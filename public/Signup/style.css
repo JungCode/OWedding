@@ -127,11 +127,17 @@ body {
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: nowrap;
-  margin-bottom: 30px;
-
+  margin-top: 30px;
+  position: relative;
 }
 .signup-form__row .signup-form__group {
   width: calc(50% - 1.5rem);
+}
+.signup-form__row-notmatch {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: red;
 }
 .signup-form__term input {
   display: none;
@@ -205,7 +211,7 @@ body {
 }
 
 .signup-form__group {
-  margin-top: 2rem;
+  margin-bottom: 3rem;
 }
 
 @media screen and (max-width: 1439px) {
@@ -245,12 +251,10 @@ body {
   .signup-form__row .signup-form__group {
     width: 100%;
     margin-bottom: 2rem;
-    margin-top: 2rem;
   }
   .signup-form__group {
     width: 100%;
     margin-bottom: 2rem;
-    margin-top: 2rem;
   }
 }
 
