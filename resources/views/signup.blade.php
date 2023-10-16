@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset('signup/style.css')}}">
 </head>
 <body>
+    {{$errors}}
    <div class="signup">
     <div class="signup__content">
         <h1 class="signup__heading">Sign Up</h1>
