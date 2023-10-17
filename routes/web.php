@@ -45,8 +45,8 @@ Route::post('/users', function (Request $request){
     'name' => ['required', 'min:3','max:10', Rule::unique('users','name')],
     'email' => ['required','email',Rule::unique('users', 'email')],
     'password' => ['required', 'min:8','max:200'],
+    'retype_password' => ['required' ,'same:password']
   ]);
-
   $user = new User;
   $user->name = $data['name'];
   $user->email = $data['email'];
@@ -73,8 +73,10 @@ Route::post('/login',function(Request $request){
   if(auth()->attempt(['email' => $data['loginemail'],
                       'password' => $data['loginpassword']])){
     $request->session()->regenerate();
+    return redirect()->route('landing');
+  }else{
+    return redirect()->back()->with('LoginFailed','Failed to login');
   };
-  return redirect()->route('landing');
 })->name('users.login');
 
 //TASKS

@@ -42,12 +42,17 @@
                 </div> -->
                 <div class="signup-form__group">
                     <label for="email" class="signup-form__label">Email</label>
-                    <input type="email" class="signup-form__input" id="email" name="loginemail" required placeholder="Email">
+                    <input type="email" class="signup-form__input" id="email" name="loginemail" required placeholder="Email" value="{{ old('loginemail' )}}">
                 </div>
             </div>
             <div class="signup-form__group">
                 <label for="password" class="signup-form__label">Password</label>
                 <input type="password" class="signup-form__input" id="password" name="loginpassword" required placeholder="Password">
+                @if (session()->has("LoginFailed"))
+                <div class="singup-form_passlerr">
+                    {{session("LoginFailed")}}
+                </div>
+                @endif
             </div>
             
             <button class="signup-form__submit" type="submit">

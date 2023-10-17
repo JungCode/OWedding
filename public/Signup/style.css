@@ -212,8 +212,22 @@ body {
 
 .signup-form__group {
   margin-bottom: 3rem;
+  position: relative;
 }
-
+.signup-form_nameerr{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: red;
+  transform: translateY(100%);
+}
+.signup-form_emailerr{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: red;
+  transform: translateY(100%);
+}
 @media screen and (max-width: 1439px) {
   .signup__content {
     width: calc(60% - 4rem);

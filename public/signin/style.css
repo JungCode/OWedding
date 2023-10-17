@@ -131,6 +131,7 @@ body {
 }
 .signup-form__row .signup-form__group {
   width: 100%;
+  position: relative;
 }
 .signup-form__term input {
   display: none;
@@ -202,6 +203,10 @@ body {
 }
 .signup__already a {
   color: #FA4C53;
+}
+
+.singup-form_passlerr{
+  color: red;
 }
 
 @media screen and (max-width: 1439px) {
