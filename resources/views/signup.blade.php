@@ -78,16 +78,16 @@
                 <input type="checkbox" name="" id="term">
                 <label for="term">I have read and agree with term</label>
             </div> -->
-                <button class="signup-form__submit" type="submit">
-                    <i class="fa fa-arrow-right"></i>
-                </button>
-                <p class="signup__already">Already signin have an account? <a href="{{ route('login') }}">Login</a></p>
-            </form>
-        </div>
-        <div class="signup__image">
-            <img src="/image/Signinimg.png" alt="">
-        </div>
+            <button class="signup-form__submit" type="submit">
+                <i class="fa fa-arrow-right"></i>
+            </button>
+            <p class="signup__already">Already signin have an account? <a href="{{ route('login') }}">Login</a></p>
+        </form>
     </div>
+    <div class="signup__image">
+        <img src="/image/Signinimg.png" alt="">
+    </div>
+   </div>
 </body>
 
 </html>
