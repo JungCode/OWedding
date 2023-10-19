@@ -54,7 +54,7 @@ Route::post('/users', function (Request $request){
   $user->password = bcrypt($data['password']);
   $user->remember_token = Str::random(10);
   $user->save();
-
+  //thay doi 1 chut
   auth()->login($user);
 
   return redirect()->route('landing');
