@@ -55,6 +55,7 @@ Route::post('/users', function (Request $request){
   $user->remember_token = Str::random(10);
   $user->save();
   $request->session()->put('user', $user);
+
   auth()->login($user);
 
   return redirect()->route('landing');
