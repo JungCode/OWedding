@@ -43,9 +43,12 @@
             </ul>
           </nav>
           @auth
+          <?php 
+          $user = session('user');
+          ?>
             <form action="{{ route('logout') }}" method="POST">
               @csrf
-              <button class="Button"></button>
+              <button class="Button">{{$user['name']}}</button>
             </form>
             @else
               <a href="{{ route('login') }}">

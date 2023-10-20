@@ -54,7 +54,7 @@ Route::post('/users', function (Request $request){
   $user->password = bcrypt($data['password']);
   $user->remember_token = Str::random(10);
   $user->save();
-
+  $request->session()->put('user', $user);
   auth()->login($user);
 
   return redirect()->route('landing');
@@ -65,19 +65,30 @@ Route::post('/logout', function(){
   return redirect()->route('landing');
 })->name('logout');
 
-Route::post('/login',function(Request $request){
-  $data = $request->validate([
-    'loginemail' => 'required',
-    'loginpassword' => 'required'
-  ]);
-  if(auth()->attempt(['email' => $data['loginemail'],
-                      'password' => $data['loginpassword']])){
-    $request->session()->regenerate();
-    return redirect()->route('landing');
-  }else{
-    return redirect()->back()->with('LoginFailed','Failed to login');
-  };
+Route::post('/login', function (Request $request) {
+    $data = $request->validate([
+        'loginemail' => 'required',
+        'loginpassword' => 'required'
+    ]);
+
+    $credentials = ['email' => $data['loginemail'], 'password' => $data['loginpassword']];
+
+    if (auth()->attempt($credentials)) {
+        $request->session()->regenerate();
+        $user = User::where('email', $data['loginemail'])->first();
+        $request->session()->put('user', $user);
+        return redirect()->route('landing');
+    } else {
+        if (User::where('email', $data['loginemail'])->exists()) {
+            // Người dùng đã nhập đúng email nhưng sai mật khẩu
+            return redirect()->route('login')->with('LoginFailed', 'Invalid password. Please try again.');
+        } else {
+            // Người dùng đã nhập sai email
+            return redirect()->route('login')->with('LoginFailed', 'Invalid email. Please try again.');
+        }
+    }
 })->name('users.login');
+
 
 //TASKS
 
