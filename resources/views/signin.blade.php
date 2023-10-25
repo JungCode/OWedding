@@ -62,7 +62,7 @@
         </form>
     </div>
     <div class="signup__image">
-        <img src="https://th.bing.com/th/id/R.24f7a469efe51a73679ba9ea1ff5993a?rik=czbvXe9EzQ9%2f4w&pid=ImgRaw&r=0" alt="">
+        <img src="/image/Signinimg.png" alt="">
     </div>
    </div>
 </body>
