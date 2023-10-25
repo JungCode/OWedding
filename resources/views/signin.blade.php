@@ -42,7 +42,7 @@
                 </div> -->
                 <div class="signup-form__group">
                     <label for="email" class="signup-form__label">Email</label>
-                    <input type="email" class="signup-form__input" id="email" name="loginemail" required placeholder="Email" value="{{ old('loginemail' )}}">
+                    <input type="email" class="signup-form__input" id="email" name="loginemail" required placeholder="Email" value="{{ old('loginemail')}}">
                 </div>
             </div>
             <div class="signup-form__group">
@@ -58,7 +58,7 @@
             <button class="signup-form__submit" type="submit">
                 <i class="fa fa-arrow-right"></i>
             </button>
-            <p class="signup__already">Don't have an account? <a href="{{ route('users.create') }}"> Create account here!</a></p>
+            <p class="signup__already">Don't have an account? <a href="{{ route('users.create') }}"> Register here!</a></p>
         </form>
     </div>
     <div class="signup__image">

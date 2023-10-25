@@ -38,7 +38,7 @@
                     <label for="name" class="signup-form__label">Name</label>
                     <div class="signup-form__validate">
                         <input type="text" class="signup-form__input" id="name" name="name" required
-                            placeholder="Name" value="{{old('name')}}">
+                            placeholder="Name" value="{{ old('name') }}">
                         <div class="signup-form__check">
                             <i class="fa fa-check"></i>
                         </div>
@@ -50,7 +50,7 @@
                 <div class="signup-form__group">
                     <label for="email" class="signup-form__label">Email</label>
                     <input type="email" class="signup-form__input" id="email" name="email" required
-                        placeholder="Email" value='{{old('email')}}'>
+                        placeholder="Email" value='{{ old('email') }}'>
                     @error('email')
                         <div class="signup-form_emailerr">{{ $message }}</div>
                     @enderror
@@ -67,27 +67,32 @@
                         <input type="password" class="signup-form__input" id="password" name="retype_password" required
                             placeholder="Confirm Password">
                     </div>
-                    @error('password')
-                        <p class="signup-form__row-notmatch">{{ $message }}</p>
-                    @enderror
-                    @error('retype_password')
-                        <p class="signup-form__row-notmatch">{{ $message }}</p>
-                    @enderror
+
+
+                    @if ($errors->first('password'))
+                        @error('password')
+                            <p class="signup-form__row-notmatch">{{ $message }}</p>
+                        @enderror
+                    @else
+                        @error('retype_password')
+                            <p class="signup-form__row-notmatch">{{ $message }}</p>
+                        @enderror
+                    @endif
                 </div>
                 <!-- <div class="signup-form__term">
                 <input type="checkbox" name="" id="term">
                 <label for="term">I have read and agree with term</label>
             </div> -->
-            <button class="signup-form__submit" type="submit">
-                <i class="fa fa-arrow-right"></i>
-            </button>
-            <p class="signup__already">Already signin have an account? <a href="{{ route('login') }}">Login</a></p>
-        </form>
+                <button class="signup-form__submit" type="submit">
+                    <i class="fa fa-arrow-right"></i>
+                </button>
+                <p class="signup__already">Already signin have an account? <a href="{{ route('login') }}">Login</a></p>
+            </form>
+        </div>
+        <div class="signup__image">
+            <img src="/image/Signinimg.png" alt="">
+        </div>
     </div>
-    <div class="signup__image">
-        <img src="/image/Signinimg.png" alt="">
-    </div>
-   </div>
 </body>
 
 </html>
