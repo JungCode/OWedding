@@ -86,7 +86,7 @@
                 <button class="signup-form__submit" type="submit">
                     <i class="fa fa-arrow-right"></i>
                 </button>
-                <p class="signup__already">Already signin have an account? <a href="{{ route('login') }}">Login</a></p>
+                <p class="signup__already">Already signin have an account? <a href="{{ route('users.showlogin') }}">Login</a></p>
             </form>
         </div>
         <div class="signup__image">

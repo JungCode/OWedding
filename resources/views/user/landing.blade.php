@@ -39,18 +39,18 @@
         <?php
         $user = session('user');
         ?>
-        <form action="{{ route('logout') }}" method="POST">
+        <form action="{{ route('users.logout') }}" method="POST">
           @csrf
           <div class="userbutton">
             <button class="Button">{{$user['name']}} <i class="fa fa-user-circle" aria-hidden="true"></i></button>
             <div class="userbutton_iw">
-              <a href="#" class="userbutton_iw-item">Setting </a>
+              <a href="#" class="userbutton_iw-item">Setting</a>
               <a href="#" class="userbutton_iw-item">Log out <i class="fa fa-sign-out" aria-hidden="true"></i></a>
             </div>
           </div>
         </form>
         @else
-        <a href="{{ route('login') }}">
+        <a href="{{ route('users.showlogin') }}">
           <div class="userbutton">
             <button class="Button">Đăng nhập</button>
           </div>

@@ -58,7 +58,7 @@
             <button class="signup-form__submit" type="submit">
                 <i class="fa fa-arrow-right"></i>
             </button>
-            <p class="signup__already">Don't have an account? <a href="{{ route('users.create') }}"> Register here!</a></p>
+            <p class="signup__already">Don't have an account? <a href="{{ route('users.showRegister') }}"> Register here!</a></p>
         </form>
     </div>
     <div class="signup__image">
