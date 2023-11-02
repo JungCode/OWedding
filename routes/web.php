@@ -40,3 +40,6 @@ Route::get('/register',[UserController::class,'showRegister'])->name('users.show
 Route::resource('users',UserController::class)->only([
   'store'
 ]);
+
+//TASK
+
