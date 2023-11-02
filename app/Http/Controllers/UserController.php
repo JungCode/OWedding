@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource (Profile).
      */
     public function index()
     {
@@ -39,7 +39,7 @@ class UserController extends Controller
         $user = new User;
         $user->name = $data['name'];
         $user->email = $data['email'];
-        $user->email_verified_at = now();
+        $user->email_verified_at = null;
         $user->password = bcrypt($data['password']);
         $user->remember_token = Str::random(10);
         $user->save();
@@ -51,7 +51,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource(này nếu làm admin chắc mới dùng).
      */
     public function show(string $id)
     {
@@ -59,7 +59,7 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource(chỉnh profile).
      */
     public function edit(string $id)
     {
