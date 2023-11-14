@@ -1,0 +1,38 @@
+html {
+    font-size: 62.5%;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  input,
+  textarea,
+  button,
+  select {
+    outline: none;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.6rem;
+    font-weight: normal;
+  }
+  
+  body {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.6rem;
+    font-weight: normal;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  img {
+    display: block;
+    max-width: 100%;
+  }
+  
+  body {
+    background-color: #fbfbfd;
+    padding: 5rem;
+    min-height: 100vh;
+  }
