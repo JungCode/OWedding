@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('budget_categories', function (Blueprint $table) {
             $table->id();
-            
-            $table->string('title');
-            $table->text('description');
-            $table->text('long_description')->nullable();
-            $table->boolean('completed')->default(false);
-
+            $table->string('budget_category_name');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('budget_categories');
     }
 };

@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory(10)->create()->each(function ($user){
-
             BudgetCategory::factory()->count(5)->for($user)->create()->each(function ($budgetCategory){
                 $numberItems = random_int(2,5);
     
