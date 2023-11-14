@@ -140,7 +140,6 @@
           </div>
         </div>
       </div>
-
     </div>
     <div class="secondpage_sub">
       <div class="secondpage_sub-content">
