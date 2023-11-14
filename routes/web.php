@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BudgetCategoryController;
 use App\Http\Controllers\UserController;
 use App\Models\Task;
 use App\Models\User;
@@ -9,6 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
 use Illuminate\Auth\Events\Login;
 use App\Http\Requests\TaskRequest;
+use App\Models\BudgetCategory;
 use Illuminate\Support\Facades\Route;
 use League\CommonMark\Extension\DescriptionList\Node\Description;
 /*
@@ -31,7 +33,7 @@ Route::get('/', function() {
 Route::view('/owedding','user.landing')
 ->name('landing');
 
-
+Route::view('/budget', 'weddingBudget.budget')->name('budget');
 //USER
 Route::post('/login',[UserController::class,'login'])->name('users.login');
 Route::get('/login',[UserController::class,'showlogin'])->name('users.showlogin');
@@ -40,3 +42,5 @@ Route::get('/register',[UserController::class,'showRegister'])->name('users.show
 Route::resource('users',UserController::class)->only([
   'store'
 ]);
+//BUDGET MANAGEMENT
+Route::resource('budgetCategories', BudgetCategoryController::class);
