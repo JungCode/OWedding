@@ -38,7 +38,7 @@ class BudgetItemController extends Controller
         $budgetItem->item_name = $data['iname'];
         $budgetItem->budget_category_id = $data['id_category'];
         $budgetItem->expected_cost = ($data['item_expected'] == null) ? 0 : $data['item_expected'];
-        $budgetItem->actual_costs = ($data['item_actual'] == null) ? 0 : $data['item_actual'];
+        $budgetItem->actual_cost = ($data['item_actual'] == null) ? 0 : $data['item_actual'];
         $budgetItem->save();
         return redirect()->route('budgetCategories.index');
     }
@@ -74,7 +74,7 @@ class BudgetItemController extends Controller
         $budgetItem->item_name = $data['iname'];
         $budgetItem->budget_category_id = $data['id_category'];
         $budgetItem->expected_cost = ($data['item_expected'] == null) ? 0 : $data['item_expected'];
-        $budgetItem->actual_costs = ($data['item_actual'] == null) ? 0 : $data['item_actual'];
+        $budgetItem->actual_cost = ($data['item_actual'] == null) ? 0 : $data['item_actual'];
         $budgetItem->save();
         return redirect()->route('budgetCategories.index');
     }

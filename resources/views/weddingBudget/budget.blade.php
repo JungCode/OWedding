@@ -50,7 +50,7 @@
                     @foreach ($budgetCategory['budgetItems'] as $item)
                         @php
                             $total_expected_cost += $item['expected_cost'];
-                            $total_actual_cost += $item['actual_costs'];
+                            $total_actual_cost += $item['actual_cost'];
                         @endphp
                         <tr class="border-solid border border-slate-300">
                             <td class="text-slate-600 pl-4 pt-6 pb-6">{{ $item['item_name'] }}</td>
@@ -58,12 +58,12 @@
                                 {{ number_format($item['expected_cost'], 0, ',', '.') }} đ
                             </td>
                             <td class="text-right pl-4 pt-6 pb-6 text-slate-600">
-                                {{ number_format($item['actual_costs'], 0, ',', '.') }} đ
+                                {{ number_format($item['actual_cost'], 0, ',', '.') }} đ
                             </td>
                             <td class="text-slate-600 flex justify-center">
                                 <div class="w-10 h-10 hover:bg-slate-200 flex justify-center rounded-full">
                                     <button class="showModal" data-id="{{ $item['id'] }}" data-name="{{ $item['item_name'] }}"
-                                        data-expected="{{ $item['expected_cost'] }}" data-actual="{{ $item['actual_costs'] }}"
+                                        data-expected="{{ $item['expected_cost'] }}" data-actual="{{ $item['actual_cost'] }}"
                                         data-idcategory="{{ $budgetCategory['id'] }}">
                                         <i class="fa-regular fa-pen-to-square"></i>
                                     </button>

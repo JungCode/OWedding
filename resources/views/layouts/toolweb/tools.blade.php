@@ -164,20 +164,14 @@
     })
     // for category modal 
     const modalCategory = document.querySelector('.modalCategory');
-    // const modalItemID = document.querySelector('#item-id');
     const modalCategoryIDForCategory = document.querySelector('#category-id-forcategory');
     const modalCategoryName = document.querySelector('#category-name');
-    // const modalItemExpected = document.querySelector('#item-expected');
-    // const modalItemActual = document.querySelector('#item-actual');
     const showModalCategory = document.querySelectorAll('.showModalCategory');
     const btnSubmitCategory = document.querySelector('#btn-submit-category');
     showModalCategory.forEach(function(element) {
         element.addEventListener('click', function() {
             categoryIDForCategory = element.dataset.idcategory;
             categoryName = element.dataset.namecategory;
-            // itemExpected = element.dataset.expected;
-            // itemActual = element.dataset.actual;
-            // categoryID = element.dataset.idcategory;
             var methodField = $('#methodFieldCategory');
             var form = $('#formCategory');
             if (categoryIDForCategory == '') {
@@ -191,8 +185,6 @@
                 "<i class=\"fa-regular fa-floppy-disk\"></i> Lưu thông tin";
             }
             modalCategoryName.setAttribute('value', categoryName);
-            // modalItemExpected.setAttribute('value', itemExpected);
-            // modalItemActual.setAttribute('value', itemActual);
             modalCategoryIDForCategory.setAttribute('value',categoryIDForCategory);
             modalCategory.classList.remove('hidden');
             modalCategory.classList.remove('modal-close');
