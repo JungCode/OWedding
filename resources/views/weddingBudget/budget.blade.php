@@ -107,7 +107,7 @@
                 </table>
             </div>
         @empty
-            <p>chua co gi</p>
+            <p class="text-center my-20">Chưa có danh mục nào</p>
         @endforelse
 
 
@@ -203,5 +203,5 @@
         </div>
     @endsection
 @else
-    chua co gi
+    Chưa đăng nhập
 @endauth
