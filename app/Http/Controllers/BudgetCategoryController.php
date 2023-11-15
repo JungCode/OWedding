@@ -30,7 +30,10 @@ class BudgetCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'id' => ['requied'],
+            'iname' => ['required','min:3'],
+        ]);
     }
 
     /**

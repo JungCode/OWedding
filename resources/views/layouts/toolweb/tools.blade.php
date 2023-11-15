@@ -18,6 +18,8 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('toolweb/reset.css') }}" />
     <link rel="stylesheet" href="{{ asset('toolweb/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('toolweb/tailwindcss.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -102,7 +104,7 @@
             <span class="btnchoice-sub">Mã QR cho website</span>
         </a>
     </div>
-    <div>
+    <div style="width: 70%">
         @yield('content')
     </div>
     <div class="line">
@@ -111,3 +113,30 @@
 </body>
 
 </html>
+<script>
+    const modal = document.querySelector('.modal');
+    const modalItemID = document.querySelector('#item-id');
+    const modalItemName = document.querySelector('#item-name');
+    const modalItemExpected = document.querySelector('#item-expected');
+    const modalItemActual = document.querySelector('#item-actual');
+    const showModal = document.querySelectorAll('.showModal');
+    showModal.forEach(function(element) {
+        element.addEventListener('click', function() {
+            itemID = element.dataset.id;
+            itemName = element.dataset.name;
+            itemExpected = element.dataset.expected;
+            itemActual = element.dataset.actual;
+
+            modalItemExpected.setAttribute('value',itemExpected);
+            modalItemActual.setAttribute('value',itemActual);
+            modalItemName.setAttribute('value', itemName);
+            modalItemID.setAttribute('value',itemID);
+            modal.classList.remove('hidden')
+        });
+    });
+    const closeModal = document.querySelector('.closeModal');
+
+    closeModal.addEventListener('click', function() {
+        modal.classList.add('hidden')
+    })
+</script>
