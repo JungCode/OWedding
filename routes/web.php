@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BudgetCategoryController;
+use App\Http\Controllers\BudgetItemController;
 use App\Http\Controllers\UserController;
 use App\Models\Task;
 use App\Models\User;
@@ -11,6 +12,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Auth\Events\Login;
 use App\Http\Requests\TaskRequest;
 use App\Models\BudgetCategory;
+use App\Models\BudgetItem;
 use Illuminate\Support\Facades\Route;
 use League\CommonMark\Extension\DescriptionList\Node\Description;
 /*
@@ -43,7 +45,12 @@ Route::resource('users',UserController::class)->only([
   'store'
 ]);
 //BUDGET MANAGEMENT
-Route::resource('budgetCategories', BudgetCategoryController::class);
+Route::resource('budgetCategories', BudgetCategoryController::class)->only([
+  'index','store', 'update', 'destroy'
+]);
+Route::resource('budgetItems', BudgetItemController::class)->only([
+  'store', 'update', 'destroy'
+]);
 
 //TASK
 

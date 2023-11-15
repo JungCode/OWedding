@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('toolweb/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('toolweb/tailwindcss.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -114,29 +115,97 @@
 
 </html>
 <script>
+    // for item modal 
     const modal = document.querySelector('.modal');
     const modalItemID = document.querySelector('#item-id');
+    const modalCategoryID = document.querySelector('#category-id');
     const modalItemName = document.querySelector('#item-name');
     const modalItemExpected = document.querySelector('#item-expected');
     const modalItemActual = document.querySelector('#item-actual');
     const showModal = document.querySelectorAll('.showModal');
+    const btnSubmit = document.querySelector('#btn-submit');
     showModal.forEach(function(element) {
         element.addEventListener('click', function() {
             itemID = element.dataset.id;
             itemName = element.dataset.name;
             itemExpected = element.dataset.expected;
             itemActual = element.dataset.actual;
-
-            modalItemExpected.setAttribute('value',itemExpected);
-            modalItemActual.setAttribute('value',itemActual);
+            categoryID = element.dataset.idcategory;
+            var methodField = $('#methodField');
+            var form = $('#form');
+            if (itemID == '') {
+                methodField.val('POST');
+                form.attr('action', "{{ route('budgetItems.store') }}");
+                btnSubmit.innerHTML = "<i class=\"fa-solid fa-plus\"></i> Thêm mới";
+            } else {
+                methodField.val('PUT');
+                form.attr('action', `{{ route('budgetItems.update', ':itemID') }}`.replace(':itemID',
+                    itemID));
+                btnSubmit.innerHTML = "<i class=\"fa-regular fa-floppy-disk\"></i> Lưu thông tin";
+            }
+            modalItemExpected.setAttribute('value', itemExpected);
+            modalItemActual.setAttribute('value', itemActual);
             modalItemName.setAttribute('value', itemName);
-            modalItemID.setAttribute('value',itemID);
-            modal.classList.remove('hidden')
+            modalItemID.setAttribute('value', itemID);
+            modalCategoryID.setAttribute('value', categoryID);
+            modal.classList.remove('hidden');
+            modal.classList.remove('modal-close');
+            modal.classList.add('modal-open');
         });
     });
     const closeModal = document.querySelector('.closeModal');
 
     closeModal.addEventListener('click', function() {
-        modal.classList.add('hidden')
+        modal.classList.remove('modal-open');
+        modal.classList.add('modal-close');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 250);
+    })
+    // for category modal 
+    const modalCategory = document.querySelector('.modalCategory');
+    // const modalItemID = document.querySelector('#item-id');
+    const modalCategoryIDForCategory = document.querySelector('#category-id-forcategory');
+    const modalCategoryName = document.querySelector('#category-name');
+    // const modalItemExpected = document.querySelector('#item-expected');
+    // const modalItemActual = document.querySelector('#item-actual');
+    const showModalCategory = document.querySelectorAll('.showModalCategory');
+    const btnSubmitCategory = document.querySelector('#btn-submit-category');
+    showModalCategory.forEach(function(element) {
+        element.addEventListener('click', function() {
+            categoryIDForCategory = element.dataset.idcategory;
+            categoryName = element.dataset.namecategory;
+            // itemExpected = element.dataset.expected;
+            // itemActual = element.dataset.actual;
+            // categoryID = element.dataset.idcategory;
+            var methodField = $('#methodFieldCategory');
+            var form = $('#formCategory');
+            if (categoryIDForCategory == '') {
+                methodField.val('POST');
+                form.attr('action', "{{ route('budgetCategories.store') }}");
+                btnSubmitCategory.innerHTML = "<i class=\"fa-solid fa-plus\"></i> Thêm mới";
+            } else {
+                methodField.val('PUT');
+                form.attr('action', `{{ route('budgetCategories.update', ':categoryID') }}`.replace(':categoryID', categoryIDForCategory));
+                btnSubmitCategory.innerHTML =
+                "<i class=\"fa-regular fa-floppy-disk\"></i> Lưu thông tin";
+            }
+            modalCategoryName.setAttribute('value', categoryName);
+            // modalItemExpected.setAttribute('value', itemExpected);
+            // modalItemActual.setAttribute('value', itemActual);
+            modalCategoryIDForCategory.setAttribute('value',categoryIDForCategory);
+            modalCategory.classList.remove('hidden');
+            modalCategory.classList.remove('modal-close');
+            modalCategory.classList.add('modal-open');
+        });
+    });
+    const closeModalCategory = document.querySelector('.closeModalCategory');
+
+    closeModalCategory.addEventListener('click', function() {
+        modalCategory.classList.remove('modal-open');
+        modalCategory.classList.add('modal-close');
+        setTimeout(() => {
+            modalCategory.classList.add('hidden');
+        }, 250);
     })
 </script>

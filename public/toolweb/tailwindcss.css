@@ -1,0 +1,24 @@
+.modal-open{
+    animation: fade-in 250ms forwards;
+    opacity: 1;
+}
+.modal-close{
+    animation: fade-out 250ms forwards;
+    opacity: 0;
+}
+@keyframes fade-in{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+@keyframes fade-out{
+    100%{
+        opacity: 0;
+    }
+    0%{
+        opacity: 1;
+    }
+}

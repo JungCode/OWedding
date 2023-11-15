@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BudgetCategory;
+use App\Models\BudgetItem;
 use Illuminate\Http\Request;
 
 class BudgetCategoryController extends Controller
@@ -14,7 +15,7 @@ class BudgetCategoryController extends Controller
     {
         $user = session('user');
         $budgetCategories = BudgetCategory::budgetCategories($user['id'])->get();
-        return view('weddingBudget.budget',['budgetCategories' => $budgetCategories]);
+        return view('weddingBudget.budget', ['budgetCategories' => $budgetCategories], ['userid' => $user['id']]);
     }
 
     /**
@@ -31,9 +32,14 @@ class BudgetCategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'id' => ['requied'],
-            'iname' => ['required','min:3'],
+            'id_user' => ['required'],
+            'cname' => ['required', 'min:3']
         ]);
+        $budgetCategory = new BudgetCategory;
+        $budgetCategory->user_id = $data['id_user'];
+        $budgetCategory->budget_category_name = $data['cname'];
+        $budgetCategory->save();
+        return redirect()->route('budgetCategories.index');
     }
 
     /**
@@ -49,7 +55,6 @@ class BudgetCategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
     }
 
     /**
@@ -57,7 +62,16 @@ class BudgetCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            'id_user' => ['required'],
+            'id_category' => ['required'],
+            'cname' => ['required', 'min:3']
+        ]);
+        $budgetCategory = BudgetCategory::findOrFail( $id );
+        $budgetCategory->user_id = $data['id_user'];
+        $budgetCategory->budget_category_name = $data['cname'];
+        $budgetCategory->save();
+        return redirect()->route('budgetCategories.index');
     }
 
     /**
@@ -65,6 +79,8 @@ class BudgetCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $budgetCategory = BudgetCategory::findOrFail( $id );
+        $budgetCategory->delete();
+        return redirect()->route('budgetCategories.index');
     }
 }
