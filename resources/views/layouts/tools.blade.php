@@ -28,7 +28,7 @@
 <body class="container mx-auto mt-10 mb-10 max-w-lg">
     <div class="relative">
         @auth
-        <form class="absolute top-0 right-0" action="{{ route('logout') }}" method="POST">
+        <form class="absolute top-0 right-0" action="{{ route('users.logout') }}" method="POST">
             @csrf
             <button>Log out</button>
         </form>

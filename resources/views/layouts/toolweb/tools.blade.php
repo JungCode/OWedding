@@ -83,14 +83,14 @@
             </h5>
             <span class="btnchoice-sub">Bạn có 0 khách mời</span>
         </a>
-        <a href="#" class="btnchoice green">
+        <a href="{{route('tasks.index')}}" class="btnchoice green">
             <h5 class="btnchoice-top">
                 <i class="fa fa-list" aria-hidden="true"></i>
                 <span>Kế hoạch cưới</span>
             </h5>
             <span class="btnchoice-sub">Đã hoàn thành 0%</span>
         </a>
-        <a href="#" class="btnchoice blue">
+        <a href="{{route('budgetCategories.index')}}" class="btnchoice blue">
             <h5 class="btnchoice-top">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <span>Ngân sách cưới</span>
