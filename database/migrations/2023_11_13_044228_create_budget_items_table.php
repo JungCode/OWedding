@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('item_name');
             $table->unsignedBigInteger('budget_category_id');
             $table->unsignedBigInteger('expected_cost');
-            $table->unsignedBigInteger('actual_costs');
+            $table->unsignedBigInteger('actual_cost');
             $table->timestamps();
             $table->foreign('budget_category_id')->references('id')->on('budget_categories')->onDelete('cascade');
         });

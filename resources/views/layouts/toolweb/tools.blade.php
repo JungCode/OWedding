@@ -200,4 +200,26 @@
             modalCategory.classList.add('hidden');
         }, 250);
     })
+    //for current budget of user
+    const modalCurrentBudget = document.querySelector('.modalCurrentBudget');
+    const modalCurrentBudgetMoney = document.querySelector('#current-budget-money');
+    const showModalCurrentBudget = document.querySelectorAll('.showModalCurrentBudget');
+    showModalCurrentBudget.forEach(function(element) {
+        element.addEventListener('click', function() {
+            CurrentBudgetMoney = element.dataset.currentbudget;
+            modalCurrentBudgetMoney.setAttribute('value',CurrentBudgetMoney);
+            modalCurrentBudget.classList.remove('hidden');
+            modalCurrentBudget.classList.remove('modal-close');
+            modalCurrentBudget.classList.add('modal-open');
+        });
+    });
+    const closeModalCurrentBudget = document.querySelector('.closeModalCurrentBudget');
+
+    closeModalCurrentBudget.addEventListener('click', function() {
+        modalCurrentBudget.classList.remove('modal-open');
+        modalCurrentBudget.classList.add('modal-close');
+        setTimeout(() => {
+            modalCurrentBudget.classList.add('hidden');
+        }, 250);
+    })   
 </script>
