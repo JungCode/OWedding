@@ -15,7 +15,11 @@ class BudgetCategoryController extends Controller
     {
         $user = session('user');
         $budgetCategories = BudgetCategory::budgetCategories($user['id'])->get();
-        return view('weddingBudget.budget', ['budgetCategories' => $budgetCategories], ['userid' => $user['id']]);
+        return view('weddingBudget.budget',[
+            'budgetCategories' => $budgetCategories, 
+            'userid' => $user['id'], 
+            'currentBudget' => $user['current_budget']
+        ]);
     }
 
     /**

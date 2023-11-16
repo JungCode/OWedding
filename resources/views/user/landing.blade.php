@@ -50,8 +50,8 @@
                             <div class="userbutton_iw">
                                 <a href="#" class="userbutton_iw-item">Cài đặt</a>
                                 <a href="{{ route('budgetCategories.index') }}" class="userbutton_iw-item">Quản lý website</a>
-                                <a href="{{ route('users.logout') }}" class="userbutton_iw-item">Đăng xuất<i class="fa fa-sign-out"
-                                        aria-hidden="true"></i></a>
+                                <button type="submit" class="userbutton_iw-item">Đăng xuất<i class="fa fa-sign-out"
+                                        aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </form>

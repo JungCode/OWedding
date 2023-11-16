@@ -83,14 +83,14 @@
             </h5>
             <span class="btnchoice-sub">Bạn có 0 khách mời</span>
         </a>
-        <a href="#" class="btnchoice green">
+        <a href="{{route('tasks.index')}}" class="btnchoice green">
             <h5 class="btnchoice-top">
                 <i class="fa fa-list" aria-hidden="true"></i>
                 <span>Kế hoạch cưới</span>
             </h5>
             <span class="btnchoice-sub">Đã hoàn thành 0%</span>
         </a>
-        <a href="#" class="btnchoice blue">
+        <a href="{{route('budgetCategories.index')}}" class="btnchoice blue">
             <h5 class="btnchoice-top">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <span>Ngân sách cưới</span>
@@ -200,4 +200,26 @@
             modalCategory.classList.add('hidden');
         }, 250);
     })
+    //for current budget of user
+    const modalCurrentBudget = document.querySelector('.modalCurrentBudget');
+    const modalCurrentBudgetMoney = document.querySelector('#current-budget-money');
+    const showModalCurrentBudget = document.querySelectorAll('.showModalCurrentBudget');
+    showModalCurrentBudget.forEach(function(element) {
+        element.addEventListener('click', function() {
+            CurrentBudgetMoney = element.dataset.currentbudget;
+            modalCurrentBudgetMoney.setAttribute('value',CurrentBudgetMoney);
+            modalCurrentBudget.classList.remove('hidden');
+            modalCurrentBudget.classList.remove('modal-close');
+            modalCurrentBudget.classList.add('modal-open');
+        });
+    });
+    const closeModalCurrentBudget = document.querySelector('.closeModalCurrentBudget');
+
+    closeModalCurrentBudget.addEventListener('click', function() {
+        modalCurrentBudget.classList.remove('modal-open');
+        modalCurrentBudget.classList.add('modal-close');
+        setTimeout(() => {
+            modalCurrentBudget.classList.add('hidden');
+        }, 250);
+    })   
 </script>

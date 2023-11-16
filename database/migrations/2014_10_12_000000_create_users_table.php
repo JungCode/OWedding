@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('full_name')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('birthday')->nullable();
+            $table->string('current_budget')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

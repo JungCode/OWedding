@@ -3,6 +3,7 @@
 use App\Http\Controllers\BudgetCategoryController;
 use App\Http\Controllers\BudgetItemController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TaskController;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -27,7 +28,7 @@ use League\CommonMark\Extension\DescriptionList\Node\Description;
 */
 //INDEX
 Route::fallback(function(){
-  return 'sai trang roi nhoc';
+  return view('404') ;
 });
 Route::get('/', function() {
   return redirect()->route('landing');
@@ -41,6 +42,7 @@ Route::post('/login',[UserController::class,'login'])->name('users.login');
 Route::get('/login',[UserController::class,'showlogin'])->name('users.showlogin');
 Route::post('/logout',[UserController::class,'logout'])->name('users.logout');
 Route::get('/register',[UserController::class,'showRegister'])->name('users.showRegister');
+Route::post('/update-current-budget',[UserController::class,'updateCurrentBudget'])->name('users.updateCurrentBudget');
 Route::resource('users',UserController::class)->only([
   'store'
 ]);
@@ -53,4 +55,6 @@ Route::resource('budgetItems', BudgetItemController::class)->only([
 ]);
 
 //TASK
+Route::resource('tasks', TaskController::class);
+Route::put('tasks/{task}/toggle-complete',[TaskController::class,'toggleComplete'])->name('tasks.toggleComplete');
 

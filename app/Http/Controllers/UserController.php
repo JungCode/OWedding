@@ -41,6 +41,7 @@ class UserController extends Controller
         $user->email = $data['email'];
         $user->email_verified_at = null;
         $user->password = bcrypt($data['password']);
+        $user->current_budget = 0;
         $user->remember_token = Str::random(10);
         $user->save();
         $request->session()->put('user', $user);
@@ -71,7 +72,7 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
     }
 
     /**
@@ -117,5 +118,15 @@ class UserController extends Controller
     function showRegister()
     {
         return view('user.signup');
+    }
+    function updateCurrentBudget(Request $request,User $user){
+        $data = $request->validate([
+            'current_budget_money' => ['numeric']
+        ]);
+        $user->current_budget = $data['current_budget_money'];
+        $user->update([
+            'current_budget' => $data['current_budget_money']
+        ]);
+        return redirect()->route('budgetCategories.index');
     }
 }
