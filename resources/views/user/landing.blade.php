@@ -44,8 +44,8 @@
           <div class="userbutton">
             <button class="Button">{{$user['name']}} <i class="fa fa-user-circle" aria-hidden="true"></i></button>
             <div class="userbutton_iw">
-              <a href="#" class="userbutton_iw-item">Setting</a>
-              <a href="#" class="userbutton_iw-item">Log out <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+              <a href="#" class="userbutton_iw-item">Cài đặt</a>
+              <a href="#" class="userbutton_iw-item">Đăng xuất <i class="fa fa-sign-out" aria-hidden="true"></i></a>
             </div>
           </div>
         </form>

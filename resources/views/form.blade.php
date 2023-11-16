@@ -20,7 +20,7 @@
         </div>
         <div>
             <label for="description">Description</label>
-            <textarea name="description" id="description" rows="5"
+            <textarea name="description" id="description" rows="3"
                       @class(['border-red-500' => $errors->has('description')])>
                 {{ $task->description ?? old('description') }}
             </textarea>
@@ -29,12 +29,12 @@
             @enderror 
         </div>
         <div>
-            <label for="long_description">Long Description</label>
-            <textarea name="long_description" id="long_description" rows="10"
-                      @class(['border-red-500' => $errors->has('long_description')])>
-                {{ $task->long_description ?? old('long_description') }}
+            <label for="Period">Period</label>
+            <textarea name="period" id="period" rows="2"
+                      @class(['border-red-500' => $errors->has('period')])>
+                {{ $task->period ?? old('period') }}
             </textarea> 
-            @error('long_description')
+            @error('period')
                 <p class="error">{{ $message }}</p>
             @enderror
         </div>

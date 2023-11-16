@@ -5,8 +5,8 @@
 @section('content')
 <p class="mb-4 text-slate-700">{{$task->description}}</p>
 
-@if ($task->long_description)
-    <p class="mb-4 text-slate-700">{{$task->long_description}}</p>
+@if ($task->period)
+    <p class="mb-4 text-slate-700">{{$task->period}}</p>
 @endif
 
 <p class="mb-4 text-sm text-slate-500">Created {{ $task->created_at->diffForHumans() }} • Updated
@@ -21,7 +21,7 @@
   </p>
 
   <div class="flex gap-2">
-    <form method="POST" action="{{ route('tasks.toggle-complete', ['task' => $task]) }}">
+    <form method="POST" action="{{ route('tasks.toggleComplete', ['task' => $task]) }}">
       @csrf
       @method('PUT')
       <button type="submit" class="btn">

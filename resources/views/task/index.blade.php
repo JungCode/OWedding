@@ -18,9 +18,5 @@
             <div>there no tasks</div>
     @endforelse
 
-    @if ($tasks->count())
-    <nav class="mt-4">
-        {{ $tasks->links() }}
-    </nav>
-    @endif
+  
 @endsection

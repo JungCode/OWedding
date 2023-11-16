@@ -16,10 +16,17 @@ class TaskFactory extends Factory
      */
     public function definition(): array
     {
+        $periods=collect(['TRƯỚC NGÀY CƯỚI 9 - 12 THÁNG',
+                        'TRƯỚC NGÀY CƯỚI 6 THÁNG', 
+                        'TRƯỚC NGÀY CƯỚI 3 THÁNG',
+                        'TRƯỚC NGÀY CƯỚI 2 THÁNG',
+                        'TRƯỚC NGÀY CƯỚI 1 THÁNG',
+                        'TRƯỚC NGÀY CƯỚI 1 NGÀY',
+                        'NGÀY ĐÁM CƯỚI']);
         return [
             'title' => fake()->sentence,
             'description' => fake()->paragraph,
-            'long_description' => fake()->paragraph(7,true),
+            'period'=> $periods->random(),
             'completed' => fake()->boolean
         ];
     }

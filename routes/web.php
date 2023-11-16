@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TaskController;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -23,7 +24,7 @@ use League\CommonMark\Extension\DescriptionList\Node\Description;
 */
 //INDEX
 Route::fallback(function(){
-  return 'sai trang roi nhoc';
+  return view('404') ;
 });
 Route::get('/', function() {
   return redirect()->route('landing');
@@ -42,4 +43,6 @@ Route::resource('users',UserController::class)->only([
 ]);
 
 //TASK
+Route::resource('tasks', TaskController::class);
+Route::put('tasks/{task}/toggle-complete',[TaskController::class,'toggleComplete'])->name('tasks.toggleComplete');
 
