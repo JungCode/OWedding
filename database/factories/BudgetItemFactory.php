@@ -20,7 +20,7 @@ class BudgetItemFactory extends Factory
             'budget_category_id' => null,
             'item_name' => fake()->sentence(3),
             'expected_cost' => fake()->numberBetween(1000000,10000000),
-            'actual_costs' => fake()->numberBetween(1000000,10000000),
+            'actual_cost' => fake()->numberBetween(1000000,10000000),
         ];
     }
 }

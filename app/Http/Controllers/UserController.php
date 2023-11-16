@@ -125,7 +125,7 @@ class UserController extends Controller
         ]);
         $user->current_budget = $data['current_budget_money'];
         $user->update([
-            'current_budget' => $data['current_budget_money']
+            'current_budget' => 100
         ]);
         return redirect()->route('budgetCategories.index');
     }
