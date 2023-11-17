@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BudgetCategory;
 use App\Models\BudgetItem;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BudgetCategoryController extends Controller
@@ -14,11 +15,23 @@ class BudgetCategoryController extends Controller
     public function index()
     {
         $user = session('user');
+        $total_all_ec = 0;
+        $total_all_ac = 0;
         $budgetCategories = BudgetCategory::budgetCategories($user['id'])->get();
+        foreach($budgetCategories as $budgetCategory){
+            $budgetItems = BudgetItem::itemByCategory($budgetCategory['id'])->get();
+            foreach($budgetItems as $budgetItem){
+                $total_all_ec += $budgetItem['expected_cost'];
+                $total_all_ac += $budgetItem['actual_cost'];
+            }
+        }
+        $User = User::findOrFail($user['id']);
         return view('weddingBudget.budget',[
             'budgetCategories' => $budgetCategories, 
             'userid' => $user['id'], 
-            'currentBudget' => $user['current_budget']
+            'currentBudget' => $User->current_budget,
+            'total_all_ac' => $total_all_ac,
+            'total_all_ec' => $total_all_ec
         ]);
     }
 

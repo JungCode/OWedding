@@ -6,11 +6,58 @@
                 <h3 class="py-6 bg-slate-200 text-3xl text-center font-semibold text-slate-600 pl-4 ">Quản lí ngân sách cưới</h3>
             </div>
             <div class="py-5">
-                <div class="flex justify-center">
+                <div class="spendandpayspinner-wrap">
+                    <div class="spend">
+                        <div class="spend-text">
+                            <div class="spend-text_top">
+                                Tổng mục cần chi tiêu <span>51</span>
+                            </div>
+                            <div class="spend-text_mid">Chi phí dự kiến</div>
+                            <div class="spend-text_sub">{{ number_format($total_all_ec, 0, ',', '.') }} <span>đ</span></div>
+                        </div>
+                        <div class="spend-spinner" value="{{$total_all_ec/$currentBudget*100}}">
+                            <div class="progress-circle">
+                                <div class="outer">
+                                    <div class="half spinner"></div>
+                                    <div class="half filler"></div>
+                                    <div class="mask"></div>
+                                </div>
+                                <div class="inner"></div>
+                                <div class="shadow"></div>
+                                <div class="percentage percentage1">
+                                    <span>7</span>%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pay">
+                        <div class="pay-spinner" value="{{$total_all_ac/$currentBudget*100}}">
+                            <div class="progress-circle spinner2">
+                                <div class="outer">
+                                    <div class="half spinner"></div>
+                                    <div class="half filler"></div>
+                                    <div class="mask"></div>
+                                </div>
+                                <div class="inner"></div>
+                                <div class="shadow"></div>
+                                <div class="percentage percentage2">
+                                    <span>7</span>%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pay-text">
+                            <div class="pay-text_top">
+                                Tổng mục cần chi tiêu <span>51</span>
+                            </div>
+                            <div class="pay-text_mid">Chi phí dự kiến</div>
+                            <div class="pay-text_sub">{{ number_format($total_all_ac, 0, ',', '.') }}<span>đ</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center mt-4">
                     <button
                         class="bg-gray-200 py-5 px-10 text-md text-slate-600 rounded-lg hover:text-white hover:bg-slate-600 transition showModalCurrentBudget"
-                        data-currentbudget = "{{$currentBudget}}"
-                        >
+                        data-currentbudget = "{{ $currentBudget }}">
                         Ngân sách:
                         {{ number_format($currentBudget, 0, ',', '.') }}
                         đ
@@ -91,8 +138,9 @@
                             {{-- BUTTON UPDATE AND BUTTON DESTROY  --}}
                             <td class="text-slate-600 flex justify-center">
                                 <div class="w-10 h-10 hover:bg-slate-200 flex justify-center rounded-full">
-                                    <button class="showModal" data-id="{{ $item['id'] }}" data-name="{{ $item['item_name'] }}"
-                                        data-expected="{{ $item['expected_cost'] }}" data-actual="{{ $item['actual_cost'] }}"
+                                    <button class="showModal" data-id="{{ $item['id'] }}"
+                                        data-name="{{ $item['item_name'] }}" data-expected="{{ $item['expected_cost'] }}"
+                                        data-actual="{{ $item['actual_cost'] }}"
                                         data-idcategory="{{ $budgetCategory['id'] }}">
                                         <i class="fa-regular fa-pen-to-square"></i>
                                     </button>
@@ -249,13 +297,16 @@
                 </div>
                 {{-- BODY OF MODAL  --}}
                 <div class="px-7">
-                    <form method="POST" action="{{route('users.updateCurrentBudget',$userid)}}" class="my-5">
+                    <form method="POST" action="{{ route('users.updateCurrentBudget', $userid) }}" class="my-5">
                         @csrf
                         <label for="item-name block">
-                            <span class="block mb-5 text-center">Bạn dự trù ngân sách tối đa cho đám cưới của mình là bao nhiêu?</span>
+                            <span class="block mb-5 text-center">Bạn dự trù ngân sách tối đa cho đám cưới của mình là bao
+                                nhiêu?</span>
+                            <input type="hidden" value="{{ $userid }}" name="userid">
                             <input
                                 class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1"
-                                placeholder="200,000,000" type="text" name="current_budget_money" id="current-budget-money" value="10">
+                                placeholder="200,000,000" type="text" name="current_budget_money"
+                                id="current-budget-money" value="10">
                         </label>
                         <button type="submit" id="btn-submit-category"
                             class="mt-7 transition duration-300 py-5 bg-gray-700 hover:bg-gray-900 px-3 py-1 rounded text-white mr-1 w-full">

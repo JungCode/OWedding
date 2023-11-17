@@ -35,7 +35,7 @@ img {
   right: 0;
   background-color: transparent;
   padding: 2px 30px;
-  z-index: 1052;
+  z-index: 1;
   box-shadow: 5px 5px 5px rgba(45, 45, 45, 0.147);
 }
 .header_logo img {

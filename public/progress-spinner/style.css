@@ -31,7 +31,7 @@ img {
   width: 12rem;
   height: 12rem;
   position: relative;
-  z-index: auto;
+  z-index: 1;
 }
 .progress-circle .outer {
   background: #d9e2ef;

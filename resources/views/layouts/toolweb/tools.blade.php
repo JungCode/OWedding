@@ -18,7 +18,8 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('toolweb/reset.css') }}" />
     <link rel="stylesheet" href="{{ asset('toolweb/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('toolweb/tailwindcss.css') }}">
+    <link rel="stylesheet" href="{{ asset('budget-tool/tailwindcss.css') }}">
+    <link rel="stylesheet" href="{{ asset('progress-spinner/style.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -83,14 +84,14 @@
             </h5>
             <span class="btnchoice-sub">Bạn có 0 khách mời</span>
         </a>
-        <a href="{{route('tasks.index')}}" class="btnchoice green">
+        <a href="{{ route('tasks.index') }}" class="btnchoice green">
             <h5 class="btnchoice-top">
                 <i class="fa fa-list" aria-hidden="true"></i>
                 <span>Kế hoạch cưới</span>
             </h5>
             <span class="btnchoice-sub">Đã hoàn thành 0%</span>
         </a>
-        <a href="{{route('budgetCategories.index')}}" class="btnchoice blue">
+        <a href="{{ route('budgetCategories.index') }}" class="btnchoice blue">
             <h5 class="btnchoice-top">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <span>Ngân sách cưới</span>
@@ -114,6 +115,7 @@
 </body>
 
 </html>
+<script src="{{asset('progress-spinner/progress-spinner.js')}}"></script>
 <script>
     // for item modal 
     const modal = document.querySelector('.modal');
@@ -131,15 +133,16 @@
             itemExpected = element.dataset.expected;
             itemActual = element.dataset.actual;
             categoryID = element.dataset.idcategory;
-            var methodField = $('#methodField');
-            var form = $('#form');
+            var methodField = document.querySelector('#methodField');
+            var form = document.querySelector('#form');
             if (itemID == '') {
-                methodField.val('POST');
-                form.attr('action', "{{ route('budgetItems.store') }}");
+                methodField.setAttribute('value', 'POST');
+                form.setAttribute('action', `{{ route('budgetItems.store') }}`);
                 btnSubmit.innerHTML = "<i class=\"fa-solid fa-plus\"></i> Thêm mới";
             } else {
-                methodField.val('PUT');
-                form.attr('action', `{{ route('budgetItems.update', ':itemID') }}`.replace(':itemID',
+                methodField.setAttribute('value', 'PUT');
+                form.setAttribute('action', `{{ route('budgetItems.update', ':itemID') }}`.replace(
+                    ':itemID',
                     itemID));
                 btnSubmit.innerHTML = "<i class=\"fa-regular fa-floppy-disk\"></i> Lưu thông tin";
             }
@@ -172,27 +175,27 @@
         element.addEventListener('click', function() {
             categoryIDForCategory = element.dataset.idcategory;
             categoryName = element.dataset.namecategory;
-            var methodField = $('#methodFieldCategory');
-            var form = $('#formCategory');
+            var methodField = document.querySelector('#methodFieldCategory');
+            var form = document.querySelector('#formCategory');
             if (categoryIDForCategory == '') {
-                methodField.val('POST');
-                form.attr('action', "{{ route('budgetCategories.store') }}");
+                methodField.setAttribute('value', 'POST');
+                form.setAttribute('action', "{{ route('budgetCategories.store') }}");
                 btnSubmitCategory.innerHTML = "<i class=\"fa-solid fa-plus\"></i> Thêm mới";
             } else {
-                methodField.val('PUT');
-                form.attr('action', `{{ route('budgetCategories.update', ':categoryID') }}`.replace(':categoryID', categoryIDForCategory));
+                methodField.setAttribute('value', 'PUT');
+                form.setAttribute('action', `{{ route('budgetCategories.update', ':categoryID') }}`
+                    .replace(':categoryID', categoryIDForCategory));
                 btnSubmitCategory.innerHTML =
-                "<i class=\"fa-regular fa-floppy-disk\"></i> Lưu thông tin";
+                    "<i class=\"fa-regular fa-floppy-disk\"></i> Lưu thông tin";
             }
             modalCategoryName.setAttribute('value', categoryName);
-            modalCategoryIDForCategory.setAttribute('value',categoryIDForCategory);
+            modalCategoryIDForCategory.setAttribute('value', categoryIDForCategory);
             modalCategory.classList.remove('hidden');
             modalCategory.classList.remove('modal-close');
             modalCategory.classList.add('modal-open');
         });
     });
     const closeModalCategory = document.querySelector('.closeModalCategory');
-
     closeModalCategory.addEventListener('click', function() {
         modalCategory.classList.remove('modal-open');
         modalCategory.classList.add('modal-close');
@@ -207,7 +210,7 @@
     showModalCurrentBudget.forEach(function(element) {
         element.addEventListener('click', function() {
             CurrentBudgetMoney = element.dataset.currentbudget;
-            modalCurrentBudgetMoney.setAttribute('value',CurrentBudgetMoney);
+            modalCurrentBudgetMoney.setAttribute('value', CurrentBudgetMoney);
             modalCurrentBudget.classList.remove('hidden');
             modalCurrentBudget.classList.remove('modal-close');
             modalCurrentBudget.classList.add('modal-open');
@@ -221,5 +224,5 @@
         setTimeout(() => {
             modalCurrentBudget.classList.add('hidden');
         }, 250);
-    })   
+    })
 </script>

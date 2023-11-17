@@ -1,7 +1,6 @@
 var j = jQuery.noConflict();
 const percent1 = document.querySelector(".spend-spinner")
 const percent2 = document.querySelector(".pay-spinner")
-console.log(percent2.getAttribute("value"));
 function setProgress1(num) {
     var $spinner = j('.spend-spinner .progress-circle .spinner');
     var $filler = j('.spend-spinner .progress-circle .filler');

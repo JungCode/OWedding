@@ -119,14 +119,14 @@ class UserController extends Controller
     {
         return view('user.signup');
     }
-    function updateCurrentBudget(Request $request,User $user){
+    function updateCurrentBudget(Request $request){
         $data = $request->validate([
+            'userid' => ['required'],
             'current_budget_money' => ['numeric']
         ]);
+        $user = User::findOrFail($data['userid']);
         $user->current_budget = $data['current_budget_money'];
-        $user->update([
-            'current_budget' => 100
-        ]);
+        $user->save();
         return redirect()->route('budgetCategories.index');
     }
 }
