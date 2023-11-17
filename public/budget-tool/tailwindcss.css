@@ -32,14 +32,14 @@
         opacity: 0;
     }
 }
-@keyframes slide-up {
+@keyframes slide-down {
     0%{
         transform: translateY(-100px);
     }
     100%{
     }
 }
-@keyframes slide-down {
+@keyframes slide-up {
     0%{
     }
     100%{

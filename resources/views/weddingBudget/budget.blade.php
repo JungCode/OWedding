@@ -10,7 +10,7 @@
                     <div class="spend">
                         <div class="spend-text">
                             <div class="spend-text_top">
-                                Tổng mục cần chi tiêu <span>51</span>
+                                Tổng mục cần chi tiêu <span>{{$count}}</span>
                             </div>
                             <div class="spend-text_mid">Chi phí dự kiến</div>
                             <div class="spend-text_sub">{{ number_format($total_all_ec, 0, ',', '.') }} <span>đ</span></div>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="pay-text">
                             <div class="pay-text_top">
-                                Tổng mục cần chi tiêu <span>51</span>
+                                Tổng mục cần chi tiêu <span>{{$count}}</span>
                             </div>
                             <div class="pay-text_mid">Chi phí dự kiến</div>
                             <div class="pay-text_sub">{{ number_format($total_all_ac, 0, ',', '.') }}<span>đ</span></div>
@@ -211,7 +211,7 @@
                         <label for="item-name block">
                             <span class="block mb-3">Tiêu đề chi tiêu</span>
                             <input
-                                class="h-20 mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1"
+                                class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1"
                                 placeholder="Nhập tiêu đề công việc..." type="text" name="iname" id="item-name"
                                 value="">
                         </label>
@@ -224,7 +224,7 @@
                                         placeholder="Chi phí dự kiến" type="text" name="item_expected" id="item-expected"
                                         value="">
                                     <div
-                                        class="inline-block mt-1 col-span-2 text-center pt-5 border border-l-0 border-slate-300 rounded-r-md border-solid shadow-sm text-slate-500">
+                                        class="inline-block col-span-2 text-center pt-5 border border-l-0 border-slate-300 rounded-r-md border-solid shadow-sm text-slate-500">
                                         VND
                                     </div>
                                 </div>

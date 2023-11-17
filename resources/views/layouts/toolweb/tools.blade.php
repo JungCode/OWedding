@@ -115,10 +115,11 @@
 </body>
 
 </html>
-<script src="{{asset('progress-spinner/progress-spinner.js')}}"></script>
+<script src="{{ asset('progress-spinner/progress-spinner.js') }}"></script>
 <script>
     // for item modal 
     const modal = document.querySelector('.modal');
+    const childElementItem = modal.querySelector(':first-child');
     const modalItemID = document.querySelector('#item-id');
     const modalCategoryID = document.querySelector('#category-id');
     const modalItemName = document.querySelector('#item-name');
@@ -154,19 +155,29 @@
             modal.classList.remove('hidden');
             modal.classList.remove('modal-close');
             modal.classList.add('modal-open');
+            childElementItem.classList.remove('slide-up');
+            childElementItem.classList.add('slide-down');
         });
     });
     const closeModal = document.querySelector('.closeModal');
+    modal.addEventListener('click', closeModalItem);
+    closeModal.addEventListener('click', closeModalItem);
 
-    closeModal.addEventListener('click', function() {
-        modal.classList.remove('modal-open');
-        modal.classList.add('modal-close');
-        setTimeout(() => {
-            modal.classList.add('hidden');
-        }, 250);
-    })
+    function closeModalItem(e) {
+        if (!childElementItem.contains(e.target)) {
+            modal.classList.remove('modal-open');
+            modal.classList.add('modal-close');
+            childElementItem.classList.add('slide-up');
+            childElementItem.classList.remove('slide-down');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 250);
+        }
+    }
     // for category modal 
     const modalCategory = document.querySelector('.modalCategory');
+    const childElementCategory = modalCategory.querySelector(':first-child');
     const modalCategoryIDForCategory = document.querySelector('#category-id-forcategory');
     const modalCategoryName = document.querySelector('#category-name');
     const showModalCategory = document.querySelectorAll('.showModalCategory');
@@ -193,18 +204,28 @@
             modalCategory.classList.remove('hidden');
             modalCategory.classList.remove('modal-close');
             modalCategory.classList.add('modal-open');
+            childElementCategory.classList.add('slide-down');
+            childElementCategory.classList.remove('slide-up');
+
         });
     });
     const closeModalCategory = document.querySelector('.closeModalCategory');
-    closeModalCategory.addEventListener('click', function() {
-        modalCategory.classList.remove('modal-open');
-        modalCategory.classList.add('modal-close');
-        setTimeout(() => {
-            modalCategory.classList.add('hidden');
-        }, 250);
-    })
+    modalCategory.addEventListener('click',closeModalCate);
+    closeModalCategory.addEventListener('click',closeModalCate);
+    function closeModalCate(e) {
+        if (!childElementCategory.contains(e.target)) {
+            modalCategory.classList.remove('modal-open');
+            modalCategory.classList.add('modal-close');
+            childElementCategory.classList.add('slide-up');
+            childElementCategory.classList.remove('slide-down');
+            setTimeout(() => {
+                modalCategory.classList.add('hidden');
+            }, 250);
+        }
+    }
     //for current budget of user
     const modalCurrentBudget = document.querySelector('.modalCurrentBudget');
+    const childElementBudget = modalCurrentBudget.querySelector(':first-child');
     const modalCurrentBudgetMoney = document.querySelector('#current-budget-money');
     const showModalCurrentBudget = document.querySelectorAll('.showModalCurrentBudget');
     showModalCurrentBudget.forEach(function(element) {
@@ -214,15 +235,24 @@
             modalCurrentBudget.classList.remove('hidden');
             modalCurrentBudget.classList.remove('modal-close');
             modalCurrentBudget.classList.add('modal-open');
+            childElementBudget.classList.add('slide-down');
+            childElementBudget.classList.remove('slide-up');
+
         });
     });
-    const closeModalCurrentBudget = document.querySelector('.closeModalCurrentBudget');
 
-    closeModalCurrentBudget.addEventListener('click', function() {
-        modalCurrentBudget.classList.remove('modal-open');
-        modalCurrentBudget.classList.add('modal-close');
-        setTimeout(() => {
-            modalCurrentBudget.classList.add('hidden');
-        }, 250);
-    })
+    const closeModalCurrentBudget = document.querySelector('.closeModalCurrentBudget');
+    modalCurrentBudget.addEventListener('click', closeModalBud);
+    closeModalCurrentBudget.addEventListener('click',closeModalBud);
+    function closeModalBud(e) {
+        if(!childElementBudget.contains(e.target)){
+            modalCurrentBudget.classList.remove('modal-open');
+            modalCurrentBudget.classList.add('modal-close');
+            childElementBudget.classList.add('slide-up');
+            childElementBudget.classList.remove('slide-down');
+            setTimeout(() => {
+                modalCurrentBudget.classList.add('hidden');
+            }, 250);
+        }
+    }
 </script>

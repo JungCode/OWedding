@@ -17,12 +17,14 @@ class BudgetCategoryController extends Controller
         $user = session('user');
         $total_all_ec = 0;
         $total_all_ac = 0;
+        $count = 0;
         $budgetCategories = BudgetCategory::budgetCategories($user['id'])->get();
         foreach($budgetCategories as $budgetCategory){
             $budgetItems = BudgetItem::itemByCategory($budgetCategory['id'])->get();
             foreach($budgetItems as $budgetItem){
                 $total_all_ec += $budgetItem['expected_cost'];
                 $total_all_ac += $budgetItem['actual_cost'];
+                $count++;
             }
         }
         $User = User::findOrFail($user['id']);
@@ -31,7 +33,8 @@ class BudgetCategoryController extends Controller
             'userid' => $user['id'], 
             'currentBudget' => $User->current_budget,
             'total_all_ac' => $total_all_ac,
-            'total_all_ec' => $total_all_ec
+            'total_all_ec' => $total_all_ec,
+            'count' => $count
         ]);
     }
 
