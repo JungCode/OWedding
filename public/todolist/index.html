@@ -183,9 +183,9 @@
                                             <input
                                                 class="checkbox"
                                                 type="checkbox"
-                                                id="checkbox1"
+                                                
                                             />
-                                            <label for="checkbox1"></label>
+                                            <label class="labelcheckbox"></label>
                                             <!-- <div class="label"></div> -->
                                         </div>
                                         <div class="inneritem-text">
@@ -200,32 +200,10 @@
                                     <div class="inneritem-icon">
                                         <i class="fa-solid fa-info"></i>
                                     </div>
-                                </div>
-                                <div class="inneritem">
-                                    <div class="inneritem-main">
-                                        <div class="round">
-                                            <input
-                                                class="checkbox"
-                                                type="checkbox"
-                                                id="checkbox2"
-                                            />
-                                            <label for="checkbox2"></label>
-                                            <!-- <div class="label"></div> -->
-                                        </div>
-                                        <div class="inneritem-text">
-                                            <span class="inneritem-text_main"
-                                                >Viết thiệp cưới</span
-                                            >
-                                            <p class="inneritem-text_detail">
-                                                Nhớ viết cho hết nội ngoại
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="inneritem-icon">
-                                        <i class="fa-solid fa-info"></i>
-                                    </div>
-                                </div>
-                                
+                                </div>    
+                                <div class="innerbtn">
+                                    <button class="innerbtn-btn"><i class="fa-regular fa-square-plus"></i> Thêm công việc</button>
+                                </div>                            
                             </div>
                         </div>
                     </div>
@@ -243,12 +221,27 @@
             </div>
         </div>
         <!-- //////modal -->
-        <div class="modaladdfirst modal">
+        <div class="modaladdfirst">
             <header class="modaladdfirst-header">
                 <h3>Thêm mới danh mục công việc</h3>
-                <i class="close fa fa-times"></i>
+                <div class="modaladdfirst-header_close">
+                    <i class="close fa fa-times"></i>
+                </div>
             </header>
             <div class="modaladdfirst-body">
+                <input type="text" placeholder="Nhận tên danh mục" />
+                <button><i class="fa fa-plus" aria-hidden="true"></i>Thêm mới</button>
+            </div>
+        </div>
+
+        <div class="modaladdsecond">
+            <header class="modaladdsecond-header">
+                <h3>Thêm mới danh mục công việc</h3>
+                <div class="modaladdsecond-header_close">
+                    <i class="close fa fa-times"></i>
+                </div>
+            </header>
+            <div class="modaladdsecond-body">
                 <input type="text" placeholder="Nhận tên danh mục" />
                 <button><i class="fa fa-plus" aria-hidden="true"></i>Thêm mới</button>
             </div>
