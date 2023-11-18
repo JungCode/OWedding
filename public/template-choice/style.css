@@ -1,0 +1,105 @@
+html {
+  font-size: 62.5%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.6rem;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: #f9fbfd;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.main {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+.main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(0deg, rgba(65, 8, 14, 0.6), rgba(65, 8, 14, 0.6));
+  z-index: -1;
+}
+.main-bgr {
+  position: relative;
+  z-index: -2;
+  height: 550px;
+  background: url(/public/image/tempatebgr.jpeg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.main-content {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 1230px;
+  max-width: 100%;
+  padding: 0 30px;
+}
+.main-content_top {
+  display: flex;
+  background-color: #df3367;
+  color: #fff;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 2.3rem;
+  line-height: 2.8rem;
+  padding: 1.5rem 2.25rem;
+  border-radius: 2rem;
+}
+.main-content_mid {
+  font-family: "Sigmar One";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 4rem;
+  line-height: 6.6rem;
+  color: #fff;
+  text-transform: uppercase;
+}
+.main-content_bottom {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 4.6rem;
+  color: #fff;
+}
+.main-bottom img {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  z-index: 1;
+  margin: 0 auto;
+}
+
+/*# sourceMappingURL=style.css.map */
