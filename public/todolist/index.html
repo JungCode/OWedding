@@ -24,6 +24,7 @@
         />
         <link rel="stylesheet" href="./reset.css" />
         <link rel="stylesheet" href="./style.css" />
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     </head>
     <body>
         <div class="header">
@@ -150,11 +151,11 @@
                             <div class="completed-content_mid-progress"></div>
                         </div>
                         <p class="completed-content_sub">
-                            Đã hoàn thành <span>10</span>%
+                            Đã hoàn thành <span>18</span>%
                         </p>
                     </div>
                     <div class="completed-button">
-                        <button>
+                        <button class="btnaddfirst">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             Thêm danh mục công việc
                         </button>
@@ -180,14 +181,20 @@
                                     <div class="inneritem-main">
                                         <div class="round">
                                             <input
+                                                class="checkbox"
                                                 type="checkbox"
-                                                id="checkbox"
+                                                id="checkbox1"
                                             />
-                                            <label for="checkbox"></label>
+                                            <label for="checkbox1"></label>
+                                            <!-- <div class="label"></div> -->
                                         </div>
                                         <div class="inneritem-text">
-                                            <span class="inneritem-text_main">Viết thiệp cưới</span>
-                                            <p class="inneritem-text_detail">Nhớ viết cho hết nội ngoại</p>
+                                            <span class="inneritem-text_main"
+                                                >Viết thiệp cưới</span
+                                            >
+                                            <p class="inneritem-text_detail">
+                                                Nhớ viết cho hết nội ngoại Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi officiis delectus minus repudiandae quod vitae architecto ducimus nulla nihil, aliquam, repellendus saepe mollitia suscipit pariatur velit voluptas, atque quam cumque!
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="inneritem-icon">
@@ -198,50 +205,55 @@
                                     <div class="inneritem-main">
                                         <div class="round">
                                             <input
+                                                class="checkbox"
                                                 type="checkbox"
-                                                id="checkbox"
+                                                id="checkbox2"
                                             />
-                                            <label for="checkbox"></label>
+                                            <label for="checkbox2"></label>
+                                            <!-- <div class="label"></div> -->
                                         </div>
                                         <div class="inneritem-text">
-                                            <span class="inneritem-text_main">Viết thiệp cưới</span>
-                                            <p class="inneritem-text_detail">Nhớ viết cho hết nội ngoại</p>
+                                            <span class="inneritem-text_main"
+                                                >Viết thiệp cưới</span
+                                            >
+                                            <p class="inneritem-text_detail">
+                                                Nhớ viết cho hết nội ngoại
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="inneritem-icon">
                                         <i class="fa-solid fa-info"></i>
                                     </div>
                                 </div>
-                                <div class="inneritem">
-                                    <div class="inneritem-main">
-                                        <div class="round">
-                                            <input
-                                                type="checkbox"
-                                                id="checkbox"
-                                            />
-                                            <label for="checkbox"></label>
-                                        </div>
-                                        <div class="inneritem-text">
-                                            <span class="inneritem-text_main">Viết thiệp cưới</span>
-                                            <p class="inneritem-text_detail">Nhớ viết cho hết nội ngoại</p>
-                                        </div>
-                                    </div>
-                                    <div class="inneritem-icon">
-                                        <i class="fa-solid fa-info"></i>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
                     <div class="completed-button btnsub">
-                        <button>
+                        <button class="btnaddfirst">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             Thêm danh mục công việc
                         </button>
+                        <!-- <button>
+                            <i class="fas fa-save    "></i>
+                            SAVE
+                        </button> -->
                     </div>
                 </div>
             </div>
         </div>
+        <!-- //////modal -->
+        <div class="modaladdfirst modal">
+            <header class="modaladdfirst-header">
+                <h3>Thêm mới danh mục công việc</h3>
+                <i class="close fa fa-times"></i>
+            </header>
+            <div class="modaladdfirst-body">
+                <input type="text" placeholder="Nhận tên danh mục" />
+                <button><i class="fa fa-plus" aria-hidden="true"></i>Thêm mới</button>
+            </div>
+        </div>
+        <div class="modal-bg"></div>
 
         <script src="./js.js"></script>
     </body>
