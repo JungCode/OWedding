@@ -19,7 +19,9 @@ function handleClickAccordition(e) {
     icon.classList.toggle("fa-angle-down");
     icon.classList.toggle("fa-angle-up");
 }
-
+document.addEventListener("click",function (e) {
+    console.log(e.target);
+})
 ///////////////check box
 const checkboxes = document.querySelectorAll('.checkbox');
 
@@ -30,15 +32,22 @@ checkboxes.forEach((checkbox) => {
     });
 });
 
-const listlable = document.querySelectorAll('.labelcheckbox');
-listlable.forEach((lable) => {
-  lable.addEventListener('click',function () {
-      const checkbox = lable.parentElement.querySelector('.checkbox');
-      console.log(checkbox);
+//  // Lấy tất cả các phần tử label có class "labelcheckbox"
+//  const labels = document.querySelectorAll('.labelcheckbox');
 
-      checkbox.checked = !checkbox.checked;
-  });
-});
+//  // Lặp qua từng label và thêm sự kiện click
+//  labels.forEach(label => {
+//      label.addEventListener('click', function () {
+//          // Lấy id của checkbox từ thuộc tính "for" của label
+//          const checkboxId = this.getAttribute('for');
+//          const checkbox = document.getElementById(checkboxId);
+
+//          // Kiểm tra và thay đổi trạng thái của checkbox
+//          if (checkbox) {
+//              checkbox.checked = !checkbox.checked;
+//          }
+//      });
+//  });
 
 //////////modal
 
@@ -60,14 +69,15 @@ function openModal(modalclass) {
     }
 
     currentModal = modalclass;
-
+    var modalHeight = $(modalclass).height();
+    var topPosition = Math.max(30, ($(document).innerHeight() / 2) - modalHeight);
     $(modalclass).animate({
-        "top": ($(document).innerHeight() / 2) - $(modalclass).height() + 30
+        "top": topPosition + 30
     }, 300);
 
     setTimeout(function () {
         $(modalclass).animate({
-            "top": ($(document).innerHeight() / 2) - $(modalclass).height()
+            "top": topPosition
         }, 300);
     }, 300);
 
@@ -94,6 +104,11 @@ function closeModal(modalclass) {
 
 addModalEvent('.btnaddfirst', '.modaladdfirst', '.modaladdfirst-header_close');
 addModalEvent('.innerbtn-btn', '.modaladdsecond', '.modaladdsecond-header_close');
+addModalEvent('.accordion-header-icon_edit','.modaleditfirst','.modaleditfirst-header_close');
+addModalEvent('.editlist','.modaleditsecond','.modaleditsecond-header_close');
+addModalEvent('.accordion-header-icon_delete','.modaldeletefirst','.modaldeletefirst-body_cancel');
+addModalEvent('.deletelist','.modaldeletesecond','.modaldeletesecond-body_cancel');
+
 
 // $('.btnaddfirst').click( function() {
 //     $('.modal').animate({"top" : ($(document).innerHeight()/2) - $('.modal').height() + 30}, 300);

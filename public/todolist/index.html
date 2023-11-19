@@ -151,7 +151,7 @@
                             <div class="completed-content_mid-progress"></div>
                         </div>
                         <p class="completed-content_sub">
-                            Đã hoàn thành <span>18</span>%
+                            Đã hoàn thành <span>10</span>%
                         </p>
                     </div>
                     <div class="completed-button">
@@ -170,9 +170,15 @@
                                 <span>Welcome to accordion heading 1</span>
                             </div>
                             <div class="accordion-header-icon">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                                <i class="fa-solid fa-trash-can"></i>
-                                <i class="down fa fa-angle-down icon"></i>
+                                <div class="accordion-header-icon_edit">
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </div>
+                                <div class="accordion-header-icon_delete">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </div>
+                                <div class="accordion-header-icon_drop">
+                                    <i class="down fa fa-angle-down icon"></i>
+                                </div>                              
                             </div>
                         </div>
                         <div class="accordion-content">
@@ -183,9 +189,9 @@
                                             <input
                                                 class="checkbox"
                                                 type="checkbox"
-                                                
+                                                id="checkbox1"
                                             />
-                                            <label class="labelcheckbox"></label>
+                                            <label class="labelcheckbox" for="checkbox1"></label>
                                             <!-- <div class="label"></div> -->
                                         </div>
                                         <div class="inneritem-text">
@@ -197,8 +203,12 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="inneritem-icon">
-                                        <i class="fa-solid fa-info"></i>
+                                    <div class="inneritem-icon editlist">
+                                        <i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="inneritem-icon deletelist">
+                                        <!-- <i class="fa-solid fa-info"></i> -->
+                                        <i class="fa-solid fa-trash-can removelist" aria-hidden="true"></i>
                                     </div>
                                 </div>    
                                 <div class="innerbtn">
@@ -221,6 +231,7 @@
             </div>
         </div>
         <!-- //////modal -->
+<!-- //////////////////////modalfist -->
         <div class="modaladdfirst">
             <header class="modaladdfirst-header">
                 <h3>Thêm mới danh mục công việc</h3>
@@ -233,17 +244,107 @@
                 <button><i class="fa fa-plus" aria-hidden="true"></i>Thêm mới</button>
             </div>
         </div>
-
+        <!-- ///////////////edit -->
+        <div class="modaleditfirst">
+            <header class="modaleditfirst-header">
+                <h3>Cập nhật danh mục công việc</h3>
+                <div class="modaleditfirst-header_close">
+                    <i class="close fa fa-times"></i>
+                </div>
+            </header>
+            <div class="modaleditfirst-body">
+                <input type="text" placeholder="Nhận tên danh mục" />
+                <button><i class="fa-regular fa-floppy-disk"></i> Lưu thông tin</button>
+            </div>
+        </div>
+        <!-- //////////////////delete -->
+        <div class="modaldeletefirst">
+            <header class="modaldeletefirst-header">
+                <h3>Bạn thực sự muốn xoá danh mục này?</h3>
+                <p>Sau khi đã xoá, dữ liệu sẽ không thể khôi phục lại được. Vậy nên, xin vui lòng chắc chắn hành động của mình.</p>
+            </header>
+            <div class="modaldeletefirst-body">
+                <button class="modaldeletefirst-body_confirm">Xác nhận</button>
+                <button class="modaldeletefirst-body_cancel">Hủy</button>
+            </div>
+        </div>
+<!-- ///////////////////////modalsecond -->
         <div class="modaladdsecond">
             <header class="modaladdsecond-header">
-                <h3>Thêm mới danh mục công việc</h3>
+                <h3>Thêm mới công việc</h3>
                 <div class="modaladdsecond-header_close">
                     <i class="close fa fa-times"></i>
                 </div>
             </header>
             <div class="modaladdsecond-body">
-                <input type="text" placeholder="Nhận tên danh mục" />
+                <div class="modaladdsecond-check">
+                    <div class="round">
+                        <input
+                            class="checkbox"
+                            type="checkbox"
+                            id="checkboxmodal"
+                        />
+                        <label class="labelcheckbox" for="checkboxmodal"></label>
+                        <!-- <div class="label"></div> -->
+                    </div>
+                    <div class="modaladdsecond-check_text">
+                        <span>Đã hoàn thành</span>
+                    </div>
+                </div>
+                <div class="modaladdsecond-title">
+                    <span>Tiêu đề công việc</span>
+                    <input type="text" placeholder="Nhập tiêu đề công việc..">
+                </div>
+                <div class="modaladdsecond-note">
+                    <span>Ghi chú</span>
+                    <textarea name="textarea" placeholder="Bạn có thể mô tả chi tiết về công việc mình phải làm..."></textarea>
+                </div>
                 <button><i class="fa fa-plus" aria-hidden="true"></i>Thêm mới</button>
+            </div>
+        </div>
+        <!-- ////////////edit -->
+        <div class="modaleditsecond">
+            <header class="modaleditsecond-header">
+                <h3>Thông tin công việc</h3>
+                <div class="modaleditsecond-header_close">
+                    <i class="close fa fa-times"></i>
+                </div>
+            </header>
+            <div class="modaleditsecond-body">
+                <div class="modaleditsecond-check">
+                    <div class="round">
+                        <input
+                            class="checkbox"
+                            type="checkbox"
+                            id="checkboxmodalsecond"
+                        />
+                        <label class="labelcheckbox" for="checkboxmodalsecond"></label>
+                        <!-- <div class="label"></div> -->
+                    </div>
+                    <div class="modaleditsecond-check_text">
+                        <span>Đã hoàn thành</span>
+                    </div>
+                </div>
+                <div class="modaleditsecond-title">
+                    <span>Tiêu đề công việc</span>
+                    <input type="text" placeholder="Nhập tiêu đề công việc..">
+                </div>
+                <div class="modaleditsecond-note">
+                    <span>Ghi chú</span>
+                    <textarea name="textarea" placeholder="Bạn có thể mô tả chi tiết về công việc mình phải làm..."></textarea>
+                </div>
+                <button><i class="fa-regular fa-floppy-disk"></i> Lưu thông tin</button>
+            </div>
+        </div>
+        <!-- ////////delete -->
+        <div class="modaldeletesecond">
+            <header class="modaldeletesecond-header">
+                <h3>Bạn thực sự muốn xoá công việc này?</h3>
+                <p>Sau khi đã xoá, dữ liệu sẽ không thể khôi phục lại được. Vậy nên, xin vui lòng chắc chắn hành động của mình.</p>
+            </header>
+            <div class="modaldeletesecond-body">
+                <button class="modaldeletesecond-body_confirm">Xác nhận</button>
+                <button class="modaldeletesecond-body_cancel">Hủy</button>
             </div>
         </div>
         <div class="modal-bg"></div>
