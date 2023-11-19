@@ -1,56 +1,114 @@
 const progress = document.querySelector(".completed-content_mid-progress");
 const sub = document.querySelector(".completed-content_sub span");
-progress.style.width =`${sub.innerHTML}%`;
+progress.style.width = `${sub.innerHTML}%`;
 // accordion
 const accordionHearders = document.querySelectorAll(".accordion-header");
 [...accordionHearders].forEach(item =>
     item.addEventListener("click", handleClickAccordition)
 );
 const activeStr = "is-active"
+
 function handleClickAccordition(e) {
     const content = e.target.nextElementSibling;
-    content.style.height =`${content.scrollHeight}px`;
+    content.style.height = `${content.scrollHeight}px`;
     content.classList.toggle(activeStr);
-    if(!content.classList.contains("is-active")){
+    if (!content.classList.contains("is-active")) {
         content.style.height = "0px";
     }
     const icon = e.target.querySelector(".icon");
     icon.classList.toggle("fa-angle-down");
     icon.classList.toggle("fa-angle-up");
 }
-
+document.addEventListener("click",function (e) {
+    console.log(e.target);
+})
 ///////////////check box
 const checkboxes = document.querySelectorAll('.checkbox');
 
-    checkboxes.forEach((checkbox) => {
-        checkbox.addEventListener('change', function () {
-            const span = this.parentElement.nextElementSibling.querySelector('.inneritem-text_main');
-            span.style.textDecoration = this.checked ? 'line-through' : 'none';
-        });
+checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', function () {
+        const span = this.parentElement.nextElementSibling.querySelector('.inneritem-text_main');
+        span.style.textDecoration = this.checked ? 'line-through' : 'none';
     });
+});
 
+//  // Lấy tất cả các phần tử label có class "labelcheckbox"
+//  const labels = document.querySelectorAll('.labelcheckbox');
+
+//  // Lặp qua từng label và thêm sự kiện click
+//  labels.forEach(label => {
+//      label.addEventListener('click', function () {
+//          // Lấy id của checkbox từ thuộc tính "for" của label
+//          const checkboxId = this.getAttribute('for');
+//          const checkbox = document.getElementById(checkboxId);
+
+//          // Kiểm tra và thay đổi trạng thái của checkbox
+//          if (checkbox) {
+//              checkbox.checked = !checkbox.checked;
+//          }
+//      });
+//  });
 
 //////////modal
 
-function addModalEvent(btnevent, modalclass) {
-  $(btnevent).click(function () {
-    $(modalclass).animate({"top": ($(document).innerHeight() / 2) - $(modalclass).height() + 30}, 300);
-    setTimeout(function () {
-      $(modalclass).animate({"top": ($(document).innerHeight() / 2) - $(modalclass).height()}, 300);
-    }, 300);
-    $(".modal-bg").fadeIn("fast");
-  });
+var currentModal = null;
 
-  $('.close, .modal-bg').click(function () {
-    $(modalclass).animate({"top": ($(document).innerHeight() / 2) - $(modalclass).height() + 30}, 300);
-    setTimeout(function () {
-      $(modalclass).animate({"top": -$(document).innerHeight()}, 300);
-    }, 300);
-    $(".modal-bg").fadeOut("fast");
-  });
+function addModalEvent(btnevent, modalclass, closebtn) {
+    $(btnevent).click(function () {
+        openModal(modalclass);
+    });
+
+    $(closebtn + ', .modal-bg').click(function () {
+        closeModal(modalclass);
+    });
 }
 
-addModalEvent('.btnaddfirst','.modaladdfirst');
+function openModal(modalclass) {
+    if (currentModal !== null) {
+        closeModal(currentModal);
+    }
+
+    currentModal = modalclass;
+    var modalHeight = $(modalclass).height();
+    var topPosition = Math.max(30, ($(document).innerHeight() / 2) - modalHeight);
+    $(modalclass).animate({
+        "top": topPosition + 30
+    }, 300);
+
+    setTimeout(function () {
+        $(modalclass).animate({
+            "top": topPosition
+        }, 300);
+    }, 300);
+
+    $(".modal-bg").fadeIn("fast");
+}
+
+function closeModal(modalclass) {
+    if (currentModal === modalclass) {
+        $(modalclass).animate({
+            "top": ($(document).innerHeight() / 2) - $(modalclass).height() + 30
+        }, 300);
+
+        setTimeout(function () {
+            $(modalclass).animate({
+                "top": -$(document).innerHeight()
+            }, 300);
+        }, 300);
+
+        $(".modal-bg").fadeOut("fast");
+
+        currentModal = null;
+    }
+}
+
+addModalEvent('.btnaddfirst', '.modaladdfirst', '.modaladdfirst-header_close');
+addModalEvent('.innerbtn-btn', '.modaladdsecond', '.modaladdsecond-header_close');
+addModalEvent('.accordion-header-icon_edit','.modaleditfirst','.modaleditfirst-header_close');
+addModalEvent('.editlist','.modaleditsecond','.modaleditsecond-header_close');
+addModalEvent('.accordion-header-icon_delete','.modaldeletefirst','.modaldeletefirst-body_cancel');
+addModalEvent('.deletelist','.modaldeletesecond','.modaldeletesecond-body_cancel');
+
 
 // $('.btnaddfirst').click( function() {
 //     $('.modal').animate({"top" : ($(document).innerHeight()/2) - $('.modal').height() + 30}, 300);
@@ -59,7 +117,7 @@ addModalEvent('.btnaddfirst','.modaladdfirst');
 //   },300);
 //     $(".modal-bg").fadeIn("fast");
 //   });
-  
+
 //   $('.close, .modal-bg').click( function() {
 //     $('.modal').animate({"top" : ($(document).innerHeight()/2) - $('.modal').height() + 30}, 300);
 //   setTimeout(function(){
