@@ -22,12 +22,14 @@
     <body>
         <div class="header">
             <div class="header_logo">
-                <img
-                    class="logo-white"
-                    width="229"
-                    height="93"
-                    src="{{asset('image/Picture2.png')}}"
-                />
+                <a href="/owedding">
+                    <img
+                        class="logo-white"
+                        width="229"
+                        height="93"
+                        src="{{asset('image/Picture2.png')}}"
+                    />
+                </a>
             </div>
             <nav class="header_nav">
                 <ul class="header_ul">

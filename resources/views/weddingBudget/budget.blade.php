@@ -10,7 +10,7 @@
                 $value2 = ($total_all_ac / $currentBudget) * 100;
             }
         @endphp
-        <section class="rounded-3xl border border-solid border-slate-300 mb-10 overflow-hidden">
+        <section class="rounded-3xl border border-solid border-slate-300 mb-10 overflow-hidden mt-10">
             <div class="bg-wedding text-center">
                 <h3 class="py-6 text-3xl text-center font-semibold text-slate-600 pl-4">Quản lí ngân sách cưới</h3>
             </div>
@@ -325,6 +325,7 @@
                 </div>
             </div>
         </div>
+
         <script src="{{ asset('progress-spinner/progress-spinner.js') }}"></script>
         <script>
             // for item modal 
@@ -369,12 +370,12 @@
                     childElementItem.classList.add('slide-down');
                 });
             });
-            const closeModal2 = document.querySelector('.closeModal');
+            const closeModal = document.querySelector('.closeModal');
             modal.addEventListener('click', closeModalItem);
-            closeModal2.addEventListener('click', closeModalItem);
+            closeModal.addEventListener('click', closeModalItem);
 
             function closeModalItem(e) {
-                if (!childElementItem.contains(e.target)) {
+                if (!childElementItem.contains(e.target) || closeModal.contains(e.target)) {
                     modal.classList.remove('modal-open');
                     modal.classList.add('modal-close');
                     childElementItem.classList.add('slide-up');
@@ -424,7 +425,7 @@
             closeModalCategory.addEventListener('click', closeModalCate);
 
             function closeModalCate(e) {
-                if (!childElementCategory.contains(e.target)) {
+                if (!childElementCategory.contains(e.target) || closeModalCategory.contains(e.target)) {
                     modalCategory.classList.remove('modal-open');
                     modalCategory.classList.add('modal-close');
                     childElementCategory.classList.add('slide-up');
@@ -457,7 +458,7 @@
             closeModalCurrentBudget.addEventListener('click', closeModalBud);
 
             function closeModalBud(e) {
-                if (!childElementBudget.contains(e.target)) {
+                if (!childElementBudget.contains(e.target) || closeModalCurrentBudget.contains(e.target)) {
                     modalCurrentBudget.classList.remove('modal-open');
                     modalCurrentBudget.classList.add('modal-close');
                     childElementBudget.classList.add('slide-up');
