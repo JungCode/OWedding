@@ -31,7 +31,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required', 'min:3', 'max:10', Rule::unique('users', 'name')],
+            'name' => ['required', 'min:3', 'max:255', Rule::unique('users', 'name')],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => ['required', 'min:8', 'max:200'],
             'retype_password' => ['required', 'same:password']
@@ -72,7 +72,22 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
+        $data = $request->validate([
+            'firstName' => 'max:255',
+            'lastName' => 'max:255',
+        ]);
+        $user = User::findOrFail($id);
+        $imageUrl = $this->storeImage($request);
+        if($imageUrl){
+            $user->photo = $imageUrl;
+        }
+        $user->first_name = $data['firstName'];
+        $user->last_name = $data['lastName'];
+        $user->phone_number = $request['phone'];
+        $user->birthday = $request['birthday'];
+        $user->address = $request['address'];
+        $user->save();
+        return redirect()->route('users.showProfile');
     }
 
     /**
@@ -130,6 +145,18 @@ class UserController extends Controller
         return redirect()->route('budgetCategories.index');
     }
     function showProfile(){
-        return view('user.profile');
+        $user = session('user');
+        $User = User::findOrFail($user['id']);
+        return view('user.profile', [
+            'user' => $User
+        ]);
     }
+    protected function storeImage(Request $request){
+        if($request->file('photo')){
+            $path = $request->file('photo')->store('public/profile-image');
+            return substr($path,strlen('public/'));
+        }else{
+            return null;
+        }
+    } 
 }

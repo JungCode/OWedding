@@ -63,12 +63,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="profile-content_infor">
+                <form class="profile-content_infor" enctype="multipart/form-data" method="POST" action="{{route('users.update',$user['id'])}}">
+                    @csrf
+                    @method('PUT')
                     <div class="profile_header"><p>Edit Your Profile</p></div>
                     <div class="profile_imgchange">
                         <div class="profile_imgchange-img">
                             <img
-                                src="/public/image/avartar.jpg"
+                                src="{{asset('storage/'. $user['photo'])}}" 
                                 alt=""
                                 class="profile_imgchange-img-avatar"
                             />
@@ -87,45 +89,47 @@
                             </span>
                             <input
                                 type="file"
+                                name="photo"
                                 class="upload-box"
                                 placeholder="Upload File"
+                                accept="image/*"
                             />
                         </div>
                     </div>
                     <div class="profile_form">
                         <div class="form-row">
                             <div class="input-focus-effect">
-                                <input type="text" placeholder=" " value=""/>
+                                <input type="text" placeholder=" " value="{{$user['first_name']}}" name="firstName"/>
                                 <label>Fisrt Name</label>
                             </div>
                             <div class="input-focus-effect">
-                                <input type="text" placeholder=" " value="" />
+                                <input type="text" placeholder=" " value="{{$user['last_name']}}" name="lastName"/>
                                 <label>Last Name</label>
                             </div>
                         </div>
                         <div class="input-focus-effect">
-                            <input type="text" placeholder=" " value=""/>
+                            <input type="text" placeholder=" " value="{{$user['email']}}" readonly/>
                             <label>Email</label>
                         </div>
                         <div class="form-row">
                             <div class="input-focus-effect">
-                                <input type="date" data-date="yyyy-mm-dd" data-date-format="YYYY-MM-DD" min="1943-11-01" max="2023-11-01" aria-required="true" value="">
+                                <input name="birthday" type="date" data-date="yyyy-mm-dd" data-date-format="YYYY-MM-DD" min="1943-11-01" max="2023-11-01" aria-required="true" value="{{$user['birthday']}}">
                                 <label>Birtday</label>
                             </div>
                             <div class="input-focus-effect">
-                                <input type="number" placeholder=" " value=""/>
+                                <input type="number" placeholder=" " value="{{$user['phone_number']}}" name="phone"/>
                                 <label>Phone Number</label>
                             </div>
                         </div>
                         <div class="input-focus-effect">
-                            <input type="text" placeholder=" " value="" />
+                            <input type="text" placeholder=" " value="{{$user['address']}}" name="address"/>
                             <label>Address</label>
                         </div>
                     </div>
                     <div class="profile-button">
                         <button class="Button"><i class="fa fa-save" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;SAVE</button>
                     </div>
-                </div>
+                </form>
                 <!-- <div class="tinasfnaskfmsaca">
                     <address>sadasd
                         <datagrid>sadsa</datagrid>

@@ -47,7 +47,7 @@ Route::get('/profile-user',[UserController::class,'showProfile'])->name('users.s
 
 Route::post('/update-current-budget',[UserController::class,'updateCurrentBudget'])->name('users.updateCurrentBudget');
 Route::resource('users',UserController::class)->only([
-  'store'
+  'store', 'update'
 ]);
 //BUDGET MANAGEMENT
 Route::resource('budgetCategories', BudgetCategoryController::class)->only([

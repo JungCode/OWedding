@@ -10,7 +10,7 @@
                 $value2 = ($total_all_ac / $currentBudget) * 100;
             }
         @endphp
-        <section class="rounded-3xl border border-solid border-slate-300 mb-10 overflow-hidden mt-10">
+        <section class="rounded-3xl border border-solid border-slate-300 mt-28 mb-11 overflow-hidden ">
             <div class="bg-wedding text-center">
                 <h3 class="py-6 text-3xl text-center font-semibold text-slate-600 pl-4">Quản lí ngân sách cưới</h3>
             </div>
@@ -221,7 +221,7 @@
                             <input
                                 class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1"
                                 placeholder="Nhập tiêu đề công việc..." type="text" name="iname" id="item-name"
-                                value="">
+                                value="" required>
                         </label>
                         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 mb-8">
                             <label for="item-expected block">
@@ -282,7 +282,7 @@
                             <input
                                 class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1"
                                 placeholder="Nhập tên danh mục..." type="text" name="cname" id="category-name"
-                                value="">
+                                value="" required>
                         </label>
                         <button type="submit" id="btn-submit-category"
                             class="mt-7 transition duration-300 py-5 bg-gray-700 hover:bg-gray-900 px-3 py-1 rounded text-white mr-1 w-full">
