@@ -1,7 +1,7 @@
 @extends('layouts.toolweb.tools')
 @auth
     @section('content')
-        <section class="rounded-md border border-solid border-slate-300 mb-10">
+        <section class="rounded-md border border-solid border-slate-300 mb-10 mt-8">
             <div class="bg-slate-200 text-center">
                 <h3 class="py-6 bg-slate-200 text-3xl text-center font-semibold text-slate-600 pl-4 ">Quản lí ngân sách cưới</h3>
             </div>

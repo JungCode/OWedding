@@ -106,11 +106,11 @@
             <span class="btnchoice-sub">Mã QR cho website</span>
         </a>
     </div>
+    <div class="line">
+        !!! Những công cụ hỗ trợ cho website của bạn dễ dàng hơn !!!
+    </div>
     <div style="width: 70%">
         @yield('content')
-    </div>
-    <div class="line">
-        trungbui trungbui trung bui trung bui trung bui
     </div>
 </body>
 
