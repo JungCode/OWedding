@@ -15,11 +15,13 @@ class TaskController extends Controller
     public function index(Request $request)
     {
         $user = session('user');
+        $User = User::findOrFail($user['id']);
         $title =$request->input('title');
         $filter =$request->input('filter','');
 
         $tasks = Task::when($title, fn($query, $title)=> $query->title($title));
         $tasks = Task::task($user['id'])->get();
+        $completedCount = Task::completedTask($user['id'])->count();
         // $tasks = match($filter) {
         //     'TRƯỚC NGÀY CƯỚI 9 - 12 THÁNG' => $tasks->popularLastMonth(),
         //     'TRƯỚC NGÀY CƯỚI 6 THÁNG' => $tasks->popularLast6Months(),
@@ -31,7 +33,12 @@ class TaskController extends Controller
         //     default => $tasks->latest()
         // };
         
-        return view('task.index',['tasks' => $tasks]);
+        return view('task.index',[
+            'currentBudget' => $User->current_budget,
+            'tasks' => $tasks,
+            'taskCount' => $tasks->count(),
+            'completedCount' => $completedCount
+        ]);
     }
 
     /**

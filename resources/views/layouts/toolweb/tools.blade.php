@@ -84,21 +84,21 @@
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <span>DANH SÁCH KHÁCH MỜI</span>
             </h5>
-            <span class="btnchoice-sub">Bạn có 0 khách mời</span>
+            <span class="btnchoice-sub">Bạn có  khách mời</span>
         </a>
         <a href="{{ route('tasks.index') }}" class="btnchoice green">
             <h5 class="btnchoice-top">
                 <i class="fa fa-list" aria-hidden="true"></i>
                 <span>Kế hoạch cưới</span>
             </h5>
-            <span class="btnchoice-sub">Đã hoàn thành 0%</span>
+            <span class="btnchoice-sub">Đã hoàn thành @yield('taskPercent') %</span>
         </a>
         <a href="{{ route('budgetCategories.index') }}" class="btnchoice blue">
             <h5 class="btnchoice-top">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <span>Ngân sách cưới</span>
             </h5>
-            <span class="btnchoice-sub">Đã chi 0 đ</span>
+            <span class="btnchoice-sub">Đã chi @yield('budget_current') đ</span>
         </a>
         <a href="#" class="btnchoice gray">
             <h5 class="btnchoice-top">
@@ -111,7 +111,7 @@
     <div class="line">
         !!! Những công cụ hỗ trợ cho website của bạn dễ dàng hơn !!!
     </div>
-    <div style="width: 70%">
+    <div style="width: 100%" class="flex justify-center ">
         @yield('content')
     </div>
 </body>

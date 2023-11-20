@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BudgetCategory;
 use App\Models\BudgetItem;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -28,13 +29,16 @@ class BudgetCategoryController extends Controller
             }
         }
         $User = User::findOrFail($user['id']);
+        $completedCount = Task::completedTask($user['id'])->count();
+        $tasks = Task::task($user['id'])->count();
         return view('weddingBudget.budget',[
             'budgetCategories' => $budgetCategories, 
             'userid' => $user['id'], 
             'currentBudget' => $User->current_budget,
             'total_all_ac' => $total_all_ac,
             'total_all_ec' => $total_all_ec,
-            'count' => $count
+            'count' => $count,
+            'taskPercent' => $completedCount/$tasks*100
         ]);
     }
 

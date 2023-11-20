@@ -32,6 +32,9 @@ class Task extends Model
     {
         return $query->where('user_id','=',$userID);
     }
+    public function scopeCompletedTask(Builder $query, int $userID) : Builder {
+        return $query->where('user_id',$userID)->where('completed',1);
+    }
 
     
 
