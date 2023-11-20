@@ -15,6 +15,12 @@
     animation: slide-down 250ms forwards;
     transition: all;
 }
+.bg-wedding{
+    background-color: #d9e2ef;
+}
+.border-wedding{
+    border-color: #eee;
+}
 @keyframes fade-in {
     0% {
         opacity: 0;

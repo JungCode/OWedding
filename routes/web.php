@@ -42,6 +42,9 @@ Route::post('/login',[UserController::class,'login'])->name('users.login');
 Route::get('/login',[UserController::class,'showlogin'])->name('users.showlogin');
 Route::post('/logout',[UserController::class,'logout'])->name('users.logout');
 Route::get('/register',[UserController::class,'showRegister'])->name('users.showRegister');
+
+Route::get('/profile-user',[UserController::class,'showProfile'])->name('users.showProfile');
+
 Route::post('/update-current-budget',[UserController::class,'updateCurrentBudget'])->name('users.updateCurrentBudget');
 Route::resource('users',UserController::class)->only([
   'store'

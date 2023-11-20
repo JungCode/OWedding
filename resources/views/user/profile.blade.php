@@ -16,8 +16,8 @@
             href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="./reset.css" />
-        <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="{{asset('profile/reset.css')}}" />
+        <link rel="stylesheet" href="{{asset('profile/style.css')}}" />
     </head>
     <body>
         <div class="header">
@@ -26,7 +26,7 @@
                     class="logo-white"
                     width="229"
                     height="93"
-                    src="/public/image/Picture2.png"
+                    src="{{asset('image/Picture2.png')}}"
                 />
             </div>
             <nav class="header_nav">

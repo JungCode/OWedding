@@ -17,11 +17,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('toolweb/reset.css') }}" />
+
     <link rel="stylesheet" href="{{ asset('toolweb/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('budget-tool/tailwindcss.css') }}">
+    <link rel="stylesheet" href="{{ asset('todolist/style.css')}}">
     <link rel="stylesheet" href="{{ asset('progress-spinner/style.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -115,144 +117,3 @@
 </body>
 
 </html>
-<script src="{{ asset('progress-spinner/progress-spinner.js') }}"></script>
-<script>
-    // for item modal 
-    const modal = document.querySelector('.modal');
-    const childElementItem = modal.querySelector(':first-child');
-    const modalItemID = document.querySelector('#item-id');
-    const modalCategoryID = document.querySelector('#category-id');
-    const modalItemName = document.querySelector('#item-name');
-    const modalItemExpected = document.querySelector('#item-expected');
-    const modalItemActual = document.querySelector('#item-actual');
-    const showModal = document.querySelectorAll('.showModal');
-    const btnSubmit = document.querySelector('#btn-submit');
-    showModal.forEach(function(element) {
-        element.addEventListener('click', function() {
-            itemID = element.dataset.id;
-            itemName = element.dataset.name;
-            itemExpected = element.dataset.expected;
-            itemActual = element.dataset.actual;
-            categoryID = element.dataset.idcategory;
-            var methodField = document.querySelector('#methodField');
-            var form = document.querySelector('#form');
-            if (itemID == '') {
-                methodField.setAttribute('value', 'POST');
-                form.setAttribute('action', `{{ route('budgetItems.store') }}`);
-                btnSubmit.innerHTML = "<i class=\"fa-solid fa-plus\"></i> Thêm mới";
-            } else {
-                methodField.setAttribute('value', 'PUT');
-                form.setAttribute('action', `{{ route('budgetItems.update', ':itemID') }}`.replace(
-                    ':itemID',
-                    itemID));
-                btnSubmit.innerHTML = "<i class=\"fa-regular fa-floppy-disk\"></i> Lưu thông tin";
-            }
-            modalItemExpected.setAttribute('value', itemExpected);
-            modalItemActual.setAttribute('value', itemActual);
-            modalItemName.setAttribute('value', itemName);
-            modalItemID.setAttribute('value', itemID);
-            modalCategoryID.setAttribute('value', categoryID);
-            modal.classList.remove('hidden');
-            modal.classList.remove('modal-close');
-            modal.classList.add('modal-open');
-            childElementItem.classList.remove('slide-up');
-            childElementItem.classList.add('slide-down');
-        });
-    });
-    const closeModal = document.querySelector('.closeModal');
-    modal.addEventListener('click', closeModalItem);
-    closeModal.addEventListener('click', closeModalItem);
-
-    function closeModalItem(e) {
-        if (!childElementItem.contains(e.target)) {
-            modal.classList.remove('modal-open');
-            modal.classList.add('modal-close');
-            childElementItem.classList.add('slide-up');
-            childElementItem.classList.remove('slide-down');
-
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 250);
-        }
-    }
-    // for category modal 
-    const modalCategory = document.querySelector('.modalCategory');
-    const childElementCategory = modalCategory.querySelector(':first-child');
-    const modalCategoryIDForCategory = document.querySelector('#category-id-forcategory');
-    const modalCategoryName = document.querySelector('#category-name');
-    const showModalCategory = document.querySelectorAll('.showModalCategory');
-    const btnSubmitCategory = document.querySelector('#btn-submit-category');
-    showModalCategory.forEach(function(element) {
-        element.addEventListener('click', function() {
-            categoryIDForCategory = element.dataset.idcategory;
-            categoryName = element.dataset.namecategory;
-            var methodField = document.querySelector('#methodFieldCategory');
-            var form = document.querySelector('#formCategory');
-            if (categoryIDForCategory == '') {
-                methodField.setAttribute('value', 'POST');
-                form.setAttribute('action', "{{ route('budgetCategories.store') }}");
-                btnSubmitCategory.innerHTML = "<i class=\"fa-solid fa-plus\"></i> Thêm mới";
-            } else {
-                methodField.setAttribute('value', 'PUT');
-                form.setAttribute('action', `{{ route('budgetCategories.update', ':categoryID') }}`
-                    .replace(':categoryID', categoryIDForCategory));
-                btnSubmitCategory.innerHTML =
-                    "<i class=\"fa-regular fa-floppy-disk\"></i> Lưu thông tin";
-            }
-            modalCategoryName.setAttribute('value', categoryName);
-            modalCategoryIDForCategory.setAttribute('value', categoryIDForCategory);
-            modalCategory.classList.remove('hidden');
-            modalCategory.classList.remove('modal-close');
-            modalCategory.classList.add('modal-open');
-            childElementCategory.classList.add('slide-down');
-            childElementCategory.classList.remove('slide-up');
-
-        });
-    });
-    const closeModalCategory = document.querySelector('.closeModalCategory');
-    modalCategory.addEventListener('click',closeModalCate);
-    closeModalCategory.addEventListener('click',closeModalCate);
-    function closeModalCate(e) {
-        if (!childElementCategory.contains(e.target)) {
-            modalCategory.classList.remove('modal-open');
-            modalCategory.classList.add('modal-close');
-            childElementCategory.classList.add('slide-up');
-            childElementCategory.classList.remove('slide-down');
-            setTimeout(() => {
-                modalCategory.classList.add('hidden');
-            }, 250);
-        }
-    }
-    //for current budget of user
-    const modalCurrentBudget = document.querySelector('.modalCurrentBudget');
-    const childElementBudget = modalCurrentBudget.querySelector(':first-child');
-    const modalCurrentBudgetMoney = document.querySelector('#current-budget-money');
-    const showModalCurrentBudget = document.querySelectorAll('.showModalCurrentBudget');
-    showModalCurrentBudget.forEach(function(element) {
-        element.addEventListener('click', function() {
-            CurrentBudgetMoney = element.dataset.currentbudget;
-            modalCurrentBudgetMoney.setAttribute('value', CurrentBudgetMoney);
-            modalCurrentBudget.classList.remove('hidden');
-            modalCurrentBudget.classList.remove('modal-close');
-            modalCurrentBudget.classList.add('modal-open');
-            childElementBudget.classList.add('slide-down');
-            childElementBudget.classList.remove('slide-up');
-
-        });
-    });
-
-    const closeModalCurrentBudget = document.querySelector('.closeModalCurrentBudget');
-    modalCurrentBudget.addEventListener('click', closeModalBud);
-    closeModalCurrentBudget.addEventListener('click',closeModalBud);
-    function closeModalBud(e) {
-        if(!childElementBudget.contains(e.target)){
-            modalCurrentBudget.classList.remove('modal-open');
-            modalCurrentBudget.classList.add('modal-close');
-            childElementBudget.classList.add('slide-up');
-            childElementBudget.classList.remove('slide-down');
-            setTimeout(() => {
-                modalCurrentBudget.classList.add('hidden');
-            }, 250);
-        }
-    }
-</script>

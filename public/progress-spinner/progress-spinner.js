@@ -73,3 +73,23 @@ function rotate($el, deg) {
 setProgress1(percent1.getAttribute("value"));
 setProgress2(percent2.getAttribute("value"));
 
+// accordion
+const accordionHearders = document.querySelectorAll(".accordion-header");
+[...accordionHearders].forEach(item =>
+    item.addEventListener("click", handleClickAccordition)
+);
+const activeStr = "is-active"
+
+function handleClickAccordition(e) {
+    const content = e.target.nextElementSibling;
+    if (content) {
+        content.style.height = `${content.scrollHeight}px`;
+        content.classList.toggle(activeStr);
+        if (!content.classList.contains("is-active")) {
+            content.style.height = "0px";
+        }
+        const icon = e.target.querySelector(".icon");
+        icon.classList.toggle("fa-angle-down");
+        icon.classList.toggle("fa-angle-up");
+    }
+}
