@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('period');
             $table->boolean('completed')->default(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            
-
 
         });
     }

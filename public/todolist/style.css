@@ -419,7 +419,7 @@ img {
 }
 .accordion-header-icon * {
   padding: 0 0.5rem;
-  z-index: 30;
+  z-index: 1;
 }
 .accordion-header-icon * i {
   pointer-events: none;

@@ -129,4 +129,7 @@ class UserController extends Controller
         $user->save();
         return redirect()->route('budgetCategories.index');
     }
+    function showProfile(){
+        return view('user.profile');
+    }
 }

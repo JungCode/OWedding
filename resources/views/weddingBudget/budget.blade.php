@@ -1,21 +1,30 @@
 @extends('layouts.toolweb.tools')
 @auth
     @section('content')
-        <section class="rounded-md border border-solid border-slate-300 mb-10">
-            <div class="bg-slate-200 text-center">
-                <h3 class="py-6 bg-slate-200 text-3xl text-center font-semibold text-slate-600 pl-4 ">Quản lí ngân sách cưới</h3>
+        @php
+            if ($currentBudget == 0) {
+                $value1 = 0;
+                $value2 = 0;
+            } else {
+                $value1 = ($total_all_ec / $currentBudget) * 100;
+                $value2 = ($total_all_ac / $currentBudget) * 100;
+            }
+        @endphp
+        <section class="rounded-3xl border border-solid border-slate-300 mb-10 overflow-hidden">
+            <div class="bg-wedding text-center">
+                <h3 class="py-6 text-3xl text-center font-semibold text-slate-600 pl-4">Quản lí ngân sách cưới</h3>
             </div>
             <div class="py-5">
                 <div class="spendandpayspinner-wrap">
                     <div class="spend">
                         <div class="spend-text">
                             <div class="spend-text_top">
-                                Tổng mục cần chi tiêu <span>{{$count}}</span>
+                                Tổng mục cần chi tiêu <span>{{ $count }}</span>
                             </div>
                             <div class="spend-text_mid">Chi phí dự kiến</div>
                             <div class="spend-text_sub">{{ number_format($total_all_ec, 0, ',', '.') }} <span>đ</span></div>
                         </div>
-                        <div class="spend-spinner" value="{{$total_all_ec/$currentBudget*100}}">
+                        <div class="spend-spinner" value="{{ $value1 }}">
                             <div class="progress-circle">
                                 <div class="outer">
                                     <div class="half spinner"></div>
@@ -31,7 +40,7 @@
                         </div>
                     </div>
                     <div class="pay">
-                        <div class="pay-spinner" value="{{$total_all_ac/$currentBudget*100}}">
+                        <div class="pay-spinner" value="{{ $value2 }}">
                             <div class="progress-circle spinner2">
                                 <div class="outer">
                                     <div class="half spinner"></div>
@@ -47,7 +56,7 @@
                         </div>
                         <div class="pay-text">
                             <div class="pay-text_top">
-                                Tổng mục cần chi tiêu <span>{{$count}}</span>
+                                Tổng mục cần chi tiêu <span>{{ $count }}</span>
                             </div>
                             <div class="pay-text_mid">Chi phí dự kiến</div>
                             <div class="pay-text_sub">{{ number_format($total_all_ac, 0, ',', '.') }}<span>đ</span></div>
@@ -77,113 +86,112 @@
         </div>
         {{-- SHOW ALL CATEGORIES  --}}
         @forelse ($budgetCategories as $budgetCategory)
-            <div>
+            <div class="accordion">
                 {{-- CALCULATE THE TOTAL  --}}
                 @php
                     $total_expected_cost = 0;
                     $total_actual_cost = 0;
                 @endphp
-                {{-- SHOW TABLE --}}
-                <table class="border-solid border border-slate-300 w-full mb-20 ">
-                    {{-- TABLE HEADER FOR CATEGORY'S NAME  --}}
-                    <tr>
-                        <td colspan="4">
-                            <div class="py-6 bg-slate-200 text-3xl text-center font-semibold text-slate-600 pl-4 relative z-0">
-                                {{ $budgetCategory['budget_category_name'] }}
-                                <div
-                                    class="w-10 h-10 hover:bg-slate-300 flex justify-center rounded-full absolute right-16 top-5 ">
-                                    <button class="showModalCategory"
-                                        data-namecategory="{{ $budgetCategory['budget_category_name'] }}"
-                                        data-idcategory="{{ $budgetCategory['id'] }}">
-                                        <i class="fa-regular fa-pen-to-square"></i>
-                                    </button>
-                                </div>
-                                <div
-                                    class="w-10 h-10 hover:bg-slate-300 flex justify-center rounded-full absolute right-5 top-5">
-                                    <form action="{{ route('budgetCategories.destroy', $budgetCategory['id']) }}"
-                                        method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="" type="submit">
-                                            <i class="fa-solid fa-trash"></i>
+                <div class="accordion-header">
+                    <i class="fa-solid fa-ellipsis"></i>
+                    <div class="accordion-header_text">
+                        <span>{{ $budgetCategory['budget_category_name'] }}</span>
+                    </div>
+                    <div class="accordion-header-icon">
+                        <div class="accordion-header-icon_edit">
+                            <button class="showModalCategory" data-namecategory="{{ $budgetCategory['budget_category_name'] }}"
+                                data-idcategory="{{ $budgetCategory['id'] }}">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </button>
+                        </div>
+                        <div class="accordion-header-icon_delete">
+                            <form action="{{ route('budgetCategories.destroy', $budgetCategory['id']) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="" type="submit">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="accordion-header-icon_drop">
+                            <i class="down fa fa-angle-down icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-content">
+                    <table class="w-full">
+                        <tr class="border-solid border border-wedding">
+                            <td class="text-left pl-4 py-6 text-slate-600 ">MỤC CHI TIÊU</th>
+                            <td class="text-right pl-4 py-6 text-slate-600">CHI PHÍ DỰ KIẾN</th>
+                            <td class="text-right pl-4 py-6 text-slate-600">CHI PHÍ THỰC TẾ</th>
+                        </tr>
+                        {{-- SHOW ALL ITEMS  --}}
+                        @foreach ($budgetCategory['budgetItems'] as $item)
+                            @php
+                                $total_expected_cost += $item['expected_cost'];
+                                $total_actual_cost += $item['actual_cost'];
+                            @endphp
+                            <tr class="border-solid border border-wedding font-medium">
+                                {{-- ITEM'S NAME  --}}
+                                <td class="text-slate-600 pl-4 py-6">{{ $item['item_name'] }}</td>
+                                {{-- ITEM'S EXPECTED COST  --}}
+                                <td class="text-right pl-4 py-6 text-slate-600">
+                                    {{ number_format($item['expected_cost'], 0, ',', '.') }} đ
+                                </td>
+                                {{-- ITEM'S ACTUAL COST  --}}
+                                <td class="text-right pl-4 py-6 text-slate-600">
+                                    {{ number_format($item['actual_cost'], 0, ',', '.') }} đ
+                                </td>
+                                {{-- BUTTON UPDATE AND BUTTON DESTROY  --}}
+                                <td class="text-slate-600 flex justify-center">
+                                    <div class="w-10 h-10 hover:bg-slate-200 flex justify-center rounded-full">
+                                        <button class="showModal" data-id="{{ $item['id'] }}"
+                                            data-name="{{ $item['item_name'] }}" data-expected="{{ $item['expected_cost'] }}"
+                                            data-actual="{{ $item['actual_cost'] }}"
+                                            data-idcategory="{{ $budgetCategory['id'] }}">
+                                            <i class="fa-regular fa-pen-to-square"></i>
                                         </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    {{-- THREE MAIN COLUMNS  --}}
-                    <tr class="border-solid border-b-2 border-slate-300">
-                        <td class="text-left text-xl pl-4 py-6 text-slate-600 ">MỤC CHI TIÊU</th>
-                        <td class="text-right text-xl pl-4 py-6 text-slate-600">CHI PHÍ DỰ KIẾN</th>
-                        <td class="text-right text-xl pl-4 py-6 text-slate-600">CHI PHÍ THỰC TẾ</th>
-                    </tr>
-                    {{-- SHOW ALL ITEMS  --}}
-                    @foreach ($budgetCategory['budgetItems'] as $item)
-                        @php
-                            $total_expected_cost += $item['expected_cost'];
-                            $total_actual_cost += $item['actual_cost'];
-                        @endphp
-                        <tr class="border-solid border border-slate-300">
-                            {{-- ITEM'S NAME  --}}
-                            <td class="text-slate-600 pl-4 py-6">{{ $item['item_name'] }}</td>
-                            {{-- ITEM'S EXPECTED COST  --}}
-                            <td class="text-right pl-4 py-6 text-slate-600">
-                                {{ number_format($item['expected_cost'], 0, ',', '.') }} đ
+                                    </div>
+                                    <div class="w-10 h-10 hover:bg-slate-200 flex justify-center rounded-full">
+                                        <form action="{{ route('budgetItems.destroy', $item['id']) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        {{-- A ROW FOR ADDING NEW ITEM  --}}
+                        <tr class="border-solid border border border-wedding">
+                            <td class="pl-4 py-6">
+                                <button class="text-sky-500 hover:text-rose-500	showModal" data-id="" data-name=""
+                                    data-expected="" data-actual="" data-idcategory="{{ $budgetCategory['id'] }}">
+                                    <i class="fa-regular fa-square-plus "></i>
+                                    thêm mục chi tiêu
+                                </button>
                             </td>
-                            {{-- ITEM'S ACTUAL COST  --}}
-                            <td class="text-right pl-4 py-6 text-slate-600">
-                                {{ number_format($item['actual_cost'], 0, ',', '.') }} đ
-                            </td>
-                            {{-- BUTTON UPDATE AND BUTTON DESTROY  --}}
-                            <td class="text-slate-600 flex justify-center">
-                                <div class="w-10 h-10 hover:bg-slate-200 flex justify-center rounded-full">
-                                    <button class="showModal" data-id="{{ $item['id'] }}"
-                                        data-name="{{ $item['item_name'] }}" data-expected="{{ $item['expected_cost'] }}"
-                                        data-actual="{{ $item['actual_cost'] }}"
-                                        data-idcategory="{{ $budgetCategory['id'] }}">
-                                        <i class="fa-regular fa-pen-to-square"></i>
-                                    </button>
-                                </div>
-                                <div class="w-10 h-10 hover:bg-slate-200 flex justify-center rounded-full">
-                                    <form action="{{ route('budgetItems.destroy', $item['id']) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit">
-                                            <i class="fa-solid fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
+                            <td class="text-right pl-4 py-6 text-slate-600"></td>
+                            <td class="text-right pl-4 py-6 text-slate-600"></td>
+                            <td class="text-right pl-4 py-6 text-white">
+                                <i class="fa-solid fa-trash"></i>
+                                <i class="fa-solid fa-trash"></i>
                             </td>
                         </tr>
-                    @endforeach
-                    {{-- A ROW FOR ADDING NEW ITEM  --}}
-                    <tr class="border-solid border-t-2 border border-slate-300">
-                        <td class="pl-4 py-6">
-                            <button class="text-sky-500 hover:text-rose-500	showModal" data-id="" data-name=""
-                                data-expected="" data-actual="" data-idcategory="{{ $budgetCategory['id'] }}">
-                                <i class="fa-regular fa-square-plus "></i>
-                                thêm mục chi tiêu
-                            </button>
-                        </td>
-                        <td class="text-right pl-4 py-6 text-slate-600"></td>
-                        <td class="text-right pl-4 py-6 text-slate-600"></td>
-                        <td class="text-right pl-4 py-6 text-white">
-                            <i class="fa-solid fa-trash"></i>
-                            <i class="fa-solid fa-trash"></i>
-                        </td>
-                    </tr>
-                    {{-- ROW FOR TOTAL  --}}
-                    <tr class="border-solid border-b-2 border-slate-300">
-                        <td class="pl-4 font-semibold text-slate-600 py-6 text-slate-600">TỔNG</td>
-                        <td class="text-right pl-4 py-6 text-slate-600 font-semibold">
-                            {{ number_format($total_expected_cost, 0, ',', '.') }} đ
-                        </td>
-                        <td class="text-right pl-4 py-6 text-slate-600 font-semibold">
-                            {{ number_format($total_actual_cost, 0, ',', '.') }} đ
-                        </td>
-                    </tr>
-                </table>
+                        {{-- ROW FOR TOTAL  --}}
+                        <tr class="border-solid border border-wedding">
+                            <td class="pl-4 font-semibold text-slate-600 py-6 text-slate-600">TỔNG</td>
+                            <td class="text-right pl-4 py-6 text-slate-600 font-semibold">
+                                {{ number_format($total_expected_cost, 0, ',', '.') }} đ
+                            </td>
+                            <td class="text-right pl-4 py-6 text-slate-600 font-semibold">
+                                {{ number_format($total_actual_cost, 0, ',', '.') }} đ
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         @empty
             <p class="text-center my-20">Chưa có danh mục nào</p>
@@ -317,6 +325,149 @@
                 </div>
             </div>
         </div>
+        <script src="{{ asset('progress-spinner/progress-spinner.js') }}"></script>
+        <script>
+            // for item modal 
+            const modal = document.querySelector('.modal');
+            const childElementItem = modal.querySelector(':first-child');
+            const modalItemID = document.querySelector('#item-id');
+            const modalCategoryID = document.querySelector('#category-id');
+            const modalItemName = document.querySelector('#item-name');
+            const modalItemExpected = document.querySelector('#item-expected');
+            const modalItemActual = document.querySelector('#item-actual');
+            const showModal = document.querySelectorAll('.showModal');
+            const btnSubmit = document.querySelector('#btn-submit');
+            showModal.forEach(function(element) {
+                element.addEventListener('click', function() {
+                    itemID = element.dataset.id;
+                    itemName = element.dataset.name;
+                    itemExpected = element.dataset.expected;
+                    itemActual = element.dataset.actual;
+                    categoryID = element.dataset.idcategory;
+                    var methodField = document.querySelector('#methodField');
+                    var form = document.querySelector('#form');
+                    if (itemID == '') {
+                        methodField.setAttribute('value', 'POST');
+                        form.setAttribute('action', `{{ route('budgetItems.store') }}`);
+                        btnSubmit.innerHTML = "<i class=\"fa-solid fa-plus\"></i> Thêm mới";
+                    } else {
+                        methodField.setAttribute('value', 'PUT');
+                        form.setAttribute('action', `{{ route('budgetItems.update', ':itemID') }}`.replace(
+                            ':itemID',
+                            itemID));
+                        btnSubmit.innerHTML = "<i class=\"fa-regular fa-floppy-disk\"></i> Lưu thông tin";
+                    }
+                    modalItemExpected.setAttribute('value', itemExpected);
+                    modalItemActual.setAttribute('value', itemActual);
+                    modalItemName.setAttribute('value', itemName);
+                    modalItemID.setAttribute('value', itemID);
+                    modalCategoryID.setAttribute('value', categoryID);
+                    modal.classList.remove('hidden');
+                    modal.classList.remove('modal-close');
+                    modal.classList.add('modal-open');
+                    childElementItem.classList.remove('slide-up');
+                    childElementItem.classList.add('slide-down');
+                });
+            });
+            const closeModal2 = document.querySelector('.closeModal');
+            modal.addEventListener('click', closeModalItem);
+            closeModal2.addEventListener('click', closeModalItem);
+
+            function closeModalItem(e) {
+                if (!childElementItem.contains(e.target)) {
+                    modal.classList.remove('modal-open');
+                    modal.classList.add('modal-close');
+                    childElementItem.classList.add('slide-up');
+                    childElementItem.classList.remove('slide-down');
+
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                    }, 250);
+                }
+            }
+            // for category modal 
+            const modalCategory = document.querySelector('.modalCategory');
+            const childElementCategory = modalCategory.querySelector(':first-child');
+            const modalCategoryIDForCategory = document.querySelector('#category-id-forcategory');
+            const modalCategoryName = document.querySelector('#category-name');
+            const showModalCategory = document.querySelectorAll('.showModalCategory');
+            const btnSubmitCategory = document.querySelector('#btn-submit-category');
+            showModalCategory.forEach(function(element) {
+                element.addEventListener('click', function() {
+                    categoryIDForCategory = element.dataset.idcategory;
+                    categoryName = element.dataset.namecategory;
+                    var methodField = document.querySelector('#methodFieldCategory');
+                    var form = document.querySelector('#formCategory');
+                    if (categoryIDForCategory == '') {
+                        methodField.setAttribute('value', 'POST');
+                        form.setAttribute('action', "{{ route('budgetCategories.store') }}");
+                        btnSubmitCategory.innerHTML = "<i class=\"fa-solid fa-plus\"></i> Thêm mới";
+                    } else {
+                        methodField.setAttribute('value', 'PUT');
+                        form.setAttribute('action', `{{ route('budgetCategories.update', ':categoryID') }}`
+                            .replace(':categoryID', categoryIDForCategory));
+                        btnSubmitCategory.innerHTML =
+                            "<i class=\"fa-regular fa-floppy-disk\"></i> Lưu thông tin";
+                    }
+                    modalCategoryName.setAttribute('value', categoryName);
+                    modalCategoryIDForCategory.setAttribute('value', categoryIDForCategory);
+                    modalCategory.classList.remove('hidden');
+                    modalCategory.classList.remove('modal-close');
+                    modalCategory.classList.add('modal-open');
+                    childElementCategory.classList.add('slide-down');
+                    childElementCategory.classList.remove('slide-up');
+
+                });
+            });
+            const closeModalCategory = document.querySelector('.closeModalCategory');
+            modalCategory.addEventListener('click', closeModalCate);
+            closeModalCategory.addEventListener('click', closeModalCate);
+
+            function closeModalCate(e) {
+                if (!childElementCategory.contains(e.target)) {
+                    modalCategory.classList.remove('modal-open');
+                    modalCategory.classList.add('modal-close');
+                    childElementCategory.classList.add('slide-up');
+                    childElementCategory.classList.remove('slide-down');
+                    setTimeout(() => {
+                        modalCategory.classList.add('hidden');
+                    }, 250);
+                }
+            }
+            //for current budget of user
+            const modalCurrentBudget = document.querySelector('.modalCurrentBudget');
+            const childElementBudget = modalCurrentBudget.querySelector(':first-child');
+            const modalCurrentBudgetMoney = document.querySelector('#current-budget-money');
+            const showModalCurrentBudget = document.querySelectorAll('.showModalCurrentBudget');
+            showModalCurrentBudget.forEach(function(element) {
+                element.addEventListener('click', function() {
+                    CurrentBudgetMoney = element.dataset.currentbudget;
+                    modalCurrentBudgetMoney.setAttribute('value', CurrentBudgetMoney);
+                    modalCurrentBudget.classList.remove('hidden');
+                    modalCurrentBudget.classList.remove('modal-close');
+                    modalCurrentBudget.classList.add('modal-open');
+                    childElementBudget.classList.add('slide-down');
+                    childElementBudget.classList.remove('slide-up');
+
+                });
+            });
+
+            const closeModalCurrentBudget = document.querySelector('.closeModalCurrentBudget');
+            modalCurrentBudget.addEventListener('click', closeModalBud);
+            closeModalCurrentBudget.addEventListener('click', closeModalBud);
+
+            function closeModalBud(e) {
+                if (!childElementBudget.contains(e.target)) {
+                    modalCurrentBudget.classList.remove('modal-open');
+                    modalCurrentBudget.classList.add('modal-close');
+                    childElementBudget.classList.add('slide-up');
+                    childElementBudget.classList.remove('slide-down');
+                    setTimeout(() => {
+                        modalCurrentBudget.classList.add('hidden');
+                    }, 250);
+                }
+            }
+        </script>
     @endsection
 @else
     Chưa đăng nhập
