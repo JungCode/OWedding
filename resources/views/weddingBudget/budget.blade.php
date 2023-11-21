@@ -277,7 +277,7 @@
                     </div>
                     {{-- BODY OF MODAL  --}}
                     <div class="px-7">
-                        <form id="formCategory" method="POST" action="" class="my-5">
+                        <form id="formCategory" method="POST" action="" class="my-7">
                             @csrf
                             <input type="hidden" name="_method" id="methodFieldCategory" value="POST">
                             <input type="hidden" name="id_category" id="category-id-forcategory" value="">
@@ -379,7 +379,7 @@
             modal.addEventListener('click', closeModalItem);
             closeModal.addEventListener('click', closeModalItem);
 
-            function closeModalItem(e) {
+            function closeModalItem(e){
                 if (!childElementItem.contains(e.target) || closeModal.contains(e.target)) {
                     modal.classList.remove('modal-open');
                     modal.classList.add('modal-close');

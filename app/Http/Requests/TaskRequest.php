@@ -15,7 +15,8 @@ class TaskRequest extends FormRequest
     {
         return ['title' => 'required|max:255',
         'description' => 'required',
-        'period' => 'required'
+        'period' => 'required',
+        'completed' => '',
         ];
     }
 }

@@ -16,10 +16,10 @@ class TaskController extends Controller
     {
         $user = session('user');
         $User = User::findOrFail($user['id']);
-        $title =$request->input('title');
-        $filter =$request->input('filter','');
+        $title = $request->input('title');
+        $filter = $request->input('filter', '');
 
-        $tasks = Task::when($title, fn($query, $title)=> $query->title($title));
+        $tasks = Task::when($title, fn ($query, $title) => $query->title($title));
         $tasks = Task::task($user['id'])->get();
         $completedCount = Task::completedTask($user['id'])->count();
         // $tasks = match($filter) {
@@ -32,8 +32,8 @@ class TaskController extends Controller
         //     'NGÀY ĐÁM CƯỚI'=> $tasks->popularLast9Months(),
         //     default => $tasks->latest()
         // };
-        
-        return view('task.index',[
+
+        return view('task.index', [
             'currentBudget' => $User->current_budget,
             'tasks' => $tasks,
             'taskCount' => $tasks->count(),
@@ -52,13 +52,19 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TaskRequest $request, User $user)
+    public function store(TaskRequest $request)
     {
         $user = session('user');
         $data = $request->validated();
         $data['user_id'] = $user['id'];
         $user->tasks()->create($data);
 
+        $task = Task::latest()->first();
+        $completed = $request->input('completed');
+        if($completed == "on"){
+            $this->toggleComplete($task);
+        }
+        
         return redirect()->route('tasks.index')
         ->with('success','Task created successfully');
     }
@@ -69,8 +75,8 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         return view('show', [
-              "task"=>$task
-            ]);
+            "task" => $task
+        ]);
     }
 
     /**
@@ -79,8 +85,8 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         return view('edit', [
-                 "task"=>$task
-               ]);
+            "task" => $task
+        ]);
     }
 
     /**
@@ -89,9 +95,12 @@ class TaskController extends Controller
     public function update(TaskRequest $request, Task $task)
     {
         $task->update($request->validated());
-
-        return redirect()->route('tasks.show', ['task'=> $task->id])
-            ->with('success','Task updated successfully');
+        $completed = $request->input('completed');
+        if($completed == "on"){
+            $this->toggleComplete($task);
+        }
+        return redirect()->route('tasks.index')
+            ->with('success', 'Task created successfully');
     }
 
     /**
@@ -104,7 +113,8 @@ class TaskController extends Controller
     }
 
     //Toggle complete
-    public function toggleComplete(Task $task){
+    public function toggleComplete(Task $task)
+    {
         $task->toggleComplete();
         return redirect()->back()->with('success', 'Task updated successfully!');
     }

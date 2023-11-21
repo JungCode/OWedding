@@ -19,21 +19,25 @@ function handleClickAccordition(e) {
     icon.classList.toggle("fa-angle-down");
     icon.classList.toggle("fa-angle-up");
 }
-document.addEventListener("click",function (e) {
-    console.log(e.target);
-})
+// document.addEventListener("click",function (e) {
+//     console.log(e.target);
+// })
 ///////////////check box
 const checkboxes = document.querySelectorAll('.checkbox');
 
 checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('change', function () {
         const span = this.parentElement.nextElementSibling.querySelector('.inneritem-text_main');
-        span.style.textDecoration = this.checked ? 'line-through' : 'none';
+        if(span){
+            span.style.textDecoration = this.checked ? 'line-through' : 'none';
+        }
     });
 
     const span = checkbox.parentElement.nextElementSibling.querySelector('.inneritem-text_main');
     if (checkbox.checked) {
-        span.style.textDecoration = 'line-through';
+        if(span){
+            span.style.textDecoration = 'line-through';
+        }
     }
 });
 
@@ -56,63 +60,63 @@ checkboxes.forEach((checkbox) => {
 
 //////////modal
 
-var currentModal = null;
+// var currentModal = null;
 
-function addModalEvent(btnevent, modalclass, closebtn) {
-    $(btnevent).click(function () {
-        openModal(modalclass);
-    });
+// function addModalEvent(btnevent, modalclass, closebtn) {
+//     $(btnevent).click(function () {
+//         openModal(modalclass);
+//     });
 
-    $(closebtn + ', .modal-bg').click(function () {
-        closeModal(modalclass);
-    });
-}
+//     $(closebtn + ', .modal-bg').click(function () {
+//         closeModal(modalclass);
+//     });
+// }
 
-function openModal(modalclass) {
-    if (currentModal !== null) {
-        closeModal(currentModal);
-    }
+// function openModal(modalclass) {
+//     if (currentModal !== null) {
+//         closeModal(currentModal);
+//     }
 
-    currentModal = modalclass;
-    var modalHeight = $(modalclass).height();
-    var topPosition = Math.max(30, ($(document).innerHeight() / 2) - modalHeight);
-    $(modalclass).animate({
-        "top": topPosition + 30
-    }, 300);
+//     currentModal = modalclass;
+//     var modalHeight = $(modalclass).height();
+//     var topPosition = Math.max(30, ($(document).innerHeight() / 2) - modalHeight);
+//     $(modalclass).animate({
+//         "top": topPosition + 30
+//     }, 300);
 
-    setTimeout(function () {
-        $(modalclass).animate({
-            "top": topPosition
-        }, 300);
-    }, 300);
+//     setTimeout(function () {
+//         $(modalclass).animate({
+//             "top": topPosition
+//         }, 300);
+//     }, 300);
 
-    $(".modal-bg").fadeIn("fast");
-}
+//     $(".modal-bg").fadeIn("fast");
+// }
 
-function closeModal(modalclass) {
-    if (currentModal === modalclass) {
-        $(modalclass).animate({
-            "top": ($(document).innerHeight() / 2) - $(modalclass).height() + 30
-        }, 300);
+// function closeModal(modalclass) {
+//     if (currentModal === modalclass) {
+//         $(modalclass).animate({
+//             "top": ($(document).innerHeight() / 2) - $(modalclass).height() + 30
+//         }, 300);
 
-        setTimeout(function () {
-            $(modalclass).animate({
-                "top": -$(document).innerHeight()
-            }, 300);
-        }, 300);
+//         setTimeout(function () {
+//             $(modalclass).animate({
+//                 "top": -$(document).innerHeight()
+//             }, 300);
+//         }, 300);
 
-        $(".modal-bg").fadeOut("fast");
+//         $(".modal-bg").fadeOut("fast");
 
-        currentModal = null;
-    }
-}
+//         currentModal = null;
+//     }
+// }
 
-addModalEvent('.btnaddfirst', '.modaladdfirst', '.modaladdfirst-header_close');
-addModalEvent('.innerbtn-btn', '.modaladdsecond', '.modaladdsecond-header_close');
-addModalEvent('.accordion-header-icon_edit','.modaleditfirst','.modaleditfirst-header_close');
-addModalEvent('.editlist','.modaleditsecond','.modaleditsecond-header_close');
-addModalEvent('.accordion-header-icon_delete','.modaldeletefirst','.modaldeletefirst-body_cancel');
-addModalEvent('.deletelist','.modaldeletesecond','.modaldeletesecond-body_cancel');
+// addModalEvent('.btnaddfirst', '.modaladdfirst', '.modaladdfirst-header_close');
+// addModalEvent('.innerbtn-btn', '.modaladdsecond', '.modaladdsecond-header_close');
+// addModalEvent('.accordion-header-icon_edit','.modaleditfirst','.modaleditfirst-header_close');
+// addModalEvent('.editlist','.modaleditsecond','.modaleditsecond-header_close');
+// addModalEvent('.accordion-header-icon_delete','.modaldeletefirst','.modaldeletefirst-body_cancel');
+// addModalEvent('.deletelist','.modaldeletesecond','.modaldeletesecond-body_cancel');
 
 
 // $('.btnaddfirst').click( function() {

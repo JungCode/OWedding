@@ -1,8 +1,3 @@
-@extends('layouts.app')
-
-@section('title', isset($task) ? 'Edit task' : 'Add Task')
-
-@section('content')
 <form method="POST"
     action="{{ isset($task) ? route('tasks.update', ['task' => $task->id]) : route('tasks.store') }}">
         @csrf
@@ -51,4 +46,3 @@
             </a>
         </div>
     </form>
-@endsection

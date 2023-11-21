@@ -59,5 +59,8 @@ Route::resource('budgetItems', BudgetItemController::class)->only([
 
 //TASK
 Route::resource('tasks', TaskController::class);
+// ->only([
+//   'index', 'store', 'update'
+// ]);
 Route::put('tasks/{task}/toggle-complete',[TaskController::class,'toggleComplete'])->name('tasks.toggleComplete');
 

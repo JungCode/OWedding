@@ -41,8 +41,7 @@
                 </div>
                 <div class="completed-button">
                     <button class="btnaddfirst">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                        Thêm danh mục công việc
+                        Theo dõi tiến độ công việc
                     </button>
                 </div>
             </div>
@@ -86,12 +85,6 @@
                             </div>
 
                             <div class="accordion-header-icon">
-                                <div class="accordion-header-icon_edit">
-                                    <i class="fa-regular fa-pen-to-square"></i>
-                                </div>
-                                <div class="accordion-header-icon_delete">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </div>
                                 <div class="accordion-header-icon_drop">
                                     <i class="down fa fa-angle-down icon"></i>
                                 </div>
@@ -113,8 +106,8 @@
                                         <div class="inneritem">
                                             <div class="inneritem-main">
                                                 <div class="round">
-                                                    <input class="checkbox" type="checkbox"
-                                                        id="checkbox{{ $idCheckBox }}" {{($task->completed) ? "checked" : null}}/>
+                                                    <input class="checkbox" type="checkbox" id="checkbox{{ $idCheckBox }}"
+                                                        {{ $task->completed ? 'checked' : null }} />
                                                     <label class="labelcheckbox" for="checkbox{{ $idCheckBox }}"></label>
                                                     <!-- <div class="label"></div> -->
                                                 </div>
@@ -125,9 +118,13 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                            <div class="inneritem-icon editlist">
+                                            <button data-id="{{ $task->id }}" data-title="{{ $task->title }}"
+                                                data-description="{{ $task->description }}"
+                                                data-completed="{{ $task->completed }}"
+                                                data-period="{{$period}}"
+                                                class="inneritem-icon editlist showModal">
                                                 <i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
-                                            </div>
+                                            </button>
                                             <div class="inneritem-icon deletelist">
                                                 <!-- <i class="fa-solid fa-info"></i> -->
                                                 <i class="fa-solid fa-trash-can removelist" aria-hidden="true"></i>
@@ -138,146 +135,132 @@
                                     <div class="text-center w-full">there no tasks</div>
                                 @endforelse
                                 <div class="innerbtn">
-                                    <button class="innerbtn-btn"><i class="fa-regular fa-square-plus"></i> Thêm công
-                                        việc</button>
+                                    <button class="innerbtn-btn showModal" data-id="" data-description="" data-title=""
+                                        data-completed="0" data-period = "{{$period}}">
+                                        <i class="fa-regular fa-square-plus"></i> 
+                                        Thêm công việc
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endfor
                 <div class="completed-button btnsub">
-                    <button class="btnaddfirst">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                        Thêm danh mục công việc
+                    <button>
+                        <i class="fas fa-save"></i>
+                        SAVE
                     </button>
-                    <!-- <button>
-                                                                    <i class="fas fa-save    "></i>
-                                                                    SAVE
-                                                                </button> -->
                 </div>
             </div>
-            @forelse ($tasks as $task)
-                <div>
-                    <a href="{{ route('tasks.show', ['task' => $task->id]) }}" @class(['line-through' => $task->completed])>
-                        {{ $task->title }}
-                    </a>
-                </div>
-            @empty
-                <div class="text-center w-full">there no tasks</div>
-            @endforelse
         </div>
     </div>
-    <!-- //////modal -->
-    <!-- //////////////////////modalfist -->
-    <div class="modaladdfirst">
-        <header class="modaladdfirst-header">
-            <h3>Thêm mới danh mục công việc</h3>
-            <div class="modaladdfirst-header_close">
-                <i class="close fa fa-times"></i>
+    {{-- modal  --}}
+    <div
+        class="z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden modal opacity">
+        <div class=" bg-white rounded-lg shadow-lg w-1/2">
+            {{-- HEADER OF MODAL  --}}
+            <div class="h-20 border-b border-solid border-slate-300 px-7 py-2 bg-rose-500 rounded-t-lg relative">
+                <h3 class="text-white h-full text-3xl py-3">Thông tin công việc</h3>
+                <i
+                    class="text-white fa-solid fa-circle-xmark absolute right-5 top-3 text-3xl opacity-50 hover:opacity-100 cursor-pointer closeModal ">
+                </i>
             </div>
-        </header>
-        <div class="modaladdfirst-body">
-            <input type="text" placeholder="Nhận tên danh mục" />
-            <button><i class="fa fa-plus" aria-hidden="true"></i>Thêm mới</button>
+            {{-- BODY OF MODALS  --}}
+            <div class="px-7">
+                <form id="form" method="POST" action="" class="my-5">
+                    @csrf
+                    <input type="hidden" name="_method" id="methodField" value="">
+                    <input type="hidden" name="id" id="task-id" value="">
+                    <input type="hidden" name="period" id="task-period" value="">
+                    <div class="round h-7 mb-11">
+                        <input class="checkbox" type="checkbox" id="modalcheckbox" name="completed" checked />
+                        <label class="labelcheckbox" for="modalcheckbox"></label>
+                        <!-- <div class="label"></div> -->
+                        <span class="ml-7 mt-1 h-10 inline-block">Hoàn thành</span>
+                    </div>
+                    <label for="item-name block" class="my-5">
+                        <span class="block mb-3">Tiêu đề công việc</span>
+                        <input
+                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1"
+                            placeholder="Nhập tiêu đề công việc..." type="text" name="title" id="task-title"
+                            value="" required>
+                    </label>
+                    <label for="item-name block">
+                        <span class="block mb-3 mt-7">Ghi chú</span>
+                        <textarea
+                            class="h-52 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1"
+                            placeholder="Nhập ghi chú công việc..." name="description" id="task-Description" required>
+                        </textarea>
+
+                    </label>
+                    <button type="submit" id="btn-submit"
+                        class="mt-7 transition duration-300 py-5 bg-gray-700 hover:bg-gray-900 px-3 rounded text-white mr-1 w-full">
+                        <i class="fa-regular fa-floppy-disk"></i>
+                        Lưu thông tin
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
-    <!-- ///////////////edit -->
-    <div class="modaleditfirst">
-        <header class="modaleditfirst-header">
-            <h3>Cập nhật danh mục công việc</h3>
-            <div class="modaleditfirst-header_close">
-                <i class="close fa fa-times"></i>
-            </div>
-        </header>
-        <div class="modaleditfirst-body">
-            <input type="text" placeholder="Nhận tên danh mục" />
-            <button><i class="fa-regular fa-floppy-disk"></i> Lưu thông tin</button>
-        </div>
-    </div>
-    <!-- //////////////////delete -->
-    <div class="modaldeletefirst">
-        <header class="modaldeletefirst-header">
-            <h3>Bạn thực sự muốn xoá danh mục này?</h3>
-            <p>Sau khi đã xoá, dữ liệu sẽ không thể khôi phục lại được. Vậy nên, xin vui lòng chắc chắn hành động của mình.
-            </p>
-        </header>
-        <div class="modaldeletefirst-body">
-            <button class="modaldeletefirst-body_confirm">Xác nhận</button>
-            <button class="modaldeletefirst-body_cancel">Hủy</button>
-        </div>
-    </div>
-    <!-- ///////////////////////modalsecond -->
-    <div class="modaladdsecond">
-        <header class="modaladdsecond-header">
-            <h3>Thêm mới công việc</h3>
-            <div class="modaladdsecond-header_close">
-                <i class="close fa fa-times"></i>
-            </div>
-        </header>
-        <div class="modaladdsecond-body">
-            <div class="modaladdsecond-check">
-                <div class="round">
-                    <input class="checkbox" type="checkbox" id="checkboxmodal" />
-                    <label class="labelcheckbox" for="checkboxmodal"></label>
-                    <!-- <div class="label"></div> -->
-                </div>
-                <div class="modaladdsecond-check_text">
-                    <span>Đã hoàn thành</span>
-                </div>
-            </div>
-            <div class="modaladdsecond-title">
-                <span>Tiêu đề công việc</span>
-                <input type="text" placeholder="Nhập tiêu đề công việc..">
-            </div>
-            <div class="modaladdsecond-note">
-                <span>Ghi chú</span>
-                <textarea name="textarea" placeholder="Bạn có thể mô tả chi tiết về công việc mình phải làm..."></textarea>
-            </div>
-            <button><i class="fa fa-plus" aria-hidden="true"></i>Thêm mới</button>
-        </div>
-    </div>
-    <!-- ////////////edit -->
-    <div class="modaleditsecond">
-        <header class="modaleditsecond-header">
-            <h3>Thông tin công việc</h3>
-            <div class="modaleditsecond-header_close">
-                <i class="close fa fa-times"></i>
-            </div>
-        </header>
-        <div class="modaleditsecond-body">
-            <div class="modaleditsecond-check">
-                <div class="round">
-                    <input class="checkbox" type="checkbox" id="checkboxmodalsecond" />
-                    <label class="labelcheckbox" for="checkboxmodalsecond"></label>
-                    <!-- <div class="label"></div> -->
-                </div>
-                <div class="modaleditsecond-check_text">
-                    <span>Đã hoàn thành</span>
-                </div>
-            </div>
-            <div class="modaleditsecond-title">
-                <span>Tiêu đề công việc</span>
-                <input type="text" placeholder="Nhập tiêu đề công việc..">
-            </div>
-            <div class="modaleditsecond-note">
-                <span>Ghi chú</span>
-                <textarea name="textarea" placeholder="Bạn có thể mô tả chi tiết về công việc mình phải làm..."></textarea>
-            </div>
-            <button><i class="fa-regular fa-floppy-disk"></i> Lưu thông tin</button>
-        </div>
-    </div>
-    <!-- ////////delete -->
-    <div class="modaldeletesecond">
-        <header class="modaldeletesecond-header">
-            <h3>Bạn thực sự muốn xoá công việc này?</h3>
-            <p>Sau khi đã xoá, dữ liệu sẽ không thể khôi phục lại được. Vậy nên, xin vui lòng chắc chắn hành động của mình.
-            </p>
-        </header>
-        <div class="modaldeletesecond-body">
-            <button class="modaldeletesecond-body_confirm">Xác nhận</button>
-            <button class="modaldeletesecond-body_cancel">Hủy</button>
-        </div>
-    </div>
-    <div class="modal-bg"></div>
     <script src="{{ asset('todolist/js.js') }}"></script>
+    <script>
+        // for item modal 
+        const modal = document.querySelector('.modal');
+        const childElementItem = modal.querySelector(':first-child');
+        const modalTaskID = document.querySelector('#task-id');
+        const modalTitle = document.querySelector('#task-title');
+        const modalPeriod = document.querySelector('#task-period');
+        const modalDescription = document.querySelector('#task-Description');
+        const modalCompleted = document.querySelector('#modalcheckbox');
+        const showModal = document.querySelectorAll('.showModal');
+        const btnSubmit = document.querySelector('#btn-submit');
+        showModal.forEach(function(element) {
+            element.addEventListener('click', function() {
+                taskID = element.dataset.id;
+                taskTitle = element.dataset.title;
+                taskDescription = element.dataset.description;
+                taskCompleted = element.dataset.completed;
+                taskPeriod = element.dataset.period;
+                var methodField = document.querySelector('#methodField');
+                var form = document.querySelector('#form');
+                if (taskID == '') {
+                    methodField.setAttribute('value', 'POST');
+                    form.setAttribute('action', `{{ route('tasks.store') }}`);
+                    btnSubmit.innerHTML = "<i class=\"fa-solid fa-plus\"></i> Thêm mới";
+                } else {
+                    methodField.setAttribute('value', 'PUT');
+                    form.setAttribute('action', `{{ route('tasks.update', ':itemID') }}`.replace(
+                        ':itemID',
+                        taskID));
+                    btnSubmit.innerHTML = "<i class=\"fa-regular fa-floppy-disk\"></i> Lưu thông tin";
+                }
+                modalTitle.setAttribute('value', taskTitle);
+                modalTaskID.setAttribute('value', taskID);
+                modalDescription.innerHTML = taskDescription;
+                modalPeriod.setAttribute('value',taskPeriod);
+                modalCompleted.checked = (taskCompleted == "1") ? 1 : 0;
+                modal.classList.remove('hidden');
+                modal.classList.remove('modal-close');
+                modal.classList.add('modal-open');
+                childElementItem.classList.remove('slide-up');
+                childElementItem.classList.add('slide-down');
+            });
+        });
+        const closeModal = document.querySelector('.closeModal');
+        modal.addEventListener('click', closeModalItem);
+        closeModal.addEventListener('click', closeModalItem);
+
+        function closeModalItem(e) {
+            if (!childElementItem.contains(e.target) || closeModal.contains(e.target)) {
+                modal.classList.remove('modal-open');
+                modal.classList.add('modal-close');
+                childElementItem.classList.add('slide-up');
+                childElementItem.classList.remove('slide-down');
+
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 250);
+            }
+        }
+    </script>
 @endsection
