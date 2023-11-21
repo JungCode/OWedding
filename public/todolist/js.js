@@ -24,18 +24,35 @@ function handleClickAccordition(e) {
 // })
 ///////////////check box
 const checkboxes = document.querySelectorAll('.checkbox');
-
+const inputIdItems = document.querySelector('#inputIdItems');
+let arrayChecks = "";
 checkboxes.forEach((checkbox) => {
     checkbox.addEventListener('change', function () {
         const span = this.parentElement.nextElementSibling.querySelector('.inneritem-text_main');
-        if(span){
+        if (span) {
             span.style.textDecoration = this.checked ? 'line-through' : 'none';
         }
+        if (this.checked) {
+            temp = arrayChecks.replace(checkbox.dataset.taskid + ".", "");
+            if(temp === arrayChecks){
+                arrayChecks += checkbox.dataset.taskid + ".";
+            }else{
+                arrayChecks = temp;
+            }
+        } else {
+            temp = arrayChecks.replace(checkbox.dataset.taskid + ".", "");
+            if(temp === arrayChecks){
+                arrayChecks += checkbox.dataset.taskid + ".";
+            }else{
+                arrayChecks = temp;
+            }
+        }
+        inputIdItems.setAttribute('value', arrayChecks);
     });
 
     const span = checkbox.parentElement.nextElementSibling.querySelector('.inneritem-text_main');
     if (checkbox.checked) {
-        if(span){
+        if (span) {
             span.style.textDecoration = 'line-through';
         }
     }

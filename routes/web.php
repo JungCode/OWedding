@@ -35,8 +35,6 @@ Route::get('/', function() {
 });
 Route::view('/owedding','user.landing')
 ->name('landing');
-
-Route::view('/budget', 'weddingBudget.budget')->name('budget');
 //USER
 Route::post('/login',[UserController::class,'login'])->name('users.login');
 Route::get('/login',[UserController::class,'showlogin'])->name('users.showlogin');
@@ -58,9 +56,9 @@ Route::resource('budgetItems', BudgetItemController::class)->only([
 ]);
 
 //TASK
-Route::resource('tasks', TaskController::class);
-// ->only([
-//   'index', 'store', 'update'
-// ]);
+Route::resource('tasks', TaskController::class)->only([
+  'index', 'store', 'update', 'destroy'
+]);
+Route::post('tasks/tasks-toggle-complete',[TaskController::class,'toggleCompleteTasks'])->name('tasks.toggleCompleteTasks');
 Route::put('tasks/{task}/toggle-complete',[TaskController::class,'toggleComplete'])->name('tasks.toggleComplete');
 

@@ -118,4 +118,14 @@ class TaskController extends Controller
         $task->toggleComplete();
         return redirect()->back()->with('success', 'Task updated successfully!');
     }
+    public function toggleCompleteTasks(Request $request){
+        $input = $request->input('IdItems');
+        $input = substr($input, 0, -1);
+        $idItems = explode('.',$input);
+        foreach($idItems as $idItem){
+            $this->toggleComplete(Task::find($idItem));
+        }
+        return redirect()->route('tasks.index')
+        ->with('success','Task created successfully');
+    }
 }

@@ -147,7 +147,7 @@
                                         {{ number_format($item['actual_cost'], 0, ',', '.') }} đ
                                     </td>
                                     {{-- BUTTON UPDATE AND BUTTON DESTROY  --}}
-                                    <td class="text-slate-600 flex justify-center">
+                                    <td class="text-slate-600 flex justify-center py-6">
                                         <div class="w-10 h-10 hover:bg-slate-200 flex justify-center rounded-full">
                                             <button class="showModal" data-id="{{ $item['id'] }}"
                                                 data-name="{{ $item['item_name'] }}"

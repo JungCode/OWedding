@@ -107,7 +107,7 @@
                                             <div class="inneritem-main">
                                                 <div class="round">
                                                     <input class="checkbox" type="checkbox" id="checkbox{{ $idCheckBox }}"
-                                                        {{ $task->completed ? 'checked' : null }} />
+                                                        {{ $task->completed ? 'checked' : null }} data-taskid="{{$task->id}}" />
                                                     <label class="labelcheckbox" for="checkbox{{ $idCheckBox }}"></label>
                                                     <!-- <div class="label"></div> -->
                                                 </div>
@@ -120,14 +120,19 @@
                                             </div>
                                             <button data-id="{{ $task->id }}" data-title="{{ $task->title }}"
                                                 data-description="{{ $task->description }}"
-                                                data-completed="{{ $task->completed }}"
-                                                data-period="{{$period}}"
+                                                data-completed="{{ $task->completed }}" data-period="{{ $period }}"
                                                 class="inneritem-icon editlist showModal">
                                                 <i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
                                             </button>
                                             <div class="inneritem-icon deletelist">
+                                                <form action="{{route('tasks.destroy',$task)}}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit">
+                                                        <i class="fa-solid fa-trash-can removelist" aria-hidden="true"></i>
+                                                    </button>
+                                                </form>
                                                 <!-- <i class="fa-solid fa-info"></i> -->
-                                                <i class="fa-solid fa-trash-can removelist" aria-hidden="true"></i>
                                             </div>
                                         </div>
                                     @endif
@@ -136,8 +141,8 @@
                                 @endforelse
                                 <div class="innerbtn">
                                     <button class="innerbtn-btn showModal" data-id="" data-description="" data-title=""
-                                        data-completed="0" data-period = "{{$period}}">
-                                        <i class="fa-regular fa-square-plus"></i> 
+                                        data-completed="0" data-period = "{{ $period }}">
+                                        <i class="fa-regular fa-square-plus"></i>
                                         Thêm công việc
                                     </button>
                                 </div>
@@ -146,10 +151,14 @@
                     </div>
                 @endfor
                 <div class="completed-button btnsub">
-                    <button>
-                        <i class="fas fa-save"></i>
-                        SAVE
-                    </button>
+                    <form action="{{route('tasks.toggleCompleteTasks',1)}}" method="POST">
+                        @csrf
+                        <input type="hidden" value="" id="inputIdItems" name="IdItems">
+                        <button>
+                            <i class="fas fa-save"></i>
+                            SAVE
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -173,7 +182,7 @@
                     <input type="hidden" name="id" id="task-id" value="">
                     <input type="hidden" name="period" id="task-period" value="">
                     <div class="round h-7 mb-11">
-                        <input class="checkbox" type="checkbox" id="modalcheckbox" name="completed" checked />
+                        <input class="checkbox" type="checkbox" id="modalcheckbox" name="completed"/>
                         <label class="labelcheckbox" for="modalcheckbox"></label>
                         <!-- <div class="label"></div> -->
                         <span class="ml-7 mt-1 h-10 inline-block">Hoàn thành</span>
@@ -237,7 +246,7 @@
                 modalTitle.setAttribute('value', taskTitle);
                 modalTaskID.setAttribute('value', taskID);
                 modalDescription.innerHTML = taskDescription;
-                modalPeriod.setAttribute('value',taskPeriod);
+                modalPeriod.setAttribute('value', taskPeriod);
                 modalCompleted.checked = (taskCompleted == "1") ? 1 : 0;
                 modal.classList.remove('hidden');
                 modal.classList.remove('modal-close');
