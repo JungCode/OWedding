@@ -16,9 +16,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('toolweb/reset.css') }}" />
-
-    <link rel="stylesheet" href="{{ asset('toolweb/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('budget-tool/tailwindcss.css') }}">
     <link rel="stylesheet" href="{{ asset('todolist/style.css')}}">
     <link rel="stylesheet" href="{{ asset('progress-spinner/style.css') }}">

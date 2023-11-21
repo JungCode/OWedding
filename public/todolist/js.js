@@ -30,6 +30,11 @@ checkboxes.forEach((checkbox) => {
         const span = this.parentElement.nextElementSibling.querySelector('.inneritem-text_main');
         span.style.textDecoration = this.checked ? 'line-through' : 'none';
     });
+
+    const span = checkbox.parentElement.nextElementSibling.querySelector('.inneritem-text_main');
+    if (checkbox.checked) {
+        span.style.textDecoration = 'line-through';
+    }
 });
 
 //  // Lấy tất cả các phần tử label có class "labelcheckbox"
