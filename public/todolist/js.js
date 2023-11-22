@@ -32,6 +32,7 @@ checkboxes.forEach((checkbox) => {
         if (span) {
             span.style.textDecoration = this.checked ? 'line-through' : 'none';
         }
+        //array
         if (this.checked) {
             temp = arrayChecks.replace(checkbox.dataset.taskid + ".", "");
             if(temp === arrayChecks){

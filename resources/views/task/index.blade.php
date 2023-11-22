@@ -1,5 +1,5 @@
 @extends('layouts.toolweb.tools')
-@section('taskPercent', ($completedCount / $taskCount) * 100)
+@section('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0)
 @section('title', 'the list of task')
 @section('budget_current', number_format($currentBudget, 0, ',', '.'))
 @section('content')
@@ -7,7 +7,7 @@
         <div class="content-wrap">
             <div class="plantitle">
                 <div class="plantitle-top">
-                    <a href="#" class="plantitle-top_back">
+                    <a href="/owedding" class="plantitle-top_back">
                         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
                     </a>
                     <div class="plantitle-top_title">
@@ -36,7 +36,8 @@
                         <div class="completed-content_mid-progress"></div>
                     </div>
                     <p class="completed-content_sub">
-                        Đã hoàn thành <span>{{ ($completedCount / $taskCount) * 100 }}</span>%
+                        Đã hoàn thành
+                        <span>{{ $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0 }}</span>%
                     </p>
                 </div>
                 <div class="completed-button">
@@ -96,18 +97,13 @@
                                     @php
                                         $idCheckBox++;
                                     @endphp
-                                    {{-- <div>
-                                        <a href="{{ route('tasks.show', ['task' => $task->id]) }}"
-                                            @class(['line-through' => $task->completed])>
-                                            {{ $task->title }}
-                                        </a>
-                                    </div> --}}
                                     @if ($task->period == $period)
                                         <div class="inneritem">
                                             <div class="inneritem-main">
                                                 <div class="round">
                                                     <input class="checkbox" type="checkbox" id="checkbox{{ $idCheckBox }}"
-                                                        {{ $task->completed ? 'checked' : null }} data-taskid="{{$task->id}}" />
+                                                        {{ $task->completed ? 'checked' : null }}
+                                                        data-taskid="{{ $task->id }}" />
                                                     <label class="labelcheckbox" for="checkbox{{ $idCheckBox }}"></label>
                                                     <!-- <div class="label"></div> -->
                                                 </div>
@@ -124,20 +120,19 @@
                                                 class="inneritem-icon editlist showModal">
                                                 <i class="fa-regular fa-pen-to-square" aria-hidden="true"></i>
                                             </button>
-                                            <div class="inneritem-icon deletelist">
-                                                <form action="{{route('tasks.destroy',$task)}}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit">
+                                            <form action="{{ route('tasks.destroy', $task) }}" method="post">
+                                                <button type="submit">
+                                                    <div class="inneritem-icon deletelist">
+                                                        @csrf
+                                                        @method('DELETE')
                                                         <i class="fa-solid fa-trash-can removelist" aria-hidden="true"></i>
-                                                    </button>
-                                                </form>
-                                                <!-- <i class="fa-solid fa-info"></i> -->
-                                            </div>
+                                                        <!-- <i class="fa-solid fa-info"></i> -->
+                                                    </div>
+                                                </button>
+                                            </form>
                                         </div>
                                     @endif
                                 @empty
-                                    <div class="text-center w-full">there no tasks</div>
                                 @endforelse
                                 <div class="innerbtn">
                                     <button class="innerbtn-btn showModal" data-id="" data-description="" data-title=""
@@ -151,7 +146,7 @@
                     </div>
                 @endfor
                 <div class="completed-button btnsub">
-                    <form action="{{route('tasks.toggleCompleteTasks',1)}}" method="POST">
+                    <form action="{{ route('tasks.toggleCompleteTasks', 1) }}" method="POST">
                         @csrf
                         <input type="hidden" value="" id="inputIdItems" name="IdItems">
                         <button>
@@ -182,7 +177,7 @@
                     <input type="hidden" name="id" id="task-id" value="">
                     <input type="hidden" name="period" id="task-period" value="">
                     <div class="round h-7 mb-11">
-                        <input class="checkbox" type="checkbox" id="modalcheckbox" name="completed"/>
+                        <input class="checkbox" type="checkbox" id="modalcheckbox" name="completed" />
                         <label class="labelcheckbox" for="modalcheckbox"></label>
                         <!-- <div class="label"></div> -->
                         <span class="ml-7 mt-1 h-10 inline-block">Hoàn thành</span>

@@ -1,4 +1,4 @@
-@section('taskPercent',$taskPercent)
+@section('taskPercent',number_format($taskPercent, 0, ',', '.'))
 @extends('layouts.toolweb.tools')
 @auth
     @section('budget_current',number_format($currentBudget, 0, ',', '.'))
