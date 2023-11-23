@@ -1,6 +1,5 @@
 @extends('layouts.toolweb.tools')
 @section('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0)
-@section('title', 'the list of task')
 @section('budget_current', number_format($currentBudget, 0, ',', '.'))
 @section('content')
     <div class="content">

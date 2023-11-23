@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Quicksand", sans-serif !important;
   font-size: 1.6rem;
   font-weight: normal;
   display: flex;
@@ -250,7 +250,6 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 4rem;
 }
 .content-wrap {
   width: 80%;
@@ -310,7 +309,6 @@ img {
   height: auto;
   border-radius: 2rem;
   border: 1px solid #d9e2ef;
-  margin-top: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;

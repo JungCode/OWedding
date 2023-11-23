@@ -21,6 +21,21 @@
 .border-wedding{
     border-color: #eee;
 }
+.bg-green-wedding{
+    background-color: #389e80;
+}
+.text-green-wedding{
+    color: #389e80;
+}
+.bg-red-wedding{
+    background-color: #df4759;
+}
+.bg-purple-wedding{
+    background-color: #6959cb;
+}
+.bg-grey-wedding{
+    background-color: #506690;
+}
 @keyframes fade-in {
     0% {
         opacity: 0;

@@ -35,6 +35,7 @@ Route::get('/', function() {
 });
 Route::view('/owedding','user.landing')
 ->name('landing');
+Route::view('/guest','guest.guest')->name('guest');
 //USER
 Route::post('/login',[UserController::class,'login'])->name('users.login');
 Route::get('/login',[UserController::class,'showlogin'])->name('users.showlogin');

@@ -76,7 +76,7 @@
         </div>
     </div>
     <div class="btnline">
-        <a href="#" class="btnchoice">
+        <a href="/guest" class="btnchoice">
             <h5 class="btnchoice-top">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <span>DANH SÁCH KHÁCH MỜI</span>
