@@ -36,6 +36,7 @@ Route::get('/', function() {
 Route::view('/owedding','user.landing')
 ->name('landing');
 Route::view('/guest','guest.guest')->name('guest');
+Route::view('/tool/index','layouts.toolweb.index')->name('tool.index');
 //USER
 Route::post('/login',[UserController::class,'login'])->name('users.login');
 Route::get('/login',[UserController::class,'showlogin'])->name('users.showlogin');
@@ -49,17 +50,17 @@ Route::resource('users',UserController::class)->only([
   'store', 'update'
 ]);
 //BUDGET MANAGEMENT
-Route::resource('budgetCategories', BudgetCategoryController::class)->only([
+Route::resource('tool/budgetCategories', BudgetCategoryController::class)->only([
   'index','store', 'update', 'destroy'
 ]);
-Route::resource('budgetItems', BudgetItemController::class)->only([
+Route::resource('tool/budgetItems', BudgetItemController::class)->only([
   'store', 'update', 'destroy'
 ]);
 
 //TASK
-Route::resource('tasks', TaskController::class)->only([
+Route::resource('tool/tasks', TaskController::class)->only([
   'index', 'store', 'update', 'destroy'
 ]);
-Route::post('tasks/tasks-toggle-complete',[TaskController::class,'toggleCompleteTasks'])->name('tasks.toggleCompleteTasks');
-Route::put('tasks/{task}/toggle-complete',[TaskController::class,'toggleComplete'])->name('tasks.toggleComplete');
+Route::post('tool/tasks/tasks-toggle-complete',[TaskController::class,'toggleCompleteTasks'])->name('tasks.toggleCompleteTasks');
+Route::put('tool/tasks/{task}/toggle-complete',[TaskController::class,'toggleComplete'])->name('tasks.toggleComplete');
 
