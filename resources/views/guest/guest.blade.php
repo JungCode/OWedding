@@ -59,7 +59,7 @@
                     <button class="rounded-lg py-3 bg-purple-wedding text-white show-guest-group-modal">Quản lý
                         nhóm</button>
                     <button class="rounded-lg py-3 bg-red-wedding text-white">Cài đặt thiệp mời</button>
-                    <button class="rounded-lg py-3 bg-grey-wedding text-white">Xuất danh sách</button>
+                    <button class="rounded-lg py-3 bg-gray-wedding text-white">Xuất danh sách</button>
                 </div>
             </div>
             <div class="mb-2">
@@ -262,20 +262,14 @@
                     </tr>
                     <tr class="border border-solid border-slate-300">
                         <td class="border border-solid border-slate-300 py-4 px-4 text-center w-2/12">1</td>
-                        <td class="border border-solid border-slate-300 py-4 px-4 text-left w-8/12">Người thân & Họ hàng
+                        <td class="border border-solid border-slate-300 py-4 px-4 text-left w-8/12">
+                            <input class="w-8/12" type="text" value="Người thân & Họ hàng" readonly>
+                            <button class="bg-blue-600 hover:bg-blue-800 transition rounded text-white px-2 py-1 hidden">Lưu</button>
+                            <button class="bg-gray-wedding hover:bg-gray-500 transition rounded text-white px-2 py-1 hidden">Hủy</button>
                         </td>
                         <td class=" flex justify-center items-center py-4 px-4">
-                            <button class="inline-block">Sửa</button>
-                            <button class="inline-block">Xóa</button>
-                        </td>
-                    </tr>
-                    <tr class="border border-solid border-slate-300">
-                        <td class="border border-solid border-slate-300 py-4 px-4 text-center w-2/12">1</td>
-                        <td class="border border-solid border-slate-300 py-4 px-4 text-left w-8/12">Người thân & Họ hàng
-                        </td>
-                        <td class=" flex justify-center items-center py-4 px-4">
-                            <button class="inline-block">Sửa</button>
-                            <button class="inline-block">Xóa</button>
+                            <button class="inline-block transition hover:text-slate-500 editGroup"><i class="fa-solid fa-pen mr-4"></i></button>
+                            <button class="inline-block transition hover:text-slate-500"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 </table>
@@ -295,6 +289,7 @@
         const guestPhoneM = document.querySelector('#guest-phone');
         const guestGroupM = document.querySelector('#guest-group');
         const guestGowithM = document.querySelector('#guest-gowith');
+        const btnSubmit = document.querySelector('#btn-submit');
         showGuestAddingModal.forEach(function (element) {
             element.addEventListener('click', function () {
                 guestEvent = element.dataset.event;
@@ -304,6 +299,19 @@
                 guestPhone = element.dataset.phone;
                 guestGroup = element.dataset.groupguest;
                 guestGowith = element.dataset.gowith;
+                var methodField = document.querySelector('#methodField');
+                var form = document.querySelector('#form');
+                if (guestId == '') {
+                    methodField.setAttribute('value', 'POST');
+                    form.setAttribute('action', `{{ route('tasks.store') }}`);
+                    btnSubmit.innerHTML = "<i class=\"fa-solid fa-plus\"></i> Thêm mới";
+                } else {
+                    methodField.setAttribute('value', 'PUT');
+                    form.setAttribute('action', `{{ route('tasks.update', ':guestID') }}`.replace(
+                        ':guestID',
+                        guestId));
+                    btnSubmit.innerHTML = "<i class=\"fa-regular fa-floppy-disk\"></i> Lưu thông tin";
+                }
                 guestAddingModal.classList.remove('hidden');
                 guestAddingModal.classList.remove('modal-close');
                 guestAddingModal.classList.add('modal-open');
@@ -327,7 +335,6 @@
                 guestAddingModal.classList.add('modal-close');
                 childElementGuestAddingModal.classList.add('slide-up');
                 childElementGuestAddingModal.classList.remove('slide-down');
-
                 setTimeout(() => {
                     guestAddingModal.classList.add('hidden');
                 }, 250);

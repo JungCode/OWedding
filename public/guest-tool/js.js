@@ -16,9 +16,9 @@ showGroupGuestModal.forEach(function (element) {
     });
 });
 const closeGuestGroupModal = document.querySelector('.closeGGM');
-guestGroupModal.addEventListener('click', closeModalItem);
-closeGuestGroupModal.addEventListener('click', closeModalItem);
-function closeModalItem(e) {
+guestGroupModal.addEventListener('click', closeGGM);
+closeGuestGroupModal.addEventListener('click', closeGGM);
+function closeGGM(e) {
     if (!childElementItemGuestGroupModal.contains(e.target) || closeGuestGroupModal.contains(e.target)) {
         guestGroupModal.classList.remove('modal-open');
         guestGroupModal.classList.add('modal-close');
@@ -30,7 +30,30 @@ function closeModalItem(e) {
         }, 250);
     }
 };
-
+editGroups = document.querySelectorAll('.editGroup');
+editGroups.forEach(editGroup =>{
+    const row = editGroup.closest("tr");
+    const cell = row.cells[1];
+    input = cell.querySelector('input');
+    buttons = cell.querySelectorAll('button');
+    editGroup.addEventListener('click', function(){
+        buttons.forEach(button => {
+            button.classList.remove("hidden");
+            button.addEventListener('click',function(){     
+            });
+        });
+        buttons[0].addEventListener('click',function(){
+            buttons[0].classList.add("hidden");
+            buttons[1].classList.add("hidden");
+        })
+        buttons[1].addEventListener('click',function(){
+            buttons[0].classList.add("hidden");
+            buttons[1].classList.add("hidden");
+        })
+        input.focus();
+        input.removeAttribute("readonly");
+    });
+})
 // table searching
 const tableRows = document.querySelector('#table').querySelectorAll('tbody tr');
 const searchableCells = Array.from(tableRows).map(row => row.querySelectorAll("td")[3]);
