@@ -46,7 +46,15 @@
                     </select>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
-                    <button class="rounded-lg py-3 bg-green-wedding text-white show-guest-adding-modal">Thêm khách
+                    <button class="rounded-lg py-3 bg-green-wedding text-white show-guest-adding-modal"
+                        data-event=""
+                        data-guestid=""
+                        data-guestname=""
+                        data-email=""
+                        data-phone=""
+                        data-groupguest=""
+                        data-gowith=""                        
+                    >Thêm khách
                         mời</button>
                     <button class="rounded-lg py-3 bg-purple-wedding text-white show-guest-group-modal">Quản lý
                         nhóm</button>
@@ -120,8 +128,17 @@
                                 100,000 đ
                             </td>
                             <td class="text-center">
-                                <button class="mr-3 transition hover:text-slate-500"><i
-                                        class="fa-solid fa-pen"></i></button>
+                                <button class="mr-3 transition hover:text-slate-500 show-guest-adding-modal"
+                                    data-event="Lễ cưới nhà nam"
+                                    data-guestid="1"
+                                    data-guestname="2"
+                                    data-email="3"
+                                    data-phone="4"
+                                    data-groupguest="gì gì đó"
+                                    data-gowith="5"
+                                >
+                                    <i class="fa-solid fa-pen "></i>
+                                </button>
                                 <button class="transition hover:text-slate-500"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         </tr>
@@ -239,37 +256,36 @@
                 <form id="form" method="POST" action="" class="my-5">
                     @csrf
                     <input type="hidden" name="_method" id="methodField" value="">
-                    <input type="hidden" name="id" id="task-id" value="">
-                    <input type="hidden" name="period" id="task-period" value="">
+                    <input type="text" name="id" id="guest-id" value="">
                     <label for="block" class="my-5 block">
-                        <span class="block mb-1">Tiêu đề công việc</span>
-                        <select name="" id=""
+                        <span class="block mb-1">Sự kiện</span>
+                        <select name="" id="guest-event"
                             class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
-                            <option value="">LỄ CƯỚI NHÀ NỮ</option>
-                            <option value="">TIỆC CƯỚI NHÀ NỮ</option>
-                            <option value="">LỄ CƯỚI NHÀ NAM</option>
-                            <option value="">TIỆC CƯỚI NHÀ NAM</option>
+                            <option value="LỄ CƯỚI NHÀ NỮ">LỄ CƯỚI NHÀ NỮ</option>
+                            <option value="TIỆC CƯỚI NHÀ NỮ">TIỆC CƯỚI NHÀ NỮ</option>
+                            <option value="LỄ CƯỚI NHÀ NAM">LỄ CƯỚI NHÀ NAM</option>
+                            <option value="TIỆC CƯỚI NHÀ NAM">TIỆC CƯỚI NHÀ NAM</option>
                         </select>
                     </label>
                     <label for="item-name" class="my-5 block">
                         <span class="block mb-1">Tên khách mời</span>
-                        <input type="text" placeholder="Nhập tên khách mời"
+                        <input type="text" placeholder="Nhập tên khách mời" id="guest-name"
                             class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
                     </label>
                     <label for="item-name" class="my-5 block">
                         <span class="block mb-1">Email</span>
-                        <input type="text" placeholder="Nhập Email khách mời"
+                        <input type="text" placeholder="Nhập Email khách mời" id="guest-email"
                             class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
                     </label>
                     <label for="item-name" class="my-5 block">
                         <span class="block mb-1">Số điện thoại</span>
-                        <input type="text" placeholder="Nhập số điện thoại khách mời"
+                        <input type="text" placeholder="Nhập số điện thoại khách mời" id="guest-phone"
                             class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
                     </label>
                     <label for="block" class="my-5 block">
-                        <span class="block mb-1">Chọn nhóm khách mời <span
+                        <span class="block mb-1">Chọn nhóm khách mời <span 
                                 class="text-blue-700 show-guest-group-modal cursor-pointer"> [Quản lý nhóm] </span></span>
-                        <select name="" id=""
+                        <select name="" id="guest-group"
                             class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
                             <option value="">Chọn nhóm khách mời</option>
                             <option value="">Người thân & Họ hàng</option>
@@ -277,6 +293,21 @@
                             <option value="">TIỆC CƯỚI NHÀ NAM</option>
                         </select>
                     </label>
+                    <label for="block" class="my-5 block">
+                        <span class="block mb-1">Đi cùng</span>
+                        <select name="" id="guest-gowith"
+                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
+                            <option value="">1</option>
+                            <option value="">2</option>
+                            <option value="">3</option>
+                            <option value="">4</option>
+                            <option value="">5</option>
+                            <option value="">6</option>
+                            <option value="">7</option>
+                            <option value="">8</option>
+                        </select>
+                    </label>
+                    
                     <button type="submit" id="btn-submit"
                         class="mt-7 transition duration-300 py-5 bg-gray-700 hover:bg-gray-900 px-3 rounded text-white mr-1 w-full">
                         <i class="fa-solid fa-plus"></i>
@@ -354,4 +385,55 @@
         </div>
     </div>
     <script src="{{ asset('guest-tool/js.js') }}"></script>
+    <script>
+        // adding-modal
+        const guestAddingModal = document.querySelector('.guest-adding-modal');
+        const childElementGuestAddingModal = guestAddingModal.querySelector(':first-child');
+        const showGuestAddingModal = document.querySelectorAll('.show-guest-adding-modal');
+        const guestIdM = document.querySelector('#guest-id');
+        const guestEventM = document.querySelector('#guest-event');
+        const guestNameM = document.querySelector('#guest-name');
+        const guestEmailM = document.querySelector('#guest-email');
+        const guestPhoneM = document.querySelector('#guest-phone');
+        const guestGroupM = document.querySelector('#guest-group');
+        const guestGowithM = document.querySelector('#guest-gowith');
+        showGuestAddingModal.forEach(function (element) {
+            element.addEventListener('click', function () {
+                guestEvent = element.dataset.event;
+                guestId = element.dataset.guestid;
+                guestName = element.dataset.guestname;
+                guestEmail = element.dataset.email;
+                guestPhone = element.dataset.phone;
+                guestGroup = element.dataset.groupguest;
+                guestGowith = element.dataset.gowith;
+                guestAddingModal.classList.remove('hidden');
+                guestAddingModal.classList.remove('modal-close');
+                guestAddingModal.classList.add('modal-open');
+                guestNameM.setAttribute('value', guestName);
+                guestIdM.setAttribute('value', guestId);
+                guestEventM.selectedIndex('value', guestEvent);
+                guestEmailM.setAttribute('value', guestEmail);
+                guestPhoneM.setAttribute('value', guestPhone);
+                guestGroupM.setAttribute('value', guestGroup);
+                guestGowithM.setAttribute('value', guestGowith);
+                childElementGuestAddingModal.classList.remove('slide-up');
+                childElementGuestAddingModal.classList.add('slide-down');
+            });
+        });
+        const closeGuestAddingModal = document.querySelector('.closeModal');
+        guestAddingModal.addEventListener('click', closeGAM);
+        closeGuestAddingModal.addEventListener('click', closeGAM);
+        function closeGAM(e) {
+            if (!childElementGuestAddingModal.contains(e.target) || closeGuestAddingModal.contains(e.target)) {
+                guestAddingModal.classList.remove('modal-open');
+                guestAddingModal.classList.add('modal-close');
+                childElementGuestAddingModal.classList.add('slide-up');
+                childElementGuestAddingModal.classList.remove('slide-down');
+
+                setTimeout(() => {
+                    guestAddingModal.classList.add('hidden');
+                }, 250);
+            }
+        }
+    </script>
 @endsection

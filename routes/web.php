@@ -38,14 +38,14 @@ Route::view('/owedding','user.landing')
 Route::view('/guest','guest.guest')->name('guest');
 Route::view('/tool/index','layouts.toolweb.index')->name('tool.index');
 //USER
-Route::post('/login',[UserController::class,'login'])->name('users.login');
-Route::get('/login',[UserController::class,'showlogin'])->name('users.showlogin');
-Route::post('/logout',[UserController::class,'logout'])->name('users.logout');
-Route::get('/register',[UserController::class,'showRegister'])->name('users.showRegister');
+Route::post('/owedding/login',[UserController::class,'login'])->name('users.login');
+Route::get('/owedding/login',[UserController::class,'showlogin'])->name('users.showlogin');
+Route::post('/owedding/logout',[UserController::class,'logout'])->name('users.logout');
+Route::get('/owedding/register',[UserController::class,'showRegister'])->name('users.showRegister');
 
-Route::get('/profile-user',[UserController::class,'showProfile'])->name('users.showProfile');
+Route::get('/owedding/profile-user',[UserController::class,'showProfile'])->name('users.showProfile');
 
-Route::post('/update-current-budget',[UserController::class,'updateCurrentBudget'])->name('users.updateCurrentBudget');
+Route::post('/owedding/update-current-budget',[UserController::class,'updateCurrentBudget'])->name('users.updateCurrentBudget');
 Route::resource('users',UserController::class)->only([
   'store', 'update'
 ]);

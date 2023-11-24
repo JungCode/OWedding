@@ -31,6 +31,7 @@ class BudgetCategoryController extends Controller
         $User = User::findOrFail($user['id']);
         $completedCount = Task::completedTask($user['id'])->count();
         $tasks = Task::task($user['id'])->count();
+        $taskPercent = ($tasks) ? $completedCount/$tasks*100 : 0;
         return view('weddingBudget.budget',[
             'budgetCategories' => $budgetCategories, 
             'userid' => $user['id'], 
@@ -38,7 +39,7 @@ class BudgetCategoryController extends Controller
             'total_all_ac' => $total_all_ac,
             'total_all_ec' => $total_all_ec,
             'count' => $count,
-            'taskPercent' => $completedCount/$tasks*100
+            'taskPercent' => $taskPercent
         ]);
     }
 
