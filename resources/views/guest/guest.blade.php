@@ -129,12 +129,12 @@
                             </td>
                             <td class="text-center">
                                 <button class="mr-3 transition hover:text-slate-500 show-guest-adding-modal"
-                                    data-event="Lễ cưới nhà nam"
+                                    data-event="LỄ CƯỚI NHÀ NAM"
                                     data-guestid="1"
                                     data-guestname="2"
                                     data-email="3"
                                     data-phone="4"
-                                    data-groupguest="gì gì đó"
+                                    data-groupguest="ĐỐI TÁC"
                                     data-gowith="5"
                                 >
                                     <i class="fa-solid fa-pen "></i>
@@ -248,7 +248,7 @@
             <div class="h-20 border-b border-solid border-slate-300 px-7 py-2 bg-rose-500 rounded-t-lg relative">
                 <h3 class="text-white h-full text-3xl py-3">Thông tin công việc</h3>
                 <i
-                    class="text-white fa-solid fa-circle-xmark absolute right-5 top-3 text-3xl opacity-50 hover:opacity-100 cursor-pointer closeModal ">
+                    class="text-white fa-solid fa-circle-xmark absolute right-5 top-3 text-3xl opacity-50 hover:opacity-100 cursor-pointer closeGAM">
                 </i>
             </div>
             {{-- BODY OF MODALS  --}}
@@ -297,14 +297,15 @@
                         <span class="block mb-1">Đi cùng</span>
                         <select name="" id="guest-gowith"
                             class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
-                            <option value="">6</option>
-                            <option value="">7</option>
-                            <option value="">8</option>
+                            <option value="">Không có</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
                         </select>
                     </label>
                     
@@ -325,7 +326,7 @@
             <div class="h-20 border-b border-solid border-slate-300 px-7 py-2 bg-rose-500 rounded-t-lg relative">
                 <h3 class="text-white h-full text-3xl py-3">Quản lý nhóm khách mời</h3>
                 <i
-                    class="text-white fa-solid fa-circle-xmark absolute right-5 top-3 text-3xl opacity-50 hover:opacity-100 cursor-pointer closeModal ">
+                    class="text-white fa-solid fa-circle-xmark absolute right-5 top-3 text-3xl opacity-50 hover:opacity-100 cursor-pointer closeGGM">
                 </i>
             </div>
             {{-- BODY OF MODALS  --}}
@@ -370,16 +371,6 @@
                             <button class="inline-block">Xóa</button>
                         </td>
                     </tr>
-                    <tr class="border border-solid border-slate-300">
-                        <td class="border border-solid border-slate-300 py-4 px-4 text-center w-2/12">1</td>
-                        <td class="border border-solid border-slate-300 py-4 px-4 text-left w-8/12">Người thân & Họ hàng
-                        </td>
-                        <td class=" flex justify-center items-center py-4 px-4">
-                            <button class="inline-block">Sửa</button>
-                            <button class="inline-block">Xóa</button>
-                        </td>
-                    </tr>
-
                 </table>
             </div>
         </div>
@@ -411,16 +402,16 @@
                 guestAddingModal.classList.add('modal-open');
                 guestNameM.setAttribute('value', guestName);
                 guestIdM.setAttribute('value', guestId);
-                guestEventM.selectedIndex('value', guestEvent);
+                guestEventM.value = guestEvent;
                 guestEmailM.setAttribute('value', guestEmail);
                 guestPhoneM.setAttribute('value', guestPhone);
-                guestGroupM.setAttribute('value', guestGroup);
-                guestGowithM.setAttribute('value', guestGowith);
+                guestGroupM.value = guestGroup;
+                guestGowithM.value = guestGowith
                 childElementGuestAddingModal.classList.remove('slide-up');
                 childElementGuestAddingModal.classList.add('slide-down');
             });
         });
-        const closeGuestAddingModal = document.querySelector('.closeModal');
+        const closeGuestAddingModal = document.querySelector('.closeGAM');
         guestAddingModal.addEventListener('click', closeGAM);
         closeGuestAddingModal.addEventListener('click', closeGAM);
         function closeGAM(e) {

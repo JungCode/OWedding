@@ -35,7 +35,7 @@ Route::get('/', function() {
 });
 Route::view('/owedding','user.landing')
 ->name('landing');
-Route::view('/guest','guest.guest')->name('guest');
+Route::view('tool/guest','guest.guest')->name('guest');
 Route::view('/tool/index','layouts.toolweb.index')->name('tool.index');
 //USER
 Route::post('/owedding/login',[UserController::class,'login'])->name('users.login');

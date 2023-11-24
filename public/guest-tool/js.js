@@ -15,7 +15,7 @@ showGroupGuestModal.forEach(function (element) {
         childElementItemGuestGroupModal.classList.add('slide-down');
     });
 });
-const closeGuestGroupModal = document.querySelector('.closeModal');
+const closeGuestGroupModal = document.querySelector('.closeGGM');
 guestGroupModal.addEventListener('click', closeModalItem);
 closeGuestGroupModal.addEventListener('click', closeModalItem);
 function closeModalItem(e) {
