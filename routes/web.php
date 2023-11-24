@@ -35,16 +35,16 @@ Route::get('/', function() {
 });
 Route::view('/owedding','user.landing')
 ->name('landing');
-Route::view('/guest','guest.guest')->name('guest');
+Route::view('/owedding/guest','guest.guest')->name('guest');
 //USER
-Route::post('/login',[UserController::class,'login'])->name('users.login');
-Route::get('/login',[UserController::class,'showlogin'])->name('users.showlogin');
-Route::post('/logout',[UserController::class,'logout'])->name('users.logout');
-Route::get('/register',[UserController::class,'showRegister'])->name('users.showRegister');
+Route::post('/owedding/login',[UserController::class,'login'])->name('users.login');
+Route::get('/owedding/login',[UserController::class,'showlogin'])->name('users.showlogin');
+Route::post('/owedding/logout',[UserController::class,'logout'])->name('users.logout');
+Route::get('/owedding/register',[UserController::class,'showRegister'])->name('users.showRegister');
 
-Route::get('/profile-user',[UserController::class,'showProfile'])->name('users.showProfile');
+Route::get('/owedding/profile-user',[UserController::class,'showProfile'])->name('users.showProfile');
 
-Route::post('/update-current-budget',[UserController::class,'updateCurrentBudget'])->name('users.updateCurrentBudget');
+Route::post('/owedding/update-current-budget',[UserController::class,'updateCurrentBudget'])->name('users.updateCurrentBudget');
 Route::resource('users',UserController::class)->only([
   'store', 'update'
 ]);
@@ -60,6 +60,6 @@ Route::resource('budgetItems', BudgetItemController::class)->only([
 Route::resource('tasks', TaskController::class)->only([
   'index', 'store', 'update', 'destroy'
 ]);
-Route::post('tasks/tasks-toggle-complete',[TaskController::class,'toggleCompleteTasks'])->name('tasks.toggleCompleteTasks');
-Route::put('tasks/{task}/toggle-complete',[TaskController::class,'toggleComplete'])->name('tasks.toggleComplete');
+Route::post('/owedding/tasks/tasks-toggle-complete',[TaskController::class,'toggleCompleteTasks'])->name('tasks.toggleCompleteTasks');
+Route::put('/owedding/tasks/{task}/toggle-complete',[TaskController::class,'toggleComplete'])->name('tasks.toggleComplete');
 

@@ -2,34 +2,6 @@
 //     console.log(e.target);
 // })
 
-// adding-modal 
-const guestAddingModal = document.querySelector('.guest-adding-modal');
-const childElementGuestAddingModal = guestAddingModal.querySelector(':first-child');
-const showGuestAddingModal = document.querySelectorAll('.show-guest-adding-modal');
-showGuestAddingModal.forEach(function (element) {
-    element.addEventListener('click', function () {
-        guestAddingModal.classList.remove('hidden');
-        guestAddingModal.classList.remove('modal-close');
-        guestAddingModal.classList.add('modal-open');
-        childElementGuestAddingModal.classList.remove('slide-up');
-        childElementGuestAddingModal.classList.add('slide-down');
-    });
-});
-const closeGuestAddingModal = document.querySelector('.closeModal');
-guestAddingModal.addEventListener('click', closeGAM);
-closeGuestAddingModal.addEventListener('click', closeGAM);
-function closeGAM(e) {
-    if (!childElementGuestAddingModal.contains(e.target) || closeGuestAddingModal.contains(e.target)) {
-        guestAddingModal.classList.remove('modal-open');
-        guestAddingModal.classList.add('modal-close');
-        childElementGuestAddingModal.classList.add('slide-up');
-        childElementGuestAddingModal.classList.remove('slide-down');
-
-        setTimeout(() => {
-            guestAddingModal.classList.add('hidden');
-        }, 250);
-    }
-}
 // group-guest-modal 
 const guestGroupModal = document.querySelector('.guest-group-modal');
 const childElementItemGuestGroupModal = guestGroupModal.querySelector(':first-child');
