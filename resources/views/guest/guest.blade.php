@@ -256,7 +256,7 @@
                 <form id="form" method="POST" action="" class="my-5">
                     @csrf
                     <input type="hidden" name="_method" id="methodField" value="">
-                    <input type="text" name="id" id="guest-id" value="">
+                    <input type="hidden" name="id" id="guest-id" value="">
                     <label for="block" class="my-5 block">
                         <span class="block mb-1">Sự kiện</span>
                         <select name="" id="guest-event"
