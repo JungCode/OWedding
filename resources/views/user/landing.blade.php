@@ -74,8 +74,13 @@
                 Cho đám cưới trở nên độc đáo hơn theo cách riêng của bạn!
             </h2>
             <div class="firstcontent_wrap">
-                <a class="Button" href="{{ route('templates.index') }}">BẮT ĐẦU MIỄN PHÍ</a>
-                <a class="Button Button2" href="{{ route('userwebs.index', $user['id']) }}">WEBSITES ĐÃ TẠO</a>
+                @if ($user)
+                    <a class="Button" href="{{ route('templates.index') }}">BẮT ĐẦU MIỄN PHÍ</a>
+                    <a class="Button Button2" href="{{ route('userwebs.index', $user['id']) }}">WEBSITES ĐÃ TẠO</a>
+                @else
+                    <a class="Button" href="{{ route('users.login') }}">BẮT ĐẦU MIỄN PHÍ</a>
+                    <a class="Button Button2" href="{{ route('users.login') }}">WEBSITES ĐÃ TẠO</a>
+                @endif
             </div>
         </div>
         <div class="firstpage_line">
