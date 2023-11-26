@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use App\Models\User;
+use App\Models\UserWeb;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
@@ -77,7 +79,7 @@ class UserController extends Controller
             'lastName' => 'max:255',
         ]);
         $user = User::findOrFail($id);
-        $imageUrl = $this->storeImage($request);
+        $imageUrl = $this->storeImage($request,$id);
         if($imageUrl){
             $user->photo = $imageUrl;
         }
@@ -130,11 +132,11 @@ class UserController extends Controller
         auth()->logout();
         return redirect()->route('landing');
     }
-    function showRegister()
+    public function showRegister()
     {
         return view('user.signup');
     }
-    function updateCurrentBudget(Request $request){
+    public function updateCurrentBudget(Request $request){
         $data = $request->validate([
             'userid' => ['required'],
             'current_budget_money' => ['numeric']
@@ -144,19 +146,37 @@ class UserController extends Controller
         $user->save();
         return redirect()->route('budgetCategories.index');
     }
-    function showProfile(){
+    public function showProfile(){
         $user = session('user');
         $User = User::findOrFail($user['id']);
         return view('user.profile', [
             'user' => $User
         ]);
     }
-    protected function storeImage(Request $request){
+    public function managementWeb(){
+        $user = session('user');
+        $User = User::findOrFail($user['id']);
+
+        $tasks = Task::task($user['id'])->get();
+        $completedCount = Task::completedTask($user['id'])->count();
+        if( UserWeb::where('user_id',$user['id'])->get()  ){
+            return view('layouts.toolweb.index',[
+                'currentBudget' => $User->current_budget,
+                'taskCount' => $tasks->count(),
+                'completedCount' => $completedCount
+            ]);
+        }else{
+            return redirect()->route('templates.index');
+        }
+    }
+    protected function storeImage(Request $request, string $userId){
         if($request->file('photo')){
-            $path = $request->file('photo')->store('public/profile-image');
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            $newFileName = "user" . $userId . "." .$extension; 
+            $path = $request->file('photo')->storeAs('public/profile-image',$newFileName);
             return substr($path,strlen('public/'));
         }else{
             return null;
         }
-    } 
+    }
 }

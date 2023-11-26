@@ -15,8 +15,8 @@
         @endphp
         <section class="rounded-3xl border border-solid border-slate-300 mt-12 mb-11 overflow-hidden ">
             <div class="bg-wedding flex">
-                <a href="/owedding" class="pl-7 text-3xl pt-8">
-                    <i class="fa fa-arrow-circle-left text-slate-600" aria-hidden="true"></i>
+                <a href="{{route('users.managementWeb')}}" class="pl-7 text-3xl pt-8 transition">
+                    <i class="fa fa-arrow-circle-left text-slate-600 hover:text-red-500" aria-hidden="true"></i>
                 </a>
                 <div class="w-full">
                     <h2 class="py-9 text-3xl text-center font-semibold text-slate-600 pl-4">

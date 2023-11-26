@@ -17,9 +17,6 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    public function budgetCategory(){
-        return $this->hasMany(BudgetCategory::class);
-    }
     protected $fillable = [
         'name',
         'email',
@@ -29,7 +26,7 @@ class User extends Authenticatable
         'birthday',
         'photo'
     ];
-
+    
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -39,7 +36,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    
     /**
      * The attributes that should be cast.
      *
@@ -49,8 +46,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
+    
     public function tasks() {
         return $this->hasMany(Task::class);
+    }
+    public function budgetCategory(){
+        return $this->hasMany(BudgetCategory::class);
+    }
+    public function userWeb(){
+        return $this->hasOne(UserWeb::class);
     }
 }

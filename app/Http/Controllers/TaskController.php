@@ -54,12 +54,13 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request)
     {
+        //adding task
         $user = session('user');
         $data = $request->validated();
         $data['user_id'] = $user['id'];
         $user->tasks()->create($data);
-
         $task = Task::latest()->first();
+        //tick the completed
         $completed = $request->input('completed');
         if($completed == "on"){
             $this->toggleComplete($task);

@@ -1,12 +1,13 @@
-@extends('layouts.toolweb.tools')
-@section('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0)
+@auth
+    @extends('layouts.toolweb.tools')
+    @section('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0)
 @section('budget_current', number_format($currentBudget, 0, ',', '.'))
 @section('content')
     <div class="content">
         <div class="content-wrap">
             <div class="plantitle">
                 <div class="plantitle-top">
-                    <a href="/owedding" class="plantitle-top_back">
+                    <a href="{{ route('users.managementWeb') }}" class="plantitle-top_back">
                         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
                     </a>
                     <div class="plantitle-top_title">
@@ -267,3 +268,6 @@
         }
     </script>
 @endsection
+@else
+chưa đăng nhập
+@endauth

@@ -2,8 +2,12 @@
 
 use App\Http\Controllers\BudgetCategoryController;
 use App\Http\Controllers\BudgetItemController;
+use App\Http\Controllers\FianceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\UserWebController;
+use App\Models\Fiance;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -14,6 +18,7 @@ use Illuminate\Auth\Events\Login;
 use App\Http\Requests\TaskRequest;
 use App\Models\BudgetCategory;
 use App\Models\BudgetItem;
+use App\Models\UserWeb;
 use Illuminate\Support\Facades\Route;
 use League\CommonMark\Extension\DescriptionList\Node\Description;
 /*
@@ -36,7 +41,7 @@ Route::get('/', function() {
 Route::view('/owedding','user.landing')
 ->name('landing');
 Route::view('tool/guest','guest.guest')->name('guest');
-Route::view('/tool/index','layouts.toolweb.index')->name('tool.index');
+
 //USER
 Route::post('/owedding/login',[UserController::class,'login'])->name('users.login');
 Route::get('/owedding/login',[UserController::class,'showlogin'])->name('users.showlogin');
@@ -44,6 +49,7 @@ Route::post('/owedding/logout',[UserController::class,'logout'])->name('users.lo
 Route::get('/owedding/register',[UserController::class,'showRegister'])->name('users.showRegister');
 
 Route::get('/owedding/profile-user',[UserController::class,'showProfile'])->name('users.showProfile');
+Route::get('/owedding/management',[UserController::class,'managementWeb'])->name('users.managementWeb');
 
 Route::post('/owedding/update-current-budget',[UserController::class,'updateCurrentBudget'])->name('users.updateCurrentBudget');
 Route::resource('users',UserController::class)->only([
@@ -63,4 +69,27 @@ Route::resource('tool/tasks', TaskController::class)->only([
 ]);
 Route::post('tool/tasks/tasks-toggle-complete',[TaskController::class,'toggleCompleteTasks'])->name('tasks.toggleCompleteTasks');
 Route::put('tool/tasks/{task}/toggle-complete',[TaskController::class,'toggleComplete'])->name('tasks.toggleComplete');
+
+
+//TEMPLATE
+Route::resource('owedding/templates',TemplateController::class)->only([
+  'index', 'show', 'create', 'store'
+]);
+Route::get('/owedding/templates/create/{id}',[TemplateController::class,'confirm'])->name('templates.confirm');
+
+
+//USERWEB
+Route::resource('owedding/userwebs',UserWebController::class)->only([
+  'store'
+]);
+Route::get('owedding/userwebs/{id}',[UserWebController::class,'index'])->name('userwebs.index');
+//FIANCE
+Route::resource('owedding/fiances',FianceController::class)->only([
+  'index','update'
+]);
+
+
+//asdf
+Route::view('/tool/event','wedding-event.event')->name('tool.event');
+
 

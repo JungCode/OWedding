@@ -38,18 +38,19 @@
                         <li class="header_menuitem"><a href="#">Bảng giá</a></li>
                     </ul>
                 </nav>
+                <?php
+                $user = session('user');
+                ?>
                 @auth
-                    <?php
-                    $user = session('user');
-                    ?>
                     <form action="{{ route('users.logout') }}" method="POST">
                         @csrf
                         <div class="userbutton">
                             <button class="Button">{{ $user['name'] }} <i class="fa fa-user-circle"
                                     aria-hidden="true"></i></button>
                             <div class="userbutton_iw">
-                                <a href="{{route('users.showProfile')}}" class="userbutton_iw-item">Thiết lập tài khoản</a>
-                                <a href="{{ route('budgetCategories.index') }}" class="userbutton_iw-item">Quản lý website</a>
+                                <a href="{{ route('users.showProfile') }}" class="userbutton_iw-item">Thiết lập tài
+                                    khoản</a>
+                                <a href="{{ route('users.managementWeb') }}" class="userbutton_iw-item">Quản lý website</a>
                                 <button type="submit" class="userbutton_iw-item">Đăng xuất<i class="fa fa-sign-out"
                                         aria-hidden="true"></i></button>
                             </div>
@@ -73,8 +74,8 @@
                 Cho đám cưới trở nên độc đáo hơn theo cách riêng của bạn!
             </h2>
             <div class="firstcontent_wrap">
-                <button class="Button">BẮT ĐẦU MIỄN PHÍ</button>
-                <button class="Button Button2">WEBSITES ĐÃ TẠO</button>
+                <a class="Button" href="{{ route('templates.index') }}">BẮT ĐẦU MIỄN PHÍ</a>
+                <a class="Button Button2" href="{{ route('userwebs.index', $user['id']) }}">WEBSITES ĐÃ TẠO</a>
             </div>
         </div>
         <div class="firstpage_line">

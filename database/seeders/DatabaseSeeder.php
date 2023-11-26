@@ -6,6 +6,8 @@ namespace Database\Seeders;
 
 use App\Models\BudgetCategory;
 use App\Models\BudgetItem;
+use App\Models\Task;
+use App\Models\Template;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -23,20 +25,16 @@ class DatabaseSeeder extends Seeder
                 BudgetItem::factory()->count($numberItems)->for($budgetCategory)->create();
             }); 
         });
-         
-        // \App\Models\User::factory(5)->create()->each(function($user){
-        //     \App\Models\Task::factory()->count(5)->for($user)->create();
-        // });
-        
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        \App\Models\Task::factory()->create([
+        Task::factory()->create([
             'user_id' => 2,
             'title'=> 'tesst title2',   
             'period'=> 'TRƯỚC NGÀY CƯỚI 6 THÁNG',
             'completed' => true,
+        ]);
+        Template::factory(1)->create([
+            'name' => "template1",
+            'photo' => "",
+            'description' => "Giao diện tối ưu cho điện thoại,phong cách đơn giản, tinh tế, không thể hiện sự cầu kì, với tone màu xám xanh nhẹ nhàng."
         ]);
     }
 }
