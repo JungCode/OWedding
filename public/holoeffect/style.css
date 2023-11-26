@@ -284,7 +284,8 @@
   font-size: 6vh;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   background-color: #333844;
   padding: 0;
@@ -367,7 +368,9 @@ p a {
   color: cyan;
 }
 
-html, body, main {
+html,
+body,
+main {
   min-height: 100%;
 }
 
