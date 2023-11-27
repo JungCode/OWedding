@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
+  <title>Responsive Wrapper</title>
+</head>
+<body>
+	<style>body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.box {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+#box1 {
+  background-color: red;
+  top: 10%;
+  left: 10%;
+}
+
+#box2 {
+  background-color: green;
+  top: 30%;
+  left: 30%;
+}
+
+#box3 {
+  background-color: blue;
+  top: 50%;
+  left: 50%;
+}
+
+@media screen and (max-width: 600px) {
+  .box {
+    width: 50px;
+    height: 50px;
+  }
+  
+  #box1 {
+    top: 20%;
+    left: 20%;
+  }
+  
+  #box2 {
+    top: 40%;
+    left: 40%;
+  }
+  
+  #box3 {
+    top: 60%;
+    left: 60%;
+  }
+}
+</style>
+    
+  <div class="wrapper">
+    <div class="box" id="box1"></div>
+    <div class="box" id="box2"></div>
+    <div class="box" id="box3"></div>
+  </div>
+<script src="js.js"></script>
+</body>
+</html>

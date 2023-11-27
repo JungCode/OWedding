@@ -1,0 +1,178 @@
+html {
+  font-size: 62.5%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.6rem;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: #f9fbfd;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.editui {
+  width: 80%;
+  height: auto;
+  margin-top: 3rem;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.uiitemwrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.edituiitem {
+  width: calc(33.3333333333% - 1rem);
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  border: 0.1rem solid #ced0d3;
+  overflow: hidden;
+}
+.edituiitem-title {
+  padding: 1.2rem;
+  background-color: transparent;
+  border-bottom: 0.1rem solid #ced0d3;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 2.4rem;
+  color: #161c2d;
+}
+.edituiitem-content {
+  padding: 1.2rem;
+  object-fit: cover;
+}
+.edituiitem-content p {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 2.4rem;
+  color: #161c2d;
+}
+.edituiitem-img {
+  width: 100%;
+  height: 20rem;
+  overflow: hidden;
+  object-fit: cover;
+  border-radius: 0.375rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.edituiitem-img > div {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+.edituiitem-btn input {
+  display: none;
+}
+.edituiitem-btn label {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: #506690;
+  border-radius: 1rem;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 2.4rem;
+  color: #fff;
+}
+
+.btnsave {
+  width: 100%;
+}
+.btnsave button {
+  width: 100%;
+  padding: 1.3rem 2rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  font-size: 1.7rem;
+  line-height: 2.7rem;
+  color: #ffffff;
+  background-color: #DF4759;
+  cursor: pointer;
+}
+.btnsave button :hover {
+  background-color: #BE3C4C;
+}
+
+.plantitle {
+  width: 100%;
+  height: auto;
+  margin-bottom: 3rem;
+}
+.plantitle-top {
+  border-start-start-radius: 2rem;
+  border-start-end-radius: 2rem;
+  background-color: #d9e2ef;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: #566c95;
+}
+.plantitle-top_back {
+  color: black;
+  margin-left: 2rem;
+}
+.plantitle-top_back:hover {
+  color: #df4759;
+}
+.plantitle-top_title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.plantitle-bottom {
+  border: 1px solid #d9e2ef;
+  border-end-start-radius: 2rem;
+  border-end-end-radius: 2rem;
+}
+.plantitle-bottom_text {
+  -webkit-tap-highlight-color: rgba(22, 28, 45, 0);
+  color: #161c2d;
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.6rem;
+  padding: 2rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0;
+  -webkit-text-size-adjust: 100%;
+}
+
+/*# sourceMappingURL=style.css.map */
