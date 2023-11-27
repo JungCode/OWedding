@@ -73,8 +73,8 @@ class UserWebController extends Controller
         $userWeb->groom_id = $groom_id;
         $userWeb->wedding_date = $data['wedding_date'];
         $userWeb->save();
-
-        return redirect()->route('userwebs.index');
+        $request->session()->put('userWeb', $userWeb);
+        return redirect()->route('userwebs.index',$user['id']);
     }
 
     /**

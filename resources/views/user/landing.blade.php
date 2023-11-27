@@ -40,6 +40,7 @@
                 </nav>
                 <?php
                 $user = session('user');
+                $userWeb = session('userWeb');
                 ?>
                 @auth
                     <form action="{{ route('users.logout') }}" method="POST">
@@ -50,7 +51,13 @@
                             <div class="userbutton_iw">
                                 <a href="{{ route('users.showProfile') }}" class="userbutton_iw-item">Thiết lập tài
                                     khoản</a>
-                                <a href="{{ route('users.managementWeb') }}" class="userbutton_iw-item">Quản lý website</a>
+                                @if ($userWeb)
+                                    <a href="{{ route('users.managementWeb') }}" class="userbutton_iw-item">Quản lý
+                                        website</a>
+                                @else
+                                    <a href="{{ route('templates.index') }}" class="userbutton_iw-item">Quản lý
+                                        website</a>
+                                @endif
                                 <button type="submit" class="userbutton_iw-item">Đăng xuất<i class="fa fa-sign-out"
                                         aria-hidden="true"></i></button>
                             </div>
