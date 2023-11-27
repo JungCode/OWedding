@@ -107,7 +107,7 @@ class FianceController extends Controller
         if($request->file('bride_photo')){
             $extension = $request->file('bride_photo')->getClientOriginalExtension();
             echo $extension;
-            $newFileName = "bride" . $request->bride_id . "." .$extension; 
+            $newFileName = "bride" . "." .$extension; 
             $path = $request->file('bride_photo')->storeAs('public/bride-image',$newFileName);
             return substr($path,strlen('public/'));
         }
@@ -119,7 +119,7 @@ class FianceController extends Controller
     protected function storeGroomImage(Request $request){
         if($request->file('groom_photo')){
             $extension = $request->file('groom_photo')->getClientOriginalExtension();
-            $newFileName = "groom" . $request->groom_id . "." .$extension; 
+            $newFileName = "groom" . "." .$extension; 
             $path = $request->file('groom_photo')->storeAs('public/groom-image',$newFileName);
             return substr($path,strlen('public/'));
         }

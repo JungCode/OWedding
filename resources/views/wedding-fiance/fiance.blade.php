@@ -26,13 +26,13 @@
                     <img src="{{ asset('storage/' . $bride->photo) }}" alt="" class="object-cover object-center	h-full w-full">
                     <div class="absolute bg-black-transparent h-24 bottom-0 w-full flex justify-center items-center">
                         <label for="input-file relative"
-                            class="bg-white px-4 py-3 rounded-xl opacity-100 cursor-pointer font-semibold">
+                            class="bg-white px-4 py-3 rounded-xl cursor-pointer font-semibold">
                             Thay đổi hình ảnh
                             <input type="file"
                                     name="bride_photo"
                                     placeholder="Upload File"
                                     accept="image/*" 
-                                    class="opacity-0 absolute top-50 right-0">
+                                    class="opacity-0 absolute top-50 left-80">
                         </label>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                                     name="groom_photo"
                                     placeholder="Upload File"
                                     accept="image/*" 
-                                    class="opacity-0 absolute top-50 right-0">
+                                    class="opacity-0 absolute top-50 left-80">
                         </label>
                     </div>
                 </div>
