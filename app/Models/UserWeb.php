@@ -16,7 +16,13 @@ class UserWeb extends Model
         return $this->hasOne(Template::class);
     }
     public function fiances(){
-        return $this->hasMany(Fiance::class);
+        return $this->hasOne(Fiance::class);
+    }
+    public function slide(){
+        return $this->hasMany(Slide::class);
+    }
+    public function Event(){
+        return $this->hasMany(Event::class);
     }
     public function scopeUserWeb(Builder $query, int $userID): Builder
     {

@@ -1,4 +1,10 @@
 @auth
+{{-- bride groom information  --}}
+@section('brideName', $bride->full_name)
+@section('groomName', $groom->full_name)
+@section('brideImg', asset('storage/' . $bride->photo))
+@section('groomImg', asset('storage/' . $groom->photo))
+{{-- layout information  --}}
 @extends('layouts.toolweb.tools')
 @section('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0)
 @section('budget_current', number_format($currentBudget, 0, ',', '.'))

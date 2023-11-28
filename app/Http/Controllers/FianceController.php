@@ -15,21 +15,20 @@ class FianceController extends Controller
      */
     public function index()
     {
+        // get user information
         $user = session('user');
         $User = User::findOrFail($user['id']);
-
+        // 
+        // get layout information 
         $tasks = Task::task($user['id'])->get();
         $completedCount = Task::completedTask($user['id'])->count();
-
+        // main content 
         $userWeb = UserWeb::userWeb($user['id'])->first();
         $bride = Fiance::findOrFail($userWeb->bride_id);
         $groom = Fiance::findOrFail($userWeb->groom_id);
-        $bride->photo = (!$bride->photo) ? "bride-image/sample.jpeg": $bride->photo;
-        $groom->photo = (!$groom->photo) ? "groom-image/sample.jpeg": $groom->photo;
-        return view('wedding-fiance.fiance',[
+        return view('wedding-fiance.fiance', [
             'bride' => $bride,
             'groom' => $groom,
-
             'currentBudget' => $User->current_budget,
             'taskCount' => $tasks->count(),
             'completedCount' => $completedCount
@@ -73,8 +72,9 @@ class FianceController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // bride 
         $bride = Fiance::findOrFail($request->input('bride_id'));
-        if($request->file('bride_photo')){
+        if ($request->file('bride_photo')) {
             $bride->photo = $this->storeBrideImage($request);
         }
         $bride->full_name = $request->input('bride_full_name');
@@ -82,9 +82,9 @@ class FianceController extends Controller
         $bride->birthday = $request->input('bride_birthday');
         $bride->description = $request->input('bride_description');
         $bride->save();
-
+        // groom
         $groom = Fiance::findOrFail($request->input('groom_id'));
-        if($request->file('groom_photo')){
+        if ($request->file('groom_photo')) {
             $groom->photo = $this->storeGroomImage($request);
         }
         $groom->full_name = $request->input('groom_full_name');
@@ -103,28 +103,18 @@ class FianceController extends Controller
     {
         //
     }
-    protected function storeBrideImage(Request $request){
-        if($request->file('bride_photo')){
-            $extension = $request->file('bride_photo')->getClientOriginalExtension();
-            echo $extension;
-            $newFileName = "bride" . "." .$extension; 
-            $path = $request->file('bride_photo')->storeAs('public/bride-image',$newFileName);
-            return substr($path,strlen('public/'));
-        }
-        else{
-            echo "2";
-            return null;
-        }
-    } 
-    protected function storeGroomImage(Request $request){
-        if($request->file('groom_photo')){
-            $extension = $request->file('groom_photo')->getClientOriginalExtension();
-            $newFileName = "groom" . "." .$extension; 
-            $path = $request->file('groom_photo')->storeAs('public/groom-image',$newFileName);
-            return substr($path,strlen('public/'));
-        }
-        else{
-            return null;
-        }
-    } 
+    protected function storeBrideImage(Request $request)
+    {
+        $extension = $request->file('bride_photo')->getClientOriginalExtension();
+        $newFileName = "bride" . "." . $extension;
+        $path = $request->file('bride_photo')->storeAs('public/bride-image', $newFileName);
+        return substr($path, strlen('public/'));
+    }
+    protected function storeGroomImage(Request $request)
+    {
+        $extension = $request->file('groom_photo')->getClientOriginalExtension();
+        $newFileName = "groom" . "." . $extension;
+        $path = $request->file('groom_photo')->storeAs('public/groom-image', $newFileName);
+        return substr($path, strlen('public/'));
+    }
 }

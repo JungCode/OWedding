@@ -13,12 +13,11 @@ class TemplateController extends Controller
      */
     public function index()
     {   
-        $user = session('user');
-        $check = UserWeb::where('user_id', $user['id'])->first();
-        if ($check) return redirect()->route('userwebs.index',$user['id']);
-        
+
         $data = Template::all();
-        return view('template-choice.index',['data' => $data]);
+        return view('template-choice.index',[
+            'data' => $data,
+        ]);
     }
 
     /**
@@ -29,10 +28,14 @@ class TemplateController extends Controller
     }
     public function confirm(string $template_id)
     {   
+        $user = session('user');
+        $check = UserWeb::where('user_id', $user['id'])->first();
+        if ($check) return redirect()->route('userwebs.index',$user['id']);
         $data = Template::findOrFail($template_id);
-        return view('template-choice.confirm', ['template_id' => $template_id,
-                                                'template_name' => $data['name'],
-                                                'template_description' => $data['description'],
+        return view('template-choice.confirm', [
+            'template_id' => $template_id,
+            'template_name' => $data['name'],
+            'template_description' => $data['description'],
         ]);
     }
 
@@ -51,11 +54,11 @@ class TemplateController extends Controller
     {
         
         return view('template-choice.template.template' . $id,[
-            'bride_name' => null,
-            'groom_name' => null,
-            'bride_description' => null,
-            'groom_description' => null,
             'wedding_date' => null,
+            'bride' => null,
+            'groom' => null,
+            'slides' => null,
+            'events' => null
         ]);
     }
 

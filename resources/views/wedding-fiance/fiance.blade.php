@@ -1,7 +1,15 @@
 @auth
 @extends('layouts.toolweb.tools')
+
+{{-- bride groom information  --}}
+@section('brideName', $bride->full_name)
+@section('groomName', $groom->full_name)
+@section('brideImg', asset("storage/" . $bride->photo))
+@section('groomImg', asset("storage/" . $groom->photo))
+{{-- layout information  --}}
 @section('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0)
 @section('budget_current', number_format($currentBudget, 0, ',', '.'))
+{{-- main content  --}}
 @section('content')
     <div style="width: 80%">
         <section class="rounded-t-3xl border border-solid border-slate-300 mt-12 overflow-hidden ">

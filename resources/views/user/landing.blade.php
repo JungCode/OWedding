@@ -22,7 +22,7 @@
         <div class="headerwrap">
             <div class="header">
                 <div class="header_logo">
-                    <a href="{{ route('landing') }}">
+                    <a href="#">
                         <img class="logo-white" width="229" height="93" src="/image/Picture1.png"
                             alt="iWedding by Biihappy" />
                     </a>
@@ -40,7 +40,6 @@
                 </nav>
                 <?php
                 $user = session('user');
-                $userWeb = session('userWeb');
                 ?>
                 @auth
                     <form action="{{ route('users.logout') }}" method="POST">

@@ -17,16 +17,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('budget-tool/tailwindcss.css') }}">
-    <link rel="stylesheet" href="{{ asset('todolist/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('todolist/style.css') }}">
     <link rel="stylesheet" href="{{ asset('progress-spinner/style.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 </head>
 
 <body>
     <div class="header">
         <div class="header_logo">
-            <a href="/owedding">
+            <a href="{{ route('users.index') }}">
                 <img class="logo-white" width="229" height="93" src="{{ asset('image\Picture2.png') }}" />
             </a>
         </div>
@@ -51,28 +52,33 @@
     </div>
     <div class="headline">
         <div class="headline-broom">
-            <span class="headline_name">Trung bui</span>
+            <span class="headline_name">
+                @yield('brideName')
+            </span>
             <div class="headline_img">
-                <img src="{{ asset('image\wedd3.jpg') }}" alt="">
+                <img src="@yield('brideImg')" alt="">
             </div>
         </div>
         <div class="headline-heart"><i class="fa fa-heart" aria-hidden="true"></i></div>
         <div class="headline-bride">
             <div class="headline_img">
-                <img src="{{ asset('image\wedd3.jpg') }}" alt="">
+                <img src="@yield('groomImg')" alt="">
             </div>
-            <span class="headline_name">Trung bui</span>
+            <span class="headline_name">@yield('groomName')</span>
         </div>
     </div>
     <div class="viewline">
         <div class="viewline-website">
             <i class="fas fa-globe"></i>
-            <span>Xem Website</span>
+            @php
+                $user = session('user');
+            @endphp
+            <a href="{{ route('userwebs.index', $user) }}">Xem Website</a>
         </div>
         <i class="fa fa-dot-circle" aria-hidden="true"></i>
         <div class="viewline-album">
             <i class="fas fa-images"></i>
-            <span>Xem Album</span>
+            <a href="{{ route('slides.index') }}">Xem Album</a>
         </div>
     </div>
     <div class="btnline">
@@ -81,7 +87,7 @@
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <span>DANH SÁCH KHÁCH MỜI</span>
             </h5>
-            <span class="btnchoice-sub">Bạn có  khách mời</span>
+            <span class="btnchoice-sub">Bạn có khách mời</span>
         </a>
         <a href="{{ route('tasks.index') }}" class="btnchoice green">
             <h5 class="btnchoice-top">
@@ -111,6 +117,8 @@
     <div style="width: 100%" class="flex justify-center ">
         @yield('content')
     </div>
+
+
 </body>
 
 </html>

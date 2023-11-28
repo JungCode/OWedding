@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\Fiance;
+use App\Models\Slide;
 use App\Models\User;
 use App\Models\UserWeb;
 use Illuminate\Http\Request;
@@ -19,12 +21,14 @@ class UserWebController extends Controller
         if (!$userWeb) return redirect()->route('templates.index');
         $bride = Fiance::findOrFail($userWeb->bride_id);
         $groom = Fiance::findOrFail($userWeb->groom_id);
+        $slides = Slide::where('user_web_id',$userWeb->id)->get();
+        $events = Event::where('user_web_id',$userWeb->id)->get();
         return view('template-choice.template.template' . $userWeb->template_id, [
-            'bride_name' => $bride->full_name,
-            'groom_name' => $groom->full_name,
-            'bride_description' => $bride->description,
-            'groom_description' => $groom->description,
+            'bride' => $bride,
+            'groom' => $groom,
             'wedding_date' => $userWeb->wedding_date,
+            'slides' => $slides,
+            'events' => $events,
         ]);
     }
 
@@ -48,33 +52,18 @@ class UserWebController extends Controller
             'wedding_date' => ['required']
         ]);
         //adding bride information
-        $fiance = new Fiance;
-        $fiance->full_name = $fiance->second_name = $data['bride_name'];
-        $fiance->type = 'bride';
-        $fiance->description = "Facilis est nemo corrupti porro. Eligendi suscipit reprehenderit non quam non delectus. Omnis dolores aspernatur aut aut sapiente beatae. Nisi consequuntur deserunt in inventore.";
-        $fiance->birthday = "12/09/1992";
-        $fiance->save();
-        $bride_id = $fiance->id;
+        $bride_id = $this->createBride($data['bride_name']);
         //adding groom information
-        $fiance = new Fiance;
-        $fiance->full_name = $fiance->second_name = $data['groom_name'];
-        $fiance->type = 'groom';
-        $fiance->description = "Facilis est nemo corrupti porro. Eligendi suscipit reprehenderit non quam non delectus. Omnis dolores aspernatur aut aut sapiente beatae. Nisi consequuntur deserunt in inventore.";
-        $fiance->birthday = "10/02/1993";
-        $fiance->save();
-        $groom_id = $fiance->id;
+        $groom_id = $this->createGroom($data['groom_name']);
         //adding userweb
         $user = session('user');
-        
-        $userWeb = new UserWeb;
-        $userWeb->template_id = $data['template_id'];
-        $userWeb->user_id = $user['id'];
-        $userWeb->bride_id = $bride_id;
-        $userWeb->groom_id = $groom_id;
-        $userWeb->wedding_date = $data['wedding_date'];
-        $userWeb->save();
-        $request->session()->put('userWeb', $userWeb);
-        return redirect()->route('userwebs.index',$user['id']);
+        $userWebId = $this->createUserWeb($data, $user, $bride_id, $groom_id, $request);
+        //adding slide
+        $this->createSlide();
+        //adding event
+        $this->createEvent($userWebId);
+
+        return redirect()->route('userwebs.index', $user['id']);
     }
 
     /**
@@ -107,5 +96,86 @@ class UserWebController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function createBride(string $bride_name){
+        $fiance = new Fiance;
+        $fiance->full_name = $fiance->second_name = $bride_name;
+        $fiance->type = 'bride';
+        $fiance->photo = 'bride-image/sample.jpeg';
+        $fiance->description = "Facilis est nemo corrupti porro. Eligendi suscipit reprehenderit non quam non delectus. Omnis dolores aspernatur aut aut sapiente beatae. Nisi consequuntur deserunt in inventore.";
+        $fiance->birthday = "12/09/1992";
+        $fiance->save();
+        return $fiance->id;
+    }
+    public function createGroom(string $groom_name){
+        $fiance = new Fiance;
+        $fiance->full_name = $fiance->second_name = $groom_name;
+        $fiance->type = 'groom';
+        $fiance->photo = 'groom-image/sample.jpeg';
+        $fiance->description = "Facilis est nemo corrupti porro. Eligendi suscipit reprehenderit non quam non delectus. Omnis dolores aspernatur aut aut sapiente beatae. Nisi consequuntur deserunt in inventore.";
+        $fiance->birthday = "10/02/1993";
+        $fiance->save();
+        return $fiance->id;
+    }
+    public function createUserWeb($data, $user, string $bride_id, string $groom_id, Request $request){
+        $userWeb = new UserWeb;
+        $userWeb->template_id = $data['template_id'];
+        $userWeb->user_id = $user['id'];
+        $userWeb->bride_id = $bride_id;
+        $userWeb->groom_id = $groom_id;
+        $userWeb->wedding_date = $data['wedding_date'];
+        $userWeb->save();
+        $request->session()->put('userWeb', $userWeb);
+        return $userWeb->id;
+    }
+    public function createSlide(){
+        for ($i = 1; $i <= 4; $i++) {
+            $usw = session('userWeb');
+            $slide = new Slide;
+            $slide->photo = 'slide-image/sample'. $i .'.jpg';
+            $slide->user_web_id = $usw['id'];
+            $slide->save();
+        }
+    }
+    public function createEvent(string $userWebId){
+        $event = new Event;
+        $event->user_web_id	 = $userWebId;
+        $event->name = 'LỄ CƯỚI NHÀ NỮ';
+        $event->photo = 'event-image/sample1.png';
+        $event->time = '07:30';
+        $event->date = '2023-02-10';
+        $event->address = '370 Đường 02 tháng 9, Quận Hải Châu, Đà Nẵng';
+        $event->link = 'https://www.google.com/maps/place/Nh%C3%A0+H%C3%A0ng+Ti%E1%BB%87c+C%C6%B0%E1%BB%9Bi+Ph%C3%BAc+Gia/@16.0386843,108.2208223,16z/data=!4m9!1m2!2m1!1zMzcwIMSQxrDhu51uZyAwMiB0aMOhbmcgOSwgUXXhuq1uIEjhuqNpIENow6J1LCDEkMOgIE7hurVuZw!3m5!1s0x314219e8511b2333:0x7dfc73b1e9718eec!8m2!3d16.0387611!4d108.2234015!15sCjozNzAgxJDGsOG7nW5nIDAyIHRow6FuZyA5LCBRdeG6rW4gSOG6o2kgQ2jDonUsIMSQw6AgTuG6tW5nWjoiODM3MCDEkcaw4budbmcgMDIgdGjDoW5nIDkgcXXhuq1uIGjhuqNpIGNow6J1IMSRw6AgbuG6tW5nkgEKcmVzdGF1cmFudA';
+        $event->save();
+        
+        $event = new Event;
+        $event->user_web_id	 = $userWebId;
+        $event->name = 'TIỆC CƯỚI NHÀ NỮ';
+        $event->photo = 'event-image/sample2.png';
+        $event->time = '11:30';
+        $event->date = '2023-02-10';
+        $event->address = '187 Hà Huy Tập, P. Hoà Khê, Quận Thanh Khê, Đà Nẵng';
+        $event->link = 'https://www.google.com/maps/place/Nh%C3%A0+H%C3%A0ng+Ti%E1%BB%87c+C%C6%B0%E1%BB%9Bi+Ph%C3%BAc+Gia/@16.0386843,108.2208223,16z/data=!4m9!1m2!2m1!1zMzcwIMSQxrDhu51uZyAwMiB0aMOhbmcgOSwgUXXhuq1uIEjhuqNpIENow6J1LCDEkMOgIE7hurVuZw!3m5!1s0x314219e8511b2333:0x7dfc73b1e9718eec!8m2!3d16.0387611!4d108.2234015!15sCjozNzAgxJDGsOG7nW5nIDAyIHRow6FuZyA5LCBRdeG6rW4gSOG6o2kgQ2jDonUsIMSQw6AgTuG6tW5nWjoiODM3MCDEkcaw4budbmcgMDIgdGjDoW5nIDkgcXXhuq1uIGjhuqNpIGNow6J1IMSRw6AgbuG6tW5nkgEKcmVzdGF1cmFudA';
+        $event->save();
+
+        $event = new Event;
+        $event->user_web_id	 = $userWebId;
+        $event->name = 'LỄ CƯỚI NHÀ NAM';
+        $event->photo = 'event-image/sample3.png';
+        $event->time = '09:00';
+        $event->date = '2023-09-12';
+        $event->address = '120A Nguyễn Văn Thoại, Quận Ngũ Hành Sơn, Đà Nẵng';
+        $event->link = 'https://www.google.com/maps/place/Nh%C3%A0+H%C3%A0ng+Ti%E1%BB%87c+C%C6%B0%E1%BB%9Bi+Ph%C3%BAc+Gia/@16.0386843,108.2208223,16z/data=!4m9!1m2!2m1!1zMzcwIMSQxrDhu51uZyAwMiB0aMOhbmcgOSwgUXXhuq1uIEjhuqNpIENow6J1LCDEkMOgIE7hurVuZw!3m5!1s0x314219e8511b2333:0x7dfc73b1e9718eec!8m2!3d16.0387611!4d108.2234015!15sCjozNzAgxJDGsOG7nW5nIDAyIHRow6FuZyA5LCBRdeG6rW4gSOG6o2kgQ2jDonUsIMSQw6AgTuG6tW5nWjoiODM3MCDEkcaw4budbmcgMDIgdGjDoW5nIDkgcXXhuq1uIGjhuqNpIGNow6J1IMSRw6AgbuG6tW5nkgEKcmVzdGF1cmFudA';
+        $event->save();
+
+        $event = new Event;
+        $event->user_web_id	 = $userWebId;
+        $event->name = 'TIỆC CƯỚI NHÀ NAM';
+        $event->photo = 'event-image/sample4.png';
+        $event->time = '12:00';
+        $event->date = '2023-09-12';
+        $event->address = 'A30 Trần Hưng Đạo, P. An Hải Tây, Quận Sơn Trà, Đà Nẵng';
+        $event->link = 'https://www.google.com/maps/place/Nh%C3%A0+H%C3%A0ng+Ti%E1%BB%87c+C%C6%B0%E1%BB%9Bi+Ph%C3%BAc+Gia/@16.0386843,108.2208223,16z/data=!4m9!1m2!2m1!1zMzcwIMSQxrDhu51uZyAwMiB0aMOhbmcgOSwgUXXhuq1uIEjhuqNpIENow6J1LCDEkMOgIE7hurVuZw!3m5!1s0x314219e8511b2333:0x7dfc73b1e9718eec!8m2!3d16.0387611!4d108.2234015!15sCjozNzAgxJDGsOG7nW5nIDAyIHRow6FuZyA5LCBRdeG6rW4gSOG6o2kgQ2jDonUsIMSQw6AgTuG6tW5nWjoiODM3MCDEkcaw4budbmcgMDIgdGjDoW5nIDkgcXXhuq1uIGjhuqNpIGNow6J1IMSRw6AgbuG6tW5nkgEKcmVzdGF1cmFudA';
+        $event->save();
     }
 }

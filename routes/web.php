@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\BudgetCategoryController;
 use App\Http\Controllers\BudgetItemController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\FianceController;
+use App\Http\Controllers\SlideController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TemplateController;
@@ -31,20 +33,23 @@ use League\CommonMark\Extension\DescriptionList\Node\Description;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 //INDEX
 Route::fallback(function(){
   return view('404') ;
 });
 Route::get('/', function() {
-  return redirect()->route('landing');
+  return redirect()->route('users.index');
 });
-Route::view('/owedding','user.landing')
-->name('landing');
 Route::view('tool/guest','guest.guest')->name('guest');
+
+
+
 
 //USER
 Route::post('/owedding/login',[UserController::class,'login'])->name('users.login');
 Route::get('/owedding/login',[UserController::class,'showlogin'])->name('users.showlogin');
+
 Route::post('/owedding/logout',[UserController::class,'logout'])->name('users.logout');
 Route::get('/owedding/register',[UserController::class,'showRegister'])->name('users.showRegister');
 
@@ -52,9 +57,13 @@ Route::get('/owedding/profile-user',[UserController::class,'showProfile'])->name
 Route::get('/owedding/management',[UserController::class,'managementWeb'])->name('users.managementWeb');
 
 Route::post('/owedding/update-current-budget',[UserController::class,'updateCurrentBudget'])->name('users.updateCurrentBudget');
-Route::resource('users',UserController::class)->only([
-  'store', 'update'
+Route::resource('/owedding/users',UserController::class)->only([
+  'index', 'store', 'update'
 ]);
+
+
+
+
 //BUDGET MANAGEMENT
 Route::resource('tool/budgetCategories', BudgetCategoryController::class)->only([
   'index','store', 'update', 'destroy'
@@ -62,6 +71,8 @@ Route::resource('tool/budgetCategories', BudgetCategoryController::class)->only(
 Route::resource('tool/budgetItems', BudgetItemController::class)->only([
   'store', 'update', 'destroy'
 ]);
+
+
 
 //TASK
 Route::resource('tool/tasks', TaskController::class)->only([
@@ -80,16 +91,29 @@ Route::get('/owedding/templates/create/{id}',[TemplateController::class,'confirm
 
 //USERWEB
 Route::resource('owedding/userwebs',UserWebController::class)->only([
-  'store'
+  'store', 'index'
 ]);
 Route::get('owedding/userwebs/{id}',[UserWebController::class,'index'])->name('userwebs.index');
+
+
+
 //FIANCE
-Route::resource('owedding/fiances',FianceController::class)->only([
+Route::resource('tool/fiances',FianceController::class)->only([
   'index','update'
 ]);
 
 
-//asdf
-Route::view('/tool/event','wedding-event.event')->name('tool.event');
+
+//SLIDE
+Route::resource('tool/slides',SlideController::class)->only([
+  'index', 'update'
+]);
+
+
+
+//EVENT
+Route::resource('tool/events',EventController::class)->only([
+  'index', 'store', 'update', 'destroy'
+]);
 
 

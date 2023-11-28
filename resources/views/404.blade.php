@@ -40,7 +40,7 @@
         </h3>
       </div>
       <div class="errorpage-button">
-        <button class="Button"><a href="{{ route('landing')}}">VỀ TRANG CHỦ</a></button>
+        <button class="Button"><a href="{{ route('users.index') }}">VỀ TRANG CHỦ</a></button>
       </div>
     </div>
   </body>

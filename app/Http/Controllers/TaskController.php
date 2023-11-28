@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Http\Requests\TaskRequest;
+use App\Models\Fiance;
 use App\Models\User;
+use App\Models\UserWeb;
 
 class TaskController extends Controller
 {
@@ -14,30 +16,27 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
+        // get user information 
         $user = session('user');
         $User = User::findOrFail($user['id']);
-        $title = $request->input('title');
-        $filter = $request->input('filter', '');
-
-        $tasks = Task::when($title, fn ($query, $title) => $query->title($title));
+        // get groom bride information 
+        $userWeb = UserWeb::where('user_id', $user['id'])->first();
+        $bride = Fiance::findOrFail($userWeb->bride_id);
+        $groom = Fiance::findOrFail($userWeb->groom_id);
+        
+        // main content
         $tasks = Task::task($user['id'])->get();
         $completedCount = Task::completedTask($user['id'])->count();
-        // $tasks = match($filter) {
-        //     'TRƯỚC NGÀY CƯỚI 9 - 12 THÁNG' => $tasks->popularLastMonth(),
-        //     'TRƯỚC NGÀY CƯỚI 6 THÁNG' => $tasks->popularLast6Months(),
-        //     'TRƯỚC NGÀY CƯỚI 3 THÁNG' => $tasks->highestRatedLastMonth(),
-        //     'TRƯỚC NGÀY CƯỚI 2 THÁNG' => $tasks->highestRatedLast6Months(),
-        //     'TRƯỚC NGÀY CƯỚI 1 THÁNG' => $tasks->popularLast7Months(),
-        //     'TRƯỚC NGÀY CƯỚI 1 NGÀY'=> $tasks->popularLast8Months(),
-        //     'NGÀY ĐÁM CƯỚI'=> $tasks->popularLast9Months(),
-        //     default => $tasks->latest()
-        // };
+
 
         return view('task.index', [
             'currentBudget' => $User->current_budget,
             'tasks' => $tasks,
             'taskCount' => $tasks->count(),
-            'completedCount' => $completedCount
+            'completedCount' => $completedCount,
+
+            'bride' => $bride,
+            'groom' => $groom
         ]);
     }
 

@@ -1,6 +1,14 @@
+
 @extends('layouts.toolweb.tools')
+{{-- bride groom information  --}}
+@section('brideName', $bride->full_name)
+@section('groomName', $groom->full_name)
+@section('brideImg', asset("storage/" . $bride->photo))
+@section('groomImg', asset("storage/" . $groom->photo))
+{{-- layout information  --}}
 @section('taskPercent',$taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0)
 @section('budget_current', number_format($currentBudget, 0, ',', '.'))
+{{-- main content  --}}
 @section('content')
     <div style="width: 80%">
         <section class="flex bg-white rounded-3xl gap-40 border border-solid border-slate-300 mt-12 h-48 justify-center items-center">
@@ -32,7 +40,9 @@
             >
                 Thông tin Cô Dâu & Chú Rể
             </a>
-            <a class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5">
+            <a class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5"
+            href="{{route('events.index')}}"
+            >
                 Sự kiện cưới
             </a>
             <a class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5">
@@ -41,8 +51,9 @@
             <a class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5">
                 Quản lí khách mời
             </a>
-            <a class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5">
-                Cài đặt địa chỉ website
+            <a class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5"
+             href="{{route('slides.index')}}">
+                Cài đặt giao diện
             </a>
             <a class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5">
                 Tạo mã QR

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fiance;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\UserWeb;
@@ -16,7 +17,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = session('user');
+        if(!$user){
+            return view('user.landing');
+        }
+        $userWeb = UserWeb::where('user_id',$user['id'])->first();
+        return view('user.landing',[
+            'userWeb' => $userWeb
+        ]);
     }
 
     /**
@@ -50,7 +58,7 @@ class UserController extends Controller
 
         auth()->login($user);
 
-        return redirect()->route('landing');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -116,7 +124,7 @@ class UserController extends Controller
             $request->session()->regenerate();
             $user = User::where('email', $data['loginemail'])->first();
             $request->session()->put('user', $user);
-            return redirect()->route('landing');
+            return redirect()->route('users.index');
         } else {
             if (User::where('email', $data['loginemail'])->exists()) {
                 // Người dùng đã nhập đúng email nhưng sai mật khẩu
@@ -155,16 +163,24 @@ class UserController extends Controller
         ]);
     }
     public function managementWeb(){
+        // get user information
         $user = session('user');
         $User = User::findOrFail($user['id']);
-
+        // get groom bride information 
+        $userWeb = UserWeb::where('user_id',$user['id'])->first();
+        $bride = Fiance::findOrFail($userWeb->bride_id);
+        $groom = Fiance::findOrFail($userWeb->groom_id);
+        // for layout 
         $tasks = Task::task($user['id'])->get();
         $completedCount = Task::completedTask($user['id'])->count();
+        // route 
         if( UserWeb::where('user_id',$user['id'])->get()  ){
             return view('layouts.toolweb.index',[
                 'currentBudget' => $User->current_budget,
                 'taskCount' => $tasks->count(),
-                'completedCount' => $completedCount
+                'completedCount' => $completedCount,
+                'bride' => $bride,
+                'groom' => $groom
             ]);
         }else{
             return redirect()->route('templates.index');

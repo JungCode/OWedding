@@ -1,11 +1,18 @@
+@auth
 @extends('layouts.toolweb.tools')
+{{-- bride groom information  --}}
+@section('brideName', $bride->full_name)
+@section('groomName', $groom->full_name)
+@section('brideImg', asset('storage/' . $bride->photo))
+@section('groomImg', asset('storage/' . $groom->photo))
+{{-- layout information  --}}
 @section('taskPercent', number_format(30, 0, ',', '.'))
 @section('budget_current', number_format(500000, 0, ',', '.'))
 @section('content')
     <div style="width: 80%">
         <section class="rounded-t-3xl border border-solid border-slate-300 mt-12 overflow-hidden ">
             <div class="bg-wedding flex">
-                <a href="/owedding" class="pl-7 text-3xl pt-8">
+                <a href="{{route('users.managementWeb')}}" class="pl-7 text-3xl pt-8">
                     <i class="fa fa-arrow-circle-left text-slate-600" aria-hidden="true"></i>
                 </a>
                 <div class="w-full">
@@ -17,61 +24,39 @@
         </section>
         <section
             class="rounded-b-3xl border border-solid border-slate-300 mb-11 overflow-hidden py-5 px-9 shadow-xl grid grid-cols-2 gap-4">
-            <div class="flex gap-5 border border-solid border-slate-300 p-3 rounded-2xl">
-                <div class="w-60 h-60 overflow-hidden rounded-2xl">
-                    <img class="h-full object-cover"
-                        src="https://www.theknot.com/tk-media/images/d47a1804-74bd-41d2-83f4-50d99e278a5e" alt="">
-                </div>
-                <div>
-                    <p class="text-3xl font-semibold text-slate-600 mb-5">LỄ CƯỜI NHÀ NỮ</p>
-                    <p class="text-slate-600 mb-2">2023-11-24</p>
-                    <p class="text-slate-600 mb-2">7:30 AM</p>
-                    <p class="text-slate-600">370 Đường 02 tháng 9, Quận Hải Châu, Đà Nẵng</p>
+            @foreach ($events as $event)
+                <div class="flex gap-5 border border-solid border-slate-300 p-3 rounded-2xl">
+                    <div class="w-60 h-60 overflow-hidden rounded-2xl">
+                        <img class="h-full object-cover object-center w-full" src="{{ asset('storage/' . $event->photo) }}"
+                            alt="">
+                    </div>
                     <div>
-                        <button
-                            class="bg-slate-200 hover:bg-slate-300 py-1 px-2 text-slate-600 transition rounded-md show-event-modal"
-                            data-id="1"
-                            data-name="LỄ CƯỜI NHÀ NỮ"
-                            data-time="7:30 AM"
-                            data-date="2023-11-24"
-                            data-address="370 Đường 02 tháng 9, Quận Hải Châu, Đà Nẵng">
-                            <i class="fa-regular fa-pen-to-square"></i>
-                        </button>
-                        <button class="bg-red-200 hover:bg-red-300 py-1 px-2 text-slate-600 transition rounded-md">
-                            <i class="fa-solid fa-trash text-red-400"></i>
-                        </button>
+                        <p class="text-3xl font-semibold text-slate-600 mb-5">{{ $event->name }}</p>
+                        <p class="text-slate-600 mb-2">{{ $event->date }}</p>
+                        <p class="text-slate-600 mb-2">{{ $event->time }}</p>
+                        <p class="text-slate-600 w-full overflow-hidden h-12">{{ $event->address }}</p>
+                        <div>
+                            <button
+                                class="bg-slate-200 hover:bg-slate-300 py-1 px-2 text-slate-600 transition rounded-md show-event-modal"
+                                data-id="{{ $event->id }}" data-name="{{ $event->name }}"
+                                data-time="{{ $event->time }}" data-date="{{ $event->date }}"
+                                data-address="{{ $event->address }}" data-link="{{ $event->link }}">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </button>
+                            <form action="{{ route('events.destroy', $event->id) }}" method="POST" class="inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="bg-red-200 hover:bg-red-300 py-1 px-2 text-slate-600 transition rounded-md">
+                                    <i class="fa-solid fa-trash text-red-400"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="flex gap-5 border border-solid border-slate-300 p-3 rounded-2xl">
-                <div class="w-60 h-60 overflow-hidden rounded-2xl">
-                    <img class="h-full object-cover"
-                        src="https://www.theknot.com/tk-media/images/d47a1804-74bd-41d2-83f4-50d99e278a5e" alt="">
-                </div>
-                <div>
-                    <p class="text-3xl font-semibold text-slate-600 mb-5">LỄ CƯỜI NHÀ NỮ</p>
-                    <p class="text-slate-600 mb-2">10-2-2023</p>
-                    <p class="text-slate-600 mb-2">7:30 AM</p>
-                    <p class="text-slate-600">370 Đường 02 tháng 9</p>
-                    <div>
-                        <button
-                            class="bg-slate-200 hover:bg-slate-300 py-1 px-2 text-slate-600 transition rounded-md show-event-modal">
-                            <i class="fa-regular fa-pen-to-square"></i>
-                        </button>
-                        <button class="bg-red-200 hover:bg-red-300 py-1 px-2 text-slate-600 transition rounded-md">
-                            <i class="fa-solid fa-trash text-red-400"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div
-                class="h-60 border border-dashed border-slate-300 p-3 rounded-2xl hover:border-red-300 cursor-pointer hover:text-red-300 show-event-modal"
-                data-id=""
-                data-name=""
-                data-time=""
-                data-date=""
-                data-address=""
-                >
+            @endforeach
+            <div class="h-64 border border-dashed border-slate-300 p-3 rounded-2xl hover:border-red-300 cursor-pointer hover:text-red-300 show-event-modal"
+                data-id="" data-name="" data-time="" data-date="" data-address="" data-link="">
                 <div class="flex justify-center items-center h-full">
                     <div>
                         <i class="fa-solid fa-plus "></i>
@@ -94,35 +79,46 @@
             </div>
             {{-- BODY OF MODALS  --}}
             <div class="px-7">
-                <form id="form" method="POST" action="" class="my-5">
+                <form id="form" method="POST" action="" class="my-5" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="_method" id="methodField" value="">
-                    <input type="hidden" name="id" id="event-id" value="">
+                    <input type="hidden" name="user_web_id" id="event-id" value="{{ $userWebId }}">
                     <label for="" class="my-5 block flex justify-center items-center">
                         <div class="relative w-40 h-40">
                             <img src="{{ asset('image\avartar.jpg') }}" class="object-cover w-100" alt="">
-                            <input type="file" class="absolute bottom-0 opacity-70">
+                            <input type="file" class="absolute bottom-0 opacity-70" placeholder="Upload File"
+                                accept="image/*" name="photo">
                         </div>
                     </label>
                     <label for="item-name" class="my-5 block">
                         <span class="block mb-1">Tên sự kiên</span>
-                        <input type="text" placeholder="Nhập tên sự kiện" id="event-name"
-                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
+                        <input type="text" placeholder="Nhập tên sự kiện" id="event-name" name="name"
+                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1"
+                            required>
                     </label>
                     <label for="item-name" class="my-5 block">
                         <span class="block mb-1">Giờ</span>
-                        <input type="time" id="event-time"
-                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
+                        <input type="time" id="event-time" name="time"
+                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1"
+                            required>
                     </label>
                     <label for="item-name" class="my-5 block">
                         <span class="block mb-1">Ngày</span>
-                        <input type="date" id="event-date"
-                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
+                        <input type="date" id="event-date" name="date"
+                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1"
+                            required>
                     </label>
                     <label for="item-name" class="my-5 block">
                         <span class="block mb-1">Địa chỉ</span>
-                        <input type="text" placeholder="Nhập địa chỉ" id="event-address"
-                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
+                        <input type="text" placeholder="Nhập địa chỉ" id="event-address" name="address"
+                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1"
+                            required>
+                    </label>
+                    <label for="item-name" class="my-5 block">
+                        <span class="block mb-1">Link googlemaps</span>
+                        <input type="text" placeholder="Nhập link" id="event-link" name="link"
+                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1"
+                            required>
                     </label>
                     <button type="submit" id="btn-submit"
                         class="mt-7 transition duration-300 py-5 bg-gray-700 hover:bg-gray-900 px-3 rounded text-white mr-1 w-full">
@@ -143,6 +139,7 @@
         const eventTimeM = document.querySelector('#event-time');
         const eventDateM = document.querySelector('#event-date');
         const eventAddressM = document.querySelector('#event-address');
+        const eventLinkM = document.querySelector('#event-link');
         const btnSubmit = document.querySelector('#btn-submit');
         showEventModal.forEach(function(element) {
             element.addEventListener('click', function() {
@@ -150,24 +147,25 @@
                 eventName = element.dataset.name;
                 eventTime = element.dataset.time;
                 eventDate = element.dataset.date;
+                eventLink = element.dataset.link;
                 eventAddress = element.dataset.address;
                 var methodField = document.querySelector('#methodField');
                 var form = document.querySelector('#form');
                 if (eventId == '') {
                     methodField.setAttribute('value', 'POST');
-                    form.setAttribute('action', `{{ route('tasks.store') }}`);
+                    form.setAttribute('action', `{{ route('events.store') }}`);
                     btnSubmit.innerHTML = "<i class=\"fa-solid fa-plus\"></i> Thêm mới";
                 } else {
                     methodField.setAttribute('value', 'PUT');
-                    form.setAttribute('action', `{{ route('tasks.update', ':eventID') }}`.replace(
+                    form.setAttribute('action', `{{ route('events.update', ':eventID') }}`.replace(
                         ':eventID',
                         eventId));
                     btnSubmit.innerHTML = "<i class=\"fa-regular fa-floppy-disk\"></i> Lưu thông tin";
                 }
                 eventNameM.setAttribute('value', eventName);
-                eventIdM.setAttribute('value', eventId);
                 eventTimeM.value = eventTime;
-                eventDateM.value =  eventDate;
+                eventDateM.value = eventDate;
+                eventLinkM.value = eventLink;
                 eventAddressM.setAttribute('value', eventAddress);
                 EventModal.classList.remove('hidden');
                 EventModal.classList.remove('modal-close');
@@ -193,3 +191,6 @@
         }
     </script>
 @endsection
+@else
+ Chưa đăng nhập
+@endauth
