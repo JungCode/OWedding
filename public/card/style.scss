@@ -287,14 +287,14 @@ p {
 
 .card.animated {
     transition: none;
-    animation: holoCard 12s ease 0s infinite;
+    animation: holoCard 12s ease 0s 1;
     &:before {
         transition: none;
-        animation: holoGradient 12s ease 0s infinite;
+        animation: holoGradient 12s ease 0s 1;
     }
     &:after {
         transition: none;
-        animation: holoSparkle 12s ease 0s infinite;
+        animation: holoSparkle 12s ease 0s 1;
     }
 }
 
