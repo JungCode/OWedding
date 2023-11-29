@@ -1,0 +1,264 @@
+html {
+  font-size: 62.5%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.6rem;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: #f9fbfd;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.lovestory {
+  width: 80%;
+  height: auto;
+  margin-top: 3rem;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.plantitle {
+  width: 100%;
+  height: auto;
+  margin-bottom: 3rem;
+}
+.plantitle-top {
+  border-start-start-radius: 2rem;
+  border-start-end-radius: 2rem;
+  background-color: #d9e2ef;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: #566c95;
+}
+.plantitle-top_back {
+  color: black;
+  margin-left: 2rem;
+}
+.plantitle-top_back:hover {
+  color: #df4759;
+}
+.plantitle-top_title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.plantitle-bottom {
+  border: 1px solid #d9e2ef;
+  border-end-start-radius: 2rem;
+  border-end-end-radius: 2rem;
+}
+.plantitle-bottom_text {
+  -webkit-tap-highlight-color: rgba(22, 28, 45, 0);
+  color: #161c2d;
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.6rem;
+  padding: 2rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0;
+  -webkit-text-size-adjust: 100%;
+}
+
+.storyedit {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2.4rem;
+  border-radius: 0.375rem;
+  border: 0.1rem solid #d9e2ef;
+  background-color: #fff;
+}
+
+.editcontent {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.storyitem {
+  width: calc(25% - 2rem);
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  border: 0.1rem solid #d9e2ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.storyitem-img {
+  border-radius: 0.375rem;
+  width: 100%;
+  object-fit: cover;
+  height: 25rem;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+.storyitem-img .imgbot {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  padding: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5490196078);
+}
+.storyitem-img .imgbot input {
+  display: none;
+}
+.storyitem-img .imgbot label {
+  padding: 0.3rem 1.5rem;
+  font-family: "Quicksand";
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 2.4rem;
+  color: #1b2a4e;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  background-color: #fafcfd;
+}
+.storyitem-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.storyitem-btn button {
+  cursor: pointer;
+  border-radius: 0.375rem;
+  padding: 0.9rem 1.5rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: #df4759;
+  border: none;
+  background-color: rgba(223, 71, 89, 0.1019607843);
+}
+.storyitem-btn button:hover {
+  background-color: #FAE4E6;
+}
+
+.input-focus-effect {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+.input-focus-effect input,
+.input-focus-effect textarea {
+  padding: 25px 10px 10px;
+  border: 1px solid transparent;
+  display: block;
+  width: 100%;
+  color: black;
+  font-family: "Quicksand", sans-serif;
+  transition: border 0.25s linear;
+  outline: none;
+  font-size: 1.6rem;
+  border-color: #d8e1ee;
+  border-radius: 0.375rem;
+  resize: none;
+}
+.input-focus-effect input:focus,
+.input-focus-effect textarea:focus {
+  border-color: #335eea;
+}
+.input-focus-effect input:focus + label,
+.input-focus-effect textarea:focus + label {
+  transform: translateY(-5px);
+  top: 10px;
+}
+.input-focus-effect input:not(:placeholder-shown) + label,
+.input-focus-effect textarea:not(:placeholder-shown) + label {
+  transform: translateY(-5px);
+  top: 10px;
+}
+.input-focus-effect textarea {
+  height: 15rem;
+}
+.input-focus-effect label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #b2bed2;
+  transition: 0.25s linear;
+  font-size: 1.5rem;
+  font-family: "Quicksand", sans-serif;
+}
+
+.editbtn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.4rem;
+  border-radius: 0.375rem;
+  border: 0.1rem solid #d9e2ef;
+  background-color: #F1F4F8;
+}
+.editbtn button {
+  padding: 1.3rem 2rem;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 600;
+  font-size: 1.7rem;
+  color: #ffffff;
+  border: none;
+  margin-left: 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+.editbtn-add {
+  background-color: #506690;
+}
+.editbtn-add:hover {
+  background-color: #44577A;
+}
+.editbtn-save {
+  background-color: #df4759;
+}
+.editbtn-save:hover {
+  background-color: #be3c4c;
+}
+
+/*# sourceMappingURL=style.css.map */
