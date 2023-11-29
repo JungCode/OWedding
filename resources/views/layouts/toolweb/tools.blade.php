@@ -40,15 +40,15 @@
                     <i class="fa fa-angle-down" aria-hidden="true"></i>
                 </div>
                 <div class="btn-choicelist">
-                    <a class="choicelist">
+                    <a class="choicelist" href="{{route('users.managementWeb')}}">
                         <i class="bi bi-grid-1x2-fill"></i>
                         Bảng Chính
                     </a>
-                    <a class="choicelist">
+                    <a class="choicelist" href="{{route('fiances.index')}}">
                         <i class="bi bi-person-heart"></i>
                         Cô Dâu & Chú Rể
                     </a>
-                    <a class="choicelist">
+                    <a class="choicelist" href="{{route('events.index')}}">
                         <i class="bi bi-calendar-event"></i>
                         Sự Kiện cưới
                     </a>
@@ -56,9 +56,9 @@
                         <i class="bi bi-chat-square-heart"></i>
                         Chuyện tình yêu
                     </a>
-                    <a class="choicelist">
+                    <a class="choicelist" href="{{route('slides.index')}}"> 
                         <i class="bi bi-palette"></i>
-                        Chỉnh Sữa Giao Diện
+                        Chỉnh Sửa Giao Diện
                     </a>
                 </div>
             </div>

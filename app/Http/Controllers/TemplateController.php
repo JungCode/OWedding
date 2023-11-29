@@ -58,7 +58,8 @@ class TemplateController extends Controller
             'bride' => null,
             'groom' => null,
             'slides' => null,
-            'events' => null
+            'events' => null,
+            'loveStories' => null
         ]);
     }
 
