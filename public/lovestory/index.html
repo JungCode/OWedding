@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+            integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,800;1,300;1,400;1,700&family=Sigmar+One&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <link rel="stylesheet" href="./reset.css" />
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+    <body>
+        <div class="lovestory">
+            <div class="plantitle">
+                <div class="plantitle-top">
+                    <a href="#" class="plantitle-top_back">
+                        <i
+                            class="fa fa-arrow-circle-left"
+                            aria-hidden="true"
+                        ></i>
+                    </a>
+                    <div class="plantitle-top_title">
+                        <h2 class="">Chuyện tình yêu</h2>
+                    </div>
+                </div>
+                <div class="plantitle-bottom">
+                    <div class="plantitle-bottom_text">
+                        Thêm và chỉnh sữa những câu chuyện tình yêu của bạn!!!
+                    </div>
+                </div>
+            </div>
+            <div class="storyedit">
+                <div class="editcontent">
+                    <div class="storyitem">
+                        <div
+                            class="storyitem-img"
+                            id="imagePreview"
+                            style="
+                                background-image: url(/public/image/bocchi2.jpg);
+                            "
+                        >
+                            <div class="imgbot">
+                                <input type="file" id="inputstory1" class="imgbot-btn"></input>
+                                <label for="inputstory1">Thay đổi</label>                               
+                            </div>
+                        </div>
+                        <div class="input-focus-effect">
+                            <input type="text" placeholder=" " />
+                            <label>Tiêu đề</label>
+                        </div>
+                        <div class="input-focus-effect">
+                            <input type="text" placeholder=" " />
+                            <label>Tiêu đề</label>
+                        </div>
+                        <div class="input-focus-effect">
+                            <textarea type="text" placeholder=" " ></textarea>
+                            <label>Tiêu đề</label>
+                        </div>
+                        <div class="storyitem-btn">
+                            <button class="storyitem-btn_del"><i class="fa-regular fa-trash-can"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="editbtn">
+                    <button class="editbtn-add">
+                        <i class="fa-solid fa-plus"></i> Thêm câu chuyện
+                    </button>
+                    <button class="editbtn-save">
+                        <i class="fa-regular fa-floppy-disk"></i> Lưu thông tin
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script src="js.js"></script>
+    </body>
+</html>
