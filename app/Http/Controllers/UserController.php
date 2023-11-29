@@ -139,7 +139,7 @@ class UserController extends Controller
     {
         auth()->logout();
         session()->flush();
-        return redirect()->route('landing');
+        return redirect()->route('users.index');
     }
     public function showRegister()
     {

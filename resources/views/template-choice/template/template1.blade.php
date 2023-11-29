@@ -45,7 +45,6 @@
             </ul>
         </nav>
     </div>
-
     <!-- /////////////////////////////home -->
     @php
         if (!$bride && !$groom) {
@@ -163,6 +162,34 @@
         <div class="couple-wrap">
             <div class="couple-wrap_title">
                 <h2 class="">Chuyện tình yêu</h2>
+            </div>
+        </div>
+        <div class="lovestory-content">
+            <div class="lovestory-content_left">
+                <div class="lovestory-content_left__img">
+                    <img src="{{ asset('image/wedd3.jpg') }}" alt="" />
+                </div>
+            </div>
+            <div class="lovestory-content_right">
+                <div class="lovestory-content_right__text">
+                    <h3 class="lovestory__text-title">
+                        Bạn Có Tin Vào Tình Yêu Online Không?
+                    </h3>
+                    <p class="lovestory__text-day">December 12 2015</p>
+                    <div class="lovestory__text-des">
+                        <p>
+                            Tôi đã từng không tin vào tình yêu online. Đã
+                            từng nghĩ làm sao có thể thích một người chưa
+                            từng gặp mặt? Vậy mà giờ đây tôi lại đang như
+                            vậy, bây giờ tôi đã hiểu: thế giới ảo tình yêu
+                            thật đấy!!! Ngày ấy vu vơ đăng một dòng status
+                            trên facebook than thở, vu vơ đùa giỡn nói
+                            chuyện với một người xa lạ chưa từng quen. Mà
+                            nào hay biết, 4 năm sau người ấy lại là chồng
+                            mình.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="lovestory-content">

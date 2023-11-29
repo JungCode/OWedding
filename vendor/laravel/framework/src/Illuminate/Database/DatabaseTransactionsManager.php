@@ -7,9 +7,16 @@ class DatabaseTransactionsManager
     /**
      * All of the recorded transactions.
      *
-     * @var \Illuminate\Support\Collection<int, \Illuminate\Database\DatabaseTransactionRecord>
+     * @var \Illuminate\Support\Collection
      */
     protected $transactions;
+
+    /**
+     * The database transaction that should be ignored by callbacks.
+     *
+     * @var \Illuminate\Database\DatabaseTransactionRecord
+     */
+    protected $callbacksShouldIgnore;
 
     /**
      * Create a new database transactions manager instance.
@@ -47,6 +54,10 @@ class DatabaseTransactionsManager
         $this->transactions = $this->transactions->reject(
             fn ($transaction) => $transaction->connection == $connection && $transaction->level > $level
         )->values();
+
+        if ($this->transactions->isEmpty()) {
+            $this->callbacksShouldIgnore = null;
+        }
     }
 
     /**
@@ -64,6 +75,10 @@ class DatabaseTransactionsManager
         $this->transactions = $forOtherConnections->values();
 
         $forThisConnection->map->executeCallbacks();
+
+        if ($this->transactions->isEmpty()) {
+            $this->callbacksShouldIgnore = null;
+        }
     }
 
     /**
@@ -82,24 +97,28 @@ class DatabaseTransactionsManager
     }
 
     /**
-     * Get the transactions that are applicable to callbacks.
+     * Specify that callbacks should ignore the given transaction when determining if they should be executed.
      *
-     * @return \Illuminate\Support\Collection<int, \Illuminate\Database\DatabaseTransactionRecord>
+     * @param  \Illuminate\Database\DatabaseTransactionRecord  $transaction
+     * @return $this
      */
-    public function callbackApplicableTransactions()
+    public function callbacksShouldIgnore(DatabaseTransactionRecord $transaction)
     {
-        return $this->transactions;
+        $this->callbacksShouldIgnore = $transaction;
+
+        return $this;
     }
 
     /**
-     * Determine if after commit callbacks should be executed for the given transaction level.
+     * Get the transactions that are applicable to callbacks.
      *
-     * @param  int  $level
-     * @return bool
+     * @return \Illuminate\Support\Collection
      */
-    public function afterCommitCallbacksShouldBeExecuted($level)
+    public function callbackApplicableTransactions()
     {
-        return $level === 0;
+        return $this->transactions->reject(function ($transaction) {
+            return $transaction === $this->callbacksShouldIgnore;
+        })->values();
     }
 
     /**

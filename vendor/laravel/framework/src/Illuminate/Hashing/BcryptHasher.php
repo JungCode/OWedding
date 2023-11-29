@@ -12,7 +12,7 @@ class BcryptHasher extends AbstractHasher implements HasherContract
      *
      * @var int
      */
-    protected $rounds = 12;
+    protected $rounds = 10;
 
     /**
      * Indicates whether to perform an algorithm check.

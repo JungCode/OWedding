@@ -17,11 +17,11 @@
                 <div class="text-slate-400 font-medium text-3xl">Số khách mời</div>
             </div>
             <div class="h-100 w-72 text-center">
-                <div class="text-4xl font-bold mb-4">30%</div>
+                <div class="text-4xl font-bold mb-4">{{$taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0}}%</div>
                 <div class="text-slate-400 font-medium text-3xl">Kế hoạch cưới</div>
             </div>
             <div class="h-100 w-72 text-center ">
-                <div class="text-4xl font-bold mb-4">500.000đ</div>
+                <div class="text-4xl font-bold mb-4">{{number_format($currentBudget, 0, ',', '.')}}</div>
                 <div class="text-slate-400 font-medium text-3xl">Ngân sách cưới</div>
             </div>
         </section>

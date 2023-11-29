@@ -22,7 +22,7 @@
     <body>
         <div class="header">
             <div class="header_logo">
-                <a href="/owedding">
+                <a href="{{route('users.index')}}">
                     <img
                         class="logo-white"
                         width="229"

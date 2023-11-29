@@ -14,63 +14,74 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('landing/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('landing/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('header/style.css') }}">
 </head>
 
 <body>
     <!-- firstpage //////////////////////////////////////////////////////////// -->
-    <div class="firstpage">
-        <div class="headerwrap">
-            <div class="header">
-                <div class="header_logo">
-                    <a href="#">
-                        <img class="logo-white" width="229" height="93" src="/image/Picture1.png"
-                            alt="iWedding by Biihappy" />
+    <div class="header">
+        <div class="header_logo">
+            <img class="logo-white logoactive" width="229" height="93" src="{{ asset('image/Picture1.png') }}" />
+            <img class="logo-red" width="229" height="93" src="{{ asset('image/Picture2.png') }}" />
+        </div>
+        <nav class="header_nav">
+            <ul class="header_ul">
+                <li class="header_menuitem">
+                    <a href="#">Xem hướng dẫn</a>
+                </li>
+                <li class="header_menuitem">
+                    <a href="#2">Công cụ lập kế hoạch</a>
+                </li>
+                <li class="header_menuitem">
+                    <a href="#">Cặp đôi đã tạo</a>
+                </li>
+                <li class="header_menuitem">
+                    <a href="#">Điểm nổi bật</a>
+                </li>
+                <li class="header_menuitem"><a href="#">Bảng giá</a></li>
+            </ul>
+        </nav>
+        <?php
+        $user = session('user');
+        ?>
+        @auth
+            <button class="header-btn">{{$user['name']}}</button>
+        </div>
+        <div class="dropdown__wrapper hide dropdown__wrapper--fade-in none">
+            <div class="dropdown__group">
+                <div class="dropdown__group-username">{{$user['name']}}</div>
+                <div class="dropdown__group-email">{{$user['email']}}</div>
+            </div>
+            <div class="dropdown-btn">
+                <form action="{{ route('users.logout') }}" method="POST">
+                    @csrf
+                    <a href="{{ route('users.showProfile') }}" class="dropdown-btn_website">
+                        <i class="fa fa-globe" aria-hidden="true"></i>
+                        <span>Thiết lập tài khoảng</span>
                     </a>
-                </div>
-                <nav class="header_nav">
-                    <ul class="header_ul">
-                        <li class="header_menuitem"><a href="#">Xem hướng dẫn</a></li>
-                        <li class="header_menuitem">
-                            <a href="#">Công cụ lập kế hoạch</a>
-                        </li>
-                        <li class="header_menuitem"><a href="#">Cặp đôi đã tạo</a></li>
-                        <li class="header_menuitem"><a href="#">Điểm nổi bật</a></li>
-                        <li class="header_menuitem"><a href="#">Bảng giá</a></li>
-                    </ul>
-                </nav>
-                <?php
-                $user = session('user');
-                ?>
-                @auth
-                    <form action="{{ route('users.logout') }}" method="POST">
-                        @csrf
-                        <div class="userbutton">
-                            <button class="Button">{{ $user['name'] }} <i class="fa fa-user-circle"
-                                    aria-hidden="true"></i></button>
-                            <div class="userbutton_iw">
-                                <a href="{{ route('users.showProfile') }}" class="userbutton_iw-item">Thiết lập tài
-                                    khoản</a>
-                                @if ($userWeb)
-                                    <a href="{{ route('users.managementWeb') }}" class="userbutton_iw-item">Quản lý
-                                        website</a>
-                                @else
-                                    <a href="{{ route('templates.index') }}" class="userbutton_iw-item">Quản lý
-                                        website</a>
-                                @endif
-                                <button type="submit" class="userbutton_iw-item">Đăng xuất<i class="fa fa-sign-out"
-                                        aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                @else
-                    <a href="{{ route('users.showlogin') }}">
-                        <div class="userbutton">
-                            <button class="Button">Đăng nhập</button>
-                        </div>
-                    </a>
-                @endauth
+                    @if ($userWeb)
+                        <a href="{{ route('users.managementWeb') }}" class="dropdown-btn_website">
+                            <i class="fa fa-globe" aria-hidden="true"></i>
+                            <span>Quản lý website</span>
+                        </a>
+                    @else
+                        <a href="{{ route('templates.index') }}" class="dropdown-btn_website">
+                            <i class="fa fa-globe" aria-hidden="true"></i>
+                            <span>Quản lý website</span>
+                        </a>
+                    @endif
+                    <button type="submit" class="dropdown-btn_logout">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        <span>Đăng xuất</span>
+                    </button>
+                </form>
             </div>
         </div>
+    @else
+        <a class="header-btn" href="{{route('users.showlogin')}}" >Đăng nhập</a>
+        </div>
+    @endauth
+    <div class="firstpage">
         <div class="firstcontent">
             <h2 class="firstcontent_top">oWedding</h2>
             <h1 class="firstcontent_title">
@@ -95,9 +106,9 @@
     </div>
 
     <!-- ////////secondpage//////////////////////////////////////////////////////////////////////// -->
-    <div class="secondpage">
-        <div class="secondtitle-wrap">
-            <div class="secondtitle_top">Đầy đủ những tính năng hữu ích </div>
+    <div class="secondpage" >
+        <div class="secondtitle-wrap" id="2">
+            <div class="secondtitle_top" >Đầy đủ những tính năng hữu ích </div>
             <div class="secondtitle_mid">CHO MỘT ĐÁM CƯỚI NHƯ MƠ</div>
             <div class="secondtitle_sub">Với những công cụ cần thiết, giúp bạn quản lý mọi kế hoạch cho ngày trọng đại
                 một cách thông minh hơn.</div>
@@ -350,5 +361,6 @@
         </div>
     </footer>
 </body>
+<script src="{{ asset('header/js.js') }}"></script>
 
 </html>
