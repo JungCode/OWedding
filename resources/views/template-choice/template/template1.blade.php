@@ -164,62 +164,60 @@
                 <h2 class="">Chuyện tình yêu</h2>
             </div>
         </div>
-        <div class="lovestory-content">
-            <div class="lovestory-content_left">
-                <div class="lovestory-content_left__img">
-                    <img src="{{ asset('image/wedd3.jpg') }}" alt="" />
+        @if ($loveStories)
+            @foreach ($loveStories as $loveStory)
+                <div class="lovestory-content">
+                    <div class="lovestory-content_left">
+                        <div class="lovestory-content_left__img">
+                            <img src="{{ asset('storage/' . $loveStory->photo) }}" alt="" />
+                        </div>
+                    </div>
+                    <div class="lovestory-content_right">
+                        <div class="lovestory-content_right__text">
+                            <h3 class="lovestory__text-title">
+                                {{$loveStory->title}}
+                            </h3>
+                            <p class="lovestory__text-day">{{$loveStory->date}}</p>
+                            <div class="lovestory__text-des">
+                                <p>
+                                    {{$loveStory->content}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="lovestory-content_right">
-                <div class="lovestory-content_right__text">
-                    <h3 class="lovestory__text-title">
-                        Bạn Có Tin Vào Tình Yêu Online Không?
-                    </h3>
-                    <p class="lovestory__text-day">December 12 2015</p>
-                    <div class="lovestory__text-des">
-                        <p>
-                            Tôi đã từng không tin vào tình yêu online. Đã
-                            từng nghĩ làm sao có thể thích một người chưa
-                            từng gặp mặt? Vậy mà giờ đây tôi lại đang như
-                            vậy, bây giờ tôi đã hiểu: thế giới ảo tình yêu
-                            thật đấy!!! Ngày ấy vu vơ đăng một dòng status
-                            trên facebook than thở, vu vơ đùa giỡn nói
-                            chuyện với một người xa lạ chưa từng quen. Mà
-                            nào hay biết, 4 năm sau người ấy lại là chồng
-                            mình.
-                        </p>
+            @endforeach
+        @else
+            <div class="lovestory-content">
+                <div class="lovestory-content_left">
+                    <div class="lovestory-content_left__img">
+                        <img src="{{ asset('image/wedd3.jpg') }}" alt="" />
+                    </div>
+                </div>
+                <div class="lovestory-content_right">
+                    <div class="lovestory-content_right__text">
+                        <h3 class="lovestory__text-title">
+                            Bạn Có Tin Vào Tình Yêu Online Không?
+                        </h3>
+                        <p class="lovestory__text-day">December 12 2015</p>
+                        <div class="lovestory__text-des">
+                            <p>
+                                Tôi đã từng không tin vào tình yêu online. Đã
+                                từng nghĩ làm sao có thể thích một người chưa
+                                từng gặp mặt? Vậy mà giờ đây tôi lại đang như
+                                vậy, bây giờ tôi đã hiểu: thế giới ảo tình yêu
+                                thật đấy!!! Ngày ấy vu vơ đăng một dòng status
+                                trên facebook than thở, vu vơ đùa giỡn nói
+                                chuyện với một người xa lạ chưa từng quen. Mà
+                                nào hay biết, 4 năm sau người ấy lại là chồng
+                                mình.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="lovestory-content">
-            <div class="lovestory-content_left">
-                <div class="lovestory-content_left__img">
-                    <img src="{{ asset('image/wedd3.jpg') }}" alt="" />
-                </div>
-            </div>
-            <div class="lovestory-content_right">
-                <div class="lovestory-content_right__text">
-                    <h3 class="lovestory__text-title">
-                        Bạn Có Tin Vào Tình Yêu Online Không?
-                    </h3>
-                    <p class="lovestory__text-day">December 12 2015</p>
-                    <div class="lovestory__text-des">
-                        <p>
-                            Tôi đã từng không tin vào tình yêu online. Đã
-                            từng nghĩ làm sao có thể thích một người chưa
-                            từng gặp mặt? Vậy mà giờ đây tôi lại đang như
-                            vậy, bây giờ tôi đã hiểu: thế giới ảo tình yêu
-                            thật đấy!!! Ngày ấy vu vơ đăng một dòng status
-                            trên facebook than thở, vu vơ đùa giỡn nói
-                            chuyện với một người xa lạ chưa từng quen. Mà
-                            nào hay biết, 4 năm sau người ấy lại là chồng
-                            mình.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endif
+
     </div>
     <div class="counter">
         <div class="counter-wrap">
@@ -262,7 +260,7 @@
                 @if ($events)
                     @foreach ($events as $event)
                         <div class="event-item">
-                            <h3 class="event-item_title">{{$event->name}}</h3>
+                            <h3 class="event-item_title">{{ $event->name }}</h3>
                             <div class="event-item_content">
                                 <div class="event-item_img">
                                     <img src="{{ asset('storage/' . $event->photo) }}" alt="">
@@ -270,16 +268,18 @@
                                 <div class="event-item_main">
                                     <div class="datetime">
                                         <div class="eventday"><i
-                                                class="fa-regular fa-calendar-check"></i><span>{{$event->date}}</span></div>
-                                        <div class="eventtime"><i class="fa-regular fa-clock"></i><span>{{$event->time}}</span>
+                                                class="fa-regular fa-calendar-check"></i><span>{{ $event->date }}</span>
+                                        </div>
+                                        <div class="eventtime"><i
+                                                class="fa-regular fa-clock"></i><span>{{ $event->time }}</span>
                                         </div>
                                     </div>
                                     <div class="address">
                                         <i class="fa-solid fa-location-dot"></i>
-                                        <p>{{$event->address}}</p>
+                                        <p>{{ $event->address }}</p>
                                     </div>
                                     <div class="link">
-                                        <a href="{{$event->link}}" target="_blank">Xem bản đồ</a>
+                                        <a href="{{ $event->link }}" target="_blank">Xem bản đồ</a>
                                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                                     </div>
                                 </div>

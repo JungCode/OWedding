@@ -4,12 +4,14 @@ use App\Http\Controllers\BudgetCategoryController;
 use App\Http\Controllers\BudgetItemController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FianceController;
+use App\Http\Controllers\LoveStoryController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\UserWebController;
 use App\Models\Fiance;
+use App\Models\LoveStory;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -116,6 +118,13 @@ Route::resource('tool/events',EventController::class)->only([
   'index', 'store', 'update', 'destroy'
 ]);
 
+
+
+
+//LOVE STORY
+Route::resource('tool/loveStories',LoveStoryController::class)->only([
+  'index', 'store', 'update', 'destroy'
+]);
 
 
 Route::middleware([

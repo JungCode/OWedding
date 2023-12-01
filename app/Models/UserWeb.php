@@ -21,8 +21,11 @@ class UserWeb extends Model
     public function slide(){
         return $this->hasMany(Slide::class);
     }
-    public function Event(){
+    public function event(){
         return $this->hasMany(Event::class);
+    }
+    public function loveStory(){
+        return $this->hasMany(LoveStory::class);
     }
     public function scopeUserWeb(Builder $query, int $userID): Builder
     {
