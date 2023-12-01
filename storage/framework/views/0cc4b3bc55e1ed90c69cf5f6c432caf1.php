@@ -21,7 +21,8 @@
     <!-- firstpage //////////////////////////////////////////////////////////// -->
     <div class="header">
         <div class="header_logo">
-            <img class="logo-white logoactive" width="229" height="93" src="<?php echo e(asset('image/Picture1.png')); ?>" />
+            <img class="logo-white logoactive" width="229" height="93"
+                src="<?php echo e(asset('image/Picture1.png')); ?>" />
             <img class="logo-red" width="229" height="93" src="<?php echo e(asset('image/Picture2.png')); ?>" />
         </div>
         <nav class="header_nav">
@@ -46,40 +47,40 @@
         ?>
         <?php if(auth()->guard()->check()): ?>
             <button class="header-btn"><?php echo e($user['name']); ?></button>
+    </div>
+    <div class="dropdown__wrapper hide dropdown__wrapper--fade-in none">
+        <div class="dropdown__group">
+            <div class="dropdown__group-username"><?php echo e($user['name']); ?></div>
+            <div class="dropdown__group-email"><?php echo e($user['email']); ?></div>
         </div>
-        <div class="dropdown__wrapper hide dropdown__wrapper--fade-in none">
-            <div class="dropdown__group">
-                <div class="dropdown__group-username"><?php echo e($user['name']); ?></div>
-                <div class="dropdown__group-email"><?php echo e($user['email']); ?></div>
-            </div>
+        <form action="<?php echo e(route('users.logout')); ?>" method="POST">
             <div class="dropdown-btn">
-                <form action="<?php echo e(route('users.logout')); ?>" method="POST">
-                    <?php echo csrf_field(); ?>
-                    <a href="<?php echo e(route('users.showProfile')); ?>" class="dropdown-btn_website">
+                <?php echo csrf_field(); ?>
+                <a href="<?php echo e(route('users.showProfile')); ?>" class="dropdown-btn_website">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    <span>Thiết lập tài khoảng</span>
+                </a>
+                <?php if($userWeb): ?>
+                    <a href="<?php echo e(route('users.managementWeb')); ?>" class="dropdown-btn_website">
                         <i class="fa fa-globe" aria-hidden="true"></i>
-                        <span>Thiết lập tài khoảng</span>
+                        <span>Quản lý website</span>
                     </a>
-                    <?php if($userWeb): ?>
-                        <a href="<?php echo e(route('users.managementWeb')); ?>" class="dropdown-btn_website">
-                            <i class="fa fa-globe" aria-hidden="true"></i>
-                            <span>Quản lý website</span>
-                        </a>
-                    <?php else: ?>
-                        <a href="<?php echo e(route('templates.index')); ?>" class="dropdown-btn_website">
-                            <i class="fa fa-globe" aria-hidden="true"></i>
-                            <span>Quản lý website</span>
-                        </a>
-                    <?php endif; ?>
-                    <button type="submit" class="dropdown-btn_logout">
-                        <i class="fa fa-sign-out" aria-hidden="true"></i>
-                        <span>Đăng xuất</span>
-                    </button>
-                </form>
+                <?php else: ?>
+                    <a href="<?php echo e(route('templates.index')); ?>" class="dropdown-btn_website">
+                        <i class="fa fa-globe" aria-hidden="true"></i>
+                        <span>Quản lý website</span>
+                    </a>
+                <?php endif; ?>
+                <button type="submit" class="dropdown-btn_logout">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    <span>Đăng xuất</span>
+                </button>
             </div>
-        </div>
-    <?php else: ?>
-        <a class="header-btn" href="<?php echo e(route('users.showlogin')); ?>" >Đăng nhập</a>
-        </div>
+        </form>
+    </div>
+<?php else: ?>
+    <a class="header-btn" href="<?php echo e(route('users.showlogin')); ?>">Đăng nhập</a>
+    </div>
     <?php endif; ?>
     <div class="firstpage">
         <div class="firstcontent">
@@ -93,7 +94,9 @@
             <div class="firstcontent_wrap">
                 <?php if($user): ?>
                     <a class="Button" href="<?php echo e(route('templates.index')); ?>">BẮT ĐẦU MIỄN PHÍ</a>
-                    <a class="Button Button2" href="<?php echo e(route('userwebs.index', $user['id'])); ?>">WEBSITES ĐÃ TẠO</a>
+                    <a class="Button Button2"
+                        href="<?php echo e(route('userwebs.index', $user['id'])); ?>">WEBSITES
+                        ĐÃ TẠO</a>
                 <?php else: ?>
                     <a class="Button" href="<?php echo e(route('users.login')); ?>">BẮT ĐẦU MIỄN PHÍ</a>
                     <a class="Button Button2" href="<?php echo e(route('users.login')); ?>">WEBSITES ĐÃ TẠO</a>
@@ -106,9 +109,9 @@
     </div>
 
     <!-- ////////secondpage//////////////////////////////////////////////////////////////////////// -->
-    <div class="secondpage" >
+    <div class="secondpage">
         <div class="secondtitle-wrap" id="2">
-            <div class="secondtitle_top" >Đầy đủ những tính năng hữu ích </div>
+            <div class="secondtitle_top">Đầy đủ những tính năng hữu ích </div>
             <div class="secondtitle_mid">CHO MỘT ĐÁM CƯỚI NHƯ MƠ</div>
             <div class="secondtitle_sub">Với những công cụ cần thiết, giúp bạn quản lý mọi kế hoạch cho ngày trọng đại
                 một cách thông minh hơn.</div>
@@ -266,8 +269,7 @@
                 </div>
             </div>
             <div class="lastpage_content-btn">
-                <a href="#">Xem hướng dẫn chi tiết tại đây <i class="fa fa-arrow-right"
-                        aria-hidden="true"></i></a>
+                <a href="#">Xem hướng dẫn chi tiết tại đây <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
             </div>
         </div>
         <div class="lastpage_img">
@@ -288,10 +290,10 @@
                     class="finalpage_content-img-item">
                 <img src="https://cajphotography335.zenfolio.com/img/s/v-10/p2450047733-4.jpg" alt=""
                     class="finalpage_content-img-item">
-                <img src="https://th.bing.com/th/id/OIP.zVJGmUeZpS__l9ahNOGkrAHaE8?pid=ImgDet&w=1500&h=1001&rs=1"
-                    alt="" class="finalpage_content-img-item">
-                <img src="https://www.lindabeansperfectmaine.com/wp-content/uploads/2014/12/GP302-580x385.jpg"
-                    alt="" class="finalpage_content-img-item">
+                <img src="https://th.bing.com/th/id/OIP.zVJGmUeZpS__l9ahNOGkrAHaE8?pid=ImgDet&w=1500&h=1001&rs=1" alt=""
+                    class="finalpage_content-img-item">
+                <img src="https://www.lindabeansperfectmaine.com/wp-content/uploads/2014/12/GP302-580x385.jpg" alt=""
+                    class="finalpage_content-img-item">
                 <img src="https://i.pinimg.com/originals/be/dd/06/bedd0625abb8a06454e286a6598e2f38.jpg" alt=""
                     class="finalpage_content-img-item">
 
