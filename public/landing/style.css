@@ -28,7 +28,7 @@ img {
   height: 100vh;
   position: relative;
   object-fit: cover;
-  background-image: url(https://static.showit.co/1200/NZAkkof3Q-q7NLNCCjbpCg/52171/20190811_0559_rsc_5750.jpg);
+  background-image: url(https://thebestweddingdresses.com/wp-content/uploads/2018/09/bigstock-Beautiful-Bride-And-Groom-Hand-243077506.jpg);
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
@@ -255,9 +255,11 @@ img {
 
 .secondpage {
   width: 100%;
+  height: auto;
   position: relative;
   padding-top: 120px;
   padding-bottom: 10rem;
+  background-color: #fff;
 }
 .secondpage_sub {
   width: 100%;
