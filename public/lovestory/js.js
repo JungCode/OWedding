@@ -12,6 +12,8 @@ function readURL(input) {
 }
 $('.imgbot-btn').change(function () {
     readURL(this);
+    var closestCheck = $(this).closest('.storyitem').find('.img-check');
+    closestCheck.attr("value", "1");
 });
 ////////
 const btnaddstory = document.querySelector(".editbtn-add");
@@ -30,17 +32,18 @@ let storyitem = `<div class="storyitem">
         <label for="inputstoryadd1">Thay đổi</label>                               
     </div>
 </div>
+<input type="hidden" value="" name="id[]">
 <div class="input-focus-effect">
-    <input type="text" placeholder=" " />
+    <input type="text" placeholder=" " name="title[]" />
     <label>Tiêu đề</label>
 </div>
 <div class="input-focus-effect">
-    <input type="text" placeholder=" " />
-    <label>Tiêu đề</label>
+    <input type="text" placeholder=" " name="date[]" />
+    <label>Thời gian</label>
 </div>
 <div class="input-focus-effect">
-    <textarea type="text" placeholder=" " ></textarea>
-    <label>Tiêu đề</label>
+    <textarea type="text" placeholder=" " name="content" ></textarea>
+    <label>Nội dung</label>
 </div>
 <div class="storyitem-btn">
     <button class="storyitem-btn_del"><i class="fa-regular fa-trash-can"></i></button>
