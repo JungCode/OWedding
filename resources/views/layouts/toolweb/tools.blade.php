@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('toolheader/style.css') }}">
     <link rel="stylesheet" href="{{ asset('todolist/style.css') }}">
     <link rel="stylesheet" href="{{ asset('progress-spinner/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
@@ -40,23 +41,23 @@
                     <i class="fa fa-angle-down" aria-hidden="true"></i>
                 </div>
                 <div class="btn-choicelist">
-                    <a class="choicelist" href="{{route('users.managementWeb')}}">
+                    <a class="choicelist" href="{{ route('users.managementWeb') }}">
                         <i class="bi bi-grid-1x2-fill"></i>
                         Bảng Chính
                     </a>
-                    <a class="choicelist" href="{{route('fiances.index')}}">
+                    <a class="choicelist" href="{{ route('fiances.index') }}">
                         <i class="bi bi-person-heart"></i>
                         Cô Dâu & Chú Rể
                     </a>
-                    <a class="choicelist" href="{{route('events.index')}}">
+                    <a class="choicelist" href="{{ route('events.index') }}">
                         <i class="bi bi-calendar-event"></i>
                         Sự Kiện cưới
                     </a>
-                    <a class="choicelist">
+                    <a class="choicelist" href="{{ route('loveStories.index') }}">
                         <i class="bi bi-chat-square-heart"></i>
                         Chuyện tình yêu
                     </a>
-                    <a class="choicelist" href="{{route('slides.index')}}"> 
+                    <a class="choicelist" href="{{ route('slides.index') }}">
                         <i class="bi bi-palette"></i>
                         Chỉnh Sửa Giao Diện
                     </a>
@@ -153,7 +154,7 @@
     </div>
 
 
-    <script src="{{asset('toolheader/js.js')}}"></script>
+    <script src="{{ asset('toolheader/js.js') }}"></script>
 
 </body>
 

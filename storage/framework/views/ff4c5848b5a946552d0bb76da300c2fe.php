@@ -22,10 +22,10 @@
                 <i class="fab fa-google signup-social__icon"></i>
                 <span class="signup-social__text">Login with Google</span>
             </a>
-            <div class="signup-social__item">
+            <a class="signup-social__item" href="<?php echo e(route('facebook-auth')); ?>" >
                 <i class="fab fa-facebook signup-social__icon"></i>
                 <span class="signup-social__text">Login with Facebook</span>
-            </div>
+            </a>
         </div>
         <form class="signup-form" autocomplete="off" method="POST" action="<?php echo e(route('users.login')); ?>">
             <?php echo csrf_field(); ?>

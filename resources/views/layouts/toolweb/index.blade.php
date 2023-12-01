@@ -39,14 +39,17 @@
             class="bg-white rounded-b-3xl border border-solid border-t-0 border-slate-300 mb-11 overflow-hidden py-5 px-9 grid grid-cols-3 gap-x-10 gap-y-4">
             <a class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5"
                 href="{{ route('fiances.index') }}">
+                <i class="bi bi-person-heart"></i>
                 Thông tin Cô Dâu & Chú Rể
             </a>
             <a class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5"
                 href="{{ route('events.index') }}">
+                <i class="bi bi-calendar-event"></i>
                 Sự kiện cưới
             </a>
             <a class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5"
                 href="{{ route('loveStories.index') }}">
+                <i class="bi bi-chat-square-heart"></i>
                 Câu chuyện tình yêu
             </a>
             <a
@@ -55,6 +58,7 @@
             </a>
             <a class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5"
                 href="{{ route('slides.index') }}">
+                <i class="bi bi-palette"></i>
                 Chỉnh Sửa Giao Diện
             </a>
             <a

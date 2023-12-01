@@ -34,13 +34,13 @@
                     <img src="<?php echo e(asset('storage/' . $bride->photo)); ?>" alt="" class="object-cover object-center	h-full w-full">
                     <div class="absolute bg-black-transparent h-24 bottom-0 w-full flex justify-center items-center">
                         <label for="input-file relative"
-                            class="bg-white px-4 py-3 rounded-xl cursor-pointer font-semibold">
+                            class="bg-white px-4 py-3 rounded-xl  font-semibold cursor-pointer">
                             Thay đổi hình ảnh
                             <input type="file"
                                     name="bride_photo"
                                     placeholder="Upload File"
                                     accept="image/*" 
-                                    class="opacity-0 absolute top-50 left-80">
+                                    class="opacity-0 absolute top-50 left-80 hidden">
                         </label>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                     <label>Ngày sinh</label>
                 </div>
                 <div class="input-focus-effect">
-                    <textarea name="bride_description" id="" class="h-52" required><?php echo e($bride->description); ?></textarea>
+                    <textarea name="bride_description" id="" class="h-52 resize-none" required><?php echo e($bride->description); ?></textarea>
                     <label>Giới thiệu</label>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                                     name="groom_photo"
                                     placeholder="Upload File"
                                     accept="image/*" 
-                                    class="opacity-0 absolute top-50 left-80">
+                                    class="opacity-0 absolute top-50 left-80 hidden">
                         </label>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                     <label>Ngày sinh</label>
                 </div>
                 <div class="input-focus-effect">
-                    <textarea name="groom_description" id="" class="h-52" required><?php echo e($groom->description); ?></textarea>
+                    <textarea name="groom_description" id="" class="h-52 resize-none" required><?php echo e($groom->description); ?></textarea>
                     <label>Giới thiệu</label>
                 </div>
             </div>

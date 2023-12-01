@@ -160,7 +160,7 @@
 
             
             <div class="px-7">
-                <form id="form" method="POST" action="" class="my-5">
+                <form id="form" method="GET" action="" class="my-5">
                     <?php echo csrf_field(); ?>
                     <input type="hidden" name="_method" id="methodField" value="">
                     <input type="hidden" name="id" id="guest-id" value="">
@@ -303,7 +303,7 @@
                 var form = document.querySelector('#form');
                 if (guestId == '') {
                     methodField.setAttribute('value', 'POST');
-                    form.setAttribute('action', `<?php echo e(route('budgetCategories.store')); ?>`);
+                    form.setAttribute('action', `<?php echo e(route('tasks.index')); ?>`);
                     btnSubmit.innerHTML = "<i class=\"fa-solid fa-plus\"></i> Thêm mới";
                 } else {
                     methodField.setAttribute('value', 'PUT');

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BudgetCategoryController;
 use App\Http\Controllers\BudgetItemController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FacebookAuthController;
 use App\Http\Controllers\FianceController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\LoveStoryController;
@@ -127,9 +128,14 @@ Route::resource('tool/loveStories',LoveStoryController::class)->only([
   'index', 'store', 'update', 'destroy'
 ]);
 
-
+//LOGIN WITH GOOGLE ACCOUNT
 Route::get('auth/google',[GoogleAuthController::class,'redirect'])->name('google-auth');
 Route::get('auth/google/callback',[GoogleAuthController::class,'callbackGoogle']);
+
+
+//LOGIN WITH FACEBOOK ACCOUNT
+Route::get('auth/facebook',[FacebookAuthController::class,'redirect'])->name('facebook-auth');
+Route::get('auth/facebook/callback',[FacebookAuthController::class,'callbackFacebook']);
 
 
 
