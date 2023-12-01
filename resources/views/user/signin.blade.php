@@ -18,10 +18,10 @@
         <h1 class="signup__heading">Login</h1>
         <h2 class="signup__caption">Login with</h2>
         <div class="signup-social">
-            <div class="signup-social__item">
+            <a class="signup-social__item" href="{{route('google-auth')}}">
                 <i class="fab fa-google signup-social__icon"></i>
                 <span class="signup-social__text">Login with Google</span>
-            </div>
+            </a>
             <div class="signup-social__item">
                 <i class="fab fa-facebook signup-social__icon"></i>
                 <span class="signup-social__text">Login with Facebook</span>

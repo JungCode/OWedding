@@ -4,6 +4,7 @@ use App\Http\Controllers\BudgetCategoryController;
 use App\Http\Controllers\BudgetItemController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FianceController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\LoveStoryController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\UserController;
@@ -125,6 +126,11 @@ Route::resource('tool/events',EventController::class)->only([
 Route::resource('tool/loveStories',LoveStoryController::class)->only([
   'index', 'store', 'update', 'destroy'
 ]);
+
+
+Route::get('auth/google',[GoogleAuthController::class,'redirect'])->name('google-auth');
+Route::get('auth/google/callback',[GoogleAuthController::class,'callbackGoogle']);
+
 
 
 Route::middleware([
