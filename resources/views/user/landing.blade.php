@@ -58,7 +58,7 @@
                 @csrf
                 <a href="{{ route('users.showProfile') }}" class="dropdown-btn_website">
                     <i class="fa fa-globe" aria-hidden="true"></i>
-                    <span>Thiết lập tài khoảng</span>
+                    <span>Thiết lập tài khoản</span>
                 </a>
                 @if($userWeb)
                     <a href="{{ route('users.managementWeb') }}" class="dropdown-btn_website">
