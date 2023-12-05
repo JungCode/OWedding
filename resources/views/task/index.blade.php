@@ -120,6 +120,7 @@
                                                     </p>
                                                 </div>
                                             </div>
+                                            <div class="inneritem-tool">
                                             <button data-id="{{ $task->id }}" data-title="{{ $task->title }}"
                                                 data-description="{{ $task->description }}"
                                                 data-completed="{{ $task->completed }}" data-period="{{ $period }}"
@@ -136,6 +137,7 @@
                                                     </div>
                                                 </button>
                                             </form>
+                                            </div>
                                         </div>
                                     @endif
                                 @empty

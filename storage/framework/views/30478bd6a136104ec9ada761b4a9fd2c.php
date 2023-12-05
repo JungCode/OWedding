@@ -122,6 +122,7 @@
                                                     </p>
                                                 </div>
                                             </div>
+                                            <div class="inneritem-tool">
                                             <button data-id="<?php echo e($task->id); ?>" data-title="<?php echo e($task->title); ?>"
                                                 data-description="<?php echo e($task->description); ?>"
                                                 data-completed="<?php echo e($task->completed); ?>" data-period="<?php echo e($period); ?>"
@@ -138,6 +139,7 @@
                                                     </div>
                                                 </button>
                                             </form>
+                                            </div>
                                         </div>
                                     <?php endif; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
