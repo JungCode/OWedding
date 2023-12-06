@@ -58,7 +58,7 @@
                 <?php echo csrf_field(); ?>
                 <a href="<?php echo e(route('users.showProfile')); ?>" class="dropdown-btn_website">
                     <i class="fa fa-globe" aria-hidden="true"></i>
-                    <span>Thiết lập tài khoảng</span>
+                    <span>Thiết lập tài khoản</span>
                 </a>
                 <?php if($userWeb): ?>
                     <a href="<?php echo e(route('users.managementWeb')); ?>" class="dropdown-btn_website">

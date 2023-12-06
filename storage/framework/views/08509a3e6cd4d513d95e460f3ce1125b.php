@@ -17,8 +17,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="<?php echo e(asset('budget-tool/tailwindcss.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('toolheader/style.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('todolist/style.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('progress-spinner/style.css')); ?>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
@@ -28,27 +30,60 @@
     <div class="header">
         <div class="header_logo">
             <a href="<?php echo e(route('users.index')); ?>">
-                <img class="logo-white" width="229" height="93" src="<?php echo e(asset('image\Picture2.png')); ?>" />
+                <img class="logo-red" width="180" height="93" src="<?php echo e(asset('image\Picture2.png')); ?>" />
             </a>
         </div>
-        <nav class="header_nav">
-            <ul class="header_ul">
-                <li class="header_menuitem">
-                    <a href="#">Xem hướng dẫn</a>
-                </li>
-                <li class="header_menuitem">
-                    <a href="#">Công cụ lập kế hoạch</a>
-                </li>
-                <li class="header_menuitem">
-                    <a href="#">Cặp đôi đã tạo</a>
-                </li>
-                <li class="header_menuitem">
-                    <a href="#">Điểm nổi bật</a>
-                </li>
-                <li class="header_menuitem"><a href="#">Bảng giá</a></li>
-            </ul>
-        </nav>
-        <button class="Button">Đăng Xuất</button>
+        <div class="btn-wrap">
+            <div class="btn-choicewrap">
+                <div class="btn-choice">
+                    <i class="fa-solid fa-gear"></i>
+                    Quản lý Website
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </div>
+                <div class="btn-choicelist">
+                    <a class="choicelist" href="<?php echo e(route('users.managementWeb')); ?>">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        Bảng Chính
+                    </a>
+                    <a class="choicelist" href="<?php echo e(route('fiances.index')); ?>">
+                        <i class="bi bi-person-heart"></i>
+                        Cô Dâu & Chú Rể
+                    </a>
+                    <a class="choicelist" href="<?php echo e(route('events.index')); ?>">
+                        <i class="bi bi-calendar-event"></i>
+                        Sự Kiện cưới
+                    </a>
+                    <a class="choicelist" href="<?php echo e(route('loveStories.index')); ?>">
+                        <i class="bi bi-chat-square-heart"></i>
+                        Chuyện tình yêu
+                    </a>
+                    <a class="choicelist" href="<?php echo e(route('slides.index')); ?>">
+                        <i class="bi bi-palette"></i>
+                        Chỉnh Sửa Giao Diện
+                    </a>
+                </div>
+            </div>
+            <button class="btn-header">Username</button>
+        </div>
+    </div>
+    <div class="dropdown__wrapper hide dropdown__wrapper--fade-in none">
+        <div class="dropdown__group">
+            <div class="dropdown__group-username">User Name</div>
+            <div class="dropdown__group-email">Usergmail@gmail.com</div>
+        </div>
+        <div class="dropdown-btn">
+            <button class="dropdown-btn_account">
+                <i class="fa-regular fa-circle-user"></i><span>Thiết lập tài khoảng</span>
+            </button>
+            <button class="dropdown-btn_website">
+                <i class="fa fa-globe" aria-hidden="true"></i>
+                <span>Quản lý website</span>
+            </button>
+            <button class="dropdown-btn_logout">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                <span>Đăng xuất</span>
+            </button>
+        </div>
     </div>
     <div class="headline">
         <div class="headline-broom">
@@ -118,6 +153,8 @@
         <?php echo $__env->yieldContent('content'); ?>
     </div>
 
+
+    <script src="<?php echo e(asset('toolheader/js.js')); ?>"></script>
 
 </body>
 

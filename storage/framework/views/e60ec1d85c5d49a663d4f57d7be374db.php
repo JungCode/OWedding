@@ -1,7 +1,13 @@
-<?php $__env->startSection('taskPercent', number_format($taskPercent, 0, ',', '.')); ?>
-
 <?php if(auth()->guard()->check()): ?>
-    <?php $__env->startSection('budget_current', number_format($currentBudget, 0, ',', '.')); ?>
+
+
+<?php $__env->startSection('brideName', $bride->full_name); ?>
+<?php $__env->startSection('groomName', $groom->full_name); ?>
+<?php $__env->startSection('brideImg', asset('storage/' . $bride->photo)); ?>
+<?php $__env->startSection('groomImg', asset('storage/' . $groom->photo)); ?>
+
+<?php $__env->startSection('taskPercent', number_format($taskPercent, 0, ',', '.')); ?>
+<?php $__env->startSection('budget_current', number_format($currentBudget, 0, ',', '.')); ?>
 <?php $__env->startSection('content'); ?>
     <div style="width: 80%">
         <?php

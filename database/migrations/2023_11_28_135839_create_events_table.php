@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('link');
             $table->unsignedBigInteger('user_web_id');
             $table->string('photo');
-            $table->foreign('user_web_id')->references('id')->on('templates')->onDelete('cascade');
+            $table->foreign('user_web_id')->references('id')->on('user_webs')->onDelete('cascade');
             $table->timestamps();
         });
     }
