@@ -157,9 +157,10 @@
                     class="text-white fa-solid fa-circle-xmark absolute right-5 top-3 text-3xl opacity-50 hover:opacity-100 cursor-pointer closeGAM">
                 </i>
             </div>
+
             
             <div class="px-7">
-                <form id="form" method="POST" action="" class="my-5">
+                <form id="form" method="GET" action="" class="my-5">
                     <?php echo csrf_field(); ?>
                     <input type="hidden" name="_method" id="methodField" value="">
                     <input type="hidden" name="id" id="guest-id" value="">
@@ -237,7 +238,7 @@
             </div>
             
             <div class="px-7 bg-slate-200">
-                <form id="form" method="POST" action="" class="py-5 bg-slate-200">
+                <form id="" method="POST" action="" class="py-5 bg-slate-200">
                     <?php echo csrf_field(); ?>
                     <div class="flex">
                         <label for="" class="mr-4 w-8/12">
@@ -302,7 +303,7 @@
                 var form = document.querySelector('#form');
                 if (guestId == '') {
                     methodField.setAttribute('value', 'POST');
-                    form.setAttribute('action', `<?php echo e(route('tasks.store')); ?>`);
+                    form.setAttribute('action', `<?php echo e(route('tasks.index')); ?>`);
                     btnSubmit.innerHTML = "<i class=\"fa-solid fa-plus\"></i> Thêm mới";
                 } else {
                     methodField.setAttribute('value', 'PUT');

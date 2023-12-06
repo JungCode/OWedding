@@ -28,19 +28,22 @@
             class="rounded-b-3xl border border-solid border-slate-300 mb-11 overflow-hidden py-12 px-12 shadow-xl grid grid-cols-2 gap-10 relative">
             <?php echo csrf_field(); ?>
             <?php echo method_field('PUT'); ?>
-            <div class="border border-soli  d border-slate-300 p-5 rounded-2xl shadow-2xl mb-32">
+            <div class="border border-soli  d border-slate-300 p-5 rounded-2xl shadow-2xl mb-32 husbandinfor">
                 <p class="text-3xl font-semibold text-center py-4">THÔNG TIN CHÚ RỂ </p>
                 <div class="w-full h-img rounded-xl overflow-hidden relative">
-                    <img src="<?php echo e(asset('storage/' . $bride->photo)); ?>" alt="" class="object-cover object-center	h-full w-full">
+
+                    <!-- <img src="<?php echo e(asset('storage/' . $bride->photo)); ?>" alt="" class="object-cover object-center	h-full w-full" > -->
+                    <div class="object-cover object-center bg-cover bg-center bg-no-repeat h-full w-full" id="imagePreview" style="background-image: url(<?php echo e(asset('storage/' . $bride->photo)); ?>)"></div>
                     <div class="absolute bg-black-transparent h-24 bottom-0 w-full flex justify-center items-center">
-                        <label for="input-file relative"
+                        <label for="husbandimginput"
                             class="bg-white px-4 py-3 rounded-xl  font-semibold cursor-pointer">
                             Thay đổi hình ảnh
                             <input type="file"
                                     name="bride_photo"
                                     placeholder="Upload File"
                                     accept="image/*" 
-                                    class="opacity-0 absolute top-50 left-80 hidden">
+                                    class="opacity-0 absolute top-50 left-80 hidden"
+                                    id="husbandimginput">
                         </label>
                     </div>
                 </div>
@@ -63,19 +66,22 @@
                     <label>Giới thiệu</label>
                 </div>
             </div>
-            <div class="border border-solid border-slate-300 p-5 rounded-2xl shadow-2xl mb-32">
+            <div class="border border-solid border-slate-300 p-5 rounded-2xl shadow-2xl mb-32 wifeinfor">
                 <p class="text-3xl font-semibold text-center py-4 text-red-600">THÔNG TIN CÔ DÂU </p>
                 <div class="w-full h-img rounded-xl overflow-hidden relative">
-                    <img src="<?php echo e(asset('storage/' . $groom->photo)); ?>" alt="" class="object-cover object-center	h-full w-full">
+                    <!-- <img src="<?php echo e(asset('storage/' . $groom->photo)); ?>" alt="" class="object-cover object-center	h-full w-full"> -->
+                    <div class="object-cover object-center bg-cover bg-center bg-no-repeat h-full w-full" id="imagePreview" style="background-image: url(<?php echo e(asset('storage/' . $groom->photo)); ?>)"></div>
                     <div class="absolute bg-black-transparent h-24 bottom-0 w-full flex justify-center items-center">
-                        <label for="input-file relative"
+                        <label for="wifeimginput"
                             class="bg-white px-4 py-3 rounded-xl opacity-100 cursor-pointer font-semibold">
                             Thay đổi hình ảnh
                             <input type="file"
                                     name="groom_photo"
                                     placeholder="Upload File"
                                     accept="image/*" 
-                                    class="opacity-0 absolute top-50 left-80 hidden">
+                                    class="opacity-0 absolute top-50 left-80 hidden"
+                                    id="wifeimginput">
+                                    
                         </label>
                     </div>
                 </div>
@@ -107,6 +113,7 @@
             </div>
         </form>
     </div>
+    <script src="<?php echo e(asset('wedding-fiance/fiancejs.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 <?php else: ?>
 Chưa đăng nhập

@@ -1,4 +1,3 @@
-@charset "UTF-8";
 html {
   font-size: 62.5%;
 }
@@ -32,8 +31,7 @@ img {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
-  top: 0;
+  position: relative;
   background-color: #ffffff;
   padding: 2px 30px;
   z-index: 152;
@@ -84,30 +82,6 @@ img {
 
 .logoactive {
   display: block;
-}
-
-.fistpage {
-  width: 100%;
-  height: 100vh;
-  background-image: url(https://static.showit.co/1200/NZAkkof3Q-q7NLNCCjbpCg/52171/20190811_0559_rsc_5750.jpg);
-  background-size: cover;
-  background-position: right;
-  background-repeat: no-repeat;
-}
-
-.fistpage::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Màu đen với độ trong suốt 0.5 */
-}
-
-.secondpage {
-  width: 100%;
-  height: 100vh;
 }
 
 .btn-wrap {
