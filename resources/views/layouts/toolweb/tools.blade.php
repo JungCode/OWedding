@@ -27,6 +27,9 @@
 </head>
 
 <body>
+    <?php   
+        $user = session('user');
+    ?>
     <div class="header">
         <div class="header_logo">
             <a href="{{ route('users.index') }}">
@@ -63,13 +66,13 @@
                     </a>
                 </div>
             </div>
-            <button class="btn-header">Username</button>
+            <button class="btn-header">{{ $user['name'] }}</button>
         </div>
     </div>
     <div class="dropdown__wrapper hide dropdown__wrapper--fade-in none">
         <div class="dropdown__group">
-            <div class="dropdown__group-username">User Name</div>
-            <div class="dropdown__group-email">Usergmail@gmail.com</div>
+            <div class="dropdown__group-username">{{ $user['name'] }}</div>
+            <div class="dropdown__group-email">{{ $user['email'] }}</div>
         </div>
         <div class="dropdown-btn">
             <button class="dropdown-btn_account">
@@ -122,7 +125,7 @@
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <span>DANH SÁCH KHÁCH MỜI</span>
             </h5>
-            <span class="btnchoice-sub">Bạn có khách mời</span>
+            <span class="btnchoice-sub">Bạn có @yield('totalGuest') khách mời</span>
         </a>
         <a href="{{ route('tasks.index') }}" class="btnchoice green">
             <h5 class="btnchoice-top">

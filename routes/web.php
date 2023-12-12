@@ -6,6 +6,8 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\FacebookAuthController;
 use App\Http\Controllers\FianceController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\GuestController;
+use App\Http\Controllers\GuestGroupController;
 use App\Http\Controllers\LoveStoryController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\UserController;
@@ -45,7 +47,7 @@ Route::fallback(function(){
 Route::get('/', function() {
   return redirect()->route('users.index');
 });
-Route::view('tool/guest','guest.guest')->name('guest');
+
 
 
 
@@ -120,8 +122,13 @@ Route::resource('tool/events',EventController::class)->only([
   'index', 'store', 'update', 'destroy'
 ]);
 
-
-
+//Guest
+Route::resource('tool/guest',GuestController::class)->only([
+  'index','store','update'
+]);
+Route::resource('tool/guestGroups',GuestGroupController::class)->only([
+  'store','update'
+]);
 
 //LOVE STORY
 Route::resource('tool/loveStories',LoveStoryController::class)->only([
