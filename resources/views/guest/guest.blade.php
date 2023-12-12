@@ -1,6 +1,7 @@
 @extends('layouts.toolweb.tools')
-@section('taskPercent', number_format(30, 0, ',', '.'))
-@section('budget_current', number_format(500000, 0, ',', '.'))
+@section('taskPercent', number_format($taskPercent, 0, ',', '.'))
+@section('budget_current', number_format($currentBudget, 0, ',', '.'))
+@section('totalGuest', number_format($totalGuest, 0, ',', '.'))
 @section('content')
     <div style="width: 80%">
         <section class="rounded-t-3xl border border-solid border-slate-300 mt-12 overflow-hidden ">
@@ -32,12 +33,17 @@
                     <select name="" id="selector5" class="border border-solid border-slate-300 rounded-lg py-3 selector">
                         <option value="">Tất cả sự kiện</option>
                         <option value="LỄ CƯỚI NHÀ NỮ">LỄ CƯỚI NHÀ NỮ</option>
-                        <option value="LỄ CƯỚI NHÀ NAM">LỄ CƯỚI NHÀ NỮ NAM</option>
+                        <option value="TIỆC CƯỚI NHÀ NỮ">TIỆC CƯỚI NHÀ NỮ</option>
+                        <option value="LỄ CƯỚI NHÀ NAM">LỄ CƯỚI NHÀ NAM</option>
+                        <option value="TIỆC CƯỚI NHÀ NAM">TIỆC CƯỚI NHÀ NAM</option>
                     </select>
                     <select name="" id="selector6" class="border border-solid border-slate-300 rounded-lg py-3 selector">
                         <option value="">Tất cả các nhóm</option>
-                        <option value="ĐỐI TÁC">ĐỐI TÁC</option>
-                        <option value="NGƯỜI THÂN & HỌ HÀNG">NGƯỜI THÂN & HỌ HÀNG</option>
+                        @foreach ($groups as $group)
+
+                            <option value="{{$group['group_name']}}">{{$group['group_name']}}</option>
+                        
+                        @endforeach
                     </select>
                     <select name="" id="selector7" class="border border-solid border-slate-300 rounded-lg selector">
                         <option value="">Trạng thái tham gia</option>
@@ -48,9 +54,9 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
                     <button class="rounded-lg py-3 bg-green-wedding text-white show-guest-adding-modal"
                         data-event=""
+                        data-email=""
                         data-guestid=""
                         data-guestname=""
-                        data-email=""
                         data-phone=""
                         data-groupguest=""
                         data-gowith=""                        
@@ -65,23 +71,23 @@
             <div class="mb-2">
                 <div class="inline-block mr-4">
                     <i class="fa-solid fa-circle text-blue-700"></i>
-                    Tổng số khách mời:1
+                    Tổng số khách mời: {{$totalGuest}}
                 </div>
                 <div class="inline-block mr-4">
                     <i class="fa-solid fa-circle text-indigo-700"></i>
-                    Tham gia:1
+                    Tham gia: {{$comingGuest}}
                 </div>
                 <div class="inline-block mr-4">
                     <i class="fa-solid fa-circle text-pink-700"></i>
-                    Không tham gia:1
+                    Không tham gia: {{$notComingGuest}}
                 </div>
                 <div class="inline-block mr-4">
                     <i class="fa-solid fa-circle text-slate-500"></i>
-                    Không xác nhận:1
+                    Không xác nhận: {{$notConfirmGuest}}
                 </div>
                 <div class="inline-block mr-4">
                     <i class="fa-solid fa-circle text-green-wedding"></i>
-                    Tiền mừng:0đ
+                    Tiền mừng: {{$totalWeddingMoney}}đ
                 </div>
             </div>
             <div class="rounded-xl border-2 border-solid border-slate-300 h-80 text-xl overflow-auto">
@@ -102,46 +108,59 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($guests as $guest)
                         <tr class="border-b-2 border-solid border-slate-300 bg-slate-100">
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">1</td>
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">###</td>
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">194H</td>
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">Bùi Đình Trung</td>
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">0981313069</td>
+                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">{{$loop->iteration}}</td>
+                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">{{$guest['ticket']}}</td>
+                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">{{$guest['invitation_id']}}</td>
+                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">{{$guest['name']}}</td>
+                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">{{$guest['phone_number']}}</td>
                             <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
                                 <div class="bg-slate-500 rounded-lg text-white font-bold">
-                                    LỄ CƯỚI NHÀ NỮ
+                                    {{$guest['event']}}
                                 </div>
                             </td>
                             <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
                                 <div class="bg-purple-wedding rounded-lg text-white font-bold">
-                                    Người thân & họ hàng
+                                    @foreach ($groups as $group )
+                                        @if ($guest['group_id']==$group['id'])
+                                            {{$group['group_name']}}
+                                        @endif
+                                    @endforeach
                                 </div>
                             </td>
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">Có</td>
+                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">{{$guest['confirmation']}}</td>
                             <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
-                                2
+                                {{$guest['go_with']}}
                                 <i class="fa-solid fa-user text-gray-400"></i>
                             </td>
                             <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
                                 <i class="fa-solid fa-sack-dollar text-gray-400"></i>
-                                100,000 đ
+                                {{$guest['wedding_money']}}
                             </td>
                             <td class="text-center">
                                 <button class="mr-3 transition hover:text-slate-500 show-guest-adding-modal"
-                                    data-event="LỄ CƯỚI NHÀ NAM"
-                                    data-guestid="1"
-                                    data-guestname="2"
-                                    data-email="3"
-                                    data-phone="4"
-                                    data-groupguest="ĐỐI TÁC"
-                                    data-gowith="5"
+                                    data-event="{{$guest['event']}}"
+                                    data-email="{{$guest['wedding_money']}}"
+                                    data-guestid="{{$guest['id']}}"
+                                    data-guestname="{{$guest['name']}}"
+                                    data-phone="{{$guest['phone_number']}}"
+                                    data-groupguest="
+                                    @foreach ($groups as $group )
+                                        @if ($guest['group_id']=$group['id'])
+                                            {{$group['group_name']}}
+                                        @endif
+                                    @endforeach
+                                    "
+                                    data-gowith="{{$guest['go_with']}}"
                                 >
                                     <i class="fa-solid fa-pen "></i>
                                 </button>
                                 <button class="transition hover:text-slate-500"><i class="fa-solid fa-trash"></i></button>
+                                
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -161,13 +180,13 @@
 
             {{-- BODY OF MODALS  --}}
             <div class="px-7">
-                <form id="form" method="GET" action="" class="my-5">
+                <form id="form" method="POST" action="" class="my-5">
                     @csrf
                     <input type="hidden" name="_method" id="methodField" value="">
                     <input type="hidden" name="id" id="guest-id" value="">
                     <label for="block" class="my-5 block">
                         <span class="block mb-1">Sự kiện</span>
-                        <select name="" id="guest-event"
+                        <select name="event" id="guest-event"
                             class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
                             <option value="LỄ CƯỚI NHÀ NỮ">LỄ CƯỚI NHÀ NỮ</option>
                             <option value="TIỆC CƯỚI NHÀ NỮ">TIỆC CƯỚI NHÀ NỮ</option>
@@ -177,33 +196,31 @@
                     </label>
                     <label for="item-name" class="my-5 block">
                         <span class="block mb-1">Tên khách mời</span>
-                        <input type="text" placeholder="Nhập tên khách mời" id="guest-name"
-                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
-                    </label>
-                    <label for="item-name" class="my-5 block">
-                        <span class="block mb-1">Email</span>
-                        <input type="text" placeholder="Nhập Email khách mời" id="guest-email"
+                        <input type="text" placeholder="Nhập tên khách mời" id="guest-name" name="name"
                             class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
                     </label>
                     <label for="item-name" class="my-5 block">
                         <span class="block mb-1">Số điện thoại</span>
-                        <input type="text" placeholder="Nhập số điện thoại khách mời" id="guest-phone"
+                        <input type="text" placeholder="Nhập số điện thoại khách mời" id="guest-phone" name="phone_number"
                             class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
                     </label>
                     <label for="block" class="my-5 block">
                         <span class="block mb-1">Chọn nhóm khách mời <span 
                                 class="text-blue-700 show-guest-group-modal cursor-pointer"> [Quản lý nhóm] </span></span>
-                        <select name="" id="guest-group"
+                        <select name="group_id" id="guest-group"
                             class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
                             <option value="">Chọn nhóm khách mời</option>
-                            <option value="">Người thân & Họ hàng</option>
-                            <option value="">Gì gì đó</option>
-                            <option value="">TIỆC CƯỚI NHÀ NAM</option>
+                            @foreach ($groups as $group)
+
+                            <option value="{{$group['id']}}">{{$group['group_name']}}</option>
+                        
+                            @endforeach
+                            
                         </select>
                     </label>
                     <label for="block" class="my-5 block">
                         <span class="block mb-1">Đi cùng</span>
-                        <select name="" id="guest-gowith"
+                        <select name="go_with" id="guest-gowith"
                             class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
                             <option value="">Không có</option>
                             <option value="1">1</option>
@@ -216,7 +233,11 @@
                             <option value="8">8</option>
                         </select>
                     </label>
-                    
+                    <label for="item-name" class="my-5 block">
+                        <span class="block mb-1">Wedding money</span>
+                        <input type="text" placeholder="Nhập số tiền mừng cưới" id="guest-email" name="wedding_money"
+                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
+                    </label>
                     <button type="submit" id="btn-submit"
                         class="mt-7 transition duration-300 py-5 bg-gray-700 hover:bg-gray-900 px-3 rounded text-white mr-1 w-full">
                         <i class="fa-solid fa-plus"></i>
@@ -239,11 +260,11 @@
             </div>
             {{-- BODY OF MODALS  --}}
             <div class="px-7 bg-slate-200">
-                <form id="" method="POST" action="" class="py-5 bg-slate-200">
+                <form id="" method="POST" action="{{route('guestGroups.store')}}" class="py-5 bg-slate-200">
                     @csrf
                     <div class="flex">
                         <label for="" class="mr-4 w-8/12">
-                            <input placeholder="Nhập tên nhóm" type="text"
+                            <input placeholder="Nhập tên nhóm" type="text" name="group_name"
                                 class="px-4 py-5 border border-solid border-slate-300 rounded-lg w-full">
                         </label>
                         <button type="submit" id="btn-submit"
@@ -256,23 +277,34 @@
             </div>
             <div class="rounded-b-lg overflow-hidden">
                 <table class="w-full table-collapse">
-                    <tr class="border border-solid border-slate-300">
+                    <tr class="border border-solid border-slate-300">   
                         <th class="border border-solid border-slate-300 py-4 px-4 text-center w-2/12">#</th>
                         <th class="border border-solid border-slate-300 py-4 px-4 text-left w-8/12">Tên nhóm</th>
                         <th class="border border-solid border-slate-300 py-4 px-4 text-center w-2/12">#</th>
                     </tr>
-                    <tr class="border border-solid border-slate-300">
-                        <td class="border border-solid border-slate-300 py-4 px-4 text-center w-2/12">1</td>
-                        <td class="border border-solid border-slate-300 py-4 px-4 text-left w-8/12">
-                            <input class="w-8/12" type="text" value="Người thân & Họ hàng" readonly>
-                            <button class="bg-blue-600 hover:bg-blue-800 transition rounded text-white px-2 py-1 hidden">Lưu</button>
-                            <button class="bg-gray-wedding hover:bg-gray-500 transition rounded text-white px-2 py-1 hidden">Hủy</button>
+                    @foreach ($groups as $group )
+                    <tr class="border border-solid border-slate-300 rowedit" >
+                        <td class="border border-solid border-slate-300 py-4 px-4 text-center w-2/12">{{$loop->iteration}}</td>
+                        <td class="border border-solid border-slate-300 py-4 px-4 text-left w-8/12" id="{{ 'adu' . $loop->iteration}}">
+                            <?php 
+                                $groupid= $group['id'];
+                            ?>
+                            <form id="" method="POST" action="{{route('guestGroups.update', $groupid )}}" >
+                                    @csrf
+                                    @method('PUT')
+                                <input name="group_name" class="w-8/12 input" type="text" value="{{$group['group_name']}}" readonly>
+                                <button class="bg-blue-600 hover:bg-blue-800 transition rounded text-white px-2 py-1 hidden save-button">Lưu</button>
+                            </form>
+                                
+                                <button class="bg-gray-wedding hover:bg-gray-500 transition rounded text-white px-2 py-1 hidden cancel-button">Hủy</button>
+                            
                         </td>
                         <td class=" flex justify-center items-center py-4 px-4">
-                            <button class="inline-block transition hover:text-slate-500 editGroup"><i class="fa-solid fa-pen mr-4"></i></button>
+                            <button class="inline-block transition hover:text-slate-500 editbtn" id="{{ 'adu' . $loop->iteration}}" ><i class="fa-solid fa-pen mr-4"></i></button>
                             <button class="inline-block transition hover:text-slate-500"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
+                    @endforeach
                 </table>
             </div>
         </div>
@@ -304,11 +336,11 @@
                 var form = document.querySelector('#form');
                 if (guestId == '') {
                     methodField.setAttribute('value', 'POST');
-                    form.setAttribute('action', `{{ route('tasks.index') }}`);
+                    form.setAttribute('action', `{{ route('guest.store') }}`);
                     btnSubmit.innerHTML = "<i class=\"fa-solid fa-plus\"></i> Thêm mới";
                 } else {
                     methodField.setAttribute('value', 'PUT');
-                    form.setAttribute('action', `{{ route('tasks.update', ':guestID') }}`.replace(
+                    form.setAttribute('action', `{{ route('guest.update', ':guestID') }}`.replace(
                         ':guestID',
                         guestId));
                     btnSubmit.innerHTML = "<i class=\"fa-regular fa-floppy-disk\"></i> Lưu thông tin";

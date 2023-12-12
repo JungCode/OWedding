@@ -30,26 +30,52 @@ function closeGGM(e) {
         }, 250);
     }
 };
-editGroups = document.querySelectorAll('.editGroup');
-editGroups.forEach(editGroup =>{
-    const row = editGroup.closest("tr");
-    const cell = row.cells[1];
-    input = cell.querySelector('input');
-    buttons = cell.querySelectorAll('button');
-    editGroup.addEventListener('click', function(){
-        buttons.forEach(button => {
-            button.classList.remove("hidden");
-            button.addEventListener('click',function(){     
-            });
+
+//edit groups
+editbtn = document.querySelectorAll('.editbtn');
+editbtn.forEach(editbtn =>{
+    // id = '#' + editbtn.getAttribute("id");
+    // const cell = document.querySelector(id);
+
+    // input = cell.querySelector('.input');
+    // console.log(input);
+    // saveButton = cell.querySelector('.save-button');
+    // cancelButton = cell.querySelector('.cancel-button');
+    editbtn.addEventListener('click', function(e){
+        const rowedit = e.target.closest('.rowedit');
+        // saveButton.classList.remove("hidden");
+        // saveButton.classList.addEventListener('click',function(){     
+
+        // });
+
+
+        // saveButton.addEventListener('click',function(){
+        //     cancelButton.classList.add("hidden");
+        //     saveButton.classList.add("hidden");
+        // })
+        // cancelButton.addEventListener('click',function(){
+        //     cancelButton.classList.add("hidden");
+        //     saveButton.classList.add("hidden");
+        // })
+        const input = rowedit.querySelector('.input');
+        const oldValue = input.value; 
+        const savebtn = rowedit.querySelector('.save-button');
+        const cancelbtn = rowedit.querySelector('.cancel-button');
+        cancelbtn.classList.remove("hidden");
+        savebtn.classList.remove("hidden");
+
+        cancelbtn.addEventListener('click', function () {
+            cancelbtn.classList.add("hidden");
+            savebtn.classList.add("hidden");
+            input.setAttribute('readonly', 'true');
+            input.value = oldValue;
         });
-        buttons[0].addEventListener('click',function(){
-            buttons[0].classList.add("hidden");
-            buttons[1].classList.add("hidden");
-        })
-        buttons[1].addEventListener('click',function(){
-            buttons[0].classList.add("hidden");
-            buttons[1].classList.add("hidden");
-        })
+        savebtn.addEventListener('click', function () {
+            savebtn.classList.add("hidden");
+            cancelbtn.classList.add("hidden");
+            input.setAttribute('readonly', 'true');
+        });
+
         input.focus();
         input.removeAttribute("readonly");
     });
