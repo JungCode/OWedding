@@ -49,7 +49,9 @@
             <button class="Button">Đăng Xuất</button>
         </div>
         <section class="main">
-            <div class="main-bgr"></div>
+            <div class="main-bgr">
+                <img src="{{ asset('/image/tempatebgr.jpeg') }}" alt="">
+            </div>
             <div class="main-content">
                 <h2 class="main-content_top">
                     oWedding
@@ -66,7 +68,7 @@
             <div class="template__list">
                 @foreach ($data as $item)
                     <div class="template__item">
-                        <img src="{{ asset('image/wedd3.jpg') }}" alt="" class="template__image">
+                        <img src="{{ asset('storage/' . $item->photo) }}" alt="" class="template__image">
                         <div class="template__content">
                             <div class="template__text">
                                 <p class="template__title">{{ $item->name }}</p>

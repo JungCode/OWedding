@@ -32,8 +32,8 @@
                 <p class="text-3xl font-semibold text-center py-4">THÔNG TIN CHÚ RỂ </p>
                 <div class="w-full h-img rounded-xl overflow-hidden relative">
 
-                    <!-- <img src="<?php echo e(asset('storage/' . $bride->photo)); ?>" alt="" class="object-cover object-center	h-full w-full" > -->
-                    <div class="object-cover object-center bg-cover bg-center bg-no-repeat h-full w-full" id="imagePreview" style="background-image: url(<?php echo e(asset('storage/' . $bride->photo)); ?>)"></div>
+                    <!-- <img src="<?php echo e(asset('storage/' . $groom->photo)); ?>" alt="" class="object-cover object-center	h-full w-full" > -->
+                    <div class="object-cover object-center bg-cover bg-center bg-no-repeat h-full w-full" id="imagePreview" style="background-image: url(<?php echo e(asset('storage/' . $groom->photo)); ?>)"></div>
                     <div class="absolute bg-black-transparent h-24 bottom-0 w-full flex justify-center items-center">
                         <label for="husbandimginput"
                             class="bg-white px-4 py-3 rounded-xl  font-semibold cursor-pointer">
@@ -47,30 +47,30 @@
                         </label>
                     </div>
                 </div>
-                <input type="hidden" value="<?php echo e($bride->id); ?>" name="bride_id">
+                <input type="hidden" value="<?php echo e($groom->id); ?>" name="bride_id">
                 <div class="input-focus-effect my-5">
-                    <input type="text" placeholder="" name="bride_full_name" value="<?php echo e($bride->full_name); ?>" required />
+                    <input type="text" placeholder="" name="bride_full_name" value="<?php echo e($groom->full_name); ?>" required />
                     <label>Tên chú rễ</label>
                 </div>
                 <div class="input-focus-effect">
-                    <input type="text" placeholder="" name="bride_second_name" value="<?php echo e($bride->second_name); ?>"
+                    <input type="text" placeholder="" name="bride_second_name" value="<?php echo e($groom->second_name); ?>"
                         required />
                     <label>Tên ngắn gọn</label>
                 </div>
                 <div class="input-focus-effect">
-                    <input type="text" placeholder="" name="bride_birthday" value="<?php echo e($bride->birthday); ?>" required />
+                    <input type="text" placeholder="" name="bride_birthday" value="<?php echo e($groom->birthday); ?>" required />
                     <label>Ngày sinh</label>
                 </div>
                 <div class="input-focus-effect">
-                    <textarea name="bride_description" id="" class="h-52 resize-none" required><?php echo e($bride->description); ?></textarea>
+                    <textarea name="bride_description" id="" class="h-52 resize-none" required><?php echo e($groom->description); ?></textarea>
                     <label>Giới thiệu</label>
                 </div>
             </div>
             <div class="border border-solid border-slate-300 p-5 rounded-2xl shadow-2xl mb-32 wifeinfor">
                 <p class="text-3xl font-semibold text-center py-4 text-red-600">THÔNG TIN CÔ DÂU </p>
                 <div class="w-full h-img rounded-xl overflow-hidden relative">
-                    <!-- <img src="<?php echo e(asset('storage/' . $groom->photo)); ?>" alt="" class="object-cover object-center	h-full w-full"> -->
-                    <div class="object-cover object-center bg-cover bg-center bg-no-repeat h-full w-full" id="imagePreview" style="background-image: url(<?php echo e(asset('storage/' . $groom->photo)); ?>)"></div>
+                    <!-- <img src="<?php echo e(asset('storage/' . $bride->photo)); ?>" alt="" class="object-cover object-center	h-full w-full"> -->
+                    <div class="object-cover object-center bg-cover bg-center bg-no-repeat h-full w-full" id="imagePreview" style="background-image: url(<?php echo e(asset('storage/' . $bride->photo)); ?>)"></div>
                     <div class="absolute bg-black-transparent h-24 bottom-0 w-full flex justify-center items-center">
                         <label for="wifeimginput"
                             class="bg-white px-4 py-3 rounded-xl opacity-100 cursor-pointer font-semibold">
@@ -85,22 +85,22 @@
                         </label>
                     </div>
                 </div>
-                <input type="hidden" name="groom_id" value="<?php echo e($groom->id); ?>">
+                <input type="hidden" name="groom_id" value="<?php echo e($bride->id); ?>">
                 <div class="input-focus-effect my-5">
-                    <input type="text" placeholder="" name="groom_full_name" value="<?php echo e($groom->full_name); ?>" required />
+                    <input type="text" placeholder="" name="groom_full_name" value="<?php echo e($bride->full_name); ?>" required />
                     <label>Tên cô dâu</label>
                 </div>
                 <div class="input-focus-effect">
-                    <input type="text" placeholder="" name="groom_second_name" value="<?php echo e($groom->second_name); ?>"
+                    <input type="text" placeholder="" name="groom_second_name" value="<?php echo e($bride->second_name); ?>"
                         required />
                     <label>Tên ngắn gọn</label>
                 </div>
                 <div class="input-focus-effect">
-                    <input type="text" placeholder="" name="groom_birthday" value="<?php echo e($groom->birthday); ?>" required />
+                    <input type="text" placeholder="" name="groom_birthday" value="<?php echo e($bride->birthday); ?>" required />
                     <label>Ngày sinh</label>
                 </div>
                 <div class="input-focus-effect">
-                    <textarea name="groom_description" id="" class="h-52 resize-none" required><?php echo e($groom->description); ?></textarea>
+                    <textarea name="groom_description" id="" class="h-52 resize-none" required><?php echo e($bride->description); ?></textarea>
                     <label>Giới thiệu</label>
                 </div>
             </div>

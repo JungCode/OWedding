@@ -45,7 +45,12 @@ img {
   position: relative;
   z-index: -2;
   height: 550px;
-  background: url(/public/image/tempatebgr.jpeg);
+}
+.main-bgr img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -141,7 +146,7 @@ img {
   bottom: 0;
   left: 0;
   height: 0.2rem;
-  background-color: #DF4759;
+  background-color: #df4759;
 }
 .template__image {
   width: 100%;
@@ -222,7 +227,7 @@ img {
 }
 
 .template__item:hover .template__title {
-  color: #DF4759; /* Màu chữ khi hover */
+  color: #df4759; /* Màu chữ khi hover */
 }
 .template__item:hover::after {
   width: 100%;

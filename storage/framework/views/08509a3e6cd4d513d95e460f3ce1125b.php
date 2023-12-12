@@ -87,19 +87,19 @@
     </div>
     <div class="headline">
         <div class="headline-broom">
-            <span class="headline_name">
-                <?php echo $__env->yieldContent('brideName'); ?>
-            </span>
+            <span class="headline_name"><?php echo $__env->yieldContent('groomName'); ?></span>
             <div class="headline_img">
-                <img src="<?php echo $__env->yieldContent('brideImg'); ?>" alt="">
+                <img src="<?php echo $__env->yieldContent('groomImg'); ?>" alt="">
             </div>
         </div>
         <div class="headline-heart"><i class="fa fa-heart" aria-hidden="true"></i></div>
         <div class="headline-bride">
             <div class="headline_img">
-                <img src="<?php echo $__env->yieldContent('groomImg'); ?>" alt="">
+                <img src="<?php echo $__env->yieldContent('brideImg'); ?>" alt="">
             </div>
-            <span class="headline_name"><?php echo $__env->yieldContent('groomName'); ?></span>
+            <span class="headline_name">
+                <?php echo $__env->yieldContent('brideName'); ?>
+            </span>
         </div>
     </div>
     <div class="viewline">

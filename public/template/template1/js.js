@@ -23,7 +23,7 @@ window.addEventListener('scroll', function () {
         navbar.classList.remove("scroll");
         logowhite.classList.add("logoactive");
         logored.classList.remove("logoactive");
-        headbtn.classList.remove("btnactive");
+        // headbtn.classList.remove("btnactive");
     }
 });
 
@@ -72,6 +72,30 @@ window.onresize = function(event) {
 // //////countdown
 // The date want to count down to
 var targetDate = new Date("2023/11/25 00:00:00 GMT+0700");   
+const wedtarget = document.querySelector('.home-wrap-date span');
+const wedday = wedtarget.innerText;
+console.log(wedday);
+
+var result = wedday.split('-');
+
+targetDate.setDate(result[2]);
+targetDate.setMonth(result[1]-1);
+targetDate.setFullYear(result[0]);
+
+console.log(targetDate);
+
+// if (result.length === 3) {
+//     var part1 = result[0];
+//     var part2 = result[1];
+//     var part3 = result[2];
+
+//     console.log("Part 1:", part1);
+//     console.log("Part 2:", part2);
+//     console.log("Part 3:", part3);
+// } else {
+//     console.log("Chuỗi không thể chia thành 3 phần.");
+// }
+
 
 // Other date related variables
 var days;
