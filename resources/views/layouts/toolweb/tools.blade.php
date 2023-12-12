@@ -87,19 +87,19 @@
     </div>
     <div class="headline">
         <div class="headline-broom">
-            <span class="headline_name">
-                @yield('brideName')
-            </span>
+            <span class="headline_name">@yield('groomName')</span>
             <div class="headline_img">
-                <img src="@yield('brideImg')" alt="">
+                <img src="@yield('groomImg')" alt="">
             </div>
         </div>
         <div class="headline-heart"><i class="fa fa-heart" aria-hidden="true"></i></div>
         <div class="headline-bride">
             <div class="headline_img">
-                <img src="@yield('groomImg')" alt="">
+                <img src="@yield('brideImg')" alt="">
             </div>
-            <span class="headline_name">@yield('groomName')</span>
+            <span class="headline_name">
+                @yield('brideName')
+            </span>
         </div>
     </div>
     <div class="viewline">
