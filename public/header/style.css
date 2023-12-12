@@ -123,9 +123,12 @@ img {
   animation: fadeOutAnimation ease-in-out 0.3s forwards;
   background-color: #ffffff;
   z-index: 10;
+  text-wrap: nowrap;
+  overflow: hidden;
 }
 .dropdown__group {
   padding: 12px;
+  overflow: hidden;
 }
 .dropdown__group-username {
   font-family: "Open Sans";
