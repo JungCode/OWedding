@@ -6,8 +6,10 @@
 @section('brideImg', asset('storage/' . $bride->photo))
 @section('groomImg', asset('storage/' . $groom->photo))
 {{-- layout information  --}}
-@section('taskPercent', number_format(30, 0, ',', '.'))
-@section('budget_current', number_format(500000, 0, ',', '.'))
+@section('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0)
+@section('budget_current', number_format($currentBudget, 0, ',', '.'))
+@section('totalGuest', number_format($totalGuest, 0, ',', '.'))
+
 @section('content')
     <div style="width: 80%">
         <section class="rounded-t-3xl border border-solid border-slate-300 mt-12 overflow-hidden ">

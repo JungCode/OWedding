@@ -8,6 +8,7 @@
 {{-- layout information  --}}
 @section('taskPercent', number_format($taskPercent, 0, ',', '.'))
 @section('budget_current', number_format($currentBudget, 0, ',', '.'))
+@section('totalGuest', number_format($totalGuest, 0, ',', '.'))
 @section('content')
     <div style="width: 80%">
         @php

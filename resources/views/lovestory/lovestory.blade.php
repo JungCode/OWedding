@@ -8,6 +8,7 @@
 {{-- layout information  --}}
 @section('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0)
 @section('budget_current', number_format($currentBudget, 0, ',', '.'))
+@section('totalGuest', number_format($totalGuest, 0, ',', '.'))
 {{-- main content  --}}
 @section('content')
     <link rel="stylesheet" href="{{ asset('lovestory/style.css') }}">

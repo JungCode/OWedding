@@ -7,13 +7,14 @@
 {{-- layout information  --}}
 @section('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0)
 @section('budget_current', number_format($currentBudget, 0, ',', '.'))
+@section('totalGuest', number_format($totalGuest, 0, ',', '.'))
 {{-- main content  --}}
 @section('content')
     <div style="width: 80%">
         <section
             class="flex bg-white rounded-3xl gap-40 border border-solid border-slate-300 mt-12 h-48 justify-center items-center">
             <div class="h-100 w-72 text-center">
-                <div class="text-4xl font-bold mb-4">1</div>
+                <div class="text-4xl font-bold mb-4">{{$totalGuest}}</div>
                 <div class="text-slate-400 font-medium text-3xl">Số khách mời</div>
             </div>
             <div class="h-100 w-72 text-center">
@@ -52,7 +53,7 @@
                 <i class="bi bi-chat-square-heart"></i>
                 Câu chuyện tình yêu
             </a>
-            <a
+            <a href="{{route('guest.index')}}"
                 class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5">
                 Quản lí khách mời
             </a>

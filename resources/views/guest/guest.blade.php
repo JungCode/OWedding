@@ -1,12 +1,19 @@
-@extends('layouts.toolweb.tools')
-@section('taskPercent', number_format($taskPercent, 0, ',', '.'))
+@auth
+    @extends('layouts.toolweb.tools')
+    {{-- bride groom information  --}}
+    @section('brideName', $bride->full_name)
+@section('groomName', $groom->full_name)
+@section('brideImg', asset('storage/' . $bride->photo))
+@section('groomImg', asset('storage/' . $groom->photo))
+{{-- layout information  --}}
+@section('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0)
 @section('budget_current', number_format($currentBudget, 0, ',', '.'))
 @section('totalGuest', number_format($totalGuest, 0, ',', '.'))
 @section('content')
     <div style="width: 80%">
         <section class="rounded-t-3xl border border-solid border-slate-300 mt-12 overflow-hidden ">
             <div class="bg-wedding flex">
-                <a href="/owedding" class="pl-7 text-3xl pt-8">
+                <a href="{{ route('users.managementWeb') }}" class="pl-7 text-3xl pt-8">
                     <i class="fa fa-arrow-circle-left text-slate-600" aria-hidden="true"></i>
                 </a>
                 <div class="w-full">
@@ -30,19 +37,18 @@
                             class="pl-10 w-full border border-solid border-slate-300 rounded-lg py-3 ">
                         <i class="fa-solid fa-magnifying-glass absolute top-5 left-3 text-slate-300"></i>
                     </div>
-                    <select name="" id="selector5" class="border border-solid border-slate-300 rounded-lg py-3 selector">
+                    <select name="" id="selector5"
+                        class="border border-solid border-slate-300 rounded-lg py-3 selector">
                         <option value="">Tất cả sự kiện</option>
-                        <option value="LỄ CƯỚI NHÀ NỮ">LỄ CƯỚI NHÀ NỮ</option>
-                        <option value="TIỆC CƯỚI NHÀ NỮ">TIỆC CƯỚI NHÀ NỮ</option>
-                        <option value="LỄ CƯỚI NHÀ NAM">LỄ CƯỚI NHÀ NAM</option>
-                        <option value="TIỆC CƯỚI NHÀ NAM">TIỆC CƯỚI NHÀ NAM</option>
+                        @foreach ($events as $event)
+                            <option value="{{ $event->name }}">{{ $event->name }}</option>
+                        @endforeach
                     </select>
-                    <select name="" id="selector6" class="border border-solid border-slate-300 rounded-lg py-3 selector">
+                    <select name="" id="selector6"
+                        class="border border-solid border-slate-300 rounded-lg py-3 selector">
                         <option value="">Tất cả các nhóm</option>
                         @foreach ($groups as $group)
-
-                            <option value="{{$group['group_name']}}">{{$group['group_name']}}</option>
-                        
+                            <option value="{{ $group['group_name'] }}">{{ $group['group_name'] }}</option>
                         @endforeach
                     </select>
                     <select name="" id="selector7" class="border border-solid border-slate-300 rounded-lg selector">
@@ -52,15 +58,9 @@
                     </select>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
-                    <button class="rounded-lg py-3 bg-green-wedding text-white show-guest-adding-modal"
-                        data-event=""
-                        data-email=""
-                        data-guestid=""
-                        data-guestname=""
-                        data-phone=""
-                        data-groupguest=""
-                        data-gowith=""                        
-                    >Thêm khách
+                    <button class="rounded-lg py-3 bg-green-wedding text-white show-guest-adding-modal" data-event=""
+                        data-email="" data-guestid="" data-guestname="" data-phone="" data-groupguest=""
+                        data-gowith="">Thêm khách
                         mời</button>
                     <button class="rounded-lg py-3 bg-purple-wedding text-white show-guest-group-modal">Quản lý
                         nhóm</button>
@@ -71,23 +71,23 @@
             <div class="mb-2">
                 <div class="inline-block mr-4">
                     <i class="fa-solid fa-circle text-blue-700"></i>
-                    Tổng số khách mời: {{$totalGuest}}
+                    Tổng số khách mời: {{ $totalGuest }}
                 </div>
                 <div class="inline-block mr-4">
                     <i class="fa-solid fa-circle text-indigo-700"></i>
-                    Tham gia: {{$comingGuest}}
+                    Tham gia: {{ $comingGuest }}
                 </div>
                 <div class="inline-block mr-4">
                     <i class="fa-solid fa-circle text-pink-700"></i>
-                    Không tham gia: {{$notComingGuest}}
+                    Không tham gia: {{ $notComingGuest }}
                 </div>
                 <div class="inline-block mr-4">
                     <i class="fa-solid fa-circle text-slate-500"></i>
-                    Không xác nhận: {{$notConfirmGuest}}
+                    Không xác nhận: {{ $notConfirmGuest }}
                 </div>
                 <div class="inline-block mr-4">
                     <i class="fa-solid fa-circle text-green-wedding"></i>
-                    Tiền mừng: {{$totalWeddingMoney}}đ
+                    Tiền mừng: {{ $totalWeddingMoney }}đ
                 </div>
             </div>
             <div class="rounded-xl border-2 border-solid border-slate-300 h-80 text-xl overflow-auto">
@@ -109,57 +109,56 @@
                     </thead>
                     <tbody>
                         @foreach ($guests as $guest)
-                        <tr class="border-b-2 border-solid border-slate-300 bg-slate-100">
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">{{$loop->iteration}}</td>
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">{{$guest['ticket']}}</td>
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">{{$guest['invitation_id']}}</td>
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">{{$guest['name']}}</td>
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">{{$guest['phone_number']}}</td>
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
-                                <div class="bg-slate-500 rounded-lg text-white font-bold">
-                                    {{$guest['event']}}
-                                </div>
-                            </td>
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
-                                <div class="bg-purple-wedding rounded-lg text-white font-bold">
-                                    @foreach ($groups as $group )
-                                        @if ($guest['group_id']==$group['id'])
-                                            {{$group['group_name']}}
-                                        @endif
-                                    @endforeach
-                                </div>
-                            </td>
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">{{$guest['confirmation']}}</td>
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
-                                {{$guest['go_with']}}
-                                <i class="fa-solid fa-user text-gray-400"></i>
-                            </td>
-                            <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
-                                <i class="fa-solid fa-sack-dollar text-gray-400"></i>
-                                {{$guest['wedding_money']}}
-                            </td>
-                            <td class="text-center">
-                                <button class="mr-3 transition hover:text-slate-500 show-guest-adding-modal"
-                                    data-event="{{$guest['event']}}"
-                                    data-email="{{$guest['wedding_money']}}"
-                                    data-guestid="{{$guest['id']}}"
-                                    data-guestname="{{$guest['name']}}"
-                                    data-phone="{{$guest['phone_number']}}"
-                                    data-groupguest="
-                                    @foreach ($groups as $group )
-                                        @if ($guest['group_id']=$group['id'])
-                                            {{$group['group_name']}}
-                                        @endif
-                                    @endforeach
-                                    "
-                                    data-gowith="{{$guest['go_with']}}"
-                                >
-                                    <i class="fa-solid fa-pen "></i>
-                                </button>
-                                <button class="transition hover:text-slate-500"><i class="fa-solid fa-trash"></i></button>
-                                
-                            </td>
-                        </tr>
+                            <tr class="border-b-2 border-solid border-slate-300 bg-slate-100">
+                                <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
+                                    {{ $loop->iteration }}</td>
+                                <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
+                                    <a href="{{ route('guest.show', $guest['id']) }}">a</a>
+                                </td>
+                                <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
+                                    {{ $guest['invitation_id'] }}</td>
+                                <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
+                                    {{ $guest['name'] }}</td>
+                                <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
+                                    {{ $guest['phone_number'] }}</td>
+                                <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
+                                    <div class="bg-slate-500 rounded-lg text-white font-bold">
+                                        {{ $guest['event'] }}
+                                    </div>
+                                </td>
+                                <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
+                                    <div class="bg-purple-wedding rounded-lg text-white font-bold">
+                                        @foreach ($groups as $group)
+                                            @if ($guest['group_id'] == $group['id'])
+                                                {{ $group['group_name'] }}
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </td>
+                                <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
+                                    {{ $guest['confirmation'] }}</td>
+                                <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
+                                    {{ $guest['go_with'] }}
+                                    <i class="fa-solid fa-user text-gray-400"></i>
+                                </td>
+                                <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
+                                    <i class="fa-solid fa-sack-dollar text-gray-400"></i>
+                                    {{ $guest['wedding_money'] }}
+                                </td>
+                                <td class="text-center">
+                                    <button class="mr-3 transition hover:text-slate-500 show-guest-adding-modal"
+                                        data-event="{{ $guest['event'] }}" data-email="{{ $guest['wedding_money'] }}"
+                                        data-guestid="{{ $guest['id'] }}" data-guestname="{{ $guest['name'] }}"
+                                        data-phone="{{ $guest['phone_number'] }}"
+                                        data-groupguest="{{$guest['group_id']}}"
+                                        data-gowith="{{ $guest['go_with'] }}">
+                                        <i class="fa-solid fa-pen "></i>
+                                    </button>
+                                    <button class="transition hover:text-slate-500"><i
+                                            class="fa-solid fa-trash"></i></button>
+
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -188,10 +187,9 @@
                         <span class="block mb-1">Sự kiện</span>
                         <select name="event" id="guest-event"
                             class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
-                            <option value="LỄ CƯỚI NHÀ NỮ">LỄ CƯỚI NHÀ NỮ</option>
-                            <option value="TIỆC CƯỚI NHÀ NỮ">TIỆC CƯỚI NHÀ NỮ</option>
-                            <option value="LỄ CƯỚI NHÀ NAM">LỄ CƯỚI NHÀ NAM</option>
-                            <option value="TIỆC CƯỚI NHÀ NAM">TIỆC CƯỚI NHÀ NAM</option>
+                            @foreach ($events as $event)
+                                <option value="{{ $event->name }}">{{ $event->name }}</option>
+                            @endforeach
                         </select>
                     </label>
                     <label for="item-name" class="my-5 block">
@@ -201,21 +199,20 @@
                     </label>
                     <label for="item-name" class="my-5 block">
                         <span class="block mb-1">Số điện thoại</span>
-                        <input type="text" placeholder="Nhập số điện thoại khách mời" id="guest-phone" name="phone_number"
+                        <input type="text" placeholder="Nhập số điện thoại khách mời" id="guest-phone"
+                            name="phone_number"
                             class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
                     </label>
                     <label for="block" class="my-5 block">
-                        <span class="block mb-1">Chọn nhóm khách mời <span 
+                        <span class="block mb-1">Chọn nhóm khách mời <span
                                 class="text-blue-700 show-guest-group-modal cursor-pointer"> [Quản lý nhóm] </span></span>
                         <select name="group_id" id="guest-group"
-                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
+                            class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1" >
                             <option value="">Chọn nhóm khách mời</option>
                             @foreach ($groups as $group)
-
-                            <option value="{{$group['id']}}">{{$group['group_name']}}</option>
-                        
+                                <option value="{{ $group['id'] }}">{{ $group['group_name'] }}</option>
                             @endforeach
-                            
+
                         </select>
                     </label>
                     <label for="block" class="my-5 block">
@@ -260,7 +257,8 @@
             </div>
             {{-- BODY OF MODALS  --}}
             <div class="px-7 bg-slate-200">
-                <form id="" method="POST" action="{{route('guestGroups.store')}}" class="py-5 bg-slate-200">
+                <form id="" method="POST" action="{{ route('guestGroups.store') }}"
+                    class="py-5 bg-slate-200">
                     @csrf
                     <div class="flex">
                         <label for="" class="mr-4 w-8/12">
@@ -277,33 +275,41 @@
             </div>
             <div class="rounded-b-lg overflow-hidden">
                 <table class="w-full table-collapse">
-                    <tr class="border border-solid border-slate-300">   
+                    <tr class="border border-solid border-slate-300">
                         <th class="border border-solid border-slate-300 py-4 px-4 text-center w-2/12">#</th>
                         <th class="border border-solid border-slate-300 py-4 px-4 text-left w-8/12">Tên nhóm</th>
                         <th class="border border-solid border-slate-300 py-4 px-4 text-center w-2/12">#</th>
                     </tr>
-                    @foreach ($groups as $group )
-                    <tr class="border border-solid border-slate-300 rowedit" >
-                        <td class="border border-solid border-slate-300 py-4 px-4 text-center w-2/12">{{$loop->iteration}}</td>
-                        <td class="border border-solid border-slate-300 py-4 px-4 text-left w-8/12" id="{{ 'adu' . $loop->iteration}}">
-                            <?php 
-                                $groupid= $group['id'];
-                            ?>
-                            <form id="" method="POST" action="{{route('guestGroups.update', $groupid )}}" >
+                    @foreach ($groups as $group)
+                        <tr class="border border-solid border-slate-300 rowedit">
+                            <td class="border border-solid border-slate-300 py-4 px-4 text-center w-2/12">
+                                {{ $loop->iteration }}</td>
+                            <td class="border border-solid border-slate-300 py-4 px-4 text-left w-8/12"
+                                id="{{ 'adu' . $loop->iteration }}">
+                                <?php
+                                $groupid = $group['id'];
+                                ?>
+                                <form id="" method="POST"
+                                    action="{{ route('guestGroups.update', $groupid) }}">
                                     @csrf
                                     @method('PUT')
-                                <input name="group_name" class="w-8/12 input" type="text" value="{{$group['group_name']}}" readonly>
-                                <button class="bg-blue-600 hover:bg-blue-800 transition rounded text-white px-2 py-1 hidden save-button">Lưu</button>
-                            </form>
-                                
-                                <button class="bg-gray-wedding hover:bg-gray-500 transition rounded text-white px-2 py-1 hidden cancel-button">Hủy</button>
-                            
-                        </td>
-                        <td class=" flex justify-center items-center py-4 px-4">
-                            <button class="inline-block transition hover:text-slate-500 editbtn" id="{{ 'adu' . $loop->iteration}}" ><i class="fa-solid fa-pen mr-4"></i></button>
-                            <button class="inline-block transition hover:text-slate-500"><i class="fa-solid fa-trash"></i></button>
-                        </td>
-                    </tr>
+                                    <input name="group_name" class="w-8/12 input" type="text"
+                                        value="{{ $group['group_name'] }}" readonly>
+                                    <button
+                                        class="bg-blue-600 hover:bg-blue-800 transition rounded text-white px-2 py-1 hidden save-button">Lưu</button>
+                                </form>
+
+                                <button
+                                    class="bg-gray-wedding hover:bg-gray-500 transition rounded text-white px-2 py-1 hidden cancel-button">Hủy</button>
+
+                            </td>
+                            <td class=" flex justify-center items-center py-4 px-4">
+                                <button class="inline-block transition hover:text-slate-500 editbtn"
+                                    id="{{ 'adu' . $loop->iteration }}"><i class="fa-solid fa-pen mr-4"></i></button>
+                                <button class="inline-block transition hover:text-slate-500"><i
+                                        class="fa-solid fa-trash"></i></button>
+                            </td>
+                        </tr>
                     @endforeach
                 </table>
             </div>
@@ -323,8 +329,8 @@
         const guestGroupM = document.querySelector('#guest-group');
         const guestGowithM = document.querySelector('#guest-gowith');
         const btnSubmit = document.querySelector('#btn-submit');
-        showGuestAddingModal.forEach(function (element) {
-            element.addEventListener('click', function () {
+        showGuestAddingModal.forEach(function(element) {
+            element.addEventListener('click', function() {
                 guestEvent = element.dataset.event;
                 guestId = element.dataset.guestid;
                 guestName = element.dataset.guestname;
@@ -362,6 +368,7 @@
         const closeGuestAddingModal = document.querySelector('.closeGAM');
         guestAddingModal.addEventListener('click', closeGAM);
         closeGuestAddingModal.addEventListener('click', closeGAM);
+
         function closeGAM(e) {
             if (!childElementGuestAddingModal.contains(e.target) || closeGuestAddingModal.contains(e.target)) {
                 guestAddingModal.classList.remove('modal-open');
@@ -375,3 +382,5 @@
         }
     </script>
 @endsection
+
+@endauth

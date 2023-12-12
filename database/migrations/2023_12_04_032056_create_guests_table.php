@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('group_id');
             $table->string('confirmation');
             $table->integer('go_with');
-            $table->unsignedBigInteger('wedding_money');
+            $table->unsignedBigInteger('wedding_money')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->foreign('group_id')->references('id')->on('guest_groups')->onDelete('cascade');

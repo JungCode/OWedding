@@ -6,8 +6,10 @@
 <?php $__env->startSection('brideImg', asset('storage/' . $bride->photo)); ?>
 <?php $__env->startSection('groomImg', asset('storage/' . $groom->photo)); ?>
 
-<?php $__env->startSection('taskPercent', number_format(30, 0, ',', '.')); ?>
-<?php $__env->startSection('budget_current', number_format(500000, 0, ',', '.')); ?>
+<?php $__env->startSection('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0); ?>
+<?php $__env->startSection('budget_current', number_format($currentBudget, 0, ',', '.')); ?>
+<?php $__env->startSection('totalGuest', number_format($totalGuest, 0, ',', '.')); ?>
+
 <?php $__env->startSection('content'); ?>
     <div style="width: 80%">
         <section class="rounded-t-3xl border border-solid border-slate-300 mt-12 overflow-hidden ">
