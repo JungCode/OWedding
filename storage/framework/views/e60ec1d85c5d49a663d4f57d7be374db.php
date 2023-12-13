@@ -8,8 +8,9 @@
 
 <?php $__env->startSection('taskPercent', number_format($taskPercent, 0, ',', '.')); ?>
 <?php $__env->startSection('budget_current', number_format($currentBudget, 0, ',', '.')); ?>
+<?php $__env->startSection('totalGuest', number_format($totalGuest, 0, ',', '.')); ?>
 <?php $__env->startSection('content'); ?>
-    <div style="width: 80%">
+    <div style="width: 80%" class="font-['Quicksand']">
         <?php
             if ($currentBudget == 0) {
                 $value1 = 0;
@@ -138,7 +139,7 @@
                 </div>
                 <div class="accordion-content">
                     <table class="w-full">
-                        <tr class="border-solid border border-wedding">
+                        <tr class="border-solid border border-wedding font-medium">
                             <td class="text-left pl-4 py-6 text-slate-600 ">MỤC CHI TIÊU</th>
                             <td class="text-right pl-4 py-6 text-slate-600">CHI PHÍ DỰ KIẾN</th>
                             <td class="text-right pl-4 py-6 text-slate-600">CHI PHÍ THỰC TẾ</th>
@@ -185,8 +186,8 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         
                         <tr class="border-solid border border border-wedding">
-                            <td class="pl-4 py-6">
-                                <button class="text-sky-500 hover:text-rose-500	showModal" data-id="" data-name=""
+                            <td class="pl-4 py-6" >
+                                <button class="text-sky-500 hover:text-rose-500	showModal font-medium" data-id="" data-name=""
                                     data-expected="" data-actual="" data-idcategory="<?php echo e($budgetCategory['id']); ?>">
                                     <i class="fa-regular fa-square-plus "></i>
                                     thêm mục chi tiêu

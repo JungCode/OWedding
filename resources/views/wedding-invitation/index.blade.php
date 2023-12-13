@@ -62,7 +62,7 @@
             <style class="hover"></style>
         </div>
         <div class="buttonwrap">
-            <button>Xác nhận tham dự</button>
+            <a>Xác nhận tham dự</a>
             <a href="{{ route('userwebs.index', $user) }}" >Thông tin cưới</a>
         </div>
         <script src="{{asset('card/js.js')}}"></script>

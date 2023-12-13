@@ -237,7 +237,7 @@ img {
   border: 0.1rem solid #d9e2ef;
   background-color: #F1F4F8;
 }
-.editbtn button {
+.editbtn a {
   padding: 1.3rem 2rem;
   font-family: "Quicksand", sans-serif;
   font-weight: 600;
