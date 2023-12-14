@@ -49,10 +49,11 @@
                         {{$event->address}}
                     </div>
                     <div class="time">Vào lúc <span>{{$event->time}}</span></div>
-                    <div class="day">
+                    <div class="dayphp" style="display: none">
                         {{-- Thứ <span>6</span>, Ngày <span>10/02/2023</span> --}}
                         {{$event->date}}
                     </div>
+                    <div class="day">Thứ <span class="span1">6</span>, Ngày <span class="span2">10/02/2023</span></div>
                     <div class="end">
                         Sự hiện diện của quý khách là niềm vinh hạnh của chúng
                         tôi!

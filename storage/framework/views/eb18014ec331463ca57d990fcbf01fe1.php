@@ -10,7 +10,7 @@
 <?php $__env->startSection('budget_current', number_format($currentBudget, 0, ',', '.')); ?>
 <?php $__env->startSection('totalGuest', number_format($totalGuest, 0, ',', '.')); ?>
 <?php $__env->startSection('content'); ?>
-    <div style="width: 80%">
+    <div style="width: 80%" class="font-['Quicksand']">
         <section class="rounded-t-3xl border border-solid border-slate-300 mt-12 overflow-hidden ">
             <div class="bg-wedding flex">
                 <a href="<?php echo e(route('users.managementWeb')); ?>" class="pl-7 text-3xl pt-8">
@@ -113,11 +113,11 @@
                     </thead>
                     <tbody>
                         <?php $__currentLoopData = $guests; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $guest): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <tr class="border-b-2 border-solid border-slate-300 bg-slate-100">
+                            <tr class="border-b-2 border-solid border-slate-300 bg-slate-100 text-2xl ">
                                 <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
                                     <?php echo e($loop->iteration); ?></td>
                                 <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
-                                    <a href="<?php echo e(route('guest.show', $guest['id'])); ?>">a</a>
+                                    <a href="<?php echo e(route('guest.show', $guest['id'])); ?>" target="_blank" class="text-[#df4759] "><i class="bi bi-envelope-paper-heart"></i></a>
                                 </td>
                                 <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
                                     <?php echo e($guest['invitation_id']); ?></td>
@@ -175,7 +175,7 @@
     </div>
     
     <div
-        class="z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden guest-adding-modal opacity ">
+        class="z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden guest-adding-modal opacity font-['Quicksand']">
         <div class=" bg-white rounded-lg shadow-lg w-1/3">
             
             <div class="h-20 border-b border-solid border-slate-300 px-7 py-2 bg-rose-500 rounded-t-lg relative">
@@ -254,7 +254,7 @@
     </div>
     
     <div
-        class="z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden guest-group-modal opacity">
+        class="z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden guest-group-modal opacity font-['Quicksand']">
         <div class=" bg-white rounded-lg shadow-lg w-1/3">
             
             <div class="h-20 border-b border-solid border-slate-300 px-7 py-2 bg-rose-500 rounded-t-lg relative">

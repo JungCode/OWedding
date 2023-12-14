@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('brideName', $bride->full_name); ?>
 <?php $__env->startSection('groomName', $groom->full_name); ?>
 <?php $__env->startSection('brideImg', asset('storage/' . $bride->photo)); ?>
@@ -10,7 +8,7 @@
 <?php $__env->startSection('totalGuest', number_format($totalGuest, 0, ',', '.')); ?>
 
 <?php $__env->startSection('content'); ?>
-    <div style="width: 80%">
+    <div style="width: 80%" class="font-['Quicksand']">
         <section
             class="flex bg-white rounded-3xl gap-40 border border-solid border-slate-300 mt-12 h-48 justify-center items-center">
             <div class="h-100 w-72 text-center">
@@ -55,6 +53,7 @@
             </a>
             <a href="<?php echo e(route('guest.index')); ?>"
                 class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5">
+                <i class="bi bi-people"></i>
                 Quản lí khách mời
             </a>
             <a class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5"
@@ -64,6 +63,7 @@
             </a>
             <a
                 class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5">
+                <i class="bi bi-qr-code-scan"></i>
                 Tạo mã QR
             </a>
         </section>

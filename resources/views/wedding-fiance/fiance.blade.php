@@ -12,7 +12,7 @@
 @section('totalGuest', number_format($totalGuest, 0, ',', '.'))
 {{-- main content  --}}
 @section('content')
-    <div style="width: 80%">
+    <div style="width: 80%" class="font-['Quicksand']">
         <section class="rounded-t-3xl border border-solid border-slate-300 mt-12 overflow-hidden ">
             <div class="bg-wedding flex">
                 <a href="{{route('users.managementWeb')}}" class="pl-7 text-3xl pt-8 transition">

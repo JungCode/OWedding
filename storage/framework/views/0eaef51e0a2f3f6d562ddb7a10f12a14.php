@@ -74,9 +74,9 @@
                     <a class="editbtn-add">
                         <i class="fa-solid fa-plus"></i> Thêm câu chuyện
                     </a>
-                    <button class="editbtn-save">
+                    <a class="editbtn-save">
                         <i class="fa-regular fa-floppy-disk"></i> Lưu thông tin
-                    </button>
+                    </a>
                 </div>
             </div>
         </form>
