@@ -27,6 +27,9 @@
 </head>
 
 <body>
+    <?php   
+        $user = session('user');
+    ?>
     <div class="header">
         <div class="header_logo">
             <a href="<?php echo e(route('users.index')); ?>">
@@ -63,13 +66,13 @@
                     </a>
                 </div>
             </div>
-            <button class="btn-header">Username</button>
+            <button class="btn-header"><?php echo e($user['name']); ?></button>
         </div>
     </div>
     <div class="dropdown__wrapper hide dropdown__wrapper--fade-in none">
         <div class="dropdown__group">
-            <div class="dropdown__group-username">User Name</div>
-            <div class="dropdown__group-email">Usergmail@gmail.com</div>
+            <div class="dropdown__group-username"><?php echo e($user['name']); ?></div>
+            <div class="dropdown__group-email"><?php echo e($user['email']); ?></div>
         </div>
         <div class="dropdown-btn">
             <button class="dropdown-btn_account">
@@ -117,12 +120,12 @@
         </div>
     </div>
     <div class="btnline">
-        <a href="/tool/guest" class="btnchoice">
+        <a href="<?php echo e(route('guest.index')); ?>" class="btnchoice">
             <h5 class="btnchoice-top">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <span>DANH SÁCH KHÁCH MỜI</span>
             </h5>
-            <span class="btnchoice-sub">Bạn có khách mời</span>
+            <span class="btnchoice-sub">Bạn có <?php echo $__env->yieldContent('totalGuest'); ?> khách mời</span>
         </a>
         <a href="<?php echo e(route('tasks.index')); ?>" class="btnchoice green">
             <h5 class="btnchoice-top">

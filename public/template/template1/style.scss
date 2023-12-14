@@ -718,16 +718,24 @@ ul#countdown {
                 display: flex;
                 & .eventday{
                     padding: .5rem 1.5rem .5rem 0;
+                    & i{
+                        margin-right: 0.5rem;
+                    }
                 }
                 & .eventtime{
                     padding: .5rem 0;
-
+                    & i{
+                        margin-right: 0.5rem;
+                    }
                 }
             }
             & .address {
                 display: flex;
                 font-size: 1.6rem;
                 line-height: 2.4rem;
+                & i{
+                    margin-right: 0.5rem;
+                }
             }
             & .link {
                 display: flex;
@@ -740,6 +748,9 @@ ul#countdown {
                     font-size: 1.4rem;
                     line-height: 2.8rem;
                     color: #337ab7;
+                }
+                & i{
+                    margin-left: 0.5rem;
                 }
             }
         }

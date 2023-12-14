@@ -1,7 +1,7 @@
 @auth
-@extends('layouts.toolweb.tools')
-{{-- bride groom information  --}}
-@section('brideName', $bride->full_name)
+    @extends('layouts.toolweb.tools')
+    {{-- bride groom information  --}}
+    @section('brideName', $bride->full_name)
 @section('groomName', $groom->full_name)
 @section('brideImg', asset('storage/' . $bride->photo))
 @section('groomImg', asset('storage/' . $groom->photo))
@@ -11,10 +11,10 @@
 @section('totalGuest', number_format($totalGuest, 0, ',', '.'))
 
 @section('content')
-    <div style="width: 80%">
+    <div style="width: 80%" class="font-['Quicksand']">
         <section class="rounded-t-3xl border border-solid border-slate-300 mt-12 overflow-hidden ">
             <div class="bg-wedding flex">
-                <a href="{{route('users.managementWeb')}}" class="pl-7 text-3xl pt-8">
+                <a href="{{ route('users.managementWeb') }}" class="pl-7 text-3xl pt-8">
                     <i class="fa fa-arrow-circle-left text-slate-600" aria-hidden="true"></i>
                 </a>
                 <div class="w-full">
@@ -28,15 +28,19 @@
             class="rounded-b-3xl border border-solid border-slate-300 mb-11 overflow-hidden py-5 px-9 shadow-xl grid grid-cols-2 gap-4">
             @foreach ($events as $event)
                 <div class="flex gap-5 border border-solid border-slate-300 p-3 rounded-2xl">
-                    <div class="w-60 h-60 overflow-hidden rounded-2xl">
-                        <img class="h-full object-cover object-center w-full" src="{{ asset('storage/' . $event->photo) }}"
-                            alt="">
+                    <div class="flex items-center justify-center">
+                        <div class="w-60 h-60 overflow-hidden rounded-2xl ">
+                            <img class="h-full object-cover object-center w-full"
+                                src="{{ asset('storage/' . $event->photo) }}" alt="">
+                        </div>
                     </div>
-                    <div>
-                        <p class="text-3xl font-semibold text-slate-600 mb-5">{{ $event->name }}</p>
-                        <p class="text-slate-600 mb-2">{{ $event->date }}</p>
-                        <p class="text-slate-600 mb-2">{{ $event->time }}</p>
-                        <p class="text-slate-600 w-full overflow-hidden h-12">{{ $event->address }}</p>
+                    <div class="flex flex-col justify-between">
+                        <div class="">
+                            <p class="text-3xl font-semibold text-slate-600 mb-3">{{ $event->name }}</p>
+                            <p class="text-slate-600 mb-1">{{ $event->date }}</p>
+                            <p class="text-slate-600 mb-1">{{ $event->time }}</p>
+                            <p class="text-slate-600 w-full overflow-hidden ">{{ $event->address }}</p>
+                        </div>
                         <div>
                             <button
                                 class="bg-slate-200 hover:bg-slate-300 py-1 px-2 text-slate-600 transition rounded-md show-event-modal"
@@ -70,7 +74,7 @@
     </div>
     {{-- event-modal --}}
     <div
-        class="z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden event-modal opacity ">
+        class="z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden event-modal opacity font-['Quicksand']">
         <div class=" bg-white rounded-lg shadow-lg w-1/3">
             {{-- HEADER OF MODAL  --}}
             <div class="h-20 border-b border-solid border-slate-300 px-7 py-2 bg-rose-500 rounded-t-lg relative">
@@ -194,5 +198,5 @@
     </script>
 @endsection
 @else
- Chưa đăng nhập
+Chưa đăng nhập
 @endauth

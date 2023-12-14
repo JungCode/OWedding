@@ -8,6 +8,7 @@
 
 <?php $__env->startSection('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0); ?>
 <?php $__env->startSection('budget_current', number_format($currentBudget, 0, ',', '.')); ?>
+<?php $__env->startSection('totalGuest', number_format($totalGuest, 0, ',', '.')); ?>
 
 <?php $__env->startSection('content'); ?>
     <link rel="stylesheet" href="<?php echo e(asset('editui/reset.css')); ?>" />
