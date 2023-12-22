@@ -1,33 +1,34 @@
 <?php
 
-use App\Http\Controllers\BudgetCategoryController;
-use App\Http\Controllers\BudgetItemController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\FacebookAuthController;
-use App\Http\Controllers\FianceController;
-use App\Http\Controllers\GoogleAuthController;
-use App\Http\Controllers\GuestController;
-use App\Http\Controllers\GuestGroupController;
-use App\Http\Controllers\LoveStoryController;
-use App\Http\Controllers\SlideController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\TaskController;
-use App\Http\Controllers\TemplateController;
-use App\Http\Controllers\UserWebController;
-use App\Models\Fiance;
-use App\Models\LoveStory;
 use App\Models\Task;
 use App\Models\User;
+use App\Models\Fiance;
+use App\Models\UserWeb;
+use App\Models\LoveStory;
+use App\Models\BudgetItem;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Models\BudgetCategory;
 use Illuminate\Validation\Rule;
 use Illuminate\Auth\Events\Login;
 use App\Http\Requests\TaskRequest;
-use App\Models\BudgetCategory;
-use App\Models\BudgetItem;
-use App\Models\UserWeb;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\GuestController;
+use App\Http\Controllers\SlideController;
+use App\Http\Controllers\FianceController;
+use App\Http\Controllers\UserWebController;
+use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\LoveStoryController;
+use App\Http\Controllers\BudgetItemController;
+use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\GuestGroupController;
+use App\Http\Controllers\FacebookAuthController;
+use App\Http\Controllers\BudgetCategoryController;
 use League\CommonMark\Extension\DescriptionList\Node\Description;
 /*
 |--------------------------------------------------------------------------
@@ -47,10 +48,24 @@ Route::fallback(function(){
 Route::get('/', function() {
   return redirect()->route('users.index');
 });
+//Storage
+Route::get('/storage/profile-image/{image}', function($image){
+  return view('storage.image',[
+    'image' => $image]);
+})->name('storage.image');
 
-
-
-
+//ADMIN
+Route::resource('/owedding/admin',AdminController::class)->only([
+  'index','store','edit','update','destroy'
+]);
+Route::get('/owedding/admin/search',[AdminController::class,'search']);
+Route::get('/owedding/admin/fiance',[AdminController::class,'fiance_index'])->name('admin.fiance_index');
+Route::delete('/owedding/admin/fiance',[AdminController::class,'fiance_destroy'])->name('admin.fiance_destroy');
+Route::get('/owedding/admin/fiance_search',[AdminController::class,'fiance_search']);
+Route::post('/owedding/admin/logout',[AdminController::class,'logout'])->name('admin.logout');
+Route::get('/owedding/admin/template',[AdminController::class,'template_index'])->name('admin.template_index');
+Route::delete('/owedding/admin/template',[AdminController::class,'template_destroy'])->name('admin.template_destroy');
+Route::get('/owedding/admin/template_search',[AdminController::class,'fiance_search']);
 
 //USER
 Route::post('/owedding/login',[UserController::class,'login'])->name('users.login');

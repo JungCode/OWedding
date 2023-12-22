@@ -124,7 +124,11 @@ class UserController extends Controller
             $request->session()->regenerate();
             $user = User::where('email', $data['loginemail'])->first();
             $request->session()->put('user', $user);
-            return redirect()->route('users.index');
+            if($user['role']=='admin'){
+                return redirect()->route('admin.index');
+            }else{
+                return redirect()->route('users.index');
+            }
         } else {
             if (User::where('email', $data['loginemail'])->exists()) {
                 // Người dùng đã nhập đúng email nhưng sai mật khẩu
@@ -133,7 +137,7 @@ class UserController extends Controller
                 // Người dùng đã nhập sai email
                 return redirect()->route('users.showlogin')->with('LoginFailed', 'Invalid email. Please try again.');
             }
-        }
+        } 
     }
     public function logout()
     {
