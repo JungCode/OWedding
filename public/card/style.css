@@ -358,4 +358,202 @@ p {
   cursor: pointer;
 }
 
+.modal-open {
+  animation: fade-in 250ms forwards;
+  opacity: 1;
+}
+
+.modal-close {
+  animation: fade-out 250ms forwards;
+  opacity: 0;
+}
+
+.slide-up {
+  animation: slide-up 250ms forwards;
+  transition: all;
+}
+
+.slide-down {
+  animation: slide-down 250ms forwards;
+  transition: all;
+}
+
+.bg-wedding {
+  background-color: #d9e2ef;
+}
+
+.border-wedding {
+  border-color: #eee;
+}
+
+.bg-green-wedding {
+  background-color: #389e80;
+}
+
+.text-green-wedding {
+  color: #389e80;
+}
+
+.bg-red-wedding {
+  background-color: #df4759;
+}
+
+.bg-purple-wedding {
+  background-color: #6959cb;
+}
+
+.bg-gray-wedding {
+  background-color: #506690;
+}
+
+.h-img {
+  height: 450px;
+}
+
+.bg-black-transparent {
+  background-color: rgba(0, 0, 0, 0.474);
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100px);
+  }
+}
+@keyframes slide-up {
+  100% {
+    transform: translateY(-100px);
+  }
+}
+/* //////////////////////////////// */
+.input-focus-effect {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.input-focus-effect input {
+  padding: 2.5rem 1rem 1rem;
+  border: 1px solid transparent;
+  display: block;
+  width: 100%;
+  color: black;
+  font-family: "Quicksand", sans-serif;
+  transition: border 0.25s linear;
+  outline: none;
+  font-size: 1.6rem;
+  border-color: #ecf0f7;
+  border-radius: 0.75rem;
+}
+
+.input-focus-effect input:focus {
+  border-color: black;
+}
+
+.input-focus-effect input:focus + label {
+  transform: translateY(-5px);
+  top: 10px;
+}
+
+.input-focus-effect input:not(:placeholder-shown) + label {
+  transform: translateY(-5px);
+  top: 10px;
+}
+
+.input-focus-effect label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: black;
+  transition: 0.25s linear;
+  font-size: 1.5rem;
+  font-family: "Quicksand", sans-serif;
+  color: #9bacc4;
+}
+
+.input-focus-effect textarea {
+  padding: 2.5rem 1rem 1rem;
+  border: 1px solid transparent;
+  display: block;
+  width: 100%;
+  color: black;
+  font-family: "Quicksand", sans-serif;
+  transition: border 0.25s linear;
+  outline: none;
+  font-size: 1.6rem;
+  border-color: #ecf0f7;
+  border-radius: 0.75rem;
+}
+
+.input-focus-effect textarea:focus {
+  border-color: black;
+}
+
+.input-focus-effect textarea:focus + label {
+  transform: translateY(-5px);
+  top: 10px;
+}
+
+.input-focus-effect textarea:not(:placeholder-shown) + label {
+  transform: translateY(-5px);
+  top: 10px;
+}
+
+.form-select {
+  display: block;
+  width: 100%;
+  margin: 0.4rem;
+  margin-bottom: 1rem;
+  padding: 1rem 2.25rem 1rem 0.75rem;
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 2.4rem;
+  color: #212529;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.form-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-btns button {
+  color: #fff;
+  background-color: #51396f;
+  border-color: #35214f;
+  font-family: "Jura", sans-serif;
+  margin: 0 0.5rem;
+  display: inline-block;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 6px 12px;
+  font-size: 16px;
+  border-radius: 0.25rem;
+}
+
 /*# sourceMappingURL=style.css.map */

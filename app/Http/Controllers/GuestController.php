@@ -149,4 +149,11 @@ class GuestController extends Controller
     {
         //
     }
+    public function guestconfirm(Request $request){
+        $guest = Guest::findOrFail($request->input('guestid'));
+        $guest->go_with = $request->input('gowith');
+        $guest->confirmation = $request->input('confirm');
+        $guest->save();
+        return redirect()->route('guest.show',$request->input('guestid'));
+    }
 }
