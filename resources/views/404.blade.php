@@ -43,5 +43,6 @@
         <button class="Button"><a href="{{ route('users.index') }}">VỀ TRANG CHỦ</a></button>
       </div>
     </div>
+    day la 404page
   </body>
 </html>
