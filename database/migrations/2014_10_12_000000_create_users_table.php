@@ -30,6 +30,7 @@ return new class extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('photo')->nullable();
             $table->timestamps();
+            $table->string('role')->default('user');
         });
     }
 
