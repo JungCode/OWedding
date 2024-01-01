@@ -25,7 +25,7 @@
     <body>
         <div class="header">
             <div class="header_logo">
-                <a href="/owedding">
+                <a href="<?php echo e(route('users.index')); ?>">
                     <img class="logo-white" width="229" height="93" src="<?php echo e(asset('image\Picture2.png')); ?>" />
                 </a>
             </div>
@@ -49,7 +49,9 @@
             <button class="Button">Đăng Xuất</button>
         </div>
         <section class="main">
-            <div class="main-bgr"></div>
+            <div class="main-bgr">
+                <img src="<?php echo e(asset('/image/tempatebgr.jpeg')); ?>" alt="">
+            </div>
             <div class="main-content">
                 <h2 class="main-content_top">
                     oWedding
@@ -66,7 +68,7 @@
             <div class="template__list">
                 <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="template__item">
-                        <img src="<?php echo e(asset('image/wedd3.jpg')); ?>" alt="" class="template__image">
+                        <img src="<?php echo e(asset('storage/' . $item->photo)); ?>" alt="" class="template__image">
                         <div class="template__content">
                             <div class="template__text">
                                 <p class="template__title"><?php echo e($item->name); ?></p>

@@ -54,11 +54,11 @@
                         @csrf
                         <input type="hidden" name="template_id" value="{{$template_id}}">
                         <div class="input-focus-effect">
-                            <input type="text" placeholder="" name="bride_name" required/>
+                            <input type="text" placeholder="" name="groom_name" required/>
                             <label>Tên chú rễ</label>
                         </div>
                         <div class="input-focus-effect">
-                            <input type="text" placeholder="" name="groom_name" required/>
+                            <input type="text" placeholder="" name="bride_name" required/>
                             <label>Tên cô dâu</label>
                         </div>
                         <div class="input-focus-effect" >

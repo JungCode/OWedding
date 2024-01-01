@@ -191,7 +191,7 @@ img {
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url(/public/image/template1homel.png);
+  background-image: url(https://truongbui.iwedding.info/templates/template18/images/body/fancy.png);
   background-repeat: no-repeat;
   background-size: 100%;
   width: 17%;
@@ -202,7 +202,7 @@ img {
   position: absolute;
   bottom: -20px;
   left: 80%;
-  background-image: url(/public/image/template1homer.png);
+  background-image: url(https://truongbui.iwedding.info/templates/template18/images/body/fancy-1.png);
   background-repeat: no-repeat;
   background-size: 100%;
   width: 17%;
@@ -676,13 +676,22 @@ ul#countdown li .label {
 .event-item_main .datetime .eventday {
   padding: 0.5rem 1.5rem 0.5rem 0;
 }
+.event-item_main .datetime .eventday i {
+  margin-right: 0.5rem;
+}
 .event-item_main .datetime .eventtime {
   padding: 0.5rem 0;
+}
+.event-item_main .datetime .eventtime i {
+  margin-right: 0.5rem;
 }
 .event-item_main .address {
   display: flex;
   font-size: 1.6rem;
   line-height: 2.4rem;
+}
+.event-item_main .address i {
+  margin-right: 0.5rem;
 }
 .event-item_main .link {
   display: flex;
@@ -695,6 +704,9 @@ ul#countdown li .label {
   font-size: 1.4rem;
   line-height: 2.8rem;
   color: #337ab7;
+}
+.event-item_main .link i {
+  margin-left: 0.5rem;
 }
 
 /*# sourceMappingURL=style.css.map */

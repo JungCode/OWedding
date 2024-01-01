@@ -5,13 +5,14 @@
 
 <?php $__env->startSection('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0); ?>
 <?php $__env->startSection('budget_current', number_format($currentBudget, 0, ',', '.')); ?>
+<?php $__env->startSection('totalGuest', number_format($totalGuest, 0, ',', '.')); ?>
 
 <?php $__env->startSection('content'); ?>
-    <div style="width: 80%">
+    <div style="width: 80%" class="font-['Quicksand']">
         <section
             class="flex bg-white rounded-3xl gap-40 border border-solid border-slate-300 mt-12 h-48 justify-center items-center">
             <div class="h-100 w-72 text-center">
-                <div class="text-4xl font-bold mb-4">1</div>
+                <div class="text-4xl font-bold mb-4"><?php echo e($totalGuest); ?></div>
                 <div class="text-slate-400 font-medium text-3xl">Số khách mời</div>
             </div>
             <div class="h-100 w-72 text-center">
@@ -50,8 +51,9 @@
                 <i class="bi bi-chat-square-heart"></i>
                 Câu chuyện tình yêu
             </a>
-            <a
+            <a href="<?php echo e(route('guest.index')); ?>"
                 class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5">
+                <i class="bi bi-people"></i>
                 Quản lí khách mời
             </a>
             <a class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5"
@@ -61,6 +63,7 @@
             </a>
             <a
                 class="cursor-pointer rounded-xl bg-slate-100 hover:bg-slate-200 transition border border-solid border-slate-300 text-slate-600 font-semibold py-3 px-5">
+                <i class="bi bi-qr-code-scan"></i>
                 Tạo mã QR
             </a>
         </section>

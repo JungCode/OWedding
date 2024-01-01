@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fiance;
+use App\Models\Guest;
 use App\Models\Slide;
 use App\Models\Task;
 use App\Models\User;
@@ -24,6 +25,7 @@ class SlideController extends Controller
         $bride = Fiance::findOrFail($userWeb->bride_id);
         $groom = Fiance::findOrFail($userWeb->groom_id);
         //for layout
+        $totalGuest = Guest::guest($user['id'])->count();
         $tasks = Task::task($user['id'])->get();
         $completedCount = Task::completedTask($user['id'])->count();
         //main function
@@ -37,6 +39,7 @@ class SlideController extends Controller
 
             'bride' => $bride,
             'groom' => $groom,
+            'totalGuest' => $totalGuest,
 
             'slides' => $slides
         ]);

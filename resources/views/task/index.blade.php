@@ -8,6 +8,7 @@
 @extends('layouts.toolweb.tools')
 @section('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0)
 @section('budget_current', number_format($currentBudget, 0, ',', '.'))
+@section('totalGuest', number_format($totalGuest, 0, ',', '.'))
 @section('content')
     <div class="content">
         <div class="content-wrap">

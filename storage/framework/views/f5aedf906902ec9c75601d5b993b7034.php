@@ -8,6 +8,7 @@
 
 <?php $__env->startSection('taskPercent', number_format($taskPercent, 0, ',', '.')); ?>
 <?php $__env->startSection('budget_current', number_format($currentBudget, 0, ',', '.')); ?>
+<?php $__env->startSection('totalGuest', number_format($totalGuest, 0, ',', '.')); ?>
 <?php $__env->startSection('content'); ?>
     <div style="width: 80%">
         <?php

@@ -49,7 +49,7 @@ const btnchoice = document.querySelector(".btn-choice");
 const btnchoiceitem = document.querySelector(".btn-choicelist")
 btnchoice.addEventListener("click",function (e) {
   btnchoiceitem.classList.toggle("choiceshown");
-
+v
 });
 document.addEventListener("click", function (e) {
   if (!btnchoice.contains(e.target)) {

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Fiance;
+use App\Models\Guest;
+use App\Models\Task;
 use App\Models\User;
 use App\Models\UserWeb;
 use Illuminate\Http\Request;
@@ -18,18 +20,25 @@ class EventController extends Controller
         // get user information 
         $user = session('user');
         $User = User::findOrFail($user['id']);
-        // get groom bride information 
+        // layout
         $userWeb = UserWeb::where('user_id', $user['id'])->first();
         $bride = Fiance::findOrFail($userWeb->bride_id);
         $groom = Fiance::findOrFail($userWeb->groom_id);
+        $tasks = Task::task($user['id'])->get();
+        $completedCount = Task::completedTask($user['id'])->count();
+        $totalGuest = Guest::guest($user['id'])->count();
         // main content 
         $events = Event::where('user_web_id', $userWeb->id)->get();
         return view('weddingEvent.event', [
             'events' => $events,
             'userWebId' => $userWeb->id,
-            
+
             'bride' => $bride,
             'groom' => $groom,
+            'totalGuest' => $totalGuest,
+            'currentBudget' => $User->current_budget,
+            'taskCount' => $tasks->count(),
+            'completedCount' => $completedCount
         ]);
     }
 

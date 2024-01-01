@@ -139,7 +139,7 @@ Route::resource('tool/events',EventController::class)->only([
 
 //Guest
 Route::resource('tool/guest',GuestController::class)->only([
-  'index','store','update'
+  'index','store','update','show'
 ]);
 Route::resource('tool/guestGroups',GuestGroupController::class)->only([
   'store','update'

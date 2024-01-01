@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fiance;
+use App\Models\Guest;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\UserWeb;
@@ -22,6 +23,7 @@ class FianceController extends Controller
         // get layout information 
         $tasks = Task::task($user['id'])->get();
         $completedCount = Task::completedTask($user['id'])->count();
+        $totalGuest = Guest::guest($user['id'])->count();
         // main content 
         $userWeb = UserWeb::userWeb($user['id'])->first();
         $bride = Fiance::findOrFail($userWeb->bride_id);
@@ -29,6 +31,7 @@ class FianceController extends Controller
         return view('wedding-fiance.fiance', [
             'bride' => $bride,
             'groom' => $groom,
+            'totalGuest' => $totalGuest,
             'currentBudget' => $User->current_budget,
             'taskCount' => $tasks->count(),
             'completedCount' => $completedCount

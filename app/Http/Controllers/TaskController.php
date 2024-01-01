@@ -6,6 +6,7 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Http\Requests\TaskRequest;
 use App\Models\Fiance;
+use App\Models\Guest;
 use App\Models\User;
 use App\Models\UserWeb;
 
@@ -19,11 +20,11 @@ class TaskController extends Controller
         // get user information 
         $user = session('user');
         $User = User::findOrFail($user['id']);
-        // get groom bride information 
+        // for layout
         $userWeb = UserWeb::where('user_id', $user['id'])->first();
         $bride = Fiance::findOrFail($userWeb->bride_id);
         $groom = Fiance::findOrFail($userWeb->groom_id);
-        
+        $totalGuest = Guest::guest($user['id'])->count();
         // main content
         $tasks = Task::task($user['id'])->get();
         $completedCount = Task::completedTask($user['id'])->count();
@@ -34,7 +35,7 @@ class TaskController extends Controller
             'tasks' => $tasks,
             'taskCount' => $tasks->count(),
             'completedCount' => $completedCount,
-
+            'totalGuest' => $totalGuest,
             'bride' => $bride,
             'groom' => $groom
         ]);

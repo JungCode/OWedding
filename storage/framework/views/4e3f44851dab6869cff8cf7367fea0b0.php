@@ -48,15 +48,15 @@
     <!-- /////////////////////////////home -->
     <?php
         if (!$bride && !$groom) {
-            $bride = new stdClass();
-            $bride->full_name = 'Trung Bui';
-            $bride->description = "Mình học bách khoa cơ khí, sinh năm 2k4. Tự mày mò\n" . "học code rồi đi làm remote cho công ty Mỹ 2 năm nay.\n" . "Mỗi tối online 3-4 giờ là xong việc. Lương tháng\n" . "3k6. Nhưng thu nhập chính vẫn là từ nhận các project\n" . "bên ngoài làm thêm. Tuần làm 2, 3 cái nhẹ nhàng 9,\n" . "10k tiền tươi thóc thật không phải đóng thuế. Làm\n" . 'gần được 3 năm mà nhà xe đã mua đủ cả. Nghĩ mà thèm.';
-            $bride->photo = 'bride-image/sample.jpeg';
-
             $groom = new stdClass();
-            $groom->full_name = 'Asuna';
-            $groom->description = "Asuna là một cô nàng nhỏ nhắn và xinh đẹp. Cô sở hữu\n" . "một mái tóc dài màu cam nâu, hạt dẻ cùng đôi mắt màu\n" . "nâu trông thật khác biệt. Trong những lần xuất hiện\n" . "đầu tiên, cô nàng luôn xuất hiện cùng với bộ trang\n" . "phục màu đỏ, được kết hợp với một chiếc giày bốt cao\n" . "tới đầu gối.Với phong cách phối đồ đầy độc lạ này,\n" . 'Asuna luôn thu hút được mọi người xung quanh.';
-            $groom->photo = 'groom-image/sample.jpeg';
+            $groom->full_name = 'Trung Bui';
+            $groom->description = "Mình học bách khoa cơ khí, sinh năm 2k4. Tự mày mò\n" . "học code rồi đi làm remote cho công ty Mỹ 2 năm nay.\n" . "Mỗi tối online 3-4 giờ là xong việc. Lương tháng\n" . "3k6. Nhưng thu nhập chính vẫn là từ nhận các project\n" . "bên ngoài làm thêm. Tuần làm 2, 3 cái nhẹ nhàng 9,\n" . "10k tiền tươi thóc thật không phải đóng thuế. Làm\n" . 'gần được 3 năm mà nhà xe đã mua đủ cả. Nghĩ mà thèm.';
+            $groom->photo = 'bride-image/sample.jpeg';
+
+            $bride = new stdClass();
+            $bride->full_name = 'Asuna';
+            $bride->description = "Asuna là một cô nàng nhỏ nhắn và xinh đẹp. Cô sở hữu\n" . "một mái tóc dài màu cam nâu, hạt dẻ cùng đôi mắt màu\n" . "nâu trông thật khác biệt. Trong những lần xuất hiện\n" . "đầu tiên, cô nàng luôn xuất hiện cùng với bộ trang\n" . "phục màu đỏ, được kết hợp với một chiếc giày bốt cao\n" . "tới đầu gối.Với phong cách phối đồ đầy độc lạ này,\n" . 'Asuna luôn thu hút được mọi người xung quanh.';
+            $bride->photo = 'groom-image/sample.jpeg';
 
             $slides = [(object) ['photo' => 'slide-image/sample1.jpg'], (object) ['photo' => 'slide-image/sample2.jpg'], (object) ['photo' => 'slide-image/sample3.jpg'], (object) ['photo' => 'slide-image/sample4.jpg']];
             $wedding_date = '2023-5-11';
@@ -81,18 +81,17 @@
                 <li></li>
                 <li></li>
                 <li></li>
-                <li></li>
             </ul>
         </div>
         <div class="home-wrap">
             <h3>We're Getting Married!</h3>
-            <h2><span><?php echo e($bride->full_name); ?></span> &amp; <span><?php echo e($groom->full_name); ?></span></h2>
+            <h2><span><?php echo e($groom->full_name); ?></span> &amp; <span><?php echo e($bride->full_name); ?></span></h2>
             <div class="home-wrap-date">
                 <p>SAVE THE DATE<span><?php echo e($wedding_date); ?></span></p>
             </div>
         </div>
         <div class="home-bottom">
-            <img src="/public/image/tempate1homebottom.png" alt="" />
+            <img src="<?php echo e(asset('/image/tempate1homebottom.png')); ?>" alt="" />
         </div>
     </div>
 
@@ -119,25 +118,25 @@
                                 <i class="fa-brands fa-instagram"></i>
                             </a>
                         </div>
-                        <span><?php echo e($bride->full_name); ?></span>
+                        <span><?php echo e($groom->full_name); ?></span>
                     </div>
                     <div class="couple-text_bottom">
-                        <?php echo e($bride->description); ?>
+                        <?php echo e($groom->description); ?>
 
                     </div>
                 </div>
                 <div class="couple-img">
-                    <img src="<?php echo e(asset('storage/' . $bride->photo)); ?>" alt="" />
+                    <img src="<?php echo e(asset('storage/' . $groom->photo)); ?>" alt="" />
                 </div>
             </div>
             <!-- ////////////////////////// -->
             <div class="couple-content_female">
                 <div class="couple-img">
-                    <img src="<?php echo e(asset('storage/' . $groom->photo)); ?>" alt="" />
+                    <img src="<?php echo e(asset('storage/' . $bride->photo)); ?>" alt="" />
                 </div>
                 <div class="couple-text">
                     <div class="couple-text_top">
-                        <span><?php echo e($groom->full_name); ?></span>
+                        <span><?php echo e($bride->full_name); ?></span>
                         <div class="couple-text_top__icon">
                             <a href="">
                                 <i class="fa-brands fa-facebook-f"></i>
@@ -151,7 +150,7 @@
                         </div>
                     </div>
                     <div class="couple-text_bottom">
-                        <?php echo e($groom->description); ?>
+                        <?php echo e($bride->description); ?>
 
                     </div>
                 </div>

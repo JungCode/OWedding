@@ -8,6 +8,7 @@
 
 <?php $__env->startSection('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0); ?>
 <?php $__env->startSection('budget_current', number_format($currentBudget, 0, ',', '.')); ?>
+<?php $__env->startSection('totalGuest', number_format($totalGuest, 0, ',', '.')); ?>
 <?php $__env->startSection('content'); ?>
     <div class="content">
         <div class="content-wrap">
@@ -122,6 +123,7 @@
                                                     </p>
                                                 </div>
                                             </div>
+                                            <div class="inneritem-tool">
                                             <button data-id="<?php echo e($task->id); ?>" data-title="<?php echo e($task->title); ?>"
                                                 data-description="<?php echo e($task->description); ?>"
                                                 data-completed="<?php echo e($task->completed); ?>" data-period="<?php echo e($period); ?>"
@@ -138,6 +140,7 @@
                                                     </div>
                                                 </button>
                                             </form>
+                                            </div>
                                         </div>
                                     <?php endif; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>

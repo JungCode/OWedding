@@ -65,10 +65,19 @@ img {
         position: relative;
         z-index: -2;
         height: 550px;
-        background: url(/public/image/tempatebgr.jpeg);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
+        // background: url(/public/image/tempatebgr.jpeg);
+        // background-repeat: no-repeat;
+        // background-position: center;
+        // background-size: cover;
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
     }
     &-content {
         position: absolute;
@@ -128,31 +137,32 @@ img {
     }
 }
 
-.template{
+.template {
     width: 100%;
-    &-wrap{
+    &-wrap {
         width: 100%;
-        padding: 4.5rem 0 ;
+        padding: 4.5rem 0;
         display: flex;
         justify-content: center;
         align-items: center;
         height: auto;
     }
-    &__list{
+    &__list {
         width: 85%;
         padding: 2rem;
         @include flexbox(stretch);
         margin-left: -2rem;
         flex-wrap: wrap;
     }
-    &__item{
+    &__item {
+        // cursor: pointer;
         margin-left: 2rem;
-        width: calc( (100%/4) - 2rem);
+        width: calc((100% / 4) - 2rem);
         margin-bottom: 3rem;
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1  );
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
         height: auto;
         position: relative;
-        &::after{
+        &::after {
             transition: width 0.3s ease;
             content: "";
             position: absolute;
@@ -160,16 +170,16 @@ img {
             bottom: 0;
             left: 0;
             height: 0.2rem;
-            background-color:#DF4759;
+            background-color: #df4759;
         }
     }
-    &__image{
+    &__image {
         width: 100%;
         height: 26rem;
         object-fit: cover;
         object-position: top;
     }
-    &__content{
+    &__content {
         padding: 2rem;
         background-color: white;
         border: 1px solid #eee;
@@ -177,29 +187,29 @@ img {
         @include flexbox(flex-start, flex-start, column);
         justify-content: space-between;
     }
-    &__text{
+    &__text {
         padding-bottom: 2.2rem;
     }
-    &__title{
+    &__title {
         font-family: "Open Sans";
         font-weight: 600;
-        line-height: 3.9rem; 
+        line-height: 3.9rem;
         font-size: 2.3rem;
         transition: color 0.3s ease;
     }
-    &__des{
+    &__des {
         font-family: "Open Sans";
         font-weight: 400;
-        line-height: 2.6rem; 
+        line-height: 2.6rem;
         font-size: 1.5rem;
         color: #6c757d;
     }
-    &__btn{
+    &__btn {
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        &-view{
+        &-view {
             width: calc(50% - 0.3rem);
             background-color: #6c757d;
             border-radius: 0.56rem;
@@ -208,16 +218,16 @@ img {
             border: none;
             font-family: "Open Sans";
             font-weight: 600;
-            line-height: 2.3rem; 
+            line-height: 2.3rem;
             font-size: 1.5rem;
             text-align: center;
             color: #ffffff;
             cursor: pointer;
-            &:hover{
+            &:hover {
                 background-color: #5c636a;
             }
         }
-        &-create{
+        &-create {
             background-color: #df3367;
             width: calc(50% - 0.3rem);
             border-radius: 0.56rem;
@@ -226,25 +236,25 @@ img {
             border: none;
             font-family: "Open Sans";
             font-weight: 600;
-            line-height: 2.3rem; 
+            line-height: 2.3rem;
             font-size: 1.5rem;
             text-align: center;
             color: #ffffff;
             cursor: pointer;
-            &:hover{
+            &:hover {
                 background-color: #e92c65;
             }
         }
     }
 }
-.template__item:hover  {
-    & .template__title{
-        color: #DF4759; /* Màu chữ khi hover */
+.template__item:hover {
+    & .template__title {
+        color: #df4759; /* Màu chữ khi hover */
     }
-    &::after{
+    &::after {
         width: 100%;
     }
-  }
+}
 .line {
     width: 100%;
     height: 3.5rem;

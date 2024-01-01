@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BudgetCategory;
 use App\Models\BudgetItem;
 use App\Models\Fiance;
+use App\Models\Guest;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\UserWeb;
@@ -38,6 +39,8 @@ class BudgetCategoryController extends Controller
                 $count++;
             }
         }
+        // layout 
+        $totalGuest = Guest::guest($user['id'])->count();
         $completedCount = Task::completedTask($user['id'])->count();
         $tasks = Task::task($user['id'])->count();
         $taskPercent = ($tasks) ? $completedCount / $tasks * 100 : 0;
@@ -53,6 +56,7 @@ class BudgetCategoryController extends Controller
             'total_all_ec' => $total_all_ec,
             'count' => $count,
 
+            'totalGuest' => $totalGuest,
             'bride' => $bride,
             'groom' => $groom,
         ]);

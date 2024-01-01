@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fiance;
+use App\Models\Guest;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\UserWeb;
@@ -175,6 +176,7 @@ class UserController extends Controller
         $bride = Fiance::findOrFail($userWeb->bride_id);
         $groom = Fiance::findOrFail($userWeb->groom_id);
         // for layout 
+        $totalGuest = Guest::guest($user['id'])->count();
         $tasks = Task::task($user['id'])->get();
         $completedCount = Task::completedTask($user['id'])->count();
         // route 
@@ -184,7 +186,8 @@ class UserController extends Controller
                 'taskCount' => $tasks->count(),
                 'completedCount' => $completedCount,
                 'bride' => $bride,
-                'groom' => $groom
+                'groom' => $groom,
+                'totalGuest' => $totalGuest
             ]);
         }else{
             return redirect()->route('templates.index');

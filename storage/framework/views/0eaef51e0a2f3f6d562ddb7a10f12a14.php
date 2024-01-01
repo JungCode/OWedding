@@ -8,6 +8,7 @@
 
 <?php $__env->startSection('taskPercent', $taskCount ? number_format(($completedCount / $taskCount) * 100, 0, ',', '.') : 0); ?>
 <?php $__env->startSection('budget_current', number_format($currentBudget, 0, ',', '.')); ?>
+<?php $__env->startSection('totalGuest', number_format($totalGuest, 0, ',', '.')); ?>
 
 <?php $__env->startSection('content'); ?>
     <link rel="stylesheet" href="<?php echo e(asset('lovestory/style.css')); ?>">
@@ -73,9 +74,9 @@
                     <a class="editbtn-add">
                         <i class="fa-solid fa-plus"></i> Thêm câu chuyện
                     </a>
-                    <button class="editbtn-save">
+                    <a class="editbtn-save">
                         <i class="fa-regular fa-floppy-disk"></i> Lưu thông tin
-                    </button>
+                    </a>
                 </div>
             </div>
         </form>
