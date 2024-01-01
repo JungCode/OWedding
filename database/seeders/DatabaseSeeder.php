@@ -18,6 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::factory()->create([
+            'name' => 'admin',
+             'email' => 'admin1@gmail.com',
+             'password' => bcrypt('123123123'),
+             'role'=>'admin',
+          ]);
         User::factory(10)->create()->each(function ($user){
             BudgetCategory::factory()->count(5)->for($user)->create()->each(function ($budgetCategory){
                 $numberItems = random_int(2,5);
@@ -36,6 +42,5 @@ class DatabaseSeeder extends Seeder
             'photo' => "template-image/template1demo.png",
             'description' => "Giao diện tối ưu cho điện thoại,phong cách đơn giản, thân thiện và trẻ trung."
         ]);
-
     }
 }
