@@ -64,8 +64,8 @@
                         mời</button>
                     <button class="rounded-lg py-3 bg-purple-wedding text-white show-guest-group-modal">Quản lý
                         nhóm</button>
-                    <button class="rounded-lg py-3 bg-red-wedding text-white">Cài đặt thiệp mời</button>
-                    <button class="rounded-lg py-3 bg-gray-wedding text-white">Xuất danh sách</button>
+                    <button class="rounded-lg py-3 bg-red-wedding text-white show-card-setting-modal">Cài đặt thiệp mời</button>
+                    <button class="rounded-lg py-3 bg-gray-wedding text-white" id="exportexcel">Xuất danh sách</button>
                 </div>
             </div>
             <div class="mb-2">
@@ -116,7 +116,7 @@
                                     <a href="{{ route('guest.show', $guest['id']) }}" target="_blank" class="text-[#df4759] "><i class="bi bi-envelope-paper-heart"></i></a>
                                 </td>
                                 <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
-                                    {{ $guest['invitation_id'] }}</td>
+                                    KM{{ $guest['id'] }}</td>
                                 <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
                                     {{ $guest['name'] }}</td>
                                 <td class="border-r-2 border-solid border-gray-100 text-center py-5 px-3">
@@ -229,7 +229,7 @@
                     </label>
                     <label for="item-name" class="my-5 block">
                         <span class="block mb-1">Wedding money</span>
-                        <input type="text" placeholder="Nhập số tiền mừng cưới" id="guest-email" name="wedding_money"
+                        <input type="number" placeholder="Nhập số tiền mừng cưới" id="guest-email" name="wedding_money"
                             class="h-20 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md focus:ring-1">
                     </label>
                     <button type="submit" id="btn-submit"
@@ -260,7 +260,7 @@
                     <div class="flex">
                         <label for="" class="mr-4 w-8/12">
                             <input placeholder="Nhập tên nhóm" type="text" name="group_name"
-                                class="px-4 py-5 border border-solid border-slate-300 rounded-lg w-full">
+                                class="px-4 py-5 border border-solid border-slate-300 rounded-lg w-full" required>
                         </label>
                         <button type="submit" id="btn-submit"
                             class="transition duration-300 py-5 bg-blue-600 hover:bg-blue-800 px-3 rounded text-white mr-1 w-4/12">
@@ -311,8 +311,27 @@
                 </table>
             </div>
         </div>
+        {{-- cartsettingmodal --}}
+        <div
+            class="z-10 h-screen w-full fixed left-0 top-0 flex justify-center items-center bg-black bg-opacity-50 hidden card-setting-modal opacity font-['Quicksand']">
+            <div class=" bg-white rounded-lg shadow-lg w-1/3">
+                <!-- {{-- HEADER OF MODAL --}} -->
+                <div class="h-20 border-b border-solid border-slate-300 px-7 py-2 bg-rose-500 rounded-t-lg relative">
+                    <h3 class="text-white h-full text-3xl py-3">Thông tin công việc</h3>
+                    <i
+                        class="text-white fa-solid fa-circle-xmark absolute right-5 top-3 text-3xl opacity-50 hover:opacity-100 cursor-pointer close">
+                    </i>
+                </div>
+                <!-- {{-- BODY OF MODALS --}} -->
+                <div class="px-7">
+                    alo
+                </div>
+            </div>
+        </div>
+        
     </div>
     <script src="{{ asset('guest-tool/js.js') }}"></script>
+    <script src="{{ asset('guest-tool/table2excel.js') }}"></script>
     <script>
         // adding-modal
         const guestAddingModal = document.querySelector('.guest-adding-modal');

@@ -78,12 +78,11 @@
                     @csrf
                     <input type="hidden" name="guestid" value="{{ $guest->id }}">
                     <select class="form-select " name="confirm" id="">
-                        <option value="">Bạn sẽ tham gia chứ?</option>
+                        <option value="Không biết">Bạn sẽ tham gia chứ?</option>
                         <option value="Có">Tôi sẽ tham gia</option>
                         <option value="Không">Tôi không Tham gia được</option>
                     </select>
                     <select class="form-select" name="gowith" id="plus-ones_id">
-                        <option value="">Bạn có người đi cùng không?</option>
                         <option value="0">Tôi đi một mình</option>
                         <option value="1">Đi cùng 1 người</option>
                         <option value="2">Đi cùng 2 người</option>

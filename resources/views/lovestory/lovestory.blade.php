@@ -32,7 +32,7 @@
         <form action="{{ route('loveStories.store') }}" method="POST" class="w-full" enctype="multipart/form-data">
             @csrf
             <div class="storyedit">
-                <div class="editcontent">
+                <div class="editcontent" >
                     @foreach ($loveStories as $loveStory)
                         @php
                             $i++;
@@ -42,7 +42,7 @@
                                 style="
                         background-image: url({{ asset('storage/' . $loveStory->photo) }});
                             ">
-                                <div class="imgbot">
+                                <div class="imgbot ">
                                     <input type="file" id="inputstory{{ $i }}" class="imgbot-btn"
                                         accept=".png, .jpg, .jpeg" name="photo[]" value="0">
                                     <label for="inputstory{{ $i }}">Thay đổi</label>
@@ -55,7 +55,7 @@
                                     required>
                                 <label>Tiêu đề</label>
                             </div>
-                            <div class="input-focus-effect">
+                            <div class="input-focus-effect ">
                                 <input type="text" placeholder=" " name="date[]" value="{{ $loveStory->date }}"
                                     required>
                                 <label>Thời gian</label>
@@ -65,7 +65,8 @@
                                 <label>Nội dung</label>
                             </div>
                             <div class="storyitem-btn">
-                                <button class="storyitem-btn_del"><i class="fa-regular fa-trash-can"></i></button>
+                                <input type="hidden" value="" name="delete[]" class="input-del">
+                                <a class="storyitem-btn_del "><i class="fa-regular fa-trash-can"></i></a>
                             </div>
                         </div>
                     @endforeach
@@ -74,9 +75,9 @@
                     <a class="editbtn-add">
                         <i class="fa-solid fa-plus"></i> Thêm câu chuyện
                     </a>
-                    <a class="editbtn-save">
+                    <button type="submit" class="editbtn-save">
                         <i class="fa-regular fa-floppy-disk"></i> Lưu thông tin
-                    </a>
+                    </button>
                 </div>
             </div>
         </form>

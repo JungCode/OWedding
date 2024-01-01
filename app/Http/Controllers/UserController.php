@@ -22,6 +22,7 @@ class UserController extends Controller
         if(!$user){
             return view('user.landing');
         }
+        
         $userWeb = UserWeb::where('user_id',$user['id'])->first();
         return view('user.landing',[
             'userWeb' => $userWeb

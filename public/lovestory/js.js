@@ -10,11 +10,12 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-$('.imgbot-btn').change(function () {
+$(document).on('change', '.imgbot-btn', function () {
     readURL(this);
     var closestCheck = $(this).closest('.storyitem').find('.img-check');
     closestCheck.attr("value", "1");
 });
+
 ////////
 const btnaddstory = document.querySelector(".editbtn-add");
 const storycontent = document.querySelector('.editcontent');
@@ -32,6 +33,7 @@ let storyitem = `<div class="storyitem">
         <label for="inputstoryadd1">Thay đổi</label>                               
     </div>
 </div>
+<input type="hidden" value="0" name="photoCheck[]" class="img-check">
 <input type="hidden" value="" name="id[]">
 <div class="input-focus-effect">
     <input type="text" placeholder=" " name="title[]" />
@@ -56,8 +58,7 @@ let storyitem = `<div class="storyitem">
 btnaddstory.addEventListener("click", function (e) {
     idnumber++;
     let storyitemWithNewId = storyitem.replace(/id="inputstoryadd1"/g, `id="inputstoryadd${idnumber}"`).replace(/for="inputstoryadd1"/g, `for="inputstoryadd${idnumber}"`);
-    console.log(idnumber);
-    console.log(storyitemWithNewId);
+
     storycontent.insertAdjacentHTML("beforeend", storyitemWithNewId);
     $('.imgbot-btn').change(function () {
         readURL(this);
@@ -66,8 +67,10 @@ btnaddstory.addEventListener("click", function (e) {
 ////////////////////////////////
 function handleDeleteEvent(button) {
     var storyItem = button.closest('.storyitem');
+    var closestInput = storyItem.querySelector('.input-del');
     if (storyItem) {
-        storyItem.remove();
+        storyItem.style.display = 'none';
+        closestInput.setAttribute("value", "1");
     }
 }
 document.addEventListener('DOMContentLoaded', function () {
