@@ -129,7 +129,7 @@ Route::resource('tool/guest',GuestController::class)->only([
 Route::resource('tool/guestGroups',GuestGroupController::class)->only([
   'store','update'
 ]);
-
+Route::post('tool/guest/guestconfirm',[GuestController::class,'guestconfirm'])->name('guest.guestconfirm');
 //LOVE STORY
 Route::resource('tool/loveStories',LoveStoryController::class)->only([
   'index', 'store', 'update', 'destroy'

@@ -32,9 +32,9 @@ class DatabaseSeeder extends Seeder
             'completed' => true,
         ]);
         Template::factory(1)->create([
-            'name' => "template1",
+            'name' => "Cloudy",
             'photo' => "template-image/template1demo.png",
-            'description' => "Giao diện tối ưu cho điện thoại,phong cách đơn giản, tinh tế, không thể hiện sự cầu kì, với tone màu xám xanh nhẹ nhàng."
+            'description' => "Giao diện tối ưu cho điện thoại,phong cách đơn giản, thân thiện và trẻ trung."
         ]);
 
     }
