@@ -21,25 +21,26 @@
     <!-- firstpage //////////////////////////////////////////////////////////// -->
     <div class="header">
         <div class="header_logo">
-            <img class="logo-white logoactive" width="229" height="93"
-                src="{{ asset('image/Picture1.png') }}" />
-            <img class="logo-red" width="229" height="93" src="{{ asset('image/Picture2.png') }}" />
+            <a href="{{ route('users.index') }}"><img class="logo-white logoactive" width="229" height="93"
+                    src="{{ asset('image/Picture1.png') }}" /></a>
+            <a href="{{ route('users.index') }}"><img class="logo-red" width="229" height="93"
+                    src="{{ asset('image/Picture2.png') }}" /></a>
         </div>
         <nav class="header_nav">
             <ul class="header_ul">
                 <li class="header_menuitem">
-                    <a href="#">Xem hướng dẫn</a>
+                    <a href="#4">Xem hướng dẫn</a>
                 </li>
                 <li class="header_menuitem">
                     <a href="#2">Công cụ lập kế hoạch</a>
                 </li>
                 <li class="header_menuitem">
-                    <a href="#">Cặp đôi đã tạo</a>
+                    <a href="#5">Cặp đôi</a>
                 </li>
                 <li class="header_menuitem">
-                    <a href="#">Điểm nổi bật</a>
+                    <a href="#3">Điểm nổi bật</a>
                 </li>
-                <li class="header_menuitem"><a href="#">Bảng giá</a></li>
+
             </ul>
         </nav>
         <?php
@@ -47,40 +48,40 @@
         ?>
         @auth
             <button class="header-btn">{{ $user['name'] }}</button>
-    </div>
-    <div class="dropdown__wrapper hide dropdown__wrapper--fade-in none">
-        <div class="dropdown__group">
-            <div class="dropdown__group-username">{{ $user['name'] }}</div>
-            <div class="dropdown__group-email">{{ $user['email'] }}</div>
         </div>
-        <form action="{{ route('users.logout') }}" method="POST">
-            <div class="dropdown-btn">
-                @csrf
-                <a href="{{ route('users.showProfile') }}" class="dropdown-btn_website">
-                    <i class="fa fa-globe" aria-hidden="true"></i>
-                    <span>Thiết lập tài khoản</span>
-                </a>
-                @if($userWeb)
-                    <a href="{{ route('users.managementWeb') }}" class="dropdown-btn_website">
-                        <i class="fa fa-globe" aria-hidden="true"></i>
-                        <span>Quản lý website</span>
-                    </a>
-                @else
-                    <a href="{{ route('templates.index') }}" class="dropdown-btn_website">
-                        <i class="fa fa-globe" aria-hidden="true"></i>
-                        <span>Quản lý website</span>
-                    </a>
-                @endif
-                <button type="submit" class="dropdown-btn_logout">
-                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                    <span>Đăng xuất</span>
-                </button>
+        <div class="dropdown__wrapper hide dropdown__wrapper--fade-in none">
+            <div class="dropdown__group">
+                <div class="dropdown__group-username">{{ $user['name'] }}</div>
+                <div class="dropdown__group-email">{{ $user['email'] }}</div>
             </div>
-        </form>
-    </div>
-@else
-    <a class="header-btn" href="{{ route('users.showlogin') }}">Đăng nhập</a>
-    </div>
+            <form action="{{ route('users.logout') }}" method="POST">
+                <div class="dropdown-btn">
+                    @csrf
+                    <a href="{{ route('users.showProfile') }}" class="dropdown-btn_website">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <span>Thiết lập tài khoản</span>
+                    </a>
+                    @if ($userWeb)
+                        <a href="{{ route('users.managementWeb') }}" class="dropdown-btn_website">
+                            <i class="fa fa-globe" aria-hidden="true"></i>
+                            <span>Quản lý website</span>
+                        </a>
+                    @else
+                        <a href="{{ route('templates.index') }}" class="dropdown-btn_website">
+                            <i class="fa fa-globe" aria-hidden="true"></i>
+                            <span>Quản lý website</span>
+                        </a>
+                    @endif
+                    <button type="submit" class="dropdown-btn_logout">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        <span>Đăng xuất</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    @else
+        <a class="header-btn" href="{{ route('users.showlogin') }}">Đăng nhập</a>
+        </div>
     @endauth
     <div class="firstpage">
         <div class="firstcontent">
@@ -92,10 +93,9 @@
                 Cho đám cưới trở nên độc đáo hơn theo cách riêng của bạn!
             </h2>
             <div class="firstcontent_wrap">
-                @if($user)
+                @if ($user)
                     <a class="Button" href="{{ route('templates.index') }}">BẮT ĐẦU MIỄN PHÍ</a>
-                    <a class="Button Button2"
-                        href="{{ route('userwebs.index', $user['id']) }}">WEBSITES
+                    <a class="Button Button2" href="{{ route('userwebs.index', $user['id']) }}">WEBSITES
                         ĐÃ TẠO</a>
                 @else
                     <a class="Button" href="{{ route('users.login') }}">BẮT ĐẦU MIỄN PHÍ</a>
@@ -186,7 +186,7 @@
         </div>
     </div>
     <!-- thirdpage ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-    <div class="thirdpage">
+    <div class="thirdpage" id="3">
         <div class="secondtitle-wrap">
             <div class="secondtitle_top">TẠI SAO NÊN TẠO</div>
             <div class="secondtitle_mid">WEBSITE ĐÁM CƯỚI</div>
@@ -248,7 +248,7 @@
 
 
     <!-- lastpage///////////////////// -->
-    <div class="lastpage">
+    <div class="lastpage" id="4">
         <div class="lastpage_content">
             <div class="lastpage_content-title">
                 <div class="secondtitle_mid">04 BƯỚC ĐỂ TẠO</div>
@@ -269,7 +269,8 @@
                 </div>
             </div>
             <div class="lastpage_content-btn">
-                <a href="#">Xem hướng dẫn chi tiết tại đây <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                <a href="#">Xem hướng dẫn chi tiết tại đây <i class="fa fa-arrow-right"
+                        aria-hidden="true"></i></a>
             </div>
         </div>
         <div class="lastpage_img">
@@ -277,7 +278,7 @@
         </div>
     </div>
     <!-- finalpage ////////////////////////////////////////-->
-    <div class="finalpage">
+    <div class="finalpage" id="5">
         <div class="finalpage_content">
             <div class="finalpage_content-title">
                 <div class="secondtitle_top">ĐƯỢC TIN TƯỞNG BỞI</div>
@@ -290,10 +291,10 @@
                     class="finalpage_content-img-item">
                 <img src="https://cajphotography335.zenfolio.com/img/s/v-10/p2450047733-4.jpg" alt=""
                     class="finalpage_content-img-item">
-                <img src="https://th.bing.com/th/id/OIP.zVJGmUeZpS__l9ahNOGkrAHaE8?pid=ImgDet&w=1500&h=1001&rs=1" alt=""
-                    class="finalpage_content-img-item">
-                <img src="https://www.lindabeansperfectmaine.com/wp-content/uploads/2014/12/GP302-580x385.jpg" alt=""
-                    class="finalpage_content-img-item">
+                <img src="https://th.bing.com/th/id/OIP.zVJGmUeZpS__l9ahNOGkrAHaE8?pid=ImgDet&w=1500&h=1001&rs=1"
+                    alt="" class="finalpage_content-img-item">
+                <img src="https://www.lindabeansperfectmaine.com/wp-content/uploads/2014/12/GP302-580x385.jpg"
+                    alt="" class="finalpage_content-img-item">
                 <img src="https://i.pinimg.com/originals/be/dd/06/bedd0625abb8a06454e286a6598e2f38.jpg" alt=""
                     class="finalpage_content-img-item">
 
