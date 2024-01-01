@@ -61,11 +61,11 @@
                                 <label>Thời gian</label>
                             </div>
                             <div class="input-focus-effect">
-                                <textarea type="text" placeholder=" " name="content[]"required>{{ $loveStory->content }}</textarea>
+                                <textarea type="text" placeholder=" " name="content[]" required>{{ $loveStory->content }}</textarea>
                                 <label>Nội dung</label>
                             </div>
                             <div class="storyitem-btn">
-                                <button class="storyitem-btn_del"><i class="fa-regular fa-trash-can"></i></button>
+                                <button class="storyitem-btn_del" ><i class="fa-regular fa-trash-can"></i></button>
                             </div>
                         </div>
                     @endforeach
@@ -74,9 +74,9 @@
                     <a class="editbtn-add">
                         <i class="fa-solid fa-plus"></i> Thêm câu chuyện
                     </a>
-                    <a class="editbtn-save">
+                    <button type="submit" class="editbtn-save">
                         <i class="fa-regular fa-floppy-disk"></i> Lưu thông tin
-                    </a>
+                    </button>
                 </div>
             </div>
         </form>

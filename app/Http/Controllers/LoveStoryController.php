@@ -40,7 +40,7 @@ class LoveStoryController extends Controller
             'bride' => $bride,
             'groom' => $groom,
             'totalGuest' => $totalGuest,
-            
+
             'loveStories' => $loveStories,
         ]);
     }
@@ -64,6 +64,7 @@ class LoveStoryController extends Controller
         $photos = $request->file('photo');
         $index = 0;
         foreach ($items['id'] as $id) {
+            dd($items);
             if ($id) {
                 $loveStory = LoveStory::findOrFail($id);
                 $loveStory->title = $items['title'][$index];
@@ -82,6 +83,7 @@ class LoveStoryController extends Controller
                 $loveStory->save();
                 if ($items['photoCheck'][$index]) {
                     $loveStory->photo = $this->storeImage($photos[$index], 'story' . $loveStory->id);
+                    $loveStory->save();
                 } else {
                     $loveStory->photo = "1";
                 }
@@ -120,13 +122,13 @@ class LoveStoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
     }
     protected function storeImage($photo, string $fileName)
     {
         $extension = $photo->getClientOriginalExtension();
         $newFileName = $fileName . $extension;
         $path = $photo->storeAs('public/lovestory-image', $newFileName);
+
         return substr($path, strlen('public/'));
     }
 }

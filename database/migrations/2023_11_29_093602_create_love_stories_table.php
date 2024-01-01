@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('date');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->text('content');
             $table->unsignedBigInteger('user_web_id')->nullable();
             $table->foreign('user_web_id')->references('id')->on('user_webs')->onDelete('cascade');

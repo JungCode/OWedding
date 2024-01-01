@@ -10,7 +10,7 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-$('.imgbot-btn').change(function () {
+$(document).on('change', '.imgbot-btn', function () {
     readURL(this);
     var closestCheck = $(this).closest('.storyitem').find('.img-check');
     closestCheck.attr("value", "1");
@@ -28,10 +28,12 @@ let storyitem = `<div class="storyitem">
     "
 >
     <div class="imgbot">
-        <input type="file" id="inputstoryadd1" class="imgbot-btn"></input>
-        <label for="inputstoryadd1">Thay đổi</label>                               
+        <input type="file" id="inputstoryadd1" class="imgbot-btn"
+        accept=".png, .jpg, .jpeg" name="photo[]" value="0">
+        <label for="inputstoryadd1">Thay đổi</label>                  
     </div>
 </div>
+<input type="hidden" value="" name="photoCheck[]" class="img-check">
 <input type="hidden" value="" name="id[]">
 <div class="input-focus-effect">
     <input type="text" placeholder=" " name="title[]" />
@@ -42,7 +44,7 @@ let storyitem = `<div class="storyitem">
     <label>Thời gian</label>
 </div>
 <div class="input-focus-effect">
-    <textarea type="text" placeholder=" " name="content" ></textarea>
+    <textarea type="text" placeholder=" " name="content[]" ></textarea>
     <label>Nội dung</label>
 </div>
 <div class="storyitem-btn">
