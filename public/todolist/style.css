@@ -99,6 +99,31 @@ img {
   padding: 2rem;
   color: #df4759;
   font-size: 5rem;
+  animation-duration: 1s;
+  animation-name: heart-zoom;
+  animation-iteration-count: infinite;
+}
+.headline-heart::before {
+  content: "\f004";
+  font-family: "fontawesome";
+  color: #df4759;
+  position: absolute;
+  left: 50;
+  top: 50;
+  animation-duration: 1s;
+  animation-name: heart-zoom1;
+  animation-iteration-count: infinite;
+}
+.headline-heart::after {
+  content: "\f004";
+  font-family: "fontawesome";
+  position: absolute;
+  color: #df4759;
+  left: 23%;
+  top: 16%;
+  animation-duration: 1s;
+  animation-name: heart-zoom2;
+  animation-iteration-count: infinite;
 }
 .headline_name {
   color: #161c2d;
@@ -116,7 +141,7 @@ img {
   }
   100% {
     transform: scale(2);
-    opacity: 0.1;
+    opacity: 0;
   }
 }
 @keyframes heart-zoom2 {
@@ -126,7 +151,7 @@ img {
   }
   100% {
     transform: scale(1.5);
-    opacity: 0.1;
+    opacity: 0;
   }
 }
 .viewline {

@@ -18,6 +18,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::factory()->create([
+            'name' => 'admin',
+             'email' => 'admin1@gmail.com',
+             'password' => bcrypt('123123123'),
+             'role'=>'admin',
+          ]);
         User::factory(10)->create()->each(function ($user){
             BudgetCategory::factory()->count(5)->for($user)->create()->each(function ($budgetCategory){
                 $numberItems = random_int(2,5);
@@ -32,10 +38,9 @@ class DatabaseSeeder extends Seeder
             'completed' => true,
         ]);
         Template::factory(1)->create([
-            'name' => "template1",
+            'name' => "Cloudy",
             'photo' => "template-image/template1demo.png",
-            'description' => "Giao diện tối ưu cho điện thoại,phong cách đơn giản, tinh tế, không thể hiện sự cầu kì, với tone màu xám xanh nhẹ nhàng."
+            'description' => "Giao diện tối ưu cho điện thoại,phong cách đơn giản, thân thiện và trẻ trung."
         ]);
-
     }
 }

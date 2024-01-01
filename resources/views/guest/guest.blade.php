@@ -225,9 +225,6 @@
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
                         </select>
                     </label>
                     <label for="item-name" class="my-5 block">
@@ -273,8 +270,8 @@
                     </div>
                 </form>
             </div>
-            <div class="rounded-b-lg overflow-hidden">
-                <table class="w-full table-collapse">
+            <div class="rounded-b-lg overflow-hidden p-5 bg-slate-200">
+                <table class="w-full table-collapse bg-white">
                     <tr class="border border-solid border-slate-300">
                         <th class="border border-solid border-slate-300 py-4 px-4 text-center w-2/12">#</th>
                         <th class="border border-solid border-slate-300 py-4 px-4 text-left w-8/12">Tên nhóm</th>

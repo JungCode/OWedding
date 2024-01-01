@@ -25,51 +25,6 @@ img {
   max-width: 100%;
 }
 
-.header {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  left: 0;
-  right: 0;
-  background-color: transparent;
-  padding: 2px 30px;
-  z-index: 1052;
-  box-shadow: 5px 5px 5px rgba(45, 45, 45, 0.147);
-}
-.header_logo img {
-  max-width: 100%;
-  height: auto;
-  cursor: pointer;
-}
-.header_ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.header_ul a {
-  text-decoration: none;
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 19px;
-  text-align: center;
-  color: black;
-}
-.header_menuitem {
-  border-radius: 20px;
-  padding: 5px 10px;
-  transition: linear 0.25s;
-}
-.header_menuitem:hover {
-  background-color: #df3367;
-}
-.header_menuitem:hover a {
-  color: white;
-}
-
 .Button {
   margin: 2rem;
   position: relative;
@@ -133,7 +88,6 @@ img {
   width: 30%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 .profile-content_img_pic {
   margin-top: 5rem;
@@ -317,33 +271,75 @@ img {
 .swap_item a {
   padding: 1rem;
   padding-left: 2rem;
-  margin-left: 6rem;
   position: relative;
   font-family: "Open Sans";
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 14px;
   line-height: 19px;
   color: black;
 }
-.swap_item a::after {
-  content: "";
-  width: 5px;
-  height: 100%;
-  background: #df3367;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateX(-1000%);
-  transition: linear 0.25s;
-  opacity: 0;
-}
 .swap_item a:hover {
   background: #f9fbfd;
 }
-.swap_item a:hover::after {
-  transform: translateX(0);
-  opacity: 1;
+
+.avatar-upload {
+  position: relative;
+  max-width: 300px;
+  margin: 50px auto;
+}
+.avatar-upload .avatar-edit {
+  position: absolute;
+  right: 12px;
+  z-index: 1;
+  top: 10px;
+}
+.avatar-upload .avatar-edit input {
+  display: none;
+}
+.avatar-upload .avatar-edit input + label {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #FFFFFF;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+.avatar-upload .avatar-edit input + label:hover {
+  background: #f1f1f1;
+  border-color: #d6d6d6;
+}
+.avatar-upload .avatar-edit input + label:after {
+  content: "\f040";
+  font-family: "FontAwesome";
+  color: #757575;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: auto;
+}
+.avatar-upload .avatar-preview {
+  width: 292px;
+  height: 292px;
+  position: relative;
+  border-radius: 100%;
+  border: 6px solid #F8F8F8;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+.avatar-upload .avatar-preview > div {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 /*# sourceMappingURL=style.css.map */
