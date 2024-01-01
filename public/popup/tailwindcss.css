@@ -1,0 +1,147 @@
+.modal-open {
+    animation: fade-in 250ms forwards;
+    opacity: 1;
+}
+
+.modal-close {
+    animation: fade-out 250ms forwards;
+    opacity: 0;
+}
+.slide-up{
+    animation: slide-up 250ms forwards;
+    transition: all;
+}
+.slide-down{
+    animation: slide-down 250ms forwards;
+    transition: all;
+}
+.bg-wedding{
+    background-color: #d9e2ef;
+}
+.border-wedding{
+    border-color: #eee;
+}
+.bg-green-wedding{
+    background-color: #389e80;
+}
+.text-green-wedding{
+    color: #389e80;
+}
+.bg-red-wedding{
+    background-color: #df4759;
+}
+.bg-purple-wedding{
+    background-color: #6959cb;
+}
+.bg-gray-wedding{
+    background-color: #506690;
+}
+.h-img{
+    height: 450px;
+}
+.bg-black-transparent{
+    background-color: rgba(0, 0, 0, 0.474);
+}
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes fade-out {
+    
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes slide-down {
+    0%{
+        transform: translateY(-100px);
+    }
+    100%{
+    }
+}
+@keyframes slide-up {
+    0%{
+    }
+    100%{
+        transform: translateY(-100px);
+    }
+}
+
+
+
+/* //////////////////////////////// */
+.input-focus-effect {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  .input-focus-effect input {
+    padding: 2.5rem 1rem 1rem;
+    border: 1px solid transparent;
+    display: block;
+    width: 100%;
+    color: black;
+    font-family: "Quicksand", sans-serif;
+    transition: border 0.25s linear;
+    outline: none;
+    font-size: 1.6rem;
+    border-color: #ECF0F7;
+    border-radius: 0.75rem;
+  }
+  .input-focus-effect input:focus {
+    border-color: black;
+  }
+  .input-focus-effect input:focus + label {
+    transform: translateY(-5px);
+    top: 10px;
+  }
+  .input-focus-effect input:not(:placeholder-shown) + label {
+    transform: translateY(-5px);
+    top: 10px;
+  }
+  .input-focus-effect label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: black;
+    transition: 0.25s linear;
+    font-size: 1.5rem;
+    font-family: "Quicksand", sans-serif;
+    color: #9BACC4;
+  }
+  
+  .input-focus-effect textarea {
+    padding: 2.5rem 1rem 1rem;
+    border: 1px solid transparent;
+    display: block;
+    width: 100%;
+    color: black;
+    font-family: "Quicksand", sans-serif;
+    transition: border 0.25s linear;
+    outline: none;
+    font-size: 1.6rem;
+    border-color: #ECF0F7;
+    border-radius: 0.75rem;
+  }
+  .input-focus-effect textarea:focus {
+    border-color: black;
+  }
+  .input-focus-effect textarea:focus + label {
+    transform: translateY(-5px);
+    top: 10px;
+  }
+  .input-focus-effect textarea:not(:placeholder-shown) + label {
+    transform: translateY(-5px);
+    top: 10px;
+  }
