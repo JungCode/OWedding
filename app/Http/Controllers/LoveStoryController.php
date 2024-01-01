@@ -64,16 +64,20 @@ class LoveStoryController extends Controller
         $photos = $request->file('photo');
         $index = 0;
         foreach ($items['id'] as $id) {
-            dd($items);
             if ($id) {
                 $loveStory = LoveStory::findOrFail($id);
-                $loveStory->title = $items['title'][$index];
-                $loveStory->date = $items['date'][$index];
-                $loveStory->content = $items['content'][$index];
-                if ($items['photoCheck'][$index]) {
-                    $loveStory->photo = $this->storeImage($photos[$index], 'story' . $loveStory->id);
+
+                if($items['delete'][$index]){
+                    $loveStory->delete();
+                }else{
+                    $loveStory->title = $items['title'][$index];
+                    $loveStory->date = $items['date'][$index];
+                    $loveStory->content = $items['content'][$index];
+                    if ($items['photoCheck'][$index]) {
+                        $loveStory->photo = $this->storeImage($photos[$index], 'story' . $loveStory->id);
+                    }
+                    $loveStory->save();
                 }
-                $loveStory->save();
             } else {
                 $loveStory = new LoveStory;
                 $loveStory->title = $items['title'][$index];
@@ -88,6 +92,7 @@ class LoveStoryController extends Controller
                     $loveStory->photo = "1";
                 }
             }
+
             $index++;
         }
         return redirect()->route('loveStories.index');

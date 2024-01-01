@@ -13,10 +13,12 @@ class TemplateController extends Controller
      */
     public function index()
     {   
-
+        $user = session('user');
         $data = Template::all();
+        $userWeb = UserWeb::where('user_id',$user['id'])->first();
         return view('template-choice.index',[
             'data' => $data,
+            'userWeb' => $userWeb
         ]);
     }
 

@@ -18,36 +18,73 @@
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
             rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('template-choice/reset.css') }}" />
-        <link rel="stylesheet" href="{{ asset('toolweb/style.css') }}" />
+        {{-- <link rel="stylesheet" href="{{ asset('toolweb/style.css') }}" /> --}}
         <link rel="stylesheet" href="{{ asset('template-choice/style.css') }}" />
     </head>
 
     <body>
         <div class="header">
             <div class="header_logo">
-                <a href="{{route('users.index')}}">
-                    <img class="logo-white" width="229" height="93" src="{{ asset('image\Picture2.png') }}" />
-                </a>
+                <a href="{{ route('users.index') }}"><img class="logo-white logoactive" width="229" height="93" src="{{ asset('image/Picture1.png') }}" /></a>
+                <a href="{{ route('users.index') }}"><img class="logo-red" width="229" height="93" src="{{ asset('image/Picture2.png') }}" /></a>
             </div>
             <nav class="header_nav">
                 <ul class="header_ul">
                     <li class="header_menuitem">
-                        <a href="#">Xem hướng dẫn</a>
+                        <a href="#4">Xem hướng dẫn</a>
                     </li>
                     <li class="header_menuitem">
-                        <a href="#">Công cụ lập kế hoạch</a>
+                        <a href="#2">Công cụ lập kế hoạch</a>
                     </li>
                     <li class="header_menuitem">
-                        <a href="#">Cặp đôi đã tạo</a>
+                        <a href="#5">Cặp đôi</a>
                     </li>
                     <li class="header_menuitem">
-                        <a href="#">Điểm nổi bật</a>
+                        <a href="#3">Điểm nổi bật</a>
                     </li>
-                    <li class="header_menuitem"><a href="#">Bảng giá</a></li>
+    
                 </ul>
             </nav>
-            <button class="Button">Đăng Xuất</button>
-        </div>
+            <?php
+            $user = session('user');
+            ?>
+            @auth
+                <button class="header-btn">{{ $user['name'] }}</button>
+            </div>
+            <div class="dropdown__wrapper hide dropdown__wrapper--fade-in none">
+                <div class="dropdown__group">
+                    <div class="dropdown__group-username">{{ $user['name'] }}</div>
+                    <div class="dropdown__group-email">{{ $user['email'] }}</div>
+                </div>
+                <form action="{{ route('users.logout') }}" method="POST">
+                    <div class="dropdown-btn">
+                        @csrf
+                        <a href="{{ route('users.showProfile') }}" class="dropdown-btn_website">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span>Thiết lập tài khoản</span>
+                        </a>
+                        @if ($userWeb)
+                            <a href="{{ route('users.managementWeb') }}" class="dropdown-btn_website">
+                                <i class="fa fa-globe" aria-hidden="true"></i>
+                                <span>Quản lý website</span>
+                            </a>
+                        @else
+                            <a href="{{ route('templates.index') }}" class="dropdown-btn_website">
+                                <i class="fa fa-globe" aria-hidden="true"></i>
+                                <span>Quản lý website</span>
+                            </a>
+                        @endif
+                        <button type="submit" class="dropdown-btn_logout">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            <span>Đăng xuất</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        @else
+            <a class="header-btn" href="{{ route('users.showlogin') }}">Đăng nhập</a>
+            </div>
+        @endauth
         <section class="main">
             <div class="main-bgr">
                 <img src="{{ asset('/image/tempatebgr.jpeg') }}" alt="">

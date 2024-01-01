@@ -32,7 +32,7 @@
         <form action="<?php echo e(route('loveStories.store')); ?>" method="POST" class="w-full" enctype="multipart/form-data">
             <?php echo csrf_field(); ?>
             <div class="storyedit">
-                <div class="editcontent">
+                <div class="editcontent" >
                     <?php $__currentLoopData = $loveStories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $loveStory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php
                             $i++;
@@ -42,7 +42,7 @@
                                 style="
                         background-image: url(<?php echo e(asset('storage/' . $loveStory->photo)); ?>);
                             ">
-                                <div class="imgbot">
+                                <div class="imgbot ">
                                     <input type="file" id="inputstory<?php echo e($i); ?>" class="imgbot-btn"
                                         accept=".png, .jpg, .jpeg" name="photo[]" value="0">
                                     <label for="inputstory<?php echo e($i); ?>">Thay đổi</label>
@@ -55,7 +55,7 @@
                                     required>
                                 <label>Tiêu đề</label>
                             </div>
-                            <div class="input-focus-effect">
+                            <div class="input-focus-effect ">
                                 <input type="text" placeholder=" " name="date[]" value="<?php echo e($loveStory->date); ?>"
                                     required>
                                 <label>Thời gian</label>
@@ -65,7 +65,8 @@
                                 <label>Nội dung</label>
                             </div>
                             <div class="storyitem-btn">
-                                <button class="storyitem-btn_del" ><i class="fa-regular fa-trash-can"></i></button>
+                                <input type="hidden" value="" name="delete[]" class="input-del">
+                                <a class="storyitem-btn_del "><i class="fa-regular fa-trash-can"></i></a>
                             </div>
                         </div>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

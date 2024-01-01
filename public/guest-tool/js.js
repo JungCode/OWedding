@@ -30,6 +30,36 @@ function closeGGM(e) {
         }, 250);
     }
 };
+// card setting modal
+// const CSModal = document.querySelector('.card-setting-modal');
+// const childElementItemCS = CSModal.querySelector(':first-child');
+// const showCSModal = document.querySelectorAll('.show-card-setting-modal');
+// showCSModal.forEach(function (element) {
+//     element.addEventListener('click', function () {
+//         CSModal.classList.remove('hidden');
+//         CSModal.classList.remove('modal-close');
+//         CSModal.classList.add('modal-open');
+//         childElementItemCS.classList.remove('slide-up');
+//         childElementItemCS.classList.add('slide-down');
+//     });
+// });
+// const closeCSModal = document.querySelector('.clo');
+// CSModal.addEventListener('click', closeCSM);
+// closeCSModal.addEventListener('click', closeCSM);
+// function closeCSM(e) {
+//     if (!childElementItemCS.contains(e.target) || closeCSModal.contains(e.target)) {
+//         CSModal.classList.remove('modal-open');
+//         CSModal.classList.add('modal-close');
+//         childElementItemCS.classList.add('slide-up');
+//         childElementItemCS.classList.remove('slide-down');
+
+//         setTimeout(() => {
+//             CSModal.classList.add('hidden');
+//         }, 250);
+//     }
+// };
+
+
 
 //edit groups
 editbtn = document.querySelectorAll('.editbtn');
@@ -128,3 +158,13 @@ selectors.forEach(selector => {
         }
     });
 });
+
+////////////////////////
+
+document.getElementById('exportexcel').addEventListener('click',function () {
+    var table2excel = new Table2Excel();
+    table2excel.export(document.querySelectorAll("#table")); 
+});
+
+
+//////////////////
