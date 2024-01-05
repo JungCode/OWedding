@@ -79,8 +79,9 @@ Route::get('/owedding/management',[UserController::class,'managementWeb'])->name
 
 Route::post('/owedding/update-current-budget',[UserController::class,'updateCurrentBudget'])->name('users.updateCurrentBudget');
 Route::resource('/owedding/users',UserController::class)->only([
-  'index', 'store', 'update'
+   'store', 'update'
 ]);
+Route::get('/owedding',[UserController::class,'index'])->name('users.index');
 
 
 
